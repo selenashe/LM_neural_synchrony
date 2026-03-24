@@ -1,0 +1,109 @@
+Local fork tracking — changes from the upstream paper repository
+================================================================
+
+This file records intentional deviations from the original LM_neural_synchrony
+setup so you can reproduce or revert them. Upstream defaults are noted where
+known.
+
+-------------------------------------------------------------------------------
+1. Model scope: two Mistral checkpoints only
+-------------------------------------------------------------------------------
+- Checkpoints used: Mistral-7B-Instruct-v0.2, Mistral-7B-Instruct-v0.3.
+- model_paths.json: only those two keys, values point to local HF snapshot dirs
+  (paths are machine-specific).
+- bash/simulate_and_save_states.sh, bash/train_affine_transformation.sh,
+  bash/without_genuine_interaction.sh: model_1_list / model_2_list restricted to
+  the two Mistral names (4 ordered pairs total).
+- evaluate_with_oss.py: model_list contains only
+  Mistral-7B-Instruct-v0.2_None_0 and Mistral-7B-Instruct-v0.3_None_0.
+- playground/data_analysis.py (__main__ block): model_list aligned to the same
+  two *_None_0 names.
+
+-------------------------------------------------------------------------------
+2. Random seeds (Stage A and matching eval)
+-------------------------------------------------------------------------------
+- Original upstream pattern in sample_normal_agent.py: seeds = [0, 1, 2, 3, 4].
+- Local setting: STAGE_A_SEEDS = [0] in experiment_config.py (single seed run).
+- sample_normal_agent.py uses STAGE_A_SEEDS.
+- evaluate_with_oss.py uses STAGE_A_SEEDS for the OSS eval loop.
+- get_control_conditions.py: args.seeds overridden to STAGE_A_SEEDS (was
+  [0, 1, 2] in the script body).
+- playground/data_analysis.py: get_eval_file_names() iterates STAGE_A_SEEDS
+  when aggregating multi-seed eval files.
+
+-------------------------------------------------------------------------------
+3. Episode count: 50 instead of 450
+-------------------------------------------------------------------------------
+- Original upstream: 450 episodes per (model pair, seed) in sample_normal_agent.py
+  and hardcoded 450 in several downstream scripts.
+- Local: EPISODES_NUM = 50 in experiment_config.py (single source of truth).
+- Wired through:
+  - sample_normal_agent.py (episodes_num)
+  - evaluate_with_oss.py (eval loop range)
+  - get_control_conditions.py (random profile list length + episode loop)
+  - playground/data_analysis.py (get_performance_separate total_episodes)
+
+Note: Results are a small-sample pilot, not a full replication of the paper’s
+450-episode statistics.
+
+-------------------------------------------------------------------------------
+4. requirements.txt (pinned dependency drift)
+-------------------------------------------------------------------------------
+Compared to the prior upstream-style pins in git history, local requirements.txt
+includes at least:
+- huggingface-hub>=0.23.2,<1.0 (needed for transformers 4.46.x; hub 1.x breaks import)
+- numpy==2.2.6 (was numpy==2.3.4 in the diff snapshot)
+- scipy==1.15.3 (was scipy==1.16.3)
+- torch==2.5.1 removed from the file (PyTorch is often installed separately per
+  CUDA/CPU; install torch matching your environment if not already present).
+
+Other pins (e.g. transformers, nnsight) remain as listed in requirements.txt.
+
+-------------------------------------------------------------------------------
+5. New module
+-------------------------------------------------------------------------------
+- experiment_config.py: EPISODES_NUM, STAGE_A_SEEDS — edit here to scale episodes
+  or seeds without hunting through the repo.
+
+-------------------------------------------------------------------------------
+6. Device selection (no CUDA / Mac)
+-------------------------------------------------------------------------------
+- LM_hf.BaseLM / LM_nnsight: default device is no longer hardcoded cuda. Uses
+  utils.default_inference_device(): CUDA if available, else Apple MPS if
+  available, else CPU. Override with env LM_DEVICE=cuda|mps|cpu (must exist).
+
+-------------------------------------------------------------------------------
+7. Path resolution (cwd-independent)
+-------------------------------------------------------------------------------
+- utils.REPO_ROOT: directory containing repo-root utils.py; data paths join here
+  so running from bash/ or elsewhere still reads/writes the same trees.
+- sot_env.py: model_paths.json opened via path next to sot_env.py.
+- sample_normal_agent.py, get_control_conditions.py, evaluate_with_oss.py,
+  affine_transformation.py: sotopia_results, affine_transformation, cache, and
+  schema paths anchored to REPO_ROOT.
+- utils.get_all_modes() / playground/utils.get_all_modes(): use REPO_ROOT; if the
+  default Llama reference run is missing, the first non-dialogs folder under
+  sotopia_results is used (override with env SOTOPIA_REFERENCE_RUN=<pair_dir>).
+- bash/*.sh: `cd "$(dirname "$0")/.."` then invoke python scripts by basename.
+- playground/data_analysis.py: R2_DATA_PATH and dialog paths use _ROOT (repo root).
+
+-------------------------------------------------------------------------------
+8. File touch list (for this configuration)
+-------------------------------------------------------------------------------
+- experiment_config.py (new)
+- utils.py (REPO_ROOT, default_inference_device), sot_env.py
+- LM_hf.py (auto device)
+- sample_normal_agent.py
+- evaluate_with_oss.py
+- get_control_conditions.py
+- affine_transformation.py
+- playground/data_analysis.py
+- playground/utils.py
+- model_paths.json (local paths + two-model keys)
+- bash/simulate_and_save_states.sh
+- bash/train_affine_transformation.sh
+- bash/without_genuine_interaction.sh
+- requirements.txt
+- REPO_LOCAL_CHANGES.txt (this file)
+
+Last updated: 2026-03-24

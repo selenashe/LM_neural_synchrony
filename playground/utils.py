@@ -1,4 +1,8 @@
 import os
+
+# Parent of playground/ = repository root
+REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+
 import torch
 import numpy as np
 import random
@@ -108,24 +112,51 @@ def get_short_names_and_identifiers(models):
     return short_names, models_identifier
 
 
+def _discover_sotopia_reference_pair_path():
+    sr = os.path.join(REPO_ROOT, "sotopia_results")
+    if not os.path.isdir(sr):
+        raise FileNotFoundError(f"Missing {sr}; run Stage A simulation first.")
+
+    env_name = os.environ.get("SOTOPIA_REFERENCE_RUN")
+    default = "Llama-3-8B-Instruct_None_0_Llama-2-7B-Chat_None_0"
+    for name in filter(None, [env_name, default]):
+        p = os.path.join(sr, name)
+        if os.path.isdir(p):
+            return p
+
+    candidates = sorted(
+        d
+        for d in os.listdir(sr)
+        if os.path.isdir(os.path.join(sr, d)) and d != "dialogs"
+    )
+    if not candidates:
+        raise FileNotFoundError(f"No model pair directories under {sr}")
+    chosen = os.path.join(sr, candidates[0])
+    print(f"get_all_modes: using discovered pair dir {candidates[0]} (set SOTOPIA_REFERENCE_RUN to pin)")
+    return chosen
+
+
 def get_all_modes():
+    pair_path = _discover_sotopia_reference_pair_path()
     modes = []
-    for subdir in os.listdir('../sotopia_results/Mistral-7B-Instruct-v0.3_None_0_Mistral-7B-Instruct-v0.3_None_0'):
-        if '.npy' not in subdir:
-            modes.append(subdir)
+    for subdir in os.listdir(pair_path):
+        if ".npy" in subdir:
+            continue
+        if not os.path.isdir(os.path.join(pair_path, subdir)):
+            continue
+        modes.append(subdir)
 
     episodes_id = {}
     for mode in modes:
-        try:
-            spath = f'../sotopia_results/Mistral-7B-Instruct-v0.3_None_0_Mistral-7B-Instruct-v0.3_None_0/{mode}'
-            all_items = os.listdir(spath)
-        except FileNotFoundError:
-            spath = f'sotopia_results/Mistral-7B-Instruct-v0.3_None_0_Mistral-7B-Instruct-v0.3_None_0/{mode}'
-            all_items = os.listdir(spath)
-        subfolders_id = [int(item.split('_')[-1]) for item in all_items if os.path.isdir(os.path.join(spath, item))]
+        spath = os.path.join(pair_path, mode)
+        all_items = os.listdir(spath)
+        subfolders_id = [
+            int(item.split("_")[-1])
+            for item in all_items
+            if os.path.isdir(os.path.join(spath, item))
+        ]
         subfolders_id = sorted(subfolders_id)
         episodes_id[mode] = subfolders_id
-        # print(mode, len(episodes_id[mode]))
     return modes, episodes_id
 
 def get_scores(json_file):

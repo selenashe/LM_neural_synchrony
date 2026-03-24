@@ -21,7 +21,12 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.metrics import r2_score, mean_squared_error
 import os
 import json
-from utils import set_seed, get_short_names_and_identifiers, get_all_modes
+from utils import (
+    REPO_ROOT,
+    set_seed,
+    get_short_names_and_identifiers,
+    get_all_modes,
+)
 import time
 
 def colorize(text, color):
@@ -208,7 +213,9 @@ def get_features_from_preloaded(preloaded_features_A, preloaded_features_B, laye
 
 def get_all_states_interactive_with_boundaries(model_name, mode, episode, token=None, setting=None, seed_list=None, suff="", data_mode="combined_metrics"):
 
-    state_path = f'sotopia_results{suff}/{model_name}/{mode}/episode_{episode}'
+    state_path = os.path.join(
+        REPO_ROOT, f"sotopia_results{suff}", model_name, mode, f"episode_{episode}"
+    )
     states_A = []
     states_B = []
     seed_boundaries = []
@@ -411,8 +418,20 @@ def linear_all_reps_layer_by_layer(models, seeds=(0, 1, 2), setting=None, seed_l
         suffix = ""
         if shuffle is True:
             suffix = "_shuffled"
-        data_dir = f"affine_transformation{suffix}/{setting[0]}_{setting[1]}/layerA{layer_A}/data"
-        weights_dir = f"affine_transformation{suffix}/{setting[0]}_{setting[1]}/layerA{layer_A}/weights"
+        data_dir = os.path.join(
+            REPO_ROOT,
+            f"affine_transformation{suffix}",
+            f"{setting[0]}_{setting[1]}",
+            f"layerA{layer_A}",
+            "data",
+        )
+        weights_dir = os.path.join(
+            REPO_ROOT,
+            f"affine_transformation{suffix}",
+            f"{setting[0]}_{setting[1]}",
+            f"layerA{layer_A}",
+            "weights",
+        )
         os.makedirs(data_dir, exist_ok=True)
         os.makedirs(weights_dir, exist_ok=True)
 

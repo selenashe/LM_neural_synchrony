@@ -1,4 +1,9 @@
 import os
+
+# Repository root (directory containing this file). All data paths should be
+# anchored here so scripts work regardless of shell cwd (e.g. running from bash/).
+REPO_ROOT = os.path.abspath(os.path.dirname(os.path.realpath(__file__)))
+
 import torch
 import numpy as np
 import random
@@ -29,6 +34,30 @@ def set_seed(seed):
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
 
+
+def default_inference_device():
+    """
+    Pick a device for local HF / nnsight runs: cuda > mps > cpu.
+    Set LM_DEVICE to cuda, mps, or cpu to force (must be available).
+    """
+    override = os.environ.get("LM_DEVICE", "").strip().lower()
+    if override == "cuda":
+        if not torch.cuda.is_available():
+            raise RuntimeError("LM_DEVICE=cuda but torch.cuda.is_available() is False")
+        return "cuda"
+    if override == "mps":
+        if not getattr(torch.backends, "mps", None) or not torch.backends.mps.is_available():
+            raise RuntimeError("LM_DEVICE=mps but MPS is not available")
+        return "mps"
+    if override == "cpu":
+        return "cpu"
+
+    if torch.cuda.is_available():
+        return "cuda"
+    if getattr(torch.backends, "mps", None) is not None and torch.backends.mps.is_available():
+        return "mps"
+    return "cpu"
+
 def get_scores(json_file):
     scores = {}
     with open(json_file, 'r') as f:
@@ -48,7 +77,7 @@ def get_scores(json_file):
     return scores
 
 def load_dialog(model_name, episode):
-    dialog_path = f'sotopia_results/dialogs/{model_name}/{episode}.csv'
+    dialog_path = os.path.join(REPO_ROOT, "sotopia_results", "dialogs", model_name, f"{episode}.csv")
     df = pd.read_csv(dialog_path)
     dialog = df["Dialog"].iloc[0]
     
@@ -58,7 +87,7 @@ def gather_states(model_name, mode, episode, max_turn=0, only_dialog=False):
     # max_turn is unnecessary
     # Paired states: (1, 2), (3, 4), (5, 6)
     # 
-    state_path = f'sotopia_results/{model_name}/{mode}/episode_{episode}'
+    state_path = os.path.join(REPO_ROOT, "sotopia_results", model_name, mode, f"episode_{episode}")
     states_A = []
     states_B = []
     
@@ -170,26 +199,54 @@ def get_short_names_and_identifiers(models):
     return short_names, models_identifier
 
 
+def _discover_sotopia_reference_pair_path():
+    """
+    Path to one completed run under sotopia_results/ used only to list mode
+    names and episode indices (same layout for all model pairs).
+    Override with env SOTOPIA_REFERENCE_RUN=<folder_name_under_sotopia_results>.
+    """
+    sr = os.path.join(REPO_ROOT, "sotopia_results")
+    if not os.path.isdir(sr):
+        raise FileNotFoundError(f"Missing {sr}; run Stage A simulation first.")
+
+    env_name = os.environ.get("SOTOPIA_REFERENCE_RUN")
+    default = "Llama-3-8B-Instruct_None_0_Llama-2-7B-Chat_None_0"
+    for name in filter(None, [env_name, default]):
+        p = os.path.join(sr, name)
+        if os.path.isdir(p):
+            return p
+
+    candidates = sorted(
+        d
+        for d in os.listdir(sr)
+        if os.path.isdir(os.path.join(sr, d)) and d != "dialogs"
+    )
+    if not candidates:
+        raise FileNotFoundError(f"No model pair directories under {sr}")
+    chosen = os.path.join(sr, candidates[0])
+    print(f"get_all_modes: using discovered pair dir {candidates[0]} (set SOTOPIA_REFERENCE_RUN to pin)")
+    return chosen
+
+
 def get_all_modes():
+    pair_path = _discover_sotopia_reference_pair_path()
     modes = []
-    try:
-        dirs = os.listdir('../sotopia_results/Llama-3-8B-Instruct_None_0_Llama-2-7B-Chat_None_0')
-    except FileNotFoundError:
-        dirs = os.listdir('sotopia_results/Llama-3-8B-Instruct_None_0_Llama-2-7B-Chat_None_0')
-    for subdir in dirs:
-        if '.npy' not in subdir:
-            modes.append(subdir)
+    for subdir in os.listdir(pair_path):
+        if ".npy" in subdir:
+            continue
+        if not os.path.isdir(os.path.join(pair_path, subdir)):
+            continue
+        modes.append(subdir)
 
     episodes_id = {}
     for mode in modes:
-        try:
-            spath = f'../sotopia_results/Llama-3-8B-Instruct_None_0_Llama-2-7B-Chat_None_0/{mode}'
-            all_items = os.listdir(spath)
-        except FileNotFoundError:
-            spath = f'sotopia_results/Llama-3-8B-Instruct_None_0_Llama-2-7B-Chat_None_0/{mode}'
-            all_items = os.listdir(spath)
-        subfolders_id = [int(item.split('_')[-1]) for item in all_items if os.path.isdir(os.path.join(spath, item))]
+        spath = os.path.join(pair_path, mode)
+        all_items = os.listdir(spath)
+        subfolders_id = [
+            int(item.split("_")[-1])
+            for item in all_items
+            if os.path.isdir(os.path.join(spath, item))
+        ]
         subfolders_id = sorted(subfolders_id)
         episodes_id[mode] = subfolders_id
-        # print(mode, len(episodes_id[mode]))
     return modes, episodes_id

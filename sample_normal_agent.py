@@ -2,6 +2,7 @@ import torch
 import csv
 from sot_env import SotopiaEnv
 from utils import *
+from experiment_config import EPISODES_NUM, STAGE_A_SEEDS
 from tqdm import tqdm
 from copy import copy
 import argparse
@@ -15,9 +16,9 @@ args = parser.parse_args()
 
 max_new_tokens = 300
 max_turns = 16
-episodes_num = 450
+episodes_num = EPISODES_NUM
 temp = 0.7
-seeds = [0, 1, 2, 3, 4]
+seeds = STAGE_A_SEEDS
 
 if args.value == 0.0:
     args.value = 0
@@ -25,8 +26,12 @@ if args.value == 0.0:
 model_1_name = f"{args.model_1}_{args.affected_type}_{args.value}"
 model_2_name = f"{args.model_2}_{args.affected_type}_{args.value}"
 
-save_dir_base = f"sotopia_results/{model_1_name}_{model_2_name}"
-dialog_base = f"sotopia_results/dialogs/{model_1_name}_{model_2_name}"
+save_dir_base = os.path.join(
+    REPO_ROOT, "sotopia_results", f"{model_1_name}_{model_2_name}"
+)
+dialog_base = os.path.join(
+    REPO_ROOT, "sotopia_results", "dialogs", f"{model_1_name}_{model_2_name}"
+)
 create_folder_if_not_there(dialog_base)
 
 for seed in seeds:

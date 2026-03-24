@@ -17,6 +17,7 @@ from utils import *
 
 current_file_path = os.path.abspath(__file__)
 directory = os.path.dirname(current_file_path)
+MODEL_PATHS_JSON = os.path.join(directory, "model_paths.json")
 
 
 def getLM(model_name_all, model_paths, temperature, seed):
@@ -52,7 +53,7 @@ class SotopiaEnv():
                 verbose: bool=False,
                 seed: int=0,
     ):
-        with open('model_paths.json', 'r') as f:
+        with open(MODEL_PATHS_JSON, "r") as f:
             model_paths = json.load(f)
         
         if saving_dir is not None:

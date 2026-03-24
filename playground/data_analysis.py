@@ -2,7 +2,12 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import os
+import sys
 import json
+_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+if _ROOT not in sys.path:
+    sys.path.insert(0, _ROOT)
+from experiment_config import EPISODES_NUM, STAGE_A_SEEDS
 from utils import *
 import seaborn as sns
 from scipy.stats import pearsonr
@@ -11,7 +16,7 @@ import matplotlib.colors as mcolors
 from matplotlib.ticker import MaxNLocator
 from collections import defaultdict
 
-R2_DATA_PATH = "../affine_transformation"
+R2_DATA_PATH = os.path.join(_ROOT, "affine_transformation")
 DATA_MODE = "combined_metrics"
 
 def get_eval_file_names(model_1, model_2, episode_id, seed=None):
@@ -19,12 +24,12 @@ def get_eval_file_names(model_1, model_2, episode_id, seed=None):
     Returns:
         List of evaluation file names for (model_1, model_2) with different seeds (0, 1, 2).
     """
-    dialog_base = f"../sotopia_results/dialogs/{model_1}_{model_2}"
-    eval_base = f"{dialog_base}/eval_oss"
+    dialog_base = os.path.join(_ROOT, "sotopia_results", "dialogs", f"{model_1}_{model_2}")
+    eval_base = os.path.join(dialog_base, "eval_oss")
     
     eval_files = []
     if seed is None:
-        for seed in [0, 1, 2, 3, 4]:
+        for seed in STAGE_A_SEEDS:
             eval_file = f"{eval_base}/{episode_id}_temp0.7_seed{seed}.json"
             eval_files.append(eval_file)
     else:
@@ -38,8 +43,8 @@ def get_eval_file_name(model_1, model_2, episode_id, seed=None):
     Returns:
         Evaluation file name for (model_1, model_2) with seed 0 (for backward compatibility).
     """
-    dialog_base = f"../sotopia_results/dialogs/{model_1}_{model_2}"
-    eval_base = f"{dialog_base}/eval_oss"
+    dialog_base = os.path.join(_ROOT, "sotopia_results", "dialogs", f"{model_1}_{model_2}")
+    eval_base = os.path.join(dialog_base, "eval_oss")
     if seed is None:
         eval_file = f"{eval_base}/{episode_id}_temp0.7_seed0.json"
     else:
@@ -73,7 +78,7 @@ def get_scores_multi_seed(model_1, model_2, episode_id, seed=None):
         if seed is not None:
             return get_scores_multi_seed(model_1, model_2, episode_id)
         else:
-            raise FileNotFoundError(f"All three seed files (seeds 0, 1, 2) are missing for {model_1}_{model_2}, episode {episode_id}")
+            raise FileNotFoundError(f"All seed files for {STAGE_A_SEEDS} are missing for {model_1}_{model_2}, episode {episode_id}")
     
     for eval_file in eval_files:
         if os.path.exists(eval_file):
@@ -113,7 +118,7 @@ def get_performance_separate(model_1, model_2):
     model2_goal_sum = 0
     model2_overall_sum = 0
     
-    total_episodes = 450
+    total_episodes = EPISODES_NUM
     valid_episodes = 0
     overall = []
     
@@ -1275,12 +1280,8 @@ def _plot_family_grouped_bars(normal_values, mode_values, normal_stes, mode_stes
 if __name__ == "__main__":
     combs = []
     model_list = [
-        "Mistral-7B-Instruct-v0.1_None_0",
         "Mistral-7B-Instruct-v0.2_None_0",
         "Mistral-7B-Instruct-v0.3_None_0",
-        "Llama-2-7B-Chat_None_0",
-        "Llama-3-8B-Instruct_None_0",
-        "Llama-3.2-3B-Instruct_None_0",
     ]
     for m1 in model_list:
         for m2 in model_list:

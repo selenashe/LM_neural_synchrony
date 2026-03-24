@@ -5,6 +5,7 @@ import numpy as np
 import os
 from sot_env import *
 from utils import *
+from experiment_config import EPISODES_NUM, STAGE_A_SEEDS
 from tqdm import tqdm
 import argparse
 
@@ -181,7 +182,7 @@ def main():
     args = parser.parse_args()
     args.random_profile = True
     all_random_profiles = []
-    args.seeds = [0, 1, 2]
+    args.seeds = STAGE_A_SEEDS
     # Setup same naming convention as original
     if args.value == 0.0:
         args.value = 0
@@ -193,10 +194,20 @@ def main():
     
     model_1_name = f"{args.model_1}_{args.affected_type}_{args.value}"
     model_2_name = f"{args.model_2}_{args.affected_type}_{args.value}"
-    save_dir_base = f"sotopia_results/{model_1_name}_{model_2_name}{random_suff}"
-    save_prompt_base = f"sotopia_results/dialogs/{model_1_name}_{model_2_name}{random_suff}/prompt_records"
+    save_dir_base = os.path.join(
+        REPO_ROOT, "sotopia_results", f"{model_1_name}_{model_2_name}{random_suff}"
+    )
+    save_prompt_base = os.path.join(
+        REPO_ROOT,
+        "sotopia_results",
+        "dialogs",
+        f"{model_1_name}_{model_2_name}{random_suff}",
+        "prompt_records",
+    )
 
-    record_dialog_base = f"sotopia_results/dialogs/{model_1_name}_{model_2_name}"
+    record_dialog_base = os.path.join(
+        REPO_ROOT, "sotopia_results", "dialogs", f"{model_1_name}_{model_2_name}"
+    )
     
     print(f"Using dialog base: {record_dialog_base}")
     print(f"Saving states to: {save_dir_base}")
@@ -226,10 +237,10 @@ def main():
         )
         set_seed(seed)
         all_random_profiles = []
-        for i in range(450):
+        for i in range(EPISODES_NUM):
             all_random_profiles.append(random_sample_agents_from_pool_with_descriptions_standalone())
 
-        for episode_id in tqdm(range(450)):
+        for episode_id in tqdm(range(EPISODES_NUM)):
             total_count += 1
             
             # Check if prompt records exist

@@ -7,8 +7,8 @@ from utils import *
 import random
 
 class BaseLM:
-    def __init__(self, model_path, model_name, device="cuda", temperature=0., seed=0, **kwargs):
-        self.device = device
+    def __init__(self, model_path, model_name, device=None, temperature=0., seed=0, **kwargs):
+        self.device = device if device is not None else default_inference_device()
         self.model_name = model_name
         base_model = AutoModelForCausalLM.from_pretrained(model_path, trust_remote_code=True)
         tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True)
@@ -90,7 +90,7 @@ You are a helpful assistant<|eot_id|><|start_header_id|>user<|end_header_id|>
 
 
 class LM_nnsight(BaseLM):
-    def __init__(self, model_path, model_name, device="cuda", temperature=0., seed=0., affected_level=0, affected_type="None"):
+    def __init__(self, model_path, model_name, device=None, temperature=0., seed=0., affected_level=0, affected_type="None"):
         super().__init__(model_path, model_name, device, temperature, seed)
 
     def generate_response(self, prompt, max_new_tokens=2000):

@@ -4,11 +4,13 @@ import os
 import json
 from tqdm import tqdm
 from utils import *
+from experiment_config import EPISODES_NUM, STAGE_A_SEEDS
 import time
 
 api_num = 0
 prompt_cache = {}
-CACHE_FILE = 'cache/oss_prompt_cache_base_models.json'
+CACHE_FILE = os.path.join(REPO_ROOT, "cache", "oss_prompt_cache_base_models.json")
+SCHEMA_PATH = os.path.join(REPO_ROOT, "sotopia_utils", "output_schema.txt")
 os.environ["VLLM_ENABLE_V1_MULTIPROCESSING"] = "0"
 
 client = OpenAI(
@@ -39,7 +41,11 @@ def load_cache():
             try:
                 with open(CACHE_FILE, 'r', encoding='utf-8') as f:
                     prompt_cache = json.load(f)
-                with open('cache/oss_prompt_cache.json', 'r', encoding='utf-8') as f:
+                with open(
+                    os.path.join(REPO_ROOT, "cache", "oss_prompt_cache.json"),
+                    "r",
+                    encoding="utf-8",
+                ) as f:
                     base_cache = json.load(f)
                 prompt_cache.update(base_cache)
                 print(f"Loaded cache with {len(prompt_cache)} entries")
@@ -91,7 +97,7 @@ def get_final_reward(intro, dialog):
     # print(dialog)
 
     template = """{history}{schema}"""
-    with open('sotopia_utils/output_schema.txt', 'r') as f:
+    with open(SCHEMA_PATH, "r", encoding="utf-8") as f:
         schema = f.read()
 
     prompt = template.format(history=history, schema=schema)
@@ -139,18 +145,18 @@ load_cache()
 
 combs = []
 model_list = [
-    "Mistral-7B-Instruct-v0.1_None_0",
+    # "Mistral-7B-Instruct-v0.1_None_0",
     "Mistral-7B-Instruct-v0.2_None_0",
     "Mistral-7B-Instruct-v0.3_None_0",
-    "Llama-2-7B-Chat_None_0",
-    "Llama-3-8B-Instruct_None_0",
-    "Llama-3.2-3B-Instruct_None_0",
+    # "Llama-2-7B-Chat_None_0",
+    # "Llama-3-8B-Instruct_None_0",
+    # "Llama-3.2-3B-Instruct_None_0",
 ]
 for m1 in model_list:
     for m2 in model_list:
         combs.append((m1, m2))
 
-seeds = [0, 1, 2, 3, 4]
+seeds = STAGE_A_SEEDS
 print(combs)
 
 for model_name in combs:
@@ -161,11 +167,11 @@ for model_name in combs:
             
         print(model_name, seed)
         
-        p = f'sotopia_results/dialogs/{model_name}'
+        p = os.path.join(REPO_ROOT, "sotopia_results", "dialogs", model_name)
         create_folder_if_not_there(f'{p}/eval_oss')
 
         suf = ""
-        for i in tqdm(range(450)):
+        for i in tqdm(range(EPISODES_NUM)):
             eval_file_path = f'{p}/eval_oss/{i}_temp0.7_seed{seed}.json'
             if os.path.exists(eval_file_path) and os.path.getsize(eval_file_path) > 0:
                 # Examine if the content is not NoneType
