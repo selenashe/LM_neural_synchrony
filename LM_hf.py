@@ -10,7 +10,7 @@ class BaseLM:
     def __init__(self, model_path, model_name, device=None, temperature=0., seed=0, **kwargs):
         self.device = device if device is not None else default_inference_device()
         self.model_name = model_name
-        base_model = AutoModelForCausalLM.from_pretrained(model_path, trust_remote_code=True)
+        base_model = AutoModelForCausalLM.from_pretrained(model_path, trust_remote_code=True, torch_dtype=torch.float16)
         tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True)
         
         if tokenizer.pad_token is None and self.model_name != "gpt2":
