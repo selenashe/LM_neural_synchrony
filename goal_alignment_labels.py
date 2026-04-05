@@ -6,7 +6,7 @@ scenario, both agents' goals, and both agents' full profiles.
 Outputs goal_alignment_labels.json keyed by combo index (0-449).
 
 Usage:
-    python goal_alignment_labels.py [--model vertex_ai/gemini-3.1-pro] [--output goal_alignment_labels.json]
+    python goal_alignment_labels.py [--model vertex_ai/gemini-3.1-pro-preview] [--output goal_alignment_labels.json]
     python goal_alignment_labels.py --resume   # pick up where you left off
 
 Requires gcloud auth for Vertex AI.
@@ -197,7 +197,7 @@ def classify_combo(model, scenario, relationship, agent1, agent2, goal_1, goal_2
 
 def main():
     parser = argparse.ArgumentParser(description="Label goal alignment for all Sotopia combos")
-    parser.add_argument("--model", default="vertex_ai/gemini-3.1-pro", help="LiteLLM model string")
+    parser.add_argument("--model", default="vertex_ai/gemini-3.1-pro-preview", help="LiteLLM model string")
     parser.add_argument("--output", default=os.path.join(SCRIPT_DIR, "goal_alignment_labels.json"))
     parser.add_argument("--resume", action="store_true",
                         help="Resume from existing output file, skipping already-labeled combos")
