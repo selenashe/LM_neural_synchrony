@@ -1,0 +1,297 @@
+{
+  "model": "Misv0.3Misv0.3",
+  "model_full": "Mistral-7B-Instruct-v0.3_None_0_Mistral-7B-Instruct-v0.3_None_0",
+  "layer_A": 8,
+  "layer_B": 6,
+  "alignment_binary": {
+    "categories": [
+      "high_align",
+      "low_align"
+    ],
+    "per_category_r2": {
+      "high_align": {
+        "r2_mean": 0.7383879820505778,
+        "r2_std": 0.0034082446077459824,
+        "r2_per_seed": [
+          0.7400624752044678,
+          0.7414649724960327,
+          0.7336364984512329
+        ],
+        "n_turns": 736
+      },
+      "low_align": {
+        "r2_mean": 0.730548640092214,
+        "r2_std": 0.005396126194500451,
+        "r2_per_seed": [
+          0.7322276830673218,
+          0.7232621908187866,
+          0.7361560463905334
+        ],
+        "n_turns": 491
+      }
+    },
+    "pairwise_similarity": {
+      "high_align_vs_low_align": {
+        "cosine_similarity": 0.3836534023284912,
+        "frobenius_distance": 5.521831512451172,
+        "relative_frobenius": 1.120151387181166,
+        "bias_cosine": 0.9326444864273071,
+        "bias_l2_distance": 0.5877634882926941
+      }
+    },
+    "global_r2": 0.752813975016276,
+    "cat_vs_global": {
+      "high_align": {
+        "cosine_similarity": 0.7310243844985962,
+        "frobenius_distance": 5.283111095428467,
+        "relative_frobenius": 0.6833773951234551
+      },
+      "low_align": {
+        "cosine_similarity": 0.6246955990791321,
+        "frobenius_distance": 6.046576023101807,
+        "relative_frobenius": 0.7821325914684621
+      }
+    }
+  },
+  "goal_structure": {
+    "categories": [
+      "coordination",
+      "information_asymmetry",
+      "mixed_motive",
+      "persuasion",
+      "zero_sum"
+    ],
+    "per_category_r2": {
+      "coordination": {
+        "r2_mean": 0.7352169354756674,
+        "r2_std": 0.009087385397930959,
+        "r2_per_seed": [
+          0.7466236352920532,
+          0.7346405982971191,
+          0.7243865728378296
+        ],
+        "n_turns": 509
+      },
+      "information_asymmetry": {
+        "r2_mean": 0.541361023982366,
+        "r2_std": 0.08375656620869923,
+        "r2_per_seed": [
+          0.6033167839050293,
+          0.4229539930820465,
+          0.597812294960022
+        ],
+        "n_turns": 60
+      },
+      "mixed_motive": {
+        "r2_mean": 0.6757075389226278,
+        "r2_std": 0.005187011404771301,
+        "r2_per_seed": [
+          0.6684044599533081,
+          0.6787620782852173,
+          0.6799560785293579
+        ],
+        "n_turns": 450
+      },
+      "persuasion": {
+        "r2_mean": 0.700583299001058,
+        "r2_std": 0.0033167554227525376,
+        "r2_per_seed": [
+          0.7052041292190552,
+          0.6989709138870239,
+          0.6975748538970947
+        ],
+        "n_turns": 318
+      },
+      "zero_sum": {
+        "r2_mean": 0.7144109408060709,
+        "r2_std": 0.0019625529991650252,
+        "r2_per_seed": [
+          0.711745023727417,
+          0.7150752544403076,
+          0.7164125442504883
+        ],
+        "n_turns": 208
+      }
+    },
+    "pairwise_similarity": {
+      "coordination_vs_information_asymmetry": {
+        "cosine_similarity": 0.26277413964271545,
+        "frobenius_distance": 4.453237533569336,
+        "relative_frobenius": 1.3786562737534056,
+        "bias_cosine": 0.9568049907684326,
+        "bias_l2_distance": 0.4984966814517975
+      },
+      "coordination_vs_mixed_motive": {
+        "cosine_similarity": 0.33569613099098206,
+        "frobenius_distance": 5.133977890014648,
+        "relative_frobenius": 1.1533302154326623,
+        "bias_cosine": 0.93373703956604,
+        "bias_l2_distance": 0.6068042516708374
+      },
+      "coordination_vs_persuasion": {
+        "cosine_similarity": 0.31895512342453003,
+        "frobenius_distance": 4.907958030700684,
+        "relative_frobenius": 1.1767617784113376,
+        "bias_cosine": 0.9422628879547119,
+        "bias_l2_distance": 0.5643969774246216
+      },
+      "coordination_vs_zero_sum": {
+        "cosine_similarity": 0.30656248331069946,
+        "frobenius_distance": 4.692836284637451,
+        "relative_frobenius": 1.2118608825135297,
+        "bias_cosine": 0.947881281375885,
+        "bias_l2_distance": 0.5382867455482483
+      },
+      "information_asymmetry_vs_mixed_motive": {
+        "cosine_similarity": 0.27848878502845764,
+        "frobenius_distance": 4.231051921844482,
+        "relative_frobenius": 1.3541576295244813,
+        "bias_cosine": 0.9438670873641968,
+        "bias_l2_distance": 0.5651283860206604
+      },
+      "information_asymmetry_vs_persuasion": {
+        "cosine_similarity": 0.31057533621788025,
+        "frobenius_distance": 3.670173406600952,
+        "relative_frobenius": 1.2905949827391907,
+        "bias_cosine": 0.9465347528457642,
+        "bias_l2_distance": 0.550785481929779
+      },
+      "information_asymmetry_vs_zero_sum": {
+        "cosine_similarity": 0.305691123008728,
+        "frobenius_distance": 3.174124002456665,
+        "relative_frobenius": 1.2469679349910678,
+        "bias_cosine": 0.9520994424819946,
+        "bias_l2_distance": 0.5224878191947937
+      },
+      "mixed_motive_vs_persuasion": {
+        "cosine_similarity": 0.365591824054718,
+        "frobenius_distance": 4.602514743804932,
+        "relative_frobenius": 1.1322040351814047,
+        "bias_cosine": 0.9432107210159302,
+        "bias_l2_distance": 0.552478015422821
+      },
+      "mixed_motive_vs_zero_sum": {
+        "cosine_similarity": 0.36912479996681213,
+        "frobenius_distance": 4.3383612632751465,
+        "relative_frobenius": 1.151741864682982,
+        "bias_cosine": 0.9542533755302429,
+        "bias_l2_distance": 0.4987228214740753
+      },
+      "persuasion_vs_zero_sum": {
+        "cosine_similarity": 0.33038628101348877,
+        "frobenius_distance": 4.0635809898376465,
+        "relative_frobenius": 1.1656602320710394,
+        "bias_cosine": 0.9530846476554871,
+        "bias_l2_distance": 0.5021185278892517
+      }
+    },
+    "global_r2": 0.752813975016276,
+    "cat_vs_global": {
+      "coordination": {
+        "cosine_similarity": 0.6155158877372742,
+        "frobenius_distance": 6.0964579582214355,
+        "relative_frobenius": 0.7885848856318891
+      },
+      "information_asymmetry": {
+        "cosine_similarity": 0.2724030613899231,
+        "frobenius_distance": 7.44131326675415,
+        "relative_frobenius": 0.9625436953109616
+      },
+      "mixed_motive": {
+        "cosine_similarity": 0.6124995946884155,
+        "frobenius_distance": 6.1236371994018555,
+        "relative_frobenius": 0.7921005563614673
+      },
+      "persuasion": {
+        "cosine_similarity": 0.5305858254432678,
+        "frobenius_distance": 6.560752868652344,
+        "relative_frobenius": 0.8486420452729017
+      },
+      "zero_sum": {
+        "cosine_similarity": 0.46171316504478455,
+        "frobenius_distance": 6.868224620819092,
+        "relative_frobenius": 0.8884139223495687
+      }
+    }
+  },
+  "value_compatibility": {
+    "categories": [
+      "compatible",
+      "conflicting",
+      "neutral"
+    ],
+    "per_category_r2": {
+      "compatible": {
+        "r2_mean": 0.7400994300842285,
+        "r2_std": 0.0045002253509899065,
+        "r2_per_seed": [
+          0.7348885536193848,
+          0.7395405173301697,
+          0.7458692193031311
+        ],
+        "n_turns": 627
+      },
+      "conflicting": {
+        "r2_mean": 0.7039300799369812,
+        "r2_std": 0.010586727473414655,
+        "r2_per_seed": [
+          0.7189017534255981,
+          0.6965145468711853,
+          0.6963739395141602
+        ],
+        "n_turns": 396
+      },
+      "neutral": {
+        "r2_mean": 0.7262309392293295,
+        "r2_std": 0.0006000783004693378,
+        "r2_per_seed": [
+          0.7270066738128662,
+          0.726141095161438,
+          0.7255450487136841
+        ],
+        "n_turns": 522
+      }
+    },
+    "pairwise_similarity": {
+      "compatible_vs_conflicting": {
+        "cosine_similarity": 0.37626731395721436,
+        "frobenius_distance": 5.2005720138549805,
+        "relative_frobenius": 1.129783337658797,
+        "bias_cosine": 0.9316444993019104,
+        "bias_l2_distance": 0.5862765312194824
+      },
+      "compatible_vs_neutral": {
+        "cosine_similarity": 0.4343624711036682,
+        "frobenius_distance": 5.219982624053955,
+        "relative_frobenius": 1.0653669894966145,
+        "bias_cosine": 0.9288055300712585,
+        "bias_l2_distance": 0.6245737671852112
+      },
+      "conflicting_vs_neutral": {
+        "cosine_similarity": 0.4074763059616089,
+        "frobenius_distance": 4.846162796020508,
+        "relative_frobenius": 1.0944097677335127,
+        "bias_cosine": 0.9307748675346375,
+        "bias_l2_distance": 0.6171730160713196
+      }
+    },
+    "global_r2": 0.752813975016276,
+    "cat_vs_global": {
+      "compatible": {
+        "cosine_similarity": 0.6986681222915649,
+        "frobenius_distance": 5.540999889373779,
+        "relative_frobenius": 0.7167356510931953
+      },
+      "conflicting": {
+        "cosine_similarity": 0.5882071852684021,
+        "frobenius_distance": 6.2660346031188965,
+        "relative_frobenius": 0.8105198485298071
+      },
+      "neutral": {
+        "cosine_similarity": 0.6646373271942139,
+        "frobenius_distance": 5.791334629058838,
+        "relative_frobenius": 0.749116780171271
+      }
+    }
+  }
+}

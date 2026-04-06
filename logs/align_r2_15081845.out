@@ -1,0 +1,416 @@
+=== Job started at Sun Apr  5 12:27:54 PM PDT 2026 ===
+Node: sphinx1.stanford.edu, GPU: NVIDIA A100-SXM4-40GB
+
+Best layer pair for Misv0.3Misv0.3: A=8, B=6, R²=0.6779
+
+############################################################
+Model: Mistral-7B-Instruct-v0.3_None_0_Mistral-7B-Instruct-v0.3_None_0
+Layer pair: A=8, B=6
+############################################################
+Loading features for Mistral-7B-Instruct-v0.3_None_0_Mistral-7B-Instruct-v0.3_None_0...
+Loaded 450 episodes
+
+--- Seed 0 ---
+Until Finding Episodes:  0.0018405914306640625
+Until Filling test data: 0.554466724395752 seconds.
+Until Filling train data: 0.8457527160644531 seconds.
+Sampling data: 0.8457756042480469 seconds.
+Until Preparation: 0.0880885124206543.
+Until Calculation: 0.47420763969421387.
+Until linalg solve: 1.0336103439331055.
+Regression solved in 1.5632 seconds
+Training and Evaluating takes 0.6888813972473145 seconds.
+Global test R²: 0.6748
+Computed per-episode R² for 300 test episodes
+
+--- Seed 1 ---
+Until Finding Episodes:  0.0009756088256835938
+Until Filling test data: 0.5534045696258545 seconds.
+Until Filling train data: 0.8334767818450928 seconds.
+Sampling data: 0.8334996700286865 seconds.
+Until Preparation: 0.001032114028930664.
+Until Calculation: 0.0013232231140136719.
+Until linalg solve: 0.1464557647705078.
+Regression solved in 0.5805 seconds
+Training and Evaluating takes 0.5756194591522217 seconds.
+Global test R²: 0.6760
+Computed per-episode R² for 301 test episodes
+
+--- Seed 2 ---
+Until Finding Episodes:  0.0010318756103515625
+Until Filling test data: 0.5485270023345947 seconds.
+Until Filling train data: 0.8346211910247803 seconds.
+Sampling data: 0.8346445560455322 seconds.
+Until Preparation: 0.001043081283569336.
+Until Calculation: 0.0013976097106933594.
+Until linalg solve: 0.14651989936828613.
+Regression solved in 0.5814 seconds
+Training and Evaluating takes 0.614513635635376 seconds.
+Global test R²: 0.6821
+Computed per-episode R² for 296 test episodes
+
+Merged: 309 episodes with both R² and labels
+Missing label: 100, Missing R²: 41
+Saved merged data: /juice6/u/jshe/nlp/LM_neural_synchrony/alignment_r2_analysis_Misv0.3Misv0.3_L8_L6.json
+
+============================================================
+Results for Misv0.3Misv0.3 (layers A=8, B=6)
+============================================================
+Global R² (mean over seeds): 0.6776
+Episodes analyzed: 309
+
+Pearson  r=-0.0650, p=2.5439e-01
+Spearman r=0.1643, p=3.7782e-03
+
+--- goal_structure ---
+  coordination             : R²=-433796.3772 ± 2906165.2405  (n=90)
+  information_asymmetry    : R²=-309.1611 ± 923.1484  (n=10)
+  mixed_motive             : R²=-47832.9046 ± 394972.2031  (n=101)
+  persuasion               : R²=-19367.4381 ± 89541.4044  (n=71)
+  zero_sum                 : R²=-1188.9984 ± 5435.3964  (n=37)
+  ANOVA: F=1.033, p=3.9028e-01
+
+--- value_compatibility ---
+  compatible               : R²=-333025.0467 ± 2502791.2098  (n=122)
+  conflicting              : R²=-7132.4309 ± 31780.2116  (n=82)
+  neutral                  : R²=-38867.1898 ± 386221.7120  (n=105)
+  ANOVA: F=1.384, p=2.5221e-01
+
+--- power_dynamic ---
+  asymmetric               : R²=-1331.9488 ± 5217.8613  (n=43)
+  symmetric                : R²=-170066.5269 ± 1718921.2203  (n=266)
+  t-test: t=0.642, p=5.2160e-01
+
+--- stakes ---
+  high                     : R²=-1177.3007 ± 2301.9774  (n=25)
+  low                      : R²=-224362.9159 ± 1999118.3148  (n=196)
+  medium                   : R²=-14663.7037 ± 71339.3560  (n=88)
+  ANOVA: F=0.634, p=5.3136e-01
+
+--- OLS: R² ~ alignment_score + goal_structure + value_compat + stakes ---
+  OLS R²: 0.0162
+  alignment_score          : coef=160482.398560
+  goal_structure           : coef=164336.280799
+  value_compatibility      : coef=132099.287984
+  stakes                   : coef=44071.613442
+  intercept                : -646613.111674
+
+Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/alignment_plots/scatter_Misv0.3Misv0.3_L8_L6.png
+Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/alignment_plots/box_goal_structure_Misv0.3Misv0.3_L8_L6.png
+Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/alignment_plots/box_value_compatibility_Misv0.3Misv0.3_L8_L6.png
+Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/alignment_plots/box_power_dynamic_Misv0.3Misv0.3_L8_L6.png
+Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/alignment_plots/box_stakes_Misv0.3Misv0.3_L8_L6.png
+Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/alignment_plots/bar_goal_structure_Misv0.3Misv0.3_L8_L6.png
+Best layer pair for Misv0.3Misv0.2: A=8, B=4, R²=0.6359
+
+############################################################
+Model: Mistral-7B-Instruct-v0.3_None_0_Mistral-7B-Instruct-v0.2_None_0
+Layer pair: A=8, B=4
+############################################################
+Loading features for Mistral-7B-Instruct-v0.3_None_0_Mistral-7B-Instruct-v0.2_None_0...
+Loaded 450 episodes
+
+--- Seed 0 ---
+Until Finding Episodes:  0.0010120868682861328
+Until Filling test data: 2.0111804008483887 seconds.
+Until Filling train data: 3.3643558025360107 seconds.
+Sampling data: 3.3643829822540283 seconds.
+Until Preparation: 0.0020418167114257812.
+Until Calculation: 0.0027914047241210938.
+Until linalg solve: 0.15167713165283203.
+Regression solved in 0.5851 seconds
+Training and Evaluating takes 0.6527729034423828 seconds.
+Global test R²: 0.6344
+Computed per-episode R² for 276 test episodes
+
+--- Seed 1 ---
+Until Finding Episodes:  0.0009365081787109375
+Until Filling test data: 2.0809831619262695 seconds.
+Until Filling train data: 3.4402456283569336 seconds.
+Sampling data: 3.4402718544006348 seconds.
+Until Preparation: 0.0010683536529541016.
+Until Calculation: 0.0014164447784423828.
+Until linalg solve: 0.15038299560546875.
+Regression solved in 0.5828 seconds
+Training and Evaluating takes 0.634211540222168 seconds.
+Global test R²: 0.6353
+Computed per-episode R² for 275 test episodes
+
+--- Seed 2 ---
+Until Finding Episodes:  0.0009226799011230469
+Until Filling test data: 2.0538036823272705 seconds.
+Until Filling train data: 3.44766902923584 seconds.
+Sampling data: 3.4476945400238037 seconds.
+Until Preparation: 0.0010797977447509766.
+Until Calculation: 0.001416921615600586.
+Until linalg solve: 0.15031647682189941.
+Regression solved in 0.5810 seconds
+Training and Evaluating takes 0.5860140323638916 seconds.
+Global test R²: 0.6367
+Computed per-episode R² for 270 test episodes
+
+Merged: 310 episodes with both R² and labels
+Missing label: 100, Missing R²: 40
+Saved merged data: /juice6/u/jshe/nlp/LM_neural_synchrony/alignment_r2_analysis_Misv0.3Misv0.2_L8_L4.json
+
+============================================================
+Results for Misv0.3Misv0.2 (layers A=8, B=4)
+============================================================
+Global R² (mean over seeds): 0.6355
+Episodes analyzed: 310
+
+Pearson  r=-0.0550, p=3.3484e-01
+Spearman r=0.1494, p=8.4015e-03
+
+--- goal_structure ---
+  coordination             : R²=-3040.0622 ± 27408.0393  (n=93)
+  information_asymmetry    : R²=-338.4425 ± 897.1267  (n=11)
+  mixed_motive             : R²=-1487.8681 ± 12890.3498  (n=96)
+  persuasion               : R²=-260.5299 ± 589.6001  (n=71)
+  zero_sum                 : R²=-72.8843 ± 209.7612  (n=39)
+  ANOVA: F=0.376, p=8.2576e-01
+
+--- value_compatibility ---
+  compatible               : R²=-3412.8250 ± 26352.1372  (n=123)
+  conflicting              : R²=-178.8141 ± 405.3225  (n=84)
+  neutral                  : R²=-153.6528 ± 760.8098  (n=103)
+  ANOVA: F=1.405, p=2.4684e-01
+
+--- power_dynamic ---
+  asymmetric               : R²=-131.8814 ± 393.9772  (n=47)
+  symmetric                : R²=-1689.8315 ± 18100.6448  (n=263)
+  t-test: t=0.588, p=5.5687e-01
+
+--- stakes ---
+  high                     : R²=-5721.3808 ± 25871.9333  (n=23)
+  low                      : R²=-187.3823 ± 700.0847  (n=196)
+  medium                   : R²=-3102.2573 ± 27695.3324  (n=91)
+  ANOVA: F=1.765, p=1.7298e-01
+
+--- OLS: R² ~ alignment_score + goal_structure + value_compat + stakes ---
+  OLS R²: 0.0102
+  alignment_score          : coef=596.550226
+  goal_structure           : coef=845.835510
+  value_compatibility      : coef=1484.675248
+  stakes                   : coef=-733.120980
+  intercept                : -3577.021532
+
+Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/alignment_plots/scatter_Misv0.3Misv0.2_L8_L4.png
+Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/alignment_plots/box_goal_structure_Misv0.3Misv0.2_L8_L4.png
+Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/alignment_plots/box_value_compatibility_Misv0.3Misv0.2_L8_L4.png
+Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/alignment_plots/box_power_dynamic_Misv0.3Misv0.2_L8_L4.png
+Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/alignment_plots/box_stakes_Misv0.3Misv0.2_L8_L4.png
+Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/alignment_plots/bar_goal_structure_Misv0.3Misv0.2_L8_L4.png
+Best layer pair for Misv0.2Misv0.3: A=16, B=16, R²=-999.0000
+
+############################################################
+Model: Mistral-7B-Instruct-v0.2_None_0_Mistral-7B-Instruct-v0.3_None_0
+Layer pair: A=16, B=16
+############################################################
+Loading features for Mistral-7B-Instruct-v0.2_None_0_Mistral-7B-Instruct-v0.3_None_0...
+Loaded 450 episodes
+
+--- Seed 0 ---
+Until Finding Episodes:  0.0009300708770751953
+Until Filling test data: 1.9832932949066162 seconds.
+Until Filling train data: 3.1477746963500977 seconds.
+Sampling data: 3.1477982997894287 seconds.
+Until Preparation: 0.0017268657684326172.
+Until Calculation: 0.002110719680786133.
+Until linalg solve: 0.14890074729919434.
+Regression solved in 0.5790 seconds
+Training and Evaluating takes 0.5852301120758057 seconds.
+Global test R²: 0.4038
+Computed per-episode R² for 289 test episodes
+
+--- Seed 1 ---
+Until Finding Episodes:  0.0009217262268066406
+Until Filling test data: 2.044461488723755 seconds.
+Until Filling train data: 3.187238931655884 seconds.
+Sampling data: 3.187298059463501 seconds.
+Until Preparation: 0.001142263412475586.
+Until Calculation: 0.0015900135040283203.
+Until linalg solve: 0.14879822731018066.
+Regression solved in 0.5802 seconds
+Training and Evaluating takes 0.5783684253692627 seconds.
+Global test R²: 0.4019
+Computed per-episode R² for 286 test episodes
+
+--- Seed 2 ---
+Until Finding Episodes:  0.0009479522705078125
+Until Filling test data: 2.0229835510253906 seconds.
+Until Filling train data: 3.1832032203674316 seconds.
+Sampling data: 3.183260202407837 seconds.
+Until Preparation: 0.00106048583984375.
+Until Calculation: 0.0014350414276123047.
+Until linalg solve: 0.14863801002502441.
+Regression solved in 0.5774 seconds
+Training and Evaluating takes 0.5871315002441406 seconds.
+Global test R²: 0.3986
+Computed per-episode R² for 284 test episodes
+
+Merged: 310 episodes with both R² and labels
+Missing label: 100, Missing R²: 40
+Saved merged data: /juice6/u/jshe/nlp/LM_neural_synchrony/alignment_r2_analysis_Misv0.2Misv0.3_L16_L16.json
+
+============================================================
+Results for Misv0.2Misv0.3 (layers A=16, B=16)
+============================================================
+Global R² (mean over seeds): 0.4014
+Episodes analyzed: 310
+
+Pearson  r=-0.0678, p=2.3425e-01
+Spearman r=0.1228, p=3.0711e-02
+
+--- goal_structure ---
+  coordination             : R²=-1539.1238 ± 10434.4282  (n=89)
+  information_asymmetry    : R²=-211.6777 ± 439.4063  (n=11)
+  mixed_motive             : R²=-514.7460 ± 1140.5526  (n=107)
+  persuasion               : R²=-527.2011 ± 2472.2127  (n=68)
+  zero_sum                 : R²=-29.4771 ± 123.3578  (n=35)
+  ANOVA: F=0.640, p=6.3403e-01
+
+--- value_compatibility ---
+  compatible               : R²=-1170.3275 ± 8755.8764  (n=127)
+  conflicting              : R²=-348.4220 ± 905.1423  (n=80)
+  neutral                  : R²=-531.6924 ± 2184.0483  (n=103)
+  ANOVA: F=0.600, p=5.4939e-01
+
+--- power_dynamic ---
+  asymmetric               : R²=-348.7748 ± 936.1426  (n=41)
+  symmetric                : R²=-806.5795 ± 6184.9491  (n=269)
+  t-test: t=0.472, p=6.3755e-01
+
+--- stakes ---
+  high                     : R²=-352.3732 ± 1236.9943  (n=24)
+  low                      : R²=-422.6866 ± 1639.3526  (n=202)
+  medium                   : R²=-1636.0717 ± 10725.2647  (n=84)
+  ANOVA: F=1.370, p=2.5578e-01
+
+--- OLS: R² ~ alignment_score + goal_structure + value_compat + stakes ---
+  OLS R²: 0.0167
+  alignment_score          : coef=113.185564
+  goal_structure           : coef=421.371109
+  value_compatibility      : coef=187.333074
+  stakes                   : coef=-991.579553
+  intercept                : -523.314312
+
+Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/alignment_plots/scatter_Misv0.2Misv0.3_L16_L16.png
+Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/alignment_plots/box_goal_structure_Misv0.2Misv0.3_L16_L16.png
+Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/alignment_plots/box_value_compatibility_Misv0.2Misv0.3_L16_L16.png
+Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/alignment_plots/box_power_dynamic_Misv0.2Misv0.3_L16_L16.png
+Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/alignment_plots/box_stakes_Misv0.2Misv0.3_L16_L16.png
+Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/alignment_plots/bar_goal_structure_Misv0.2Misv0.3_L16_L16.png
+Best layer pair for Misv0.2Misv0.2: A=16, B=16, R²=-999.0000
+
+############################################################
+Model: Mistral-7B-Instruct-v0.2_None_0_Mistral-7B-Instruct-v0.2_None_0
+Layer pair: A=16, B=16
+############################################################
+Loading features for Mistral-7B-Instruct-v0.2_None_0_Mistral-7B-Instruct-v0.2_None_0...
+Loaded 450 episodes
+
+--- Seed 0 ---
+Until Finding Episodes:  0.0036199092864990234
+Until Filling test data: 2.114561080932617 seconds.
+Until Filling train data: 4.626643657684326 seconds.
+Sampling data: 4.626668691635132 seconds.
+Until Preparation: 0.004754781723022461.
+Until Calculation: 0.0054378509521484375.
+Until linalg solve: 0.1674811840057373.
+Regression solved in 0.6266 seconds
+Training and Evaluating takes 0.905428409576416 seconds.
+Global test R²: 0.3676
+Computed per-episode R² for 209 test episodes
+
+--- Seed 1 ---
+Until Finding Episodes:  0.0009613037109375
+Until Filling test data: 2.1681296825408936 seconds.
+Until Filling train data: 4.792114734649658 seconds.
+Sampling data: 4.792140007019043 seconds.
+Until Preparation: 0.0011889934539794922.
+Until Calculation: 0.0016171932220458984.
+Until linalg solve: 0.16370224952697754.
+Regression solved in 0.5955 seconds
+Training and Evaluating takes 0.5607860088348389 seconds.
+Global test R²: 0.3808
+Computed per-episode R² for 206 test episodes
+
+--- Seed 2 ---
+Until Finding Episodes:  0.0015895366668701172
+Until Filling test data: 2.1900711059570312 seconds.
+Until Filling train data: 4.692089080810547 seconds.
+Sampling data: 4.692113637924194 seconds.
+Until Preparation: 0.001110076904296875.
+Until Calculation: 0.0014338493347167969.
+Until linalg solve: 0.16353535652160645.
+Regression solved in 0.5936 seconds
+Training and Evaluating takes 0.5602881908416748 seconds.
+Global test R²: 0.3780
+Computed per-episode R² for 209 test episodes
+
+Merged: 307 episodes with both R² and labels
+Missing label: 100, Missing R²: 43
+Saved merged data: /juice6/u/jshe/nlp/LM_neural_synchrony/alignment_r2_analysis_Misv0.2Misv0.2_L16_L16.json
+
+============================================================
+Results for Misv0.2Misv0.2 (layers A=16, B=16)
+============================================================
+Global R² (mean over seeds): 0.3754
+Episodes analyzed: 307
+
+Pearson  r=0.0113, p=8.4406e-01
+Spearman r=0.0133, p=8.1651e-01
+
+--- goal_structure ---
+  coordination             : R²=-96.2817 ± 709.5718  (n=92)
+  information_asymmetry    : R²=-1.5245 ± 0.5394  (n=11)
+  mixed_motive             : R²=-24459.5837 ± 242670.3994  (n=102)
+  persuasion               : R²=-2.2918 ± 3.8417  (n=69)
+  zero_sum                 : R²=-275.5292 ± 1546.2128  (n=33)
+  ANOVA: F=0.509, p=7.2953e-01
+
+--- value_compatibility ---
+  compatible               : R²=-225.1620 ± 1125.6367  (n=124)
+  conflicting              : R²=-111.5215 ± 984.0386  (n=83)
+  neutral                  : R²=-24758.2646 ± 245077.1387  (n=100)
+  ANOVA: F=1.031, p=3.5796e-01
+
+--- power_dynamic ---
+  asymmetric               : R²=-48.0462 ± 290.8896  (n=44)
+  symmetric                : R²=-9547.1057 ± 151592.8961  (n=263)
+  t-test: t=0.414, p=6.7895e-01
+
+--- stakes ---
+  high                     : R²=-11.1279 ± 42.5882  (n=23)
+  low                      : R²=-12804.2960 ± 175933.0776  (n=195)
+  medium                   : R²=-178.7546 ± 1170.3432  (n=89)
+  ANOVA: F=0.287, p=7.5060e-01
+
+--- OLS: R² ~ alignment_score + goal_structure + value_compat + stakes ---
+  OLS R²: 0.0057
+  alignment_score          : coef=-3510.066880
+  goal_structure           : coef=-714.965993
+  value_compatibility      : coef=-12465.005515
+  stakes                   : coef=4805.183526
+  intercept                : -769.810407
+
+Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/alignment_plots/scatter_Misv0.2Misv0.2_L16_L16.png
+Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/alignment_plots/box_goal_structure_Misv0.2Misv0.2_L16_L16.png
+Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/alignment_plots/box_value_compatibility_Misv0.2Misv0.2_L16_L16.png
+Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/alignment_plots/box_power_dynamic_Misv0.2Misv0.2_L16_L16.png
+Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/alignment_plots/box_stakes_Misv0.2Misv0.2_L16_L16.png
+Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/alignment_plots/bar_goal_structure_Misv0.2Misv0.2_L16_L16.png
+
+
+============================================================
+AGGREGATE SUMMARY
+============================================================
+  Misv0.3Misv0.3        Pearson r=-0.0650 (p=2.54e-01)  Spearman r=+0.1643 (p=3.78e-03)  n=309
+  Misv0.3Misv0.2        Pearson r=-0.0550 (p=3.35e-01)  Spearman r=+0.1494 (p=8.40e-03)  n=310
+  Misv0.2Misv0.3        Pearson r=-0.0678 (p=2.34e-01)  Spearman r=+0.1228 (p=3.07e-02)  n=310
+  Misv0.2Misv0.2        Pearson r=+0.0113 (p=8.44e-01)  Spearman r=+0.0133 (p=8.17e-01)  n=307
+
+Saved aggregate summary: /juice6/u/jshe/nlp/LM_neural_synchrony/alignment_r2_summary.json
+
+=== Job finished at Sun Apr  5 12:35:59 PM PDT 2026 ===

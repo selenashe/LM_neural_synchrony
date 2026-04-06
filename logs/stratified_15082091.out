@@ -1,0 +1,1264 @@
+=== Job started at Sun Apr  5 01:25:51 PM PDT 2026 ===
+Node: sphinx11.stanford.edu, GPU: NVIDIA H200
+
+Best layer pair for Misv0.3Misv0.3: A=8, B=6, R²=0.6779
+
+############################################################
+Model: Mistral-7B-Instruct-v0.3_None_0_Mistral-7B-Instruct-v0.3_None_0 (Misv0.3Misv0.3)
+Layer pair: A=8, B=6
+Pathway: both
+############################################################
+Loading features for Mistral-7B-Instruct-v0.3_None_0_Mistral-7B-Instruct-v0.3_None_0...
+Loaded 450 episodes
+
+============================================================
+Pathway A: alignment_binary
+============================================================
+  Binary alignment split: high(>=0.5)=151, low(<=-0.5)=118
+    high_align: 736 turns
+    low_align: 491 turns
+
+  --- Seed 0 ---
+Until Preparation: 0.05167675018310547.
+Until Calculation: 0.2778487205505371.
+Until linalg solve: 0.5613410472869873.
+Regression solved in 0.6646 seconds
+Training and Evaluating takes 0.10399007797241211 seconds.
+    Trained on 'high_align': test 'high_align'=0.7401, test 'low_align'=0.6215
+Until Preparation: 0.000766754150390625.
+Until Calculation: 0.0012450218200683594.
+Until linalg solve: 0.020247936248779297.
+Regression solved in 0.1376 seconds
+Training and Evaluating takes 0.011746406555175781 seconds.
+    Trained on 'low_align': test 'high_align'=0.5569, test 'low_align'=0.7322
+
+  --- Seed 1 ---
+Until Preparation: 0.0005714893341064453.
+Until Calculation: 0.0008988380432128906.
+Until linalg solve: 0.0201718807220459.
+Regression solved in 0.1161 seconds
+Training and Evaluating takes 0.011240959167480469 seconds.
+    Trained on 'high_align': test 'high_align'=0.7415, test 'low_align'=0.6211
+Until Preparation: 0.0005743503570556641.
+Until Calculation: 0.00087738037109375.
+Until linalg solve: 0.01987934112548828.
+Regression solved in 0.1233 seconds
+Training and Evaluating takes 0.0098876953125 seconds.
+    Trained on 'low_align': test 'high_align'=0.5547, test 'low_align'=0.7233
+
+  --- Seed 2 ---
+Until Preparation: 0.0006742477416992188.
+Until Calculation: 0.0011239051818847656.
+Until linalg solve: 0.020305871963500977.
+Regression solved in 0.1343 seconds
+Training and Evaluating takes 0.01504659652709961 seconds.
+    Trained on 'high_align': test 'high_align'=0.7336, test 'low_align'=0.6175
+Until Preparation: 0.0006177425384521484.
+Until Calculation: 0.0009527206420898438.
+Until linalg solve: 0.019942045211791992.
+Regression solved in 0.1155 seconds
+Training and Evaluating takes 0.007488727569580078 seconds.
+    Trained on 'low_align': test 'high_align'=0.5561, test 'low_align'=0.7362
+
+  Transfer gap: diagonal=0.7345, off-diagonal=0.5880, gap=0.1465 (19.9%)
+  Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/stratified_plots/transfer_alignment_binary_Misv0.3Misv0.3_L8_L6.png
+
+============================================================
+Pathway A: goal_structure
+============================================================
+  Partitioned by 'goal_structure': coordination=103, information_asymmetry=13, mixed_motive=114, persuasion=79, zero_sum=41  (skipped 100 unlabeled)
+    coordination: 509 turns
+    information_asymmetry: 60 turns
+    mixed_motive: 450 turns
+    persuasion: 318 turns
+    zero_sum: 208 turns
+
+  --- Seed 0 ---
+Until Preparation: 0.0005841255187988281.
+Until Calculation: 0.0009799003601074219.
+Until linalg solve: 0.019918441772460938.
+Regression solved in 0.1355 seconds
+Training and Evaluating takes 0.011548995971679688 seconds.
+    Trained on 'coordination': test 'coordination'=0.7466, test 'information_asymmetry'=0.5634, test 'mixed_motive'=0.5211, test 'persuasion'=0.5855, test 'zero_sum'=0.5806
+Until Preparation: 0.0011327266693115234.
+Until Calculation: 0.0015628337860107422.
+Until linalg solve: 0.020016193389892578.
+Regression solved in 0.1165 seconds
+Training and Evaluating takes 0.012845277786254883 seconds.
+    Trained on 'information_asymmetry': test 'coordination'=0.3552, test 'information_asymmetry'=0.6033, test 'mixed_motive'=0.3507, test 'persuasion'=0.4204, test 'zero_sum'=0.4336
+Until Preparation: 0.0005390644073486328.
+Until Calculation: 0.0008914470672607422.
+Until linalg solve: 0.019801616668701172.
+Regression solved in 0.1211 seconds
+Training and Evaluating takes 0.009130239486694336 seconds.
+    Trained on 'mixed_motive': test 'coordination'=0.4920, test 'information_asymmetry'=0.5562, test 'mixed_motive'=0.6684, test 'persuasion'=0.5976, test 'zero_sum'=0.6148
+Until Preparation: 0.0006146430969238281.
+Until Calculation: 0.0010306835174560547.
+Until linalg solve: 0.019798755645751953.
+Regression solved in 0.1356 seconds
+Training and Evaluating takes 0.008900880813598633 seconds.
+    Trained on 'persuasion': test 'coordination'=0.4533, test 'information_asymmetry'=0.5502, test 'mixed_motive'=0.5200, test 'persuasion'=0.7052, test 'zero_sum'=0.5759
+Until Preparation: 0.0006051063537597656.
+Until Calculation: 0.0010080337524414062.
+Until linalg solve: 0.019606351852416992.
+Regression solved in 0.1161 seconds
+Training and Evaluating takes 0.004632711410522461 seconds.
+    Trained on 'zero_sum': test 'coordination'=0.4587, test 'information_asymmetry'=0.5111, test 'mixed_motive'=0.5196, test 'persuasion'=0.5472, test 'zero_sum'=0.7117
+
+  --- Seed 1 ---
+Until Preparation: 0.0005178451538085938.
+Until Calculation: 0.0008220672607421875.
+Until linalg solve: 0.019807100296020508.
+Regression solved in 0.1193 seconds
+Training and Evaluating takes 0.009337425231933594 seconds.
+    Trained on 'coordination': test 'coordination'=0.7346, test 'information_asymmetry'=0.5660, test 'mixed_motive'=0.5228, test 'persuasion'=0.5875, test 'zero_sum'=0.5851
+Until Preparation: 0.0005707740783691406.
+Until Calculation: 0.0009379386901855469.
+Until linalg solve: 0.019406557083129883.
+Regression solved in 0.1388 seconds
+Training and Evaluating takes 0.0035572052001953125 seconds.
+    Trained on 'information_asymmetry': test 'coordination'=0.3458, test 'information_asymmetry'=0.4230, test 'mixed_motive'=0.3333, test 'persuasion'=0.3969, test 'zero_sum'=0.4197
+Until Preparation: 0.0006146430969238281.
+Until Calculation: 0.0009543895721435547.
+Until linalg solve: 0.01989126205444336.
+Regression solved in 0.1159 seconds
+Training and Evaluating takes 0.0071563720703125 seconds.
+    Trained on 'mixed_motive': test 'coordination'=0.4931, test 'information_asymmetry'=0.5547, test 'mixed_motive'=0.6788, test 'persuasion'=0.5990, test 'zero_sum'=0.6141
+Until Preparation: 0.0005440711975097656.
+Until Calculation: 0.0008442401885986328.
+Until linalg solve: 0.019681692123413086.
+Regression solved in 0.1202 seconds
+Training and Evaluating takes 0.007424592971801758 seconds.
+    Trained on 'persuasion': test 'coordination'=0.4635, test 'information_asymmetry'=0.5569, test 'mixed_motive'=0.5237, test 'persuasion'=0.6990, test 'zero_sum'=0.5782
+Until Preparation: 0.0006582736968994141.
+Until Calculation: 0.001058340072631836.
+Until linalg solve: 0.01972365379333496.
+Regression solved in 0.1355 seconds
+Training and Evaluating takes 0.006350040435791016 seconds.
+    Trained on 'zero_sum': test 'coordination'=0.4556, test 'information_asymmetry'=0.5017, test 'mixed_motive'=0.5153, test 'persuasion'=0.5357, test 'zero_sum'=0.7151
+
+  --- Seed 2 ---
+Until Preparation: 0.0005726814270019531.
+Until Calculation: 0.0008950233459472656.
+Until linalg solve: 0.01988840103149414.
+Regression solved in 0.1154 seconds
+Training and Evaluating takes 0.008057832717895508 seconds.
+    Trained on 'coordination': test 'coordination'=0.7244, test 'information_asymmetry'=0.5725, test 'mixed_motive'=0.5233, test 'persuasion'=0.5832, test 'zero_sum'=0.5830
+Until Preparation: 0.00051116943359375.
+Until Calculation: 0.0007746219635009766.
+Until linalg solve: 0.019255638122558594.
+Regression solved in 0.1198 seconds
+Training and Evaluating takes 0.002920389175415039 seconds.
+    Trained on 'information_asymmetry': test 'coordination'=0.3538, test 'information_asymmetry'=0.5978, test 'mixed_motive'=0.3496, test 'persuasion'=0.4204, test 'zero_sum'=0.4341
+Until Preparation: 0.0006382465362548828.
+Until Calculation: 0.0010154247283935547.
+Until linalg solve: 0.019956111907958984.
+Regression solved in 0.1347 seconds
+Training and Evaluating takes 0.010896921157836914 seconds.
+    Trained on 'mixed_motive': test 'coordination'=0.4933, test 'information_asymmetry'=0.5538, test 'mixed_motive'=0.6800, test 'persuasion'=0.5980, test 'zero_sum'=0.6140
+Until Preparation: 0.0005869865417480469.
+Until Calculation: 0.0009191036224365234.
+Until linalg solve: 0.019682645797729492.
+Regression solved in 0.1154 seconds
+Training and Evaluating takes 0.005764007568359375 seconds.
+    Trained on 'persuasion': test 'coordination'=0.4555, test 'information_asymmetry'=0.5519, test 'mixed_motive'=0.5228, test 'persuasion'=0.6976, test 'zero_sum'=0.5776
+Until Preparation: 0.0005464553833007812.
+Until Calculation: 0.0008504390716552734.
+Until linalg solve: 0.019483566284179688.
+Regression solved in 0.1217 seconds
+Training and Evaluating takes 0.005628108978271484 seconds.
+    Trained on 'zero_sum': test 'coordination'=0.4546, test 'information_asymmetry'=0.5017, test 'mixed_motive'=0.5138, test 'persuasion'=0.5456, test 'zero_sum'=0.7164
+
+  Transfer gap: diagonal=0.6735, off-diagonal=0.5093, gap=0.1641 (24.4%)
+  Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/stratified_plots/transfer_goal_structure_Misv0.3Misv0.3_L8_L6.png
+
+============================================================
+Pathway A: value_compatibility
+============================================================
+  Partitioned by 'value_compatibility': compatible=141, conflicting=94, neutral=115  (skipped 100 unlabeled)
+    compatible: 627 turns
+    conflicting: 396 turns
+    neutral: 522 turns
+
+  --- Seed 0 ---
+Until Preparation: 0.0006096363067626953.
+Until Calculation: 0.0010466575622558594.
+Until linalg solve: 0.02012920379638672.
+Regression solved in 0.1150 seconds
+Training and Evaluating takes 0.00932455062866211 seconds.
+    Trained on 'compatible': test 'compatible'=0.7349, test 'conflicting'=0.6287, test 'neutral'=0.6442
+Until Preparation: 0.0005502700805664062.
+Until Calculation: 0.0009174346923828125.
+Until linalg solve: 0.01977849006652832.
+Regression solved in 0.1221 seconds
+Training and Evaluating takes 0.008608341217041016 seconds.
+    Trained on 'conflicting': test 'compatible'=0.5637, test 'conflicting'=0.7189, test 'neutral'=0.5796
+Until Preparation: 0.0006420612335205078.
+Until Calculation: 0.0010743141174316406.
+Until linalg solve: 0.020067691802978516.
+Regression solved in 0.1170 seconds
+Training and Evaluating takes 0.008448362350463867 seconds.
+    Trained on 'neutral': test 'compatible'=0.6411, test 'conflicting'=0.6345, test 'neutral'=0.7270
+
+  --- Seed 1 ---
+Until Preparation: 0.0005486011505126953.
+Until Calculation: 0.0008871555328369141.
+Until linalg solve: 0.019998788833618164.
+Regression solved in 0.1297 seconds
+Training and Evaluating takes 0.012837648391723633 seconds.
+    Trained on 'compatible': test 'compatible'=0.7395, test 'conflicting'=0.6288, test 'neutral'=0.6407
+Until Preparation: 0.0006244182586669922.
+Until Calculation: 0.0010302066802978516.
+Until linalg solve: 0.01986861228942871.
+Regression solved in 0.1304 seconds
+Training and Evaluating takes 0.008107662200927734 seconds.
+    Trained on 'conflicting': test 'compatible'=0.5598, test 'conflicting'=0.6965, test 'neutral'=0.5748
+Until Preparation: 0.00052642822265625.
+Until Calculation: 0.0008604526519775391.
+Until linalg solve: 0.01982259750366211.
+Regression solved in 0.1155 seconds
+Training and Evaluating takes 0.008201360702514648 seconds.
+    Trained on 'neutral': test 'compatible'=0.6424, test 'conflicting'=0.6343, test 'neutral'=0.7261
+
+  --- Seed 2 ---
+Until Preparation: 0.0005633831024169922.
+Until Calculation: 0.0008800029754638672.
+Until linalg solve: 0.019991636276245117.
+Regression solved in 0.1257 seconds
+Training and Evaluating takes 0.014020442962646484 seconds.
+    Trained on 'compatible': test 'compatible'=0.7459, test 'conflicting'=0.6303, test 'neutral'=0.6424
+Until Preparation: 0.0006794929504394531.
+Until Calculation: 0.001132965087890625.
+Until linalg solve: 0.01994466781616211.
+Regression solved in 0.1275 seconds
+Training and Evaluating takes 0.0077626705169677734 seconds.
+    Trained on 'conflicting': test 'compatible'=0.5625, test 'conflicting'=0.6964, test 'neutral'=0.5764
+Until Preparation: 0.0005331039428710938.
+Until Calculation: 0.0008258819580078125.
+Until linalg solve: 0.019822359085083008.
+Regression solved in 0.1161 seconds
+Training and Evaluating takes 0.008318901062011719 seconds.
+    Trained on 'neutral': test 'compatible'=0.6430, test 'conflicting'=0.6366, test 'neutral'=0.7255
+
+  Transfer gap: diagonal=0.7234, off-diagonal=0.6147, gap=0.1088 (15.0%)
+  Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/stratified_plots/transfer_value_compatibility_Misv0.3Misv0.3_L8_L6.png
+Loading features for Mistral-7B-Instruct-v0.3_None_0_Mistral-7B-Instruct-v0.3_None_0...
+Loaded 450 episodes
+
+============================================================
+Pathway C: Residual Analysis
+============================================================
+
+  --- Seed 0 ---
+Until Preparation: 0.0006735324859619141.
+Until Calculation: 0.0014464855194091797.
+Until linalg solve: 0.021976947784423828.
+Regression solved in 0.1197 seconds
+Training and Evaluating takes 0.03835606575012207 seconds.
+    Global R²: 0.7525
+
+  --- Seed 1 ---
+Until Preparation: 0.0007028579711914062.
+Until Calculation: 0.0010826587677001953.
+Until linalg solve: 0.021731138229370117.
+Regression solved in 0.1326 seconds
+Training and Evaluating takes 0.03906440734863281 seconds.
+    Global R²: 0.7580
+
+  --- Seed 2 ---
+Until Preparation: 0.0011126995086669922.
+Until Calculation: 0.0013947486877441406.
+Until linalg solve: 0.021993637084960938.
+Regression solved in 0.1253 seconds
+Training and Evaluating takes 0.04408717155456543 seconds.
+    Global R²: 0.7479
+
+  --- goal_structure (residual L2 norms) ---
+    coordination             : residual=0.1238 ± 0.0139  (n=93)
+    information_asymmetry    : residual=0.1339 ± 0.0261  (n=10)
+    mixed_motive             : residual=0.1290 ± 0.0210  (n=104)
+    persuasion               : residual=0.1296 ± 0.0175  (n=72)
+    zero_sum                 : residual=0.1253 ± 0.0104  (n=37)
+    ANOVA: F=1.926, p=1.0592e-01
+    Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/stratified_plots/residual_goal_structure_Misv0.3Misv0.3_L8_L6.png
+
+  --- value_compatibility (residual L2 norms) ---
+    compatible               : residual=0.1298 ± 0.0200  (n=127)
+    conflicting              : residual=0.1226 ± 0.0139  (n=81)
+    neutral                  : residual=0.1280 ± 0.0167  (n=108)
+    ANOVA: F=4.264, p=1.4897e-02
+    Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/stratified_plots/residual_value_compatibility_Misv0.3Misv0.3_L8_L6.png
+
+  --- power_dynamic (residual L2 norms) ---
+    asymmetric               : residual=0.1234 ± 0.0172  (n=41)
+    symmetric                : residual=0.1279 ± 0.0177  (n=275)
+    t-test: t=1.524, p=1.2859e-01
+    Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/stratified_plots/residual_power_dynamic_Misv0.3Misv0.3_L8_L6.png
+
+  --- stakes (residual L2 norms) ---
+    high                     : residual=0.1342 ± 0.0201  (n=22)
+    low                      : residual=0.1279 ± 0.0177  (n=199)
+    medium                   : residual=0.1245 ± 0.0167  (n=95)
+    ANOVA: F=3.003, p=5.1087e-02
+    Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/stratified_plots/residual_stakes_Misv0.3Misv0.3_L8_L6.png
+
+  Alignment score vs residual L2:
+    Pearson  r=-0.0059, p=9.1675e-01
+    Spearman r=-0.0117, p=8.3649e-01
+    Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/stratified_plots/residual_scatter_Misv0.3Misv0.3_L8_L6.png
+
+Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/stratified_analysis_Misv0.3Misv0.3_L8_L6.json
+Best layer pair for Misv0.3Misv0.2: A=8, B=4, R²=0.6359
+
+############################################################
+Model: Mistral-7B-Instruct-v0.3_None_0_Mistral-7B-Instruct-v0.2_None_0 (Misv0.3Misv0.2)
+Layer pair: A=8, B=4
+Pathway: both
+############################################################
+Loading features for Mistral-7B-Instruct-v0.3_None_0_Mistral-7B-Instruct-v0.2_None_0...
+Loaded 450 episodes
+
+============================================================
+Pathway A: alignment_binary
+============================================================
+  Binary alignment split: high(>=0.5)=151, low(<=-0.5)=118
+    high_align: 804 turns
+    low_align: 544 turns
+
+  --- Seed 0 ---
+Until Preparation: 0.0006492137908935547.
+Until Calculation: 0.0011394023895263672.
+Until linalg solve: 0.020391464233398438.
+Regression solved in 0.0903 seconds
+Training and Evaluating takes 0.015537500381469727 seconds.
+    Trained on 'high_align': test 'high_align'=0.7221, test 'low_align'=0.5505
+Until Preparation: 0.0006279945373535156.
+Until Calculation: 0.0010612010955810547.
+Until linalg solve: 0.020076513290405273.
+Regression solved in 0.0976 seconds
+Training and Evaluating takes 0.012155294418334961 seconds.
+    Trained on 'low_align': test 'high_align'=0.4915, test 'low_align'=0.6798
+
+  --- Seed 1 ---
+Until Preparation: 0.0006575584411621094.
+Until Calculation: 0.0010509490966796875.
+Until linalg solve: 0.020376920700073242.
+Regression solved in 0.0892 seconds
+Training and Evaluating takes 0.012493610382080078 seconds.
+    Trained on 'high_align': test 'high_align'=0.7252, test 'low_align'=0.5484
+Until Preparation: 0.0005478858947753906.
+Until Calculation: 0.0008456707000732422.
+Until linalg solve: 0.019855976104736328.
+Regression solved in 0.0870 seconds
+Training and Evaluating takes 0.00874471664428711 seconds.
+    Trained on 'low_align': test 'high_align'=0.4920, test 'low_align'=0.6553
+
+  --- Seed 2 ---
+Until Preparation: 0.0006012916564941406.
+Until Calculation: 0.0009315013885498047.
+Until linalg solve: 0.020246028900146484.
+Regression solved in 0.0958 seconds
+Training and Evaluating takes 0.01648402214050293 seconds.
+    Trained on 'high_align': test 'high_align'=0.6943, test 'low_align'=0.5498
+Until Preparation: 0.0006260871887207031.
+Until Calculation: 0.0010323524475097656.
+Until linalg solve: 0.020036697387695312.
+Regression solved in 0.0978 seconds
+Training and Evaluating takes 0.012302637100219727 seconds.
+    Trained on 'low_align': test 'high_align'=0.4916, test 'low_align'=0.6680
+
+  Transfer gap: diagonal=0.6908, off-diagonal=0.5206, gap=0.1702 (24.6%)
+  Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/stratified_plots/transfer_alignment_binary_Misv0.3Misv0.2_L8_L4.png
+
+============================================================
+Pathway A: goal_structure
+============================================================
+  Partitioned by 'goal_structure': coordination=103, information_asymmetry=13, mixed_motive=114, persuasion=79, zero_sum=41  (skipped 100 unlabeled)
+    coordination: 562 turns
+    information_asymmetry: 63 turns
+    mixed_motive: 486 turns
+    persuasion: 377 turns
+    zero_sum: 193 turns
+
+  --- Seed 0 ---
+Until Preparation: 0.0005457401275634766.
+Until Calculation: 0.000934600830078125.
+Until linalg solve: 0.019950389862060547.
+Regression solved in 0.0879 seconds
+Training and Evaluating takes 0.010100603103637695 seconds.
+    Trained on 'coordination': test 'coordination'=0.7320, test 'information_asymmetry'=0.5201, test 'mixed_motive'=0.4801, test 'persuasion'=0.5135, test 'zero_sum'=0.4770
+Until Preparation: 0.0005705356597900391.
+Until Calculation: 0.000980377197265625.
+Until linalg solve: 0.01943373680114746.
+Regression solved in 0.0962 seconds
+Training and Evaluating takes 0.0036492347717285156 seconds.
+    Trained on 'information_asymmetry': test 'coordination'=0.2537, test 'information_asymmetry'=0.4752, test 'mixed_motive'=0.3169, test 'persuasion'=0.3225, test 'zero_sum'=0.2932
+Until Preparation: 0.0007076263427734375.
+Until Calculation: 0.0011827945709228516.
+Until linalg solve: 0.020114660263061523.
+Regression solved in 0.0883 seconds
+Training and Evaluating takes 0.008170604705810547 seconds.
+    Trained on 'mixed_motive': test 'coordination'=0.4177, test 'information_asymmetry'=0.5023, test 'mixed_motive'=0.6567, test 'persuasion'=0.5302, test 'zero_sum'=0.5393
+Until Preparation: 0.0005426406860351562.
+Until Calculation: 0.000888824462890625.
+Until linalg solve: 0.019694805145263672.
+Regression solved in 0.0872 seconds
+Training and Evaluating takes 0.007015705108642578 seconds.
+    Trained on 'persuasion': test 'coordination'=0.3880, test 'information_asymmetry'=0.4625, test 'mixed_motive'=0.4843, test 'persuasion'=0.6644, test 'zero_sum'=0.4761
+Until Preparation: 0.00058746337890625.
+Until Calculation: 0.0009729862213134766.
+Until linalg solve: 0.01959514617919922.
+Regression solved in 0.0939 seconds
+Training and Evaluating takes 0.016777753829956055 seconds.
+    Trained on 'zero_sum': test 'coordination'=0.3665, test 'information_asymmetry'=0.4161, test 'mixed_motive'=0.4706, test 'persuasion'=0.4554, test 'zero_sum'=0.6619
+
+  --- Seed 1 ---
+Until Preparation: 0.000640869140625.
+Until Calculation: 0.0010652542114257812.
+Until linalg solve: 0.02008223533630371.
+Regression solved in 0.0880 seconds
+Training and Evaluating takes 0.008772134780883789 seconds.
+    Trained on 'coordination': test 'coordination'=0.7159, test 'information_asymmetry'=0.5204, test 'mixed_motive'=0.4830, test 'persuasion'=0.5158, test 'zero_sum'=0.4766
+Until Preparation: 0.0005323886871337891.
+Until Calculation: 0.0008108615875244141.
+Until linalg solve: 0.019353151321411133.
+Regression solved in 0.0880 seconds
+Training and Evaluating takes 0.002881288528442383 seconds.
+    Trained on 'information_asymmetry': test 'coordination'=0.2554, test 'information_asymmetry'=0.6020, test 'mixed_motive'=0.3232, test 'persuasion'=0.3239, test 'zero_sum'=0.2879
+Until Preparation: 0.0006053447723388672.
+Until Calculation: 0.0009512901306152344.
+Until linalg solve: 0.01992654800415039.
+Regression solved in 0.0940 seconds
+Training and Evaluating takes 0.010626554489135742 seconds.
+    Trained on 'mixed_motive': test 'coordination'=0.4131, test 'information_asymmetry'=0.4987, test 'mixed_motive'=0.6757, test 'persuasion'=0.5303, test 'zero_sum'=0.5381
+Until Preparation: 0.0006461143493652344.
+Until Calculation: 0.0010311603546142578.
+Until linalg solve: 0.019865036010742188.
+Regression solved in 0.0920 seconds
+Training and Evaluating takes 0.0074367523193359375 seconds.
+    Trained on 'persuasion': test 'coordination'=0.3870, test 'information_asymmetry'=0.4549, test 'mixed_motive'=0.4773, test 'persuasion'=0.6679, test 'zero_sum'=0.4706
+Until Preparation: 0.00055694580078125.
+Until Calculation: 0.0008723735809326172.
+Until linalg solve: 0.01952815055847168.
+Regression solved in 0.0915 seconds
+Training and Evaluating takes 0.0052683353424072266 seconds.
+    Trained on 'zero_sum': test 'coordination'=0.3724, test 'information_asymmetry'=0.4297, test 'mixed_motive'=0.4788, test 'persuasion'=0.4568, test 'zero_sum'=0.6101
+
+  --- Seed 2 ---
+Until Preparation: 0.0006120204925537109.
+Until Calculation: 0.0009353160858154297.
+Until linalg solve: 0.019989728927612305.
+Regression solved in 0.0897 seconds
+Training and Evaluating takes 0.009767293930053711 seconds.
+    Trained on 'coordination': test 'coordination'=0.7088, test 'information_asymmetry'=0.5240, test 'mixed_motive'=0.4828, test 'persuasion'=0.5085, test 'zero_sum'=0.4795
+Until Preparation: 0.0005686283111572266.
+Until Calculation: 0.0008883476257324219.
+Until linalg solve: 0.019410133361816406.
+Regression solved in 0.0962 seconds
+Training and Evaluating takes 0.003289937973022461 seconds.
+    Trained on 'information_asymmetry': test 'coordination'=0.2639, test 'information_asymmetry'=0.5953, test 'mixed_motive'=0.3272, test 'persuasion'=0.3322, test 'zero_sum'=0.2998
+Until Preparation: 0.0005385875701904297.
+Until Calculation: 0.0008549690246582031.
+Until linalg solve: 0.0198209285736084.
+Regression solved in 0.0873 seconds
+Training and Evaluating takes 0.00786590576171875 seconds.
+    Trained on 'mixed_motive': test 'coordination'=0.4179, test 'information_asymmetry'=0.4992, test 'mixed_motive'=0.6841, test 'persuasion'=0.5294, test 'zero_sum'=0.5355
+Until Preparation: 0.0005548000335693359.
+Until Calculation: 0.0008673667907714844.
+Until linalg solve: 0.02408123016357422.
+Regression solved in 0.0960 seconds
+Training and Evaluating takes 0.008919715881347656 seconds.
+    Trained on 'persuasion': test 'coordination'=0.3830, test 'information_asymmetry'=0.4603, test 'mixed_motive'=0.4772, test 'persuasion'=0.6715, test 'zero_sum'=0.4704
+Until Preparation: 0.0006234645843505859.
+Until Calculation: 0.0010445117950439453.
+Until linalg solve: 0.019622325897216797.
+Regression solved in 0.0983 seconds
+Training and Evaluating takes 0.005932807922363281 seconds.
+    Trained on 'zero_sum': test 'coordination'=0.3680, test 'information_asymmetry'=0.4098, test 'mixed_motive'=0.4703, test 'persuasion'=0.4513, test 'zero_sum'=0.6236
+
+  Transfer gap: diagonal=0.6497, off-diagonal=0.4345, gap=0.2152 (33.1%)
+  Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/stratified_plots/transfer_goal_structure_Misv0.3Misv0.2_L8_L4.png
+
+============================================================
+Pathway A: value_compatibility
+============================================================
+  Partitioned by 'value_compatibility': compatible=141, conflicting=94, neutral=115  (skipped 100 unlabeled)
+    compatible: 669 turns
+    conflicting: 441 turns
+    neutral: 571 turns
+
+  --- Seed 0 ---
+Until Preparation: 0.0005786418914794922.
+Until Calculation: 0.0009975433349609375.
+Until linalg solve: 0.020105838775634766.
+Regression solved in 0.0961 seconds
+Training and Evaluating takes 0.014209747314453125 seconds.
+    Trained on 'compatible': test 'compatible'=0.6959, test 'conflicting'=0.5647, test 'neutral'=0.6006
+Until Preparation: 0.0006630420684814453.
+Until Calculation: 0.0011224746704101562.
+Until linalg solve: 0.020043134689331055.
+Regression solved in 0.0969 seconds
+Training and Evaluating takes 0.010412216186523438 seconds.
+    Trained on 'conflicting': test 'compatible'=0.4899, test 'conflicting'=0.6655, test 'neutral'=0.5252
+Until Preparation: 0.0005495548248291016.
+Until Calculation: 0.0009334087371826172.
+Until linalg solve: 0.019954681396484375.
+Regression solved in 0.0856 seconds
+Training and Evaluating takes 0.008801698684692383 seconds.
+    Trained on 'neutral': test 'compatible'=0.5929, test 'conflicting'=0.5697, test 'neutral'=0.7147
+
+  --- Seed 1 ---
+Until Preparation: 0.0005393028259277344.
+Until Calculation: 0.0008797645568847656.
+Until linalg solve: 0.020018339157104492.
+Regression solved in 0.0917 seconds
+Training and Evaluating takes 0.012688875198364258 seconds.
+    Trained on 'compatible': test 'compatible'=0.7123, test 'conflicting'=0.5607, test 'neutral'=0.5964
+Until Preparation: 0.0006322860717773438.
+Until Calculation: 0.0010030269622802734.
+Until linalg solve: 0.019884109497070312.
+Regression solved in 0.0991 seconds
+Training and Evaluating takes 0.010535240173339844 seconds.
+    Trained on 'conflicting': test 'compatible'=0.4926, test 'conflicting'=0.6491, test 'neutral'=0.5231
+Until Preparation: 0.0005934238433837891.
+Until Calculation: 0.0009684562683105469.
+Until linalg solve: 0.019989013671875.
+Regression solved in 0.0856 seconds
+Training and Evaluating takes 0.008753061294555664 seconds.
+    Trained on 'neutral': test 'compatible'=0.5943, test 'conflicting'=0.5686, test 'neutral'=0.6961
+
+  --- Seed 2 ---
+Until Preparation: 0.0005307197570800781.
+Until Calculation: 0.0008339881896972656.
+Until linalg solve: 0.019998788833618164.
+Regression solved in 0.0908 seconds
+Training and Evaluating takes 0.012778759002685547 seconds.
+    Trained on 'compatible': test 'compatible'=0.6942, test 'conflicting'=0.5607, test 'neutral'=0.5993
+Until Preparation: 0.000640869140625.
+Until Calculation: 0.0010118484497070312.
+Until linalg solve: 0.019937753677368164.
+Regression solved in 0.0965 seconds
+Training and Evaluating takes 0.010539531707763672 seconds.
+    Trained on 'conflicting': test 'compatible'=0.4903, test 'conflicting'=0.6677, test 'neutral'=0.5248
+Until Preparation: 0.0006067752838134766.
+Until Calculation: 0.0009908676147460938.
+Until linalg solve: 0.020038127899169922.
+Regression solved in 0.0865 seconds
+Training and Evaluating takes 0.00917196273803711 seconds.
+    Trained on 'neutral': test 'compatible'=0.5940, test 'conflicting'=0.5703, test 'neutral'=0.7221
+
+  Transfer gap: diagonal=0.6908, off-diagonal=0.5566, gap=0.1343 (19.4%)
+  Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/stratified_plots/transfer_value_compatibility_Misv0.3Misv0.2_L8_L4.png
+Loading features for Mistral-7B-Instruct-v0.3_None_0_Mistral-7B-Instruct-v0.2_None_0...
+Loaded 450 episodes
+
+============================================================
+Pathway C: Residual Analysis
+============================================================
+
+  --- Seed 0 ---
+Until Preparation: 0.0008640289306640625.
+Until Calculation: 0.0012040138244628906.
+Until linalg solve: 0.021984338760375977.
+Regression solved in 0.0953 seconds
+Training and Evaluating takes 0.03546762466430664 seconds.
+    Global R²: 0.7174
+
+  --- Seed 1 ---
+Until Preparation: 0.0006561279296875.
+Until Calculation: 0.00098419189453125.
+Until linalg solve: 0.02182769775390625.
+Regression solved in 0.0896 seconds
+Training and Evaluating takes 0.02772665023803711 seconds.
+    Global R²: 0.7106
+
+  --- Seed 2 ---
+Until Preparation: 0.0006232261657714844.
+Until Calculation: 0.0009253025054931641.
+Until linalg solve: 0.021687030792236328.
+Regression solved in 0.0971 seconds
+Training and Evaluating takes 0.04160642623901367 seconds.
+    Global R²: 0.7166
+
+  --- goal_structure (residual L2 norms) ---
+    coordination             : residual=0.0913 ± 0.0126  (n=95)
+    information_asymmetry    : residual=0.1030 ± 0.0200  (n=12)
+    mixed_motive             : residual=0.0981 ± 0.0167  (n=107)
+    persuasion               : residual=0.0970 ± 0.0135  (n=75)
+    zero_sum                 : residual=0.1000 ± 0.0157  (n=38)
+    ANOVA: F=4.268, p=2.2227e-03
+    Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/stratified_plots/residual_goal_structure_Misv0.3Misv0.2_L8_L4.png
+
+  --- value_compatibility (residual L2 norms) ---
+    compatible               : residual=0.0965 ± 0.0162  (n=130)
+    conflicting              : residual=0.0977 ± 0.0165  (n=88)
+    neutral                  : residual=0.0949 ± 0.0129  (n=109)
+    ANOVA: F=0.885, p=4.1362e-01
+    Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/stratified_plots/residual_value_compatibility_Misv0.3Misv0.2_L8_L4.png
+
+  --- power_dynamic (residual L2 norms) ---
+    asymmetric               : residual=0.0984 ± 0.0173  (n=45)
+    symmetric                : residual=0.0959 ± 0.0149  (n=282)
+    t-test: t=-1.010, p=3.1340e-01
+    Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/stratified_plots/residual_power_dynamic_Misv0.3Misv0.2_L8_L4.png
+
+  --- stakes (residual L2 norms) ---
+    high                     : residual=0.1019 ± 0.0169  (n=25)
+    low                      : residual=0.0957 ± 0.0143  (n=206)
+    medium                   : residual=0.0961 ± 0.0166  (n=96)
+    ANOVA: F=1.886, p=1.5337e-01
+    Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/stratified_plots/residual_stakes_Misv0.3Misv0.2_L8_L4.png
+
+  Alignment score vs residual L2:
+    Pearson  r=-0.1267, p=2.1964e-02
+    Spearman r=-0.1649, p=2.7798e-03
+    Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/stratified_plots/residual_scatter_Misv0.3Misv0.2_L8_L4.png
+
+Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/stratified_analysis_Misv0.3Misv0.2_L8_L4.json
+Best layer pair for Misv0.2Misv0.3: A=16, B=16, R²=-999.0000
+
+############################################################
+Model: Mistral-7B-Instruct-v0.2_None_0_Mistral-7B-Instruct-v0.3_None_0 (Misv0.2Misv0.3)
+Layer pair: A=16, B=16
+Pathway: both
+############################################################
+Loading features for Mistral-7B-Instruct-v0.2_None_0_Mistral-7B-Instruct-v0.3_None_0...
+Loaded 450 episodes
+
+============================================================
+Pathway A: alignment_binary
+============================================================
+  Binary alignment split: high(>=0.5)=151, low(<=-0.5)=118
+    high_align: 760 turns
+    low_align: 488 turns
+
+  --- Seed 0 ---
+Until Preparation: 0.0007677078247070312.
+Until Calculation: 0.0013251304626464844.
+Until linalg solve: 0.020563840866088867.
+Regression solved in 0.1060 seconds
+Training and Evaluating takes 0.014603376388549805 seconds.
+    Trained on 'high_align': test 'high_align'=0.5624, test 'low_align'=0.1097
+Until Preparation: 0.0005815029144287109.
+Until Calculation: 0.0009496212005615234.
+Until linalg solve: 0.0199124813079834.
+Regression solved in 0.0861 seconds
+Training and Evaluating takes 0.007455348968505859 seconds.
+    Trained on 'low_align': test 'high_align'=0.0185, test 'low_align'=0.5453
+
+  --- Seed 1 ---
+Until Preparation: 0.0005619525909423828.
+Until Calculation: 0.0008687973022460938.
+Until linalg solve: 0.020086288452148438.
+Regression solved in 0.0918 seconds
+Training and Evaluating takes 0.013768672943115234 seconds.
+    Trained on 'high_align': test 'high_align'=0.5802, test 'low_align'=0.1124
+Until Preparation: 0.0006535053253173828.
+Until Calculation: 0.0010335445404052734.
+Until linalg solve: 0.01998281478881836.
+Regression solved in 0.0983 seconds
+Training and Evaluating takes 0.011526107788085938 seconds.
+    Trained on 'low_align': test 'high_align'=0.0042, test 'low_align'=0.5632
+
+  --- Seed 2 ---
+Until Preparation: 0.0006871223449707031.
+Until Calculation: 0.0011172294616699219.
+Until linalg solve: 0.02031731605529785.
+Regression solved in 0.0894 seconds
+Training and Evaluating takes 0.011945009231567383 seconds.
+    Trained on 'high_align': test 'high_align'=0.5477, test 'low_align'=0.0989
+Until Preparation: 0.0005373954772949219.
+Until Calculation: 0.0008409023284912109.
+Until linalg solve: 0.019794702529907227.
+Regression solved in 0.0875 seconds
+Training and Evaluating takes 0.00826883316040039 seconds.
+    Trained on 'low_align': test 'high_align'=0.0000, test 'low_align'=0.5399
+
+  Transfer gap: diagonal=0.5565, off-diagonal=0.0573, gap=0.4992 (89.7%)
+  Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/stratified_plots/transfer_alignment_binary_Misv0.2Misv0.3_L16_L16.png
+
+============================================================
+Pathway A: goal_structure
+============================================================
+  Partitioned by 'goal_structure': coordination=103, information_asymmetry=13, mixed_motive=114, persuasion=79, zero_sum=41  (skipped 100 unlabeled)
+    coordination: 530 turns
+    information_asymmetry: 58 turns
+    mixed_motive: 454 turns
+    persuasion: 378 turns
+    zero_sum: 186 turns
+
+  --- Seed 0 ---
+Until Preparation: 0.0007445812225341797.
+Until Calculation: 0.0013208389282226562.
+Until linalg solve: 0.020287513732910156.
+Regression solved in 0.0924 seconds
+Training and Evaluating takes 0.00884866714477539 seconds.
+    Trained on 'coordination': test 'coordination'=0.5112, test 'information_asymmetry'=0.0000, test 'mixed_motive'=0.0000, test 'persuasion'=0.0851, test 'zero_sum'=0.0000
+Until Preparation: 0.0004937648773193359.
+Until Calculation: 0.0008423328399658203.
+Until linalg solve: 0.01929450035095215.
+Regression solved in 0.0870 seconds
+Training and Evaluating takes 0.002819538116455078 seconds.
+    Trained on 'information_asymmetry': test 'coordination'=0.0000, test 'information_asymmetry'=0.4725, test 'mixed_motive'=0.0000, test 'persuasion'=0.0324, test 'zero_sum'=0.0000
+Until Preparation: 0.0005636215209960938.
+Until Calculation: 0.0009477138519287109.
+Until linalg solve: 0.019845962524414062.
+Regression solved in 0.0928 seconds
+Training and Evaluating takes 0.009525537490844727 seconds.
+    Trained on 'mixed_motive': test 'coordination'=0.0000, test 'information_asymmetry'=0.0000, test 'mixed_motive'=0.5462, test 'persuasion'=0.1790, test 'zero_sum'=0.2071
+Until Preparation: 0.0006263256072998047.
+Until Calculation: 0.0010616779327392578.
+Until linalg solve: 0.019884586334228516.
+Regression solved in 0.0980 seconds
+Training and Evaluating takes 0.009469747543334961 seconds.
+    Trained on 'persuasion': test 'coordination'=0.0000, test 'information_asymmetry'=0.0000, test 'mixed_motive'=0.0404, test 'persuasion'=0.5978, test 'zero_sum'=0.1259
+Until Preparation: 0.0005974769592285156.
+Until Calculation: 0.0009946823120117188.
+Until linalg solve: 0.019598007202148438.
+Regression solved in 0.0862 seconds
+Training and Evaluating takes 0.004121303558349609 seconds.
+    Trained on 'zero_sum': test 'coordination'=0.0000, test 'information_asymmetry'=0.0000, test 'mixed_motive'=0.1590, test 'persuasion'=0.1478, test 'zero_sum'=0.5290
+
+  --- Seed 1 ---
+Until Preparation: 0.0005269050598144531.
+Until Calculation: 0.0008263587951660156.
+Until linalg solve: 0.019835472106933594.
+Regression solved in 0.0889 seconds
+Training and Evaluating takes 0.00929713249206543 seconds.
+    Trained on 'coordination': test 'coordination'=0.5593, test 'information_asymmetry'=0.0000, test 'mixed_motive'=0.0000, test 'persuasion'=0.1145, test 'zero_sum'=0.0000
+Until Preparation: 0.000579833984375.
+Until Calculation: 0.0009033679962158203.
+Until linalg solve: 0.01941370964050293.
+Regression solved in 0.0982 seconds
+Training and Evaluating takes 0.0033440589904785156 seconds.
+    Trained on 'information_asymmetry': test 'coordination'=0.0000, test 'information_asymmetry'=0.0191, test 'mixed_motive'=0.0000, test 'persuasion'=0.0219, test 'zero_sum'=0.0000
+Until Preparation: 0.0006115436553955078.
+Until Calculation: 0.0010056495666503906.
+Until linalg solve: 0.019944429397583008.
+Regression solved in 0.0906 seconds
+Training and Evaluating takes 0.007658720016479492 seconds.
+    Trained on 'mixed_motive': test 'coordination'=0.0000, test 'information_asymmetry'=0.0000, test 'mixed_motive'=0.5603, test 'persuasion'=0.1723, test 'zero_sum'=0.1914
+Until Preparation: 0.0005323886871337891.
+Until Calculation: 0.0008270740509033203.
+Until linalg solve: 0.019702672958374023.
+Regression solved in 0.0879 seconds
+Training and Evaluating takes 0.007119178771972656 seconds.
+    Trained on 'persuasion': test 'coordination'=0.0000, test 'information_asymmetry'=0.0000, test 'mixed_motive'=0.0416, test 'persuasion'=0.5336, test 'zero_sum'=0.1169
+Until Preparation: 0.0005943775177001953.
+Until Calculation: 0.0009505748748779297.
+Until linalg solve: 0.019540071487426758.
+Regression solved in 0.0958 seconds
+Training and Evaluating takes 0.005382537841796875 seconds.
+    Trained on 'zero_sum': test 'coordination'=0.0000, test 'information_asymmetry'=0.0000, test 'mixed_motive'=0.1549, test 'persuasion'=0.1444, test 'zero_sum'=0.5567
+
+  --- Seed 2 ---
+Until Preparation: 0.0006546974182128906.
+Until Calculation: 0.0010592937469482422.
+Until linalg solve: 0.019974470138549805.
+Regression solved in 0.0977 seconds
+Training and Evaluating takes 0.011800050735473633 seconds.
+    Trained on 'coordination': test 'coordination'=0.5323, test 'information_asymmetry'=0.0000, test 'mixed_motive'=0.0000, test 'persuasion'=0.1075, test 'zero_sum'=0.0000
+Until Preparation: 0.0005662441253662109.
+Until Calculation: 0.0008800029754638672.
+Until linalg solve: 0.019344568252563477.
+Regression solved in 0.0851 seconds
+Training and Evaluating takes 0.002359628677368164 seconds.
+    Trained on 'information_asymmetry': test 'coordination'=0.0000, test 'information_asymmetry'=0.5104, test 'mixed_motive'=0.0000, test 'persuasion'=0.0583, test 'zero_sum'=0.0000
+Until Preparation: 0.0005238056182861328.
+Until Calculation: 0.0008203983306884766.
+Until linalg solve: 0.019764184951782227.
+Regression solved in 0.0885 seconds
+Training and Evaluating takes 0.00795125961303711 seconds.
+    Trained on 'mixed_motive': test 'coordination'=0.0000, test 'information_asymmetry'=0.0000, test 'mixed_motive'=0.5407, test 'persuasion'=0.1739, test 'zero_sum'=0.2123
+Until Preparation: 0.0005917549133300781.
+Until Calculation: 0.0009567737579345703.
+Until linalg solve: 0.019840002059936523.
+Regression solved in 0.0971 seconds
+Training and Evaluating takes 0.008877754211425781 seconds.
+    Trained on 'persuasion': test 'coordination'=0.0000, test 'information_asymmetry'=0.0000, test 'mixed_motive'=0.0399, test 'persuasion'=0.5543, test 'zero_sum'=0.1238
+Until Preparation: 0.0006344318389892578.
+Until Calculation: 0.0010027885437011719.
+Until linalg solve: 0.01962733268737793.
+Regression solved in 0.0882 seconds
+Training and Evaluating takes 0.004213809967041016 seconds.
+    Trained on 'zero_sum': test 'coordination'=0.0000, test 'information_asymmetry'=0.0000, test 'mixed_motive'=0.1717, test 'persuasion'=0.1580, test 'zero_sum'=0.5885
+
+  Transfer gap: diagonal=0.5075, off-diagonal=0.0497, gap=0.4578 (90.2%)
+  Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/stratified_plots/transfer_goal_structure_Misv0.2Misv0.3_L16_L16.png
+
+============================================================
+Pathway A: value_compatibility
+============================================================
+  Partitioned by 'value_compatibility': compatible=141, conflicting=94, neutral=115  (skipped 100 unlabeled)
+    compatible: 684 turns
+    conflicting: 393 turns
+    neutral: 529 turns
+
+  --- Seed 0 ---
+Until Preparation: 0.0007154941558837891.
+Until Calculation: 0.0012710094451904297.
+Until linalg solve: 0.020371437072753906.
+Regression solved in 0.0900 seconds
+Training and Evaluating takes 0.01114201545715332 seconds.
+    Trained on 'compatible': test 'compatible'=0.5830, test 'conflicting'=0.2640, test 'neutral'=0.3283
+Until Preparation: 0.0005443096160888672.
+Until Calculation: 0.0008895397186279297.
+Until linalg solve: 0.019714832305908203.
+Regression solved in 0.0880 seconds
+Training and Evaluating takes 0.007391452789306641 seconds.
+    Trained on 'conflicting': test 'compatible'=0.1973, test 'conflicting'=0.5782, test 'neutral'=0.2507
+Until Preparation: 0.0006275177001953125.
+Until Calculation: 0.001035928726196289.
+Until linalg solve: 0.020029306411743164.
+Regression solved in 0.0991 seconds
+Training and Evaluating takes 0.012594223022460938 seconds.
+    Trained on 'neutral': test 'compatible'=0.3013, test 'conflicting'=0.3164, test 'neutral'=0.5348
+
+  --- Seed 1 ---
+Until Preparation: 0.0006902217864990234.
+Until Calculation: 0.0011022090911865234.
+Until linalg solve: 0.020253419876098633.
+Regression solved in 0.0887 seconds
+Training and Evaluating takes 0.010639667510986328 seconds.
+    Trained on 'compatible': test 'compatible'=0.5274, test 'conflicting'=0.2600, test 'neutral'=0.3270
+Until Preparation: 0.0005598068237304688.
+Until Calculation: 0.0008573532104492188.
+Until linalg solve: 0.01969623565673828.
+Regression solved in 0.0889 seconds
+Training and Evaluating takes 0.007429599761962891 seconds.
+    Trained on 'conflicting': test 'compatible'=0.1853, test 'conflicting'=0.5886, test 'neutral'=0.2414
+Until Preparation: 0.0006239414215087891.
+Until Calculation: 0.001003265380859375.
+Until linalg solve: 0.020035505294799805.
+Regression solved in 0.0958 seconds
+Training and Evaluating takes 0.01090383529663086 seconds.
+    Trained on 'neutral': test 'compatible'=0.2999, test 'conflicting'=0.3080, test 'neutral'=0.5500
+
+  --- Seed 2 ---
+Until Preparation: 0.00054931640625.
+Until Calculation: 0.0008556842803955078.
+Until linalg solve: 0.02006983757019043.
+Regression solved in 0.0861 seconds
+Training and Evaluating takes 0.010436773300170898 seconds.
+    Trained on 'compatible': test 'compatible'=0.5447, test 'conflicting'=0.2595, test 'neutral'=0.3241
+Until Preparation: 0.0005524158477783203.
+Until Calculation: 0.0008814334869384766.
+Until linalg solve: 0.019732952117919922.
+Regression solved in 0.0904 seconds
+Training and Evaluating takes 0.0077784061431884766 seconds.
+    Trained on 'conflicting': test 'compatible'=0.2017, test 'conflicting'=0.5803, test 'neutral'=0.2552
+Until Preparation: 0.0006146430969238281.
+Until Calculation: 0.0009911060333251953.
+Until linalg solve: 0.019967317581176758.
+Regression solved in 0.0967 seconds
+Training and Evaluating takes 0.011338233947753906 seconds.
+    Trained on 'neutral': test 'compatible'=0.2947, test 'conflicting'=0.3065, test 'neutral'=0.5691
+
+  Transfer gap: diagonal=0.5618, off-diagonal=0.2734, gap=0.2884 (51.3%)
+  Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/stratified_plots/transfer_value_compatibility_Misv0.2Misv0.3_L16_L16.png
+Loading features for Mistral-7B-Instruct-v0.2_None_0_Mistral-7B-Instruct-v0.3_None_0...
+Loaded 450 episodes
+
+============================================================
+Pathway C: Residual Analysis
+============================================================
+
+  --- Seed 0 ---
+Until Preparation: 0.0006575584411621094.
+Until Calculation: 0.0010364055633544922.
+Until linalg solve: 0.021736621856689453.
+Regression solved in 0.1016 seconds
+Training and Evaluating takes 0.043764591217041016 seconds.
+    Global R²: 0.6078
+
+  --- Seed 1 ---
+Until Preparation: 0.0005600452423095703.
+Until Calculation: 0.0008423328399658203.
+Until linalg solve: 0.021526575088500977.
+Regression solved in 0.0901 seconds
+Training and Evaluating takes 0.029587268829345703 seconds.
+    Global R²: 0.6126
+
+  --- Seed 2 ---
+Until Preparation: 0.0006515979766845703.
+Until Calculation: 0.000978231430053711.
+Until linalg solve: 0.02171158790588379.
+Regression solved in 0.0933 seconds
+Training and Evaluating takes 0.02857208251953125 seconds.
+    Global R²: 0.5958
+
+  --- goal_structure (residual L2 norms) ---
+    coordination             : residual=0.5716 ± 0.1191  (n=98)
+    information_asymmetry    : residual=0.5615 ± 0.1299  (n=10)
+    mixed_motive             : residual=0.5922 ± 0.1520  (n=108)
+    persuasion               : residual=0.5686 ± 0.1156  (n=75)
+    zero_sum                 : residual=0.5681 ± 0.1143  (n=35)
+    ANOVA: F=0.560, p=6.9223e-01
+    Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/stratified_plots/residual_goal_structure_Misv0.2Misv0.3_L16_L16.png
+
+  --- value_compatibility (residual L2 norms) ---
+    compatible               : residual=0.5847 ± 0.1410  (n=133)
+    conflicting              : residual=0.5502 ± 0.1119  (n=85)
+    neutral                  : residual=0.5888 ± 0.1278  (n=108)
+    ANOVA: F=2.478, p=8.5534e-02
+    Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/stratified_plots/residual_value_compatibility_Misv0.2Misv0.3_L16_L16.png
+
+  --- power_dynamic (residual L2 norms) ---
+    asymmetric               : residual=0.5613 ± 0.1265  (n=41)
+    symmetric                : residual=0.5793 ± 0.1309  (n=285)
+    t-test: t=0.825, p=4.0975e-01
+    Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/stratified_plots/residual_power_dynamic_Misv0.2Misv0.3_L16_L16.png
+
+  --- stakes (residual L2 norms) ---
+    high                     : residual=0.5207 ± 0.0924  (n=23)
+    low                      : residual=0.5823 ± 0.1304  (n=206)
+    medium                   : residual=0.5793 ± 0.1353  (n=97)
+    ANOVA: F=2.337, p=9.8258e-02
+    Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/stratified_plots/residual_stakes_Misv0.2Misv0.3_L16_L16.png
+
+  Alignment score vs residual L2:
+    Pearson  r=-0.0076, p=8.9189e-01
+    Spearman r=0.0189, p=7.3387e-01
+    Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/stratified_plots/residual_scatter_Misv0.2Misv0.3_L16_L16.png
+
+Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/stratified_analysis_Misv0.2Misv0.3_L16_L16.json
+Best layer pair for Misv0.2Misv0.2: A=16, B=16, R²=-999.0000
+
+############################################################
+Model: Mistral-7B-Instruct-v0.2_None_0_Mistral-7B-Instruct-v0.2_None_0 (Misv0.2Misv0.2)
+Layer pair: A=16, B=16
+Pathway: both
+############################################################
+Loading features for Mistral-7B-Instruct-v0.2_None_0_Mistral-7B-Instruct-v0.2_None_0...
+Loaded 450 episodes
+
+============================================================
+Pathway A: alignment_binary
+============================================================
+  Binary alignment split: high(>=0.5)=151, low(<=-0.5)=118
+    high_align: 992 turns
+    low_align: 726 turns
+
+  --- Seed 0 ---
+Until Preparation: 0.0006420612335205078.
+Until Calculation: 0.0012776851654052734.
+Until linalg solve: 0.02077341079711914.
+Regression solved in 0.1022 seconds
+Training and Evaluating takes 0.01880049705505371 seconds.
+    Trained on 'high_align': test 'high_align'=0.5668, test 'low_align'=0.0807
+Until Preparation: 0.0006411075592041016.
+Until Calculation: 0.0011034011840820312.
+Until linalg solve: 0.020314693450927734.
+Regression solved in 0.1029 seconds
+Training and Evaluating takes 0.016611099243164062 seconds.
+    Trained on 'low_align': test 'high_align'=0.0000, test 'low_align'=0.5478
+
+  --- Seed 1 ---
+Until Preparation: 0.0005450248718261719.
+Until Calculation: 0.0008907318115234375.
+Until linalg solve: 0.020392179489135742.
+Regression solved in 0.0904 seconds
+Training and Evaluating takes 0.013828516006469727 seconds.
+    Trained on 'high_align': test 'high_align'=0.5338, test 'low_align'=0.0737
+Until Preparation: 0.0005450248718261719.
+Until Calculation: 0.0008444786071777344.
+Until linalg solve: 0.020066022872924805.
+Regression solved in 0.0906 seconds
+Training and Evaluating takes 0.012813091278076172 seconds.
+    Trained on 'low_align': test 'high_align'=0.0000, test 'low_align'=0.5477
+
+  --- Seed 2 ---
+Until Preparation: 0.0006144046783447266.
+Until Calculation: 0.001003265380859375.
+Until linalg solve: 0.02054619789123535.
+Regression solved in 0.0981 seconds
+Training and Evaluating takes 0.02139449119567871 seconds.
+    Trained on 'high_align': test 'high_align'=0.5260, test 'low_align'=0.0856
+Until Preparation: 0.0006618499755859375.
+Until Calculation: 0.0010461807250976562.
+Until linalg solve: 0.020328760147094727.
+Regression solved in 0.0891 seconds
+Training and Evaluating takes 0.011287689208984375 seconds.
+    Trained on 'low_align': test 'high_align'=0.0000, test 'low_align'=0.5322
+
+  Transfer gap: diagonal=0.5424, off-diagonal=0.0400, gap=0.5024 (92.6%)
+  Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/stratified_plots/transfer_alignment_binary_Misv0.2Misv0.2_L16_L16.png
+
+============================================================
+Pathway A: goal_structure
+============================================================
+  Partitioned by 'goal_structure': coordination=103, information_asymmetry=13, mixed_motive=114, persuasion=79, zero_sum=41  (skipped 100 unlabeled)
+    coordination: 682 turns
+    information_asymmetry: 97 turns
+    mixed_motive: 634 turns
+    persuasion: 528 turns
+    zero_sum: 260 turns
+
+  --- Seed 0 ---
+Until Preparation: 0.0007154941558837891.
+Until Calculation: 0.0012371540069580078.
+Until linalg solve: 0.020397186279296875.
+Regression solved in 0.0929 seconds
+Training and Evaluating takes 0.012295722961425781 seconds.
+    Trained on 'coordination': test 'coordination'=0.5442, test 'information_asymmetry'=0.0000, test 'mixed_motive'=0.0000, test 'persuasion'=0.0920, test 'zero_sum'=0.0000
+Until Preparation: 0.0005164146423339844.
+Until Calculation: 0.001163482666015625.
+Until linalg solve: 0.01963663101196289.
+Regression solved in 0.0878 seconds
+Training and Evaluating takes 0.0033593177795410156 seconds.
+    Trained on 'information_asymmetry': test 'coordination'=0.0000, test 'information_asymmetry'=0.4695, test 'mixed_motive'=0.0000, test 'persuasion'=0.0000, test 'zero_sum'=0.0000
+Until Preparation: 0.0006232261657714844.
+Until Calculation: 0.0010640621185302734.
+Until linalg solve: 0.02018427848815918.
+Regression solved in 0.0981 seconds
+Training and Evaluating takes 0.01405787467956543 seconds.
+    Trained on 'mixed_motive': test 'coordination'=0.0000, test 'information_asymmetry'=0.0000, test 'mixed_motive'=0.5481, test 'persuasion'=0.1486, test 'zero_sum'=0.0905
+Until Preparation: 0.0006010532379150391.
+Until Calculation: 0.0010025501251220703.
+Until linalg solve: 0.020018577575683594.
+Regression solved in 0.0862 seconds
+Training and Evaluating takes 0.007898569107055664 seconds.
+    Trained on 'persuasion': test 'coordination'=0.0000, test 'information_asymmetry'=0.0000, test 'mixed_motive'=0.0402, test 'persuasion'=0.5586, test 'zero_sum'=0.0697
+Until Preparation: 0.0005397796630859375.
+Until Calculation: 0.0008902549743652344.
+Until linalg solve: 0.01959228515625.
+Regression solved in 0.0892 seconds
+Training and Evaluating takes 0.0056667327880859375 seconds.
+    Trained on 'zero_sum': test 'coordination'=0.0000, test 'information_asymmetry'=0.0000, test 'mixed_motive'=0.0600, test 'persuasion'=0.0438, test 'zero_sum'=0.5827
+
+  --- Seed 1 ---
+Until Preparation: 0.0006382465362548828.
+Until Calculation: 0.0009992122650146484.
+Until linalg solve: 0.02018117904663086.
+Regression solved in 0.0961 seconds
+Training and Evaluating takes 0.014293670654296875 seconds.
+    Trained on 'coordination': test 'coordination'=0.4814, test 'information_asymmetry'=0.0000, test 'mixed_motive'=0.0000, test 'persuasion'=0.0828, test 'zero_sum'=0.0000
+Until Preparation: 0.0005688667297363281.
+Until Calculation: 0.0009219646453857422.
+Until linalg solve: 0.019412994384765625.
+Regression solved in 0.0859 seconds
+Training and Evaluating takes 0.003022909164428711 seconds.
+    Trained on 'information_asymmetry': test 'coordination'=0.0000, test 'information_asymmetry'=0.4618, test 'mixed_motive'=0.0000, test 'persuasion'=0.0000, test 'zero_sum'=0.0000
+Until Preparation: 0.0005419254302978516.
+Until Calculation: 0.0008859634399414062.
+Until linalg solve: 0.020000696182250977.
+Regression solved in 0.0908 seconds
+Training and Evaluating takes 0.011469125747680664 seconds.
+    Trained on 'mixed_motive': test 'coordination'=0.0000, test 'information_asymmetry'=0.0000, test 'mixed_motive'=0.5086, test 'persuasion'=0.1537, test 'zero_sum'=0.1248
+Until Preparation: 0.0006351470947265625.
+Until Calculation: 0.0009951591491699219.
+Until linalg solve: 0.020006895065307617.
+Regression solved in 0.0934 seconds
+Training and Evaluating takes 0.009658575057983398 seconds.
+    Trained on 'persuasion': test 'coordination'=0.0000, test 'information_asymmetry'=0.0000, test 'mixed_motive'=0.0639, test 'persuasion'=0.6041, test 'zero_sum'=0.0755
+Until Preparation: 0.0005066394805908203.
+Until Calculation: 0.0008132457733154297.
+Until linalg solve: 0.01951766014099121.
+Regression solved in 0.0872 seconds
+Training and Evaluating takes 0.005250453948974609 seconds.
+    Trained on 'zero_sum': test 'coordination'=0.0000, test 'information_asymmetry'=0.0000, test 'mixed_motive'=0.0800, test 'persuasion'=0.0642, test 'zero_sum'=0.5392
+
+  --- Seed 2 ---
+Until Preparation: 0.000583648681640625.
+Until Calculation: 0.0009086132049560547.
+Until linalg solve: 0.020066022872924805.
+Regression solved in 0.0943 seconds
+Training and Evaluating takes 0.013417482376098633 seconds.
+    Trained on 'coordination': test 'coordination'=0.4894, test 'information_asymmetry'=0.0000, test 'mixed_motive'=0.0000, test 'persuasion'=0.0487, test 'zero_sum'=0.0000
+Until Preparation: 0.0006015300750732422.
+Until Calculation: 0.0009763240814208984.
+Until linalg solve: 0.019467592239379883.
+Regression solved in 0.0924 seconds
+Training and Evaluating takes 0.0033893585205078125 seconds.
+    Trained on 'information_asymmetry': test 'coordination'=0.0000, test 'information_asymmetry'=0.3586, test 'mixed_motive'=0.0000, test 'persuasion'=0.0093, test 'zero_sum'=0.0000
+Until Preparation: 0.0005328655242919922.
+Until Calculation: 0.0008401870727539062.
+Until linalg solve: 0.019964933395385742.
+Regression solved in 0.0927 seconds
+Training and Evaluating takes 0.010626792907714844 seconds.
+    Trained on 'mixed_motive': test 'coordination'=0.0000, test 'information_asymmetry'=0.0000, test 'mixed_motive'=0.5735, test 'persuasion'=0.1535, test 'zero_sum'=0.1039
+Until Preparation: 0.0006177425384521484.
+Until Calculation: 0.0009756088256835938.
+Until linalg solve: 0.019968509674072266.
+Regression solved in 0.0956 seconds
+Training and Evaluating takes 0.010750055313110352 seconds.
+    Trained on 'persuasion': test 'coordination'=0.0000, test 'information_asymmetry'=0.0000, test 'mixed_motive'=0.0544, test 'persuasion'=0.5624, test 'zero_sum'=0.0508
+Until Preparation: 0.0008249282836914062.
+Until Calculation: 0.001123666763305664.
+Until linalg solve: 0.019791364669799805.
+Regression solved in 0.0867 seconds
+Training and Evaluating takes 0.00504612922668457 seconds.
+    Trained on 'zero_sum': test 'coordination'=0.0000, test 'information_asymmetry'=0.0000, test 'mixed_motive'=0.0810, test 'persuasion'=0.0432, test 'zero_sum'=0.5535
+
+  Transfer gap: diagonal=0.5224, off-diagonal=0.0289, gap=0.4935 (94.5%)
+  Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/stratified_plots/transfer_goal_structure_Misv0.2Misv0.2_L16_L16.png
+
+============================================================
+Pathway A: value_compatibility
+============================================================
+  Partitioned by 'value_compatibility': compatible=141, conflicting=94, neutral=115  (skipped 100 unlabeled)
+    compatible: 887 turns
+    conflicting: 610 turns
+    neutral: 704 turns
+
+  --- Seed 0 ---
+Until Preparation: 0.0006878376007080078.
+Until Calculation: 0.0011546611785888672.
+Until linalg solve: 0.020532846450805664.
+Regression solved in 0.0892 seconds
+Training and Evaluating takes 0.01315927505493164 seconds.
+    Trained on 'compatible': test 'compatible'=0.5299, test 'conflicting'=0.1763, test 'neutral'=0.2781
+Until Preparation: 0.0005335807800292969.
+Until Calculation: 0.0009062290191650391.
+Until linalg solve: 0.019980907440185547.
+Regression solved in 0.0896 seconds
+Training and Evaluating takes 0.009831666946411133 seconds.
+    Trained on 'conflicting': test 'compatible'=0.1108, test 'conflicting'=0.5253, test 'neutral'=0.1931
+Until Preparation: 0.000621795654296875.
+Until Calculation: 0.0010416507720947266.
+Until linalg solve: 0.02024245262145996.
+Regression solved in 0.0966 seconds
+Training and Evaluating takes 0.013766288757324219 seconds.
+    Trained on 'neutral': test 'compatible'=0.2546, test 'conflicting'=0.2357, test 'neutral'=0.5777
+
+  --- Seed 1 ---
+Until Preparation: 0.0005376338958740234.
+Until Calculation: 0.000835418701171875.
+Until linalg solve: 0.02028369903564453.
+Regression solved in 0.0883 seconds
+Training and Evaluating takes 0.013934135437011719 seconds.
+    Trained on 'compatible': test 'compatible'=0.5386, test 'conflicting'=0.1646, test 'neutral'=0.2740
+Until Preparation: 0.0006048679351806641.
+Until Calculation: 0.0009686946868896484.
+Until linalg solve: 0.020070552825927734.
+Regression solved in 0.0983 seconds
+Training and Evaluating takes 0.012538433074951172 seconds.
+    Trained on 'conflicting': test 'compatible'=0.1154, test 'conflicting'=0.5269, test 'neutral'=0.1998
+Until Preparation: 0.0005433559417724609.
+Until Calculation: 0.0008668899536132812.
+Until linalg solve: 0.02010202407836914.
+Regression solved in 0.0867 seconds
+Training and Evaluating takes 0.01111149787902832 seconds.
+    Trained on 'neutral': test 'compatible'=0.2537, test 'conflicting'=0.2378, test 'neutral'=0.5561
+
+  --- Seed 2 ---
+Until Preparation: 0.0005793571472167969.
+Until Calculation: 0.0009462833404541016.
+Until linalg solve: 0.020383596420288086.
+Regression solved in 0.0965 seconds
+Training and Evaluating takes 0.01835012435913086 seconds.
+    Trained on 'compatible': test 'compatible'=0.5229, test 'conflicting'=0.1681, test 'neutral'=0.2751
+Until Preparation: 0.0005524158477783203.
+Until Calculation: 0.0008766651153564453.
+Until linalg solve: 0.019997596740722656.
+Regression solved in 0.0863 seconds
+Training and Evaluating takes 0.009011507034301758 seconds.
+    Trained on 'conflicting': test 'compatible'=0.0963, test 'conflicting'=0.4850, test 'neutral'=0.1794
+Until Preparation: 0.0006060600280761719.
+Until Calculation: 0.0009388923645019531.
+Until linalg solve: 0.02016758918762207.
+Regression solved in 0.0946 seconds
+Training and Evaluating takes 0.013863086700439453 seconds.
+    Trained on 'neutral': test 'compatible'=0.2683, test 'conflicting'=0.2611, test 'neutral'=0.5186
+
+  Transfer gap: diagonal=0.5312, off-diagonal=0.2079, gap=0.3233 (60.9%)
+  Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/stratified_plots/transfer_value_compatibility_Misv0.2Misv0.2_L16_L16.png
+Loading features for Mistral-7B-Instruct-v0.2_None_0_Mistral-7B-Instruct-v0.2_None_0...
+Loaded 450 episodes
+
+============================================================
+Pathway C: Residual Analysis
+============================================================
+
+  --- Seed 0 ---
+Until Preparation: 0.0007128715515136719.
+Until Calculation: 0.00109100341796875.
+Until linalg solve: 0.022572994232177734.
+Regression solved in 0.1152 seconds
+Training and Evaluating takes 0.04916119575500488 seconds.
+    Global R²: 0.5687
+
+  --- Seed 1 ---
+Until Preparation: 0.0005316734313964844.
+Until Calculation: 0.000804901123046875.
+Until linalg solve: 0.02233290672302246.
+Regression solved in 0.0898 seconds
+Training and Evaluating takes 0.041336774826049805 seconds.
+    Global R²: 0.5740
+
+  --- Seed 2 ---
+Until Preparation: 0.0006415843963623047.
+Until Calculation: 0.0009610652923583984.
+Until linalg solve: 0.02250814437866211.
+Regression solved in 0.0934 seconds
+Training and Evaluating takes 0.03926968574523926 seconds.
+    Global R²: 0.5878
+
+  --- goal_structure (residual L2 norms) ---
+    coordination             : residual=0.7972 ± 0.1683  (n=101)
+    information_asymmetry    : residual=0.8189 ± 0.1824  (n=12)
+    mixed_motive             : residual=0.8525 ± 0.1978  (n=111)
+    persuasion               : residual=0.8067 ± 0.1856  (n=78)
+    zero_sum                 : residual=0.7894 ± 0.1496  (n=40)
+    ANOVA: F=1.648, p=1.6184e-01
+    Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/stratified_plots/residual_goal_structure_Misv0.2Misv0.2_L16_L16.png
+
+  --- value_compatibility (residual L2 norms) ---
+    compatible               : residual=0.8200 ± 0.1841  (n=138)
+    conflicting              : residual=0.7830 ± 0.1516  (n=93)
+    neutral                  : residual=0.8423 ± 0.1993  (n=111)
+    ANOVA: F=2.717, p=6.7487e-02
+    Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/stratified_plots/residual_value_compatibility_Misv0.2Misv0.2_L16_L16.png
+
+  --- power_dynamic (residual L2 norms) ---
+    asymmetric               : residual=0.7729 ± 0.1198  (n=44)
+    symmetric                : residual=0.8237 ± 0.1892  (n=298)
+    t-test: t=1.725, p=8.5449e-02
+    Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/stratified_plots/residual_power_dynamic_Misv0.2Misv0.2_L16_L16.png
+
+  --- stakes (residual L2 norms) ---
+    high                     : residual=0.7936 ± 0.1802  (n=27)
+    low                      : residual=0.8280 ± 0.1836  (n=214)
+    medium                   : residual=0.8004 ± 0.1792  (n=101)
+    ANOVA: F=1.025, p=3.6008e-01
+    Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/stratified_plots/residual_stakes_Misv0.2Misv0.2_L16_L16.png
+
+  Alignment score vs residual L2:
+    Pearson  r=-0.0370, p=4.9524e-01
+    Spearman r=-0.0503, p=3.5387e-01
+    Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/playground/stratified_plots/residual_scatter_Misv0.2Misv0.2_L16_L16.png
+
+Saved: /juice6/u/jshe/nlp/LM_neural_synchrony/stratified_analysis_Misv0.2Misv0.2_L16_L16.json
+
+
+============================================================
+AGGREGATE SUMMARY
+============================================================
+
+  Misv0.3Misv0.3:
+    [alignment_binary] diag=0.7345  off-diag=0.5880  gap=+0.1465 (+19.9%)
+    [goal_structure] diag=0.6735  off-diag=0.5093  gap=+0.1641 (+24.4%)
+    [value_compatibility] diag=0.7234  off-diag=0.6147  gap=+0.1088 (+15.0%)
+    [residual~alignment] Pearson r=-0.0059 (p=9.17e-01)
+
+  Misv0.3Misv0.2:
+    [alignment_binary] diag=0.6908  off-diag=0.5206  gap=+0.1702 (+24.6%)
+    [goal_structure] diag=0.6497  off-diag=0.4345  gap=+0.2152 (+33.1%)
+    [value_compatibility] diag=0.6908  off-diag=0.5566  gap=+0.1343 (+19.4%)
+    [residual~alignment] Pearson r=-0.1267 (p=2.20e-02)
+
+  Misv0.2Misv0.3:
+    [alignment_binary] diag=0.5565  off-diag=0.0573  gap=+0.4992 (+89.7%)
+    [goal_structure] diag=0.5075  off-diag=0.0497  gap=+0.4578 (+90.2%)
+    [value_compatibility] diag=0.5618  off-diag=0.2734  gap=+0.2884 (+51.3%)
+    [residual~alignment] Pearson r=-0.0076 (p=8.92e-01)
+
+  Misv0.2Misv0.2:
+    [alignment_binary] diag=0.5424  off-diag=0.0400  gap=+0.5024 (+92.6%)
+    [goal_structure] diag=0.5224  off-diag=0.0289  gap=+0.4935 (+94.5%)
+    [value_compatibility] diag=0.5312  off-diag=0.2079  gap=+0.3233 (+60.9%)
+    [residual~alignment] Pearson r=-0.0370 (p=4.95e-01)
+
+Saved aggregate summary: /juice6/u/jshe/nlp/LM_neural_synchrony/stratified_analysis_summary.json
+
+=== Job finished at Sun Apr  5 01:27:56 PM PDT 2026 ===

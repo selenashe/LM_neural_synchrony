@@ -1,0 +1,193 @@
+{
+  "model": "Misv0.2Misv0.2",
+  "model_full": "Mistral-7B-Instruct-v0.2_None_0_Mistral-7B-Instruct-v0.2_None_0",
+  "layer_A": 16,
+  "layer_B": 16,
+  "pathway_a": {
+    "alignment_binary": {
+      "categories": [
+        "high_align",
+        "low_align"
+      ],
+      "transfer_matrix": {
+        "high_align_to_high_align": 0.542177418867747,
+        "high_align_to_low_align": 0.07999903460343678,
+        "low_align_to_low_align": 0.5425597429275513,
+        "low_align_to_high_align": 0.0
+      },
+      "gap": {
+        "diagonal_mean": 0.542368580897649,
+        "off_diagonal_mean": 0.03999951730171839,
+        "gap": 0.5023690635959307,
+        "gap_ratio": 0.9262503052158423
+      }
+    },
+    "goal_structure": {
+      "categories": [
+        "coordination",
+        "information_asymmetry",
+        "mixed_motive",
+        "persuasion",
+        "zero_sum"
+      ],
+      "transfer_matrix": {
+        "coordination_to_coordination": 0.5050009588400522,
+        "coordination_to_information_asymmetry": 0.0,
+        "coordination_to_mixed_motive": 0.0,
+        "coordination_to_persuasion": 0.07449938853581746,
+        "coordination_to_zero_sum": 0.0,
+        "information_asymmetry_to_information_asymmetry": 0.42995845278104144,
+        "information_asymmetry_to_coordination": 0.0,
+        "information_asymmetry_to_mixed_motive": 0.0,
+        "information_asymmetry_to_persuasion": 0.003097174068291982,
+        "information_asymmetry_to_zero_sum": 0.0,
+        "mixed_motive_to_mixed_motive": 0.543395479520162,
+        "mixed_motive_to_coordination": 0.0,
+        "mixed_motive_to_information_asymmetry": 0.0,
+        "mixed_motive_to_persuasion": 0.15192113320032755,
+        "mixed_motive_to_zero_sum": 0.106431911389033,
+        "persuasion_to_persuasion": 0.5750344594319662,
+        "persuasion_to_coordination": 0.0,
+        "persuasion_to_information_asymmetry": 0.0,
+        "persuasion_to_mixed_motive": 0.05284698928395907,
+        "persuasion_to_zero_sum": 0.06532205144564311,
+        "zero_sum_to_zero_sum": 0.558471143245697,
+        "zero_sum_to_coordination": 0.0,
+        "zero_sum_to_information_asymmetry": 0.0,
+        "zero_sum_to_mixed_motive": 0.07364495967825253,
+        "zero_sum_to_persuasion": 0.05038859571019808
+      },
+      "gap": {
+        "diagonal_mean": 0.5223720987637839,
+        "off_diagonal_mean": 0.028907610165576143,
+        "gap": 0.49346448859820774,
+        "gap_ratio": 0.9446608840058892
+      }
+    },
+    "value_compatibility": {
+      "categories": [
+        "compatible",
+        "conflicting",
+        "neutral"
+      ],
+      "transfer_matrix": {
+        "compatible_to_compatible": 0.5304509202639262,
+        "compatible_to_conflicting": 0.16966227690378824,
+        "compatible_to_neutral": 0.27574780583381653,
+        "conflicting_to_conflicting": 0.5124047597249349,
+        "conflicting_to_compatible": 0.10752256711324056,
+        "conflicting_to_neutral": 0.19076782961686453,
+        "neutral_to_neutral": 0.550826887289683,
+        "neutral_to_compatible": 0.2588811020056407,
+        "neutral_to_conflicting": 0.24486470222473145
+      },
+      "gap": {
+        "diagonal_mean": 0.5312275224261813,
+        "off_diagonal_mean": 0.20790771394968033,
+        "gap": 0.323319808476501,
+        "gap_ratio": 0.6086277439087865
+      }
+    }
+  },
+  "pathway_c": {
+    "goal_structure": {
+      "coordination": {
+        "mean": 0.7971791074220891,
+        "std": 0.16832050259070178,
+        "n": 101
+      },
+      "information_asymmetry": {
+        "mean": 0.8189178076055313,
+        "std": 0.182375878697504,
+        "n": 12
+      },
+      "mixed_motive": {
+        "mean": 0.8525442466721521,
+        "std": 0.19779587757307213,
+        "n": 111
+      },
+      "persuasion": {
+        "mean": 0.8066652329304279,
+        "std": 0.1855714871611193,
+        "n": 78
+      },
+      "zero_sum": {
+        "mean": 0.7893944747745991,
+        "std": 0.14959326900855544,
+        "n": 40
+      },
+      "test": {
+        "type": "ANOVA",
+        "statistic": 1.6478978332357528,
+        "p": 0.16183649030273983
+      }
+    },
+    "value_compatibility": {
+      "compatible": {
+        "mean": 0.8199545447377191,
+        "std": 0.18414920363575063,
+        "n": 138
+      },
+      "conflicting": {
+        "mean": 0.7829939797787684,
+        "std": 0.15157222327940612,
+        "n": 93
+      },
+      "neutral": {
+        "mean": 0.8423244575480442,
+        "std": 0.19925640792273414,
+        "n": 111
+      },
+      "test": {
+        "type": "ANOVA",
+        "statistic": 2.7173664158854676,
+        "p": 0.06748739055846445
+      }
+    },
+    "power_dynamic": {
+      "asymmetric": {
+        "mean": 0.7729030989787795,
+        "std": 0.11983627667105072,
+        "n": 44
+      },
+      "symmetric": {
+        "mean": 0.8236994823020044,
+        "std": 0.18924505748915063,
+        "n": 298
+      },
+      "test": {
+        "type": "t-test",
+        "statistic": 1.7249274104764836,
+        "p": 0.08544930071419662
+      }
+    },
+    "stakes": {
+      "high": {
+        "mean": 0.7936373279418475,
+        "std": 0.18018736897154747,
+        "n": 27
+      },
+      "low": {
+        "mean": 0.8280317437054584,
+        "std": 0.18361990876915535,
+        "n": 214
+      },
+      "medium": {
+        "mean": 0.800427535382828,
+        "std": 0.17918581188730173,
+        "n": 101
+      },
+      "test": {
+        "type": "ANOVA",
+        "statistic": 1.0245088073816264,
+        "p": 0.36008145535530395
+      }
+    },
+    "alignment_score_correlation": {
+      "pearson_r": -0.03700113913240135,
+      "pearson_p": 0.4952393355363599,
+      "spearman_r": -0.05028442835335321,
+      "spearman_p": 0.35387245597692985
+    }
+  }
+}
