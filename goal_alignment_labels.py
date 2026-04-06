@@ -66,7 +66,7 @@ Respond with ONLY a JSON object (no markdown fencing) with these fields:
     "medium" — moderate consequences (reputation, moderate money, social standing)
     "high"   — significant financial, relational, or moral consequences
 
-- "reasoning": 2-3 sentence holistic explanation considering goals, personalities, and context"""
+- "reasoning": 1-2 sentence explanation (keep under 80 words)"""
 
 USER_TEMPLATE = """\
 Scenario: {scenario}
@@ -149,7 +149,7 @@ def classify_combo(model, scenario, relationship, agent1, agent2, goal_1, goal_2
                 vertex_project="hs-soil-gemini",
                 vertex_location="global",
                 temperature=0,
-                max_tokens=500,
+                max_tokens=1024,
                 timeout=120,
                 num_retries=3,
             )
