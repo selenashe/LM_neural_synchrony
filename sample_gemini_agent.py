@@ -16,7 +16,7 @@ Smoke test (few episodes):
   conda activate neural_sync
   export SOTOPIA_ENV_AGENT_COMBOS_BASENAME=env_agent_combos_fixed_two_agents.json  # optional
   export SOTOPIA_RUN_LABEL=mia_ava_fixed_two_agents  # optional
-  python sample_gemini_agent.py --model_1 Mistral-7B-Instruct-v0.3 --model_2 Mistral-7B-Instruct-v0.3 \\
+  python sample_gemini_agent.py --model_1 gemini-3.1-pro-preview --model_2 gemini-3.1-pro-preview \\
     --max_episodes 2
 
 Outputs (same naming as sample_normal_agent.py, under sotopia_results_gemini):
@@ -48,8 +48,18 @@ def main():
     parser = argparse.ArgumentParser(
         description="Sotopia episodes with Gemini/Vertex (mirrors sample_normal_agent.py outputs)"
     )
-    parser.add_argument("--model_1", type=str, default="Mistral-7B-Instruct-v0.3")
-    parser.add_argument("--model_2", type=str, default="Mistral-7B-Instruct-v0.3")
+    parser.add_argument(
+        "--model_1",
+        type=str,
+        default="gemini-3.1-pro-preview",
+        help="Agent A label used in output folder naming (generation uses --vertex_model).",
+    )
+    parser.add_argument(
+        "--model_2",
+        type=str,
+        default="gemini-3.1-pro-preview",
+        help="Agent B label used in output folder naming (generation uses --vertex_model_2 or --vertex_model).",
+    )
     parser.add_argument("--affected_type", type=str, default="None")
     parser.add_argument("--value", type=float, default=0)
     parser.add_argument(
