@@ -1,0 +1,56 @@
+{
+  "dialogs/gemini-3.1-pro-preview_None_0_gemini-3.1-pro-preview_None_0/prompt_records/0_temp0.7_seed0.csv": {
+    "transcript_preview": "Turn 0: Mia Sanders said: Hi Ava, it's so nice to catch up over tea. How have you and your beautiful samoyed been doing lately?\nTurn 1: Ava Thompson said: We've been great, thanks for asking! Snowball is as energetic as ever, keeping me on my toes when I'm not designing. How are you and your son doing?\nTurn 2: Mia Sanders said: We're hanging in there, but to\nTurn 3: Ava Thompson said: Oh no, but what? Is everything okay with him?\nTurn 4: Mia Sanders said: He's physically fine, thankfully, but\nTurn 5: Ava Thompson said: But what? You know you can tell me\nTurn 6: Mia Sanders said: I'm really struggling financially right now. I hate to\nTurn 7: Ava Thompson said: I'm so sorry you're going through a tough\nTurn 8: Mia Sanders said: I really hate to ask this as a friend,\nTurn 9: Ava Thompson said: It's okay, Mia, you can ask.\nTurn 10: Mia Sanders said: Could I possibly borrow $3000 to help cover\nTurn 11: Ava Thompson said: Oh, Mia, I wish I could,\nTurn 12: Mia Sanders said: I understand if that's too much. Is there any smaller amount you might be able to spare? I wouldn't ask if I wasn't completely desperate.\nTurn 13: Ava Thompson said: I really want to help you, Mia. Things\nTurn 14: Mia Sanders said: I know things might be tight for you too, Ava.\nTurn 15: Ava Thompson said: ",
+    "analysis": {
+      "summary": "Mia slowly builds up to asking Ava for a $3000 loan, and when Ava hesitates, Mia asks for a smaller amount. Ava tries to be supportive but indicates she cannot provide the full amount. The dialogue is severely hampered by extreme truncation, with almost every turn ending mid-sentence.",
+      "agent_1_goal_tracking": "strong",
+      "agent_2_goal_tracking": "strong",
+      "issues": [
+        {
+          "turn": 2,
+          "agent": "Mia Sanders",
+          "detail": "Response is cut off mid-sentence ('but to')."
+        },
+        {
+          "turn": 4,
+          "agent": "Mia Sanders",
+          "detail": "Response is cut off mid-sentence ('but')."
+        },
+        {
+          "turn": 6,
+          "agent": "Mia Sanders",
+          "detail": "Response is cut off mid-sentence ('hate to')."
+        },
+        {
+          "turn": 7,
+          "agent": "Ava Thompson",
+          "detail": "Response is cut off mid-sentence ('tough')."
+        },
+        {
+          "turn": 8,
+          "agent": "Mia Sanders",
+          "detail": "Response is cut off mid-sentence ('friend,')."
+        },
+        {
+          "turn": 10,
+          "agent": "Mia Sanders",
+          "detail": "Response is cut off mid-sentence ('cover')."
+        },
+        {
+          "turn": 11,
+          "agent": "Ava Thompson",
+          "detail": "Response is cut off mid-sentence ('could,')."
+        },
+        {
+          "turn": 13,
+          "agent": "Ava Thompson",
+          "detail": "Response is cut off mid-sentence ('Things')."
+        }
+      ],
+      "unnatural_behaviors": [
+        "Severe and consistent truncation of dialogue, with almost every turn ending abruptly mid-sentence."
+      ],
+      "notes": "Both agents are pursuing their goals effectively, but the generation parameters (likely max_tokens) seem to be set far too low, resulting in a highly unnatural, fragmented conversation."
+    }
+  }
+}

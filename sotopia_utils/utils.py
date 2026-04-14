@@ -170,21 +170,19 @@ def _agent_profile_to_friendabove_self(
 def get_bio(
     relationship: RelationshipType, profile, agent_id: int
 ) -> str:
-    match relationship:
-        case RelationshipType.stranger:
-            return _agent_profile_to_stranger_self(profile, agent_id=agent_id)
-        case RelationshipType.know_by_name:
-            return _agent_profile_to_name_self(profile, agent_id=agent_id)
-        case RelationshipType.acquaintance:
-            return _agent_profile_to_aquaintance_self(
-                profile, agent_id=agent_id
-            )
-        case RelationshipType.friend | RelationshipType.romantic_relationship | RelationshipType.family_member:
-            return _agent_profile_to_friendabove_self(
-                profile, agent_id=agent_id
-            )
-        case _:
-            raise ValueError(f"Unknown relationship {relationship}")
+    if relationship == RelationshipType.stranger:
+        return _agent_profile_to_stranger_self(profile, agent_id=agent_id)
+    if relationship == RelationshipType.know_by_name:
+        return _agent_profile_to_name_self(profile, agent_id=agent_id)
+    if relationship == RelationshipType.acquaintance:
+        return _agent_profile_to_aquaintance_self(profile, agent_id=agent_id)
+    if relationship in (
+        RelationshipType.friend,
+        RelationshipType.romantic_relationship,
+        RelationshipType.family_member,
+    ):
+        return _agent_profile_to_friendabove_self(profile, agent_id=agent_id)
+    raise ValueError(f"Unknown relationship {relationship}")
 
 
 def extract_leading_int(input_string):

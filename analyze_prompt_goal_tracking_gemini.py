@@ -1,13 +1,13 @@
 """
-For each CSV in prompt_records/, send the logged dialogue to Gemini (Vertex)
-and assess whether each agent stays aligned with their private goals across turns.
+Analyze goal tracking in Gemini-generated Sotopia outputs.
 
-API parameters match goal_alignment_labels.classify_combo (LiteLLM completion).
-Note: build_labels_v2.py does not perform API calls; labeling uses goal_alignment_labels.py.
+This is adapted from analyze_prompt_goal_tracking.py, but defaults to scanning:
+    sotopia_results_gemini/**/prompt_records/*.csv
 
 Usage:
-    python analyze_prompt_goal_tracking.py [--prompt-dir prompt_records] [--output analysis_outputs/goal_tracking_by_file.json]
-    python analyze_prompt_goal_tracking.py --only 6_temp0.7_seed0.csv
+    python analyze_prompt_goal_tracking_gemini.py
+    python analyze_prompt_goal_tracking_gemini.py --only dialogs/.../prompt_records/0_temp0.7_seed0.csv
+    python analyze_prompt_goal_tracking_gemini.py --limit 5
 """
 
 from __future__ import annotations
@@ -22,9 +22,9 @@ from pathlib import Path
 
 from litellm import completion
 
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+SCRIPT_DIR = Path(__file__).resolve().parent
 
-# Same as goal_alignment_labels.classify_combo (build_labels_v2.py has no API layer)
+# Same API settings used in analyze_prompt_goal_tracking.py
 DEFAULT_MODEL = "vertex_ai/gemini-3.1-pro-preview"
 VERTEX_PROJECT = "hs-soil-gemini"
 VERTEX_LOCATION = "global"
@@ -143,24 +143,22 @@ def extract_transcript_from_prompts(prompt_rows: list[str]) -> str:
         return ""
     longest = max(prompt_rows, key=len)
     longest = _clean_tags(longest)
-    # Turn lines: capture until next Turn or end
     pattern = re.compile(
         r"(Turn \d+:[^\n]*? said:)(.*?)(?=\nTurn \d+:|$)",
         re.DOTALL | re.IGNORECASE,
     )
     chunks = []
-    for m in pattern.finditer(longest):
-        prefix, speech = m.group(1), m.group(2).strip()
-        chunks.append(prefix + " " + speech[:2000])  # cap very long cells
+    for match in pattern.finditer(longest):
+        prefix, speech = match.group(1), match.group(2).strip()
+        chunks.append(prefix + " " + speech[:2000])
     if chunks:
         return "\n".join(chunks)
-    # Fallback: return tail of longest prompt
     return longest[-12000:]
 
 
 def read_prompt_csv(path: Path) -> list[str]:
     rows: list[str] = []
-    with open(path, newline="", encoding="utf-8") as f:
+    with path.open(newline="", encoding="utf-8") as f:
         reader = csv.reader(f)
         header = next(reader, None)
         if not header or not header[0]:
@@ -183,7 +181,6 @@ def call_analyze(
         transcript=transcript[:50000],
         raw_blocks=raw_blocks[:80000],
     )
-    prompt = f"{ANALYSIS_SYSTEM}\n\n{user_msg}"
     raw = ""
     for attempt in range(max_retries):
         try:
@@ -210,9 +207,9 @@ def call_analyze(
                     repaired["_repaired_json"] = True
                     return repaired
                 raise
-        except (json.JSONDecodeError, KeyError) as e:
+        except (json.JSONDecodeError, KeyError) as error:
             if attempt < max_retries - 1:
-                print(f"  Retry {attempt + 1} (parse): {e}")
+                print(f"  Retry {attempt + 1} (parse): {error}")
                 time.sleep(1)
             else:
                 return {
@@ -221,84 +218,107 @@ def call_analyze(
                     "agent_2_goal_tracking": None,
                     "issues": [],
                     "unnatural_behaviors": [],
-                    "notes": f"PARSE_ERROR: {e}",
+                    "notes": f"PARSE_ERROR: {error}",
                     "raw_response": raw[:4000],
                 }
-        except Exception as e:
+        except Exception as error:
             if attempt < max_retries - 1:
                 wait = 2 ** (attempt + 1)
-                print(f"  API error, retry in {wait}s: {e}")
+                print(f"  API error, retry in {wait}s: {error}")
                 time.sleep(wait)
             else:
                 raise
     return {}
 
 
-def main():
+def list_prompt_files(results_root: Path) -> list[Path]:
+    return sorted(results_root.glob("**/prompt_records/*.csv"))
+
+
+def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--prompt-dir",
-        default=os.path.join(SCRIPT_DIR, "prompt_records"),
-        help="Directory containing *_temp*_seed*.csv files",
+        "--results-root",
+        default=str(SCRIPT_DIR / "sotopia_results_gemini"),
+        help="Root directory that contains Gemini output folders",
     )
     parser.add_argument(
         "--output",
-        default=os.path.join(SCRIPT_DIR, "analysis_outputs", "goal_tracking_by_file.json"),
+        default=str(SCRIPT_DIR / "analysis_outputs" / "gemini_goal_tracking_by_file.json"),
     )
     parser.add_argument("--model", default=DEFAULT_MODEL)
-    parser.add_argument("--only", default=None, help="Single filename under prompt-dir to process")
+    parser.add_argument(
+        "--only",
+        default=None,
+        help="Relative path under results-root to process (e.g. dialogs/.../prompt_records/file.csv)",
+    )
     parser.add_argument("--resume", action="store_true", help="Skip keys already present in output JSON")
     parser.add_argument(
         "--retry-parse-errors",
         action="store_true",
         help="When used with --resume, reprocess entries whose notes start with PARSE_ERROR",
     )
+    parser.add_argument("--limit", type=int, default=None, help="Process at most N files")
     args = parser.parse_args()
 
-    prompt_dir = Path(args.prompt_dir)
+    results_root = Path(args.results_root)
+    if not results_root.is_dir():
+        raise SystemExit(f"Not found: {results_root}")
+
     out_path = Path(args.output)
     out_path.parent.mkdir(parents=True, exist_ok=True)
 
     results: dict = {}
     if args.resume and out_path.exists():
-        with open(out_path) as f:
+        with out_path.open(encoding="utf-8") as f:
             results = json.load(f)
 
     if args.only:
-        files = [prompt_dir / args.only]
-        if not files[0].is_file():
-            raise SystemExit(f"Not found: {files[0]}")
+        only_path = (results_root / args.only).resolve()
+        if not only_path.is_file():
+            raise SystemExit(f"Not found: {only_path}")
+        files = [only_path]
     else:
-        files = sorted(prompt_dir.glob("*.csv"))
+        files = list_prompt_files(results_root)
 
-    for i, fp in enumerate(files):
-        key = fp.name
-        if key in results:
+    if args.limit is not None:
+        files = files[: max(args.limit, 0)]
+
+    if not files:
+        print(f"No prompt_records CSV files found under {results_root}")
+        return
+
+    for i, file_path in enumerate(files, start=1):
+        rel_key = str(file_path.resolve().relative_to(results_root.resolve()))
+        if rel_key in results:
             if args.retry_parse_errors:
-                existing = results.get(key, {})
+                existing = results.get(rel_key, {})
                 notes = (
                     existing.get("analysis", {}).get("notes")
                     if isinstance(existing, dict)
                     else None
                 )
                 if isinstance(notes, str) and notes.startswith("PARSE_ERROR"):
-                    print(f"[retry parse-error] {key}")
+                    print(f"[retry parse-error] {rel_key}")
                 else:
-                    print(f"[skip] {key}")
+                    print(f"[skip] {rel_key}")
                     continue
             else:
-                print(f"[skip] {key}")
+                print(f"[skip] {rel_key}")
                 continue
-        print(f"[{i + 1}/{len(files)}] {key}")
-        prompt_rows = read_prompt_csv(fp)
+
+        print(f"[{i}/{len(files)}] {rel_key}")
+        prompt_rows = read_prompt_csv(file_path)
         transcript = extract_transcript_from_prompts(prompt_rows)
-        raw_blocks = "\n\n---ROW---\n\n".join(f"ROW {j}:\n{r[:6000]}" for j, r in enumerate(prompt_rows[:40]))
-        analysis = call_analyze(args.model, key, transcript, raw_blocks)
-        results[key] = {
+        raw_blocks = "\n\n---ROW---\n\n".join(
+            f"ROW {j}:\n{row[:6000]}" for j, row in enumerate(prompt_rows[:40])
+        )
+        analysis = call_analyze(args.model, rel_key, transcript, raw_blocks)
+        results[rel_key] = {
             "transcript_preview": transcript[:2000],
             "analysis": analysis,
         }
-        with open(out_path, "w") as f:
+        with out_path.open("w", encoding="utf-8") as f:
             json.dump(results, f, indent=2)
         print(f"  saved checkpoint ({len(results)} files)")
 
