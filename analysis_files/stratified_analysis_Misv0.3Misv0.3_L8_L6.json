@@ -4,25 +4,73 @@
   "layer_A": 8,
   "layer_B": 6,
   "pathway_a": {
-    "alignment_binary": {
+    "outcome_correspondence": {
       "categories": [
-        "high_align",
-        "low_align"
+        "conflicting",
+        "corresponding",
+        "orthogonal"
       ],
       "transfer_matrix": {
-        "high_align_to_high_align": 0.7383879820505778,
-        "high_align_to_low_align": 0.6200327078501383,
-        "low_align_to_low_align": 0.730548640092214,
-        "low_align_to_high_align": 0.5558918515841166
+        "conflicting_to_conflicting": 0.6725987593332926,
+        "conflicting_to_corresponding": 0.5807191729545593,
+        "conflicting_to_orthogonal": 0.6252113183339437,
+        "corresponding_to_corresponding": 0.6780622402826945,
+        "corresponding_to_conflicting": 0.6276575922966003,
+        "corresponding_to_orthogonal": 0.6268311738967896,
+        "orthogonal_to_orthogonal": 0.5952528715133667,
+        "orthogonal_to_conflicting": 0.6159583528836569,
+        "orthogonal_to_corresponding": 0.5387597878774008
       },
       "gap": {
-        "diagonal_mean": 0.7344683110713959,
-        "off_diagonal_mean": 0.5879622797171274,
-        "gap": 0.14650603135426843,
-        "gap_ratio": 0.1994722292927175
+        "diagonal_mean": 0.6486379570431179,
+        "off_diagonal_mean": 0.6025228997071584,
+        "gap": 0.04611505733595944,
+        "gap_ratio": 0.07109521858107043
       }
     },
-    "goal_structure": {
+    "task_structure": {
+      "categories": [
+        "distributive_bargaining",
+        "information_exchange",
+        "norm_negotiation",
+        "relational_maintenance",
+        "social_persuasion"
+      ],
+      "transfer_matrix": {
+        "distributive_bargaining_to_distributive_bargaining": 0.6317978103955587,
+        "distributive_bargaining_to_information_exchange": 0.45229638616244,
+        "distributive_bargaining_to_norm_negotiation": 0.5662495891253153,
+        "distributive_bargaining_to_relational_maintenance": 0.558958371480306,
+        "distributive_bargaining_to_social_persuasion": 0.5587659478187561,
+        "information_exchange_to_information_exchange": 0.6489966511726379,
+        "information_exchange_to_distributive_bargaining": 0.4787072241306305,
+        "information_exchange_to_norm_negotiation": 0.5345478455225626,
+        "information_exchange_to_relational_maintenance": 0.5603846907615662,
+        "information_exchange_to_social_persuasion": 0.5489776929219564,
+        "norm_negotiation_to_norm_negotiation": 0.47003334760665894,
+        "norm_negotiation_to_distributive_bargaining": 0.41010425488154095,
+        "norm_negotiation_to_information_exchange": 0.3110434015591939,
+        "norm_negotiation_to_relational_maintenance": 0.4833480715751648,
+        "norm_negotiation_to_social_persuasion": 0.49940887093544006,
+        "relational_maintenance_to_relational_maintenance": 0.6395283540089926,
+        "relational_maintenance_to_distributive_bargaining": 0.4874278207619985,
+        "relational_maintenance_to_information_exchange": 0.46973203619321185,
+        "relational_maintenance_to_norm_negotiation": 0.5931245883305868,
+        "relational_maintenance_to_social_persuasion": 0.5993089477221171,
+        "social_persuasion_to_social_persuasion": 0.6215224266052246,
+        "social_persuasion_to_distributive_bargaining": 0.514128565788269,
+        "social_persuasion_to_information_exchange": 0.47490839163462323,
+        "social_persuasion_to_norm_negotiation": 0.6140778462092081,
+        "social_persuasion_to_relational_maintenance": 0.6090087493260702
+      },
+      "gap": {
+        "diagonal_mean": 0.6023757179578146,
+        "off_diagonal_mean": 0.5162254646420479,
+        "gap": 0.08615025331576676,
+        "gap_ratio": 0.14301747355925126
+      }
+    },
+    "v1_goal_structure": {
       "categories": [
         "coordination",
         "information_asymmetry",
@@ -31,163 +79,217 @@
         "zero_sum"
       ],
       "transfer_matrix": {
-        "coordination_to_coordination": 0.7352169354756674,
-        "coordination_to_information_asymmetry": 0.5673059225082397,
-        "coordination_to_mixed_motive": 0.5224056641260783,
-        "coordination_to_persuasion": 0.5854138930638632,
-        "coordination_to_zero_sum": 0.5828736623128256,
-        "information_asymmetry_to_information_asymmetry": 0.541361023982366,
-        "information_asymmetry_to_coordination": 0.35160420338312787,
-        "information_asymmetry_to_mixed_motive": 0.3445482750733693,
-        "information_asymmetry_to_persuasion": 0.41254610816637677,
-        "information_asymmetry_to_zero_sum": 0.42914902170499164,
-        "mixed_motive_to_mixed_motive": 0.6757075389226278,
-        "mixed_motive_to_coordination": 0.49283188581466675,
-        "mixed_motive_to_information_asymmetry": 0.5548961559931437,
-        "mixed_motive_to_persuasion": 0.5982019503911337,
-        "mixed_motive_to_zero_sum": 0.614314079284668,
-        "persuasion_to_persuasion": 0.700583299001058,
-        "persuasion_to_coordination": 0.45744643608729046,
-        "persuasion_to_information_asymmetry": 0.5529711643854777,
-        "persuasion_to_mixed_motive": 0.5221659143765768,
-        "persuasion_to_zero_sum": 0.5772303342819214,
-        "zero_sum_to_zero_sum": 0.7144109408060709,
-        "zero_sum_to_coordination": 0.45629648367563885,
-        "zero_sum_to_information_asymmetry": 0.5048395196596781,
-        "zero_sum_to_mixed_motive": 0.5162417888641357,
-        "zero_sum_to_persuasion": 0.5428482492764791
+        "coordination_to_coordination": 0.6669235030810038,
+        "coordination_to_information_asymmetry": 0.5625727574030558,
+        "coordination_to_mixed_motive": 0.5305221279462179,
+        "coordination_to_persuasion": 0.5792751510938009,
+        "coordination_to_zero_sum": 0.5788614352544149,
+        "information_asymmetry_to_information_asymmetry": 0.3920217553774516,
+        "information_asymmetry_to_coordination": 0.40289682149887085,
+        "information_asymmetry_to_mixed_motive": 0.41715778907140094,
+        "information_asymmetry_to_persuasion": 0.487145056327184,
+        "information_asymmetry_to_zero_sum": 0.48522581656773883,
+        "mixed_motive_to_mixed_motive": 0.6394909024238586,
+        "mixed_motive_to_coordination": 0.5271055102348328,
+        "mixed_motive_to_information_asymmetry": 0.6087647875150045,
+        "mixed_motive_to_persuasion": 0.6284226775169373,
+        "mixed_motive_to_zero_sum": 0.6478522817293803,
+        "persuasion_to_persuasion": 0.6057742635409037,
+        "persuasion_to_coordination": 0.47170143326123554,
+        "persuasion_to_information_asymmetry": 0.5824335416158041,
+        "persuasion_to_mixed_motive": 0.538344661394755,
+        "persuasion_to_zero_sum": 0.5879084269205729,
+        "zero_sum_to_zero_sum": 0.6152442495028178,
+        "zero_sum_to_coordination": 0.47011543313662213,
+        "zero_sum_to_information_asymmetry": 0.5438533027966818,
+        "zero_sum_to_mixed_motive": 0.5344440142313639,
+        "zero_sum_to_persuasion": 0.5657028357187907
       },
       "gap": {
-        "diagonal_mean": 0.673455947637558,
-        "off_diagonal_mean": 0.5093065356214841,
-        "gap": 0.16414941201607391,
-        "gap_ratio": 0.24374186996476896
+        "diagonal_mean": 0.583890934785207,
+        "off_diagonal_mean": 0.5375152930617332,
+        "gap": 0.04637564172347386,
+        "gap_ratio": 0.07942517850621165
       }
     },
-    "value_compatibility": {
+    "v1_value_compatibility": {
       "categories": [
         "compatible",
         "conflicting",
         "neutral"
       ],
       "transfer_matrix": {
-        "compatible_to_compatible": 0.7400994300842285,
-        "compatible_to_conflicting": 0.6292730768521627,
-        "compatible_to_neutral": 0.6424382925033569,
-        "conflicting_to_conflicting": 0.7039300799369812,
-        "conflicting_to_compatible": 0.5619969964027405,
-        "conflicting_to_neutral": 0.5769188404083252,
-        "neutral_to_neutral": 0.7262309392293295,
-        "neutral_to_compatible": 0.6421323418617249,
-        "neutral_to_conflicting": 0.6351510087649027
+        "compatible_to_compatible": 0.6629973848660787,
+        "compatible_to_conflicting": 0.634630044301351,
+        "compatible_to_neutral": 0.6498240431149801,
+        "conflicting_to_conflicting": 0.6425760388374329,
+        "conflicting_to_compatible": 0.5819255113601685,
+        "conflicting_to_neutral": 0.6001370151837667,
+        "neutral_to_neutral": 0.6544791062672933,
+        "neutral_to_compatible": 0.6554806629816691,
+        "neutral_to_conflicting": 0.6503483454386393
       },
       "gap": {
-        "diagonal_mean": 0.7234201497501798,
-        "off_diagonal_mean": 0.6146517594655355,
-        "gap": 0.10876839028464425,
-        "gap_ratio": 0.15035300070395533
+        "diagonal_mean": 0.6533508433236017,
+        "off_diagonal_mean": 0.6287242703967624,
+        "gap": 0.02462657292683934,
+        "gap_ratio": 0.03769272386879267
       }
     }
   },
   "pathway_c": {
-    "goal_structure": {
+    "task_structure": {
+      "distributive_bargaining": {
+        "mean": 0.15266820653502283,
+        "std": 0.028493536458623007,
+        "n": 58
+      },
+      "information_exchange": {
+        "mean": 0.14713564570303317,
+        "std": 0.013320877540312142,
+        "n": 27
+      },
+      "norm_negotiation": {
+        "mean": 0.1522455013224057,
+        "std": 0.02244218016426887,
+        "n": 14
+      },
+      "relational_maintenance": {
+        "mean": 0.14785008039325476,
+        "std": 0.018123904570566597,
+        "n": 52
+      },
+      "social_persuasion": {
+        "mean": 0.14739882537612206,
+        "std": 0.019583757541276222,
+        "n": 45
+      },
+      "test": {
+        "type": "ANOVA",
+        "statistic": 0.6022598695478236,
+        "p": 0.6614598178787272
+      }
+    },
+    "outcome_correspondence": {
+      "conflicting": {
+        "mean": 0.14691772354796293,
+        "std": 0.019256778466399227,
+        "n": 84
+      },
+      "corresponding": {
+        "mean": 0.14984437002724893,
+        "std": 0.0196630658774702,
+        "n": 74
+      },
+      "orthogonal": {
+        "mean": 0.1539588051014825,
+        "std": 0.02963143746772992,
+        "n": 38
+      },
+      "test": {
+        "type": "ANOVA",
+        "statistic": 1.3698151719173668,
+        "p": 0.25661356560688353
+      }
+    },
+    "v1_goal_structure": {
       "coordination": {
-        "mean": 0.12379584891394478,
-        "std": 0.013912067123835546,
-        "n": 93
+        "mean": 0.14768524857030974,
+        "std": 0.016388487292502814,
+        "n": 45
       },
       "information_asymmetry": {
-        "mean": 0.1339196483294169,
-        "std": 0.02608406796786999,
-        "n": 10
+        "mean": 0.14895375072956085,
+        "std": 0.01906821175631409,
+        "n": 8
       },
       "mixed_motive": {
-        "mean": 0.12902531863596195,
-        "std": 0.02102621286847863,
-        "n": 104
+        "mean": 0.1506870459569128,
+        "std": 0.02625843153281503,
+        "n": 76
       },
       "persuasion": {
-        "mean": 0.129557181460162,
-        "std": 0.017539578081930893,
-        "n": 72
+        "mean": 0.15185386029093764,
+        "std": 0.019364015074934116,
+        "n": 43
       },
       "zero_sum": {
-        "mean": 0.12532276660203936,
-        "std": 0.01038362377745297,
-        "n": 37
+        "mean": 0.14419204488189682,
+        "std": 0.020162335118188525,
+        "n": 24
       },
       "test": {
         "type": "ANOVA",
-        "statistic": 1.9260349903129106,
-        "p": 0.10591653133521103
+        "statistic": 0.5987564599022867,
+        "p": 0.6639739937989578
       }
     },
-    "value_compatibility": {
+    "v1_value_compatibility": {
       "compatible": {
-        "mean": 0.12977998821050163,
-        "std": 0.020042924377710564,
-        "n": 127
+        "mean": 0.14951147148773694,
+        "std": 0.020027250911105503,
+        "n": 64
       },
       "conflicting": {
-        "mean": 0.12258610644458252,
-        "std": 0.01385271624812988,
-        "n": 81
+        "mean": 0.14728621821850538,
+        "std": 0.01970572884057519,
+        "n": 60
       },
       "neutral": {
-        "mean": 0.12800342476938242,
-        "std": 0.01670164674505971,
-        "n": 108
+        "mean": 0.151029159521891,
+        "std": 0.025005081181695938,
+        "n": 72
       },
       "test": {
         "type": "ANOVA",
-        "statistic": 4.263661243098106,
-        "p": 0.014896697121780678
+        "statistic": 0.4722477917819095,
+        "p": 0.6243176320658732
       }
     },
-    "power_dynamic": {
+    "v1_power_dynamic": {
       "asymmetric": {
-        "mean": 0.12339521387243657,
-        "std": 0.01716678534311194,
-        "n": 41
+        "mean": 0.14474740097619065,
+        "std": 0.019976445094142235,
+        "n": 33
       },
       "symmetric": {
-        "mean": 0.12791526993115745,
-        "std": 0.017736516050646186,
-        "n": 275
+        "mean": 0.15032725473427822,
+        "std": 0.022212528154202965,
+        "n": 163
       },
       "test": {
         "type": "t-test",
-        "statistic": 1.5237012024917935,
-        "p": 0.12858984899880505
+        "statistic": -1.3308398627952325,
+        "p": 0.18480372835739667
       }
     },
-    "stakes": {
+    "v1_stakes": {
       "high": {
-        "mean": 0.13420555424509628,
-        "std": 0.020127574428165606,
-        "n": 22
+        "mean": 0.15877572855069524,
+        "std": 0.02153983372971573,
+        "n": 21
       },
       "low": {
-        "mean": 0.12791889656328875,
-        "std": 0.01767585156228903,
-        "n": 199
+        "mean": 0.15046276540859885,
+        "std": 0.022171463290115462,
+        "n": 115
       },
       "medium": {
-        "mean": 0.12450021463528015,
-        "std": 0.016659163632165512,
-        "n": 95
+        "mean": 0.14404164053913618,
+        "std": 0.020196612633999304,
+        "n": 60
       },
       "test": {
         "type": "ANOVA",
-        "statistic": 3.002658848498003,
-        "p": 0.051087415538814906
+        "statistic": 3.932983665609353,
+        "p": 0.021174663788309078
       }
     },
     "alignment_score_correlation": {
-      "pearson_r": -0.005903217668138047,
-      "pearson_p": 0.9167543619025763,
-      "spearman_r": -0.011656177865871803,
-      "spearman_p": 0.8364857916124093
+      "pearson_r": 0.05031857359730188,
+      "pearson_p": 0.48367883856547933,
+      "spearman_r": 0.060033094126491056,
+      "spearman_p": 0.4032440103572299
     }
   }
 }

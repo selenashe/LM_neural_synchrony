@@ -27,7 +27,15 @@ from utils import (
     get_short_names_and_identifiers,
     get_all_modes,
 )
+from experiment_config import EPISODES_NUM, STAGE_A_SEEDS, MIA_AVA_RESULTS_POSTFIX
 import time
+
+
+def _default_precomputed_sample_num():
+    """450-ep runs used 6500 turn samples; ~90 episodes cannot supply that many tokens."""
+    if EPISODES_NUM > 200:
+        return 6500
+    return min(1400, max(400, EPISODES_NUM * 15))
 
 def colorize(text, color):
     colors = {
@@ -583,8 +591,17 @@ def convert_numpy_types(obj):
 
 if __name__ == "__main__":
     seeds = (0, 1, 2)
+    _default_model = (
+        "Mistral-7B-Instruct-v0.3_None_0_Mistral-7B-Instruct-v0.3_None_0"
+        + MIA_AVA_RESULTS_POSTFIX
+    )
     parser = argparse.ArgumentParser()
-    parser.add_argument('--model', type=str, default="Mistral-7B-Instruct-v0.3_None_0_Mistral-7B-Instruct-v0.3_None_0")
+    parser.add_argument(
+        "--model",
+        type=str,
+        default=_default_model,
+        help="Model pair folder name under sotopia_results/ (include _mia_ava_fixed_two_agents for 90-ep runs).",
+    )
     parser.add_argument('--setting', type=str, default="A_forward")
     parser.add_argument('--data_mode', type=str, default="combined_metrics")
     parser.add_argument('--another_read', action="store_true", default=False)
@@ -593,7 +610,18 @@ if __name__ == "__main__":
     parser.add_argument('--save_weights', action="store_true")
     parser.add_argument('--layer_A', type=int, default=None, help="Specific layer A to run (if not set, runs all layers)")
     parser.add_argument('--layer_B', type=int, default=None, help="Specific layer B to run (if not set, runs all layers)")
+    parser.add_argument(
+        "--precomputed_sample_num",
+        type=int,
+        default=None,
+        help="Target turn-pair count for train+test sampling (default: 6500 for 450 ep; lower for 90 ep).",
+    )
     args = parser.parse_args()
+    precomputed_sample_num = (
+        args.precomputed_sample_num
+        if args.precomputed_sample_num is not None
+        else _default_precomputed_sample_num()
+    )
     print(args)
     if args.another_read is True:
         args.model += "_anotherread"
@@ -611,7 +639,8 @@ if __name__ == "__main__":
             args.A_range = 28
     models = [args.model]
     setting = (args.setting.split('_')[0], args.setting.split('_')[1])
-    seed_list = [0, 1, 2, 3, 4]
+    # Load only seeds that exist under each episode (Stage A uses STAGE_A_SEEDS, often [0]).
+    seed_list = STAGE_A_SEEDS if EPISODES_NUM <= 200 else [0, 1, 2, 3, 4]
     
     # Set specific_layer_pair if both layer_A and layer_B are provided
     specific_layer_pair = None
@@ -621,4 +650,18 @@ if __name__ == "__main__":
     elif args.layer_A is not None or args.layer_B is not None:
         print("Warning: Both --layer_A and --layer_B must be specified to run a specific layer pair. Running all layers instead.")
     
-    linear_all_reps_layer_by_layer(models, seeds, setting, seed_list=seed_list, precomputed_sample_num=6500, shuffle=False, A_range=args.A_range, B_range=args.B_range, data_seed_list=None, data_mode=args.data_mode, save_weights=args.save_weights, specific_layer_pair=specific_layer_pair, another_read=args.another_read)
+    linear_all_reps_layer_by_layer(
+        models,
+        seeds,
+        setting,
+        seed_list=seed_list,
+        precomputed_sample_num=precomputed_sample_num,
+        shuffle=False,
+        A_range=args.A_range,
+        B_range=args.B_range,
+        data_seed_list=None,
+        data_mode=args.data_mode,
+        save_weights=args.save_weights,
+        specific_layer_pair=specific_layer_pair,
+        another_read=args.another_read,
+    )

@@ -2,7 +2,7 @@
 Per-episode R² analysis correlated with goal alignment labels.
 
 Phase 1: Retrain affine map at the best layer pair, compute per-episode R².
-Phase 2: Merge with alignment labels from goal_alignment_labels.json.
+Phase 2: Merge with alignment labels from goal_alignment_labels_v2.json.
 Phase 3: Statistical analysis and plots.
 
 Usage:
@@ -11,6 +11,7 @@ Usage:
     python analyze_alignment.py --all_pairs
 """
 
+import glob
 import os
 import sys
 import json
@@ -32,7 +33,7 @@ from affine_transformation import (
 )
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-LABELS_PATH = os.path.join(SCRIPT_DIR, "goal_alignment_labels.json")
+LABELS_PATH = os.path.join(SCRIPT_DIR, "goal_alignment_labels_v2.json")
 PLOTS_DIR = os.path.join(SCRIPT_DIR, "playground", "alignment_plots")
 
 
@@ -41,21 +42,37 @@ PLOTS_DIR = os.path.join(SCRIPT_DIR, "playground", "alignment_plots")
 # ---------------------------------------------------------------------------
 
 def find_best_layer_pair(model_name, setting="A_forward", data_mode="combined_metrics"):
-    """Scan existing affine results to find the layer pair with highest mean R²."""
+    """Scan existing affine results for the global best among all 32×32 layer pairs.
+
+    Reads ``affine_transformation/{setting}/layerA{la}/data/`` JSONs and picks the
+    (layer_A, layer_B) with highest stored ``r2_mean``. If no files exist for this
+    model, raises ``FileNotFoundError`` (callers must run ``affine_transformation.py``
+    first for a full grid).
+    """
     short_names, _ = get_short_names_and_identifiers([model_name])
     model_key = short_names[0]
 
     base = os.path.join(REPO_ROOT, "affine_transformation", setting)
-    best_r2, best_pair = -999, (16, 16)
+    best_r2 = float("-inf")
+    best_pair = (0, 0)
 
     for la in range(32):
         data_dir = os.path.join(base, f"layerA{la}", "data")
         for lb in range(32):
-            fn = os.path.join(
+            pattern = os.path.join(
                 data_dir,
-                f"{data_mode}_{model_key}[0, 1, 2, 3, 4]_layerA{la}_layerB{lb}_allreps.json",
+                f"{data_mode}_{model_key}*_layerA{la}_layerB{lb}_allreps.json",
             )
-            if not os.path.exists(fn):
+            matches = sorted(glob.glob(pattern))
+            if matches:
+                fn = matches[0]
+            else:
+                legacy = os.path.join(
+                    data_dir,
+                    f"{data_mode}_{model_key}[0, 1, 2, 3, 4]_layerA{la}_layerB{lb}_allreps.json",
+                )
+                fn = legacy if os.path.exists(legacy) else None
+            if fn is None:
                 continue
             with open(fn) as f:
                 data = json.load(f)
@@ -65,6 +82,13 @@ def find_best_layer_pair(model_name, setting="A_forward", data_mode="combined_me
             if r2 > best_r2:
                 best_r2 = r2
                 best_pair = (la, lb)
+
+    if best_r2 == float("-inf"):
+        raise FileNotFoundError(
+            f"No affine JSON found for {model_key!r} under {base!r} "
+            f"(expected {data_mode}_..._layerA*_layerB*_allreps.json). "
+            f"Run affine_transformation.py for this model pair and setting first."
+        )
 
     print(f"Best layer pair for {model_key}: A={best_pair[0]}, B={best_pair[1]}, R²={best_r2:.4f}")
     return best_pair, best_r2
@@ -198,13 +222,13 @@ def merge_with_labels(per_episode_r2, labels_path=LABELS_PATH):
             "combo_index": combo_idx,
             "env_id": label.get("env_id"),
             "source": label.get("source"),
-            "agent_1": label.get("agent_1"),
-            "agent_2": label.get("agent_2"),
             "alignment_score": label["alignment_score"],
-            "goal_structure": label["goal_structure"],
-            "value_compatibility": label["value_compatibility"],
-            "power_dynamic": label["power_dynamic"],
-            "stakes": label["stakes"],
+            "task_structure": label.get("task_structure"),
+            "outcome_correspondence": label.get("outcome_correspondence"),
+            "v1_goal_structure": label.get("v1_goal_structure"),
+            "v1_value_compatibility": label.get("v1_value_compatibility"),
+            "v1_power_dynamic": label.get("v1_power_dynamic"),
+            "v1_stakes": label.get("v1_stakes"),
             "r2_mean": float(np.mean(r2_clamped)),
             "r2_std": float(np.std(r2_clamped)) if len(r2_clamped) > 1 else 0.0,
             "r2_all": r2_clamped,
@@ -248,7 +272,11 @@ def run_analysis(merged, model_name, layer_A, layer_B, global_r2_per_seed):
     print(f"Spearman r={spearman_r:.4f}, p={spearman_p:.4e}")
 
     # --- Group comparisons ---
-    dimensions = ["goal_structure", "value_compatibility", "power_dynamic", "stakes"]
+    dimensions = [
+        "task_structure", "outcome_correspondence",
+        "v1_goal_structure", "v1_value_compatibility",
+        "v1_power_dynamic", "v1_stakes",
+    ]
     group_stats = {}
 
     for dim in dimensions:
@@ -275,7 +303,7 @@ def run_analysis(merged, model_name, layer_A, layer_B, global_r2_per_seed):
                 print(f"  ANOVA: F={f_stat:.3f}, p={f_p:.4e}")
 
     # --- Second-stage regression ---
-    print(f"\n--- OLS: R² ~ alignment_score + goal_structure + value_compat + stakes ---")
+    print(f"\n--- OLS: R² ~ alignment_score + task_structure + outcome_correspondence + v1 dims ---")
     try:
         from sklearn.linear_model import LinearRegression
         from sklearn.preprocessing import LabelEncoder
@@ -283,7 +311,8 @@ def run_analysis(merged, model_name, layer_A, layer_B, global_r2_per_seed):
         feature_names = ["alignment_score"]
         X_features = [alignment_scores.reshape(-1, 1)]
 
-        for dim in ["goal_structure", "value_compatibility", "stakes"]:
+        for dim in ["task_structure", "outcome_correspondence",
+                     "v1_goal_structure", "v1_value_compatibility", "v1_stakes"]:
             le = LabelEncoder()
             vals = [e[dim] if e[dim] else "unknown" for e in merged]
             encoded = le.fit_transform(vals).reshape(-1, 1)
@@ -343,8 +372,10 @@ def run_analysis(merged, model_name, layer_A, layer_B, global_r2_per_seed):
         plt.close(fig)
         print(f"Saved: {box_path}")
 
-    if "goal_structure" in group_stats:
-        gs = group_stats["goal_structure"]
+    for bar_dim in ["task_structure", "outcome_correspondence"]:
+        if bar_dim not in group_stats:
+            continue
+        gs = group_stats[bar_dim]
         cats = sorted(gs.keys())
         means = [gs[c]["mean"] for c in cats]
         stds = [gs[c]["std"] for c in cats]
@@ -355,9 +386,9 @@ def run_analysis(merged, model_name, layer_A, layer_B, global_r2_per_seed):
         ax.set_xticks(x)
         ax.set_xticklabels(cats, rotation=30, ha="right")
         ax.set_ylabel("Mean Per-Episode R²")
-        ax.set_title(f"{model_tag} — Mean R² by Goal Structure (L{layer_A}→L{layer_B})")
+        ax.set_title(f"{model_tag} — Mean R² by {bar_dim} (L{layer_A}→L{layer_B})")
         fig.tight_layout()
-        bar_path = os.path.join(PLOTS_DIR, f"bar_goal_structure_{model_tag}_L{layer_A}_L{layer_B}.png")
+        bar_path = os.path.join(PLOTS_DIR, f"bar_{bar_dim}_{model_tag}_L{layer_A}_L{layer_B}.png")
         fig.savefig(bar_path, dpi=150)
         plt.close(fig)
         print(f"Saved: {bar_path}")

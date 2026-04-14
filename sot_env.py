@@ -14,6 +14,7 @@ import time
 import pandas as pd
 from nltk.translate.bleu_score import sentence_bleu
 from utils import *
+from experiment_config import ENV_AGENT_COMBOS_PATH
 
 current_file_path = os.path.abspath(__file__)
 directory = os.path.dirname(current_file_path)
@@ -121,7 +122,7 @@ class SotopiaEnv():
         self.source_name = None
 
     def load_scenarios(self):
-        with open(os.path.join(directory, 'sotopia_utils/sotopia_data/env_agent_combos.json'), 'r') as f:
+        with open(ENV_AGENT_COMBOS_PATH, "r", encoding="utf-8") as f:
             self.env_agent_combos = json.load(f)
 
         with open(os.path.join(directory, 'sotopia_utils/sotopia_data/envs.json'), 'r') as f:
@@ -230,7 +231,7 @@ class SotopiaEnv():
         self.actor_role = actor_role
 
         if env_id is None:
-            env_id = random.randint(0, 449)
+            env_id = random.randint(0, len(self.env_agent_combos) - 1)
         self.episode = env_id
         env_agent_combo_storage = self.env_agent_combos[env_id]
         

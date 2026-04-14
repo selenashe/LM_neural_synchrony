@@ -1,9 +1,9 @@
 """
-Classify all 450 Sotopia combo entries on a multi-dimensional alignment scale
+Classify all Sotopia combo entries (length of env_agent_combos list) on a multi-dimensional alignment scale
 using Gemini via Vertex AI.  Each combo is evaluated holistically using the
 scenario, both agents' goals, and both agents' full profiles.
 
-Outputs goal_alignment_labels.json keyed by combo index (0-449).
+Outputs goal_alignment_labels.json keyed by combo index (0 .. EPISODES_NUM-1).
 
 Usage:
     python goal_alignment_labels.py [--model vertex_ai/gemini-3.1-pro-preview] [--output goal_alignment_labels.json]
@@ -19,9 +19,10 @@ import argparse
 import time
 from litellm import completion
 
+from experiment_config import COMBOS_PATH
+
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 ENVS_PATH = os.path.join(SCRIPT_DIR, "sotopia_utils/sotopia_data/envs.json")
-COMBOS_PATH = os.path.join(SCRIPT_DIR, "sotopia_utils/sotopia_data/env_agent_combos.json")
 AGENTS_PATH = os.path.join(SCRIPT_DIR, "sotopia_utils/sotopia_data/agents.json")
 
 RELATIONSHIP_LABELS = {

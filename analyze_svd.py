@@ -31,13 +31,19 @@ from utils import REPO_ROOT, set_seed, get_all_modes, get_short_names_and_identi
 from affine_transformation import get_preloaded_features
 from analyze_alignment import find_best_layer_pair, build_flat_episode_map
 from analyze_stratified import (
-    load_labels,
+    load_labels as load_labels_v1,
     partition_episodes_by_label,
     partition_by_alignment_score,
     split_episodes,
 )
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+LABELS_V2_PATH = os.path.join(SCRIPT_DIR, "goal_alignment_labels_v2.json")
+
+
+def load_labels_v2():
+    with open(LABELS_V2_PATH) as f:
+        return json.load(f)
 PLOTS_DIR = os.path.join(SCRIPT_DIR, "playground", "svd_plots")
 
 ALL_MISTRAL_PAIRS = [
@@ -190,26 +196,62 @@ def compute_trajectory_metrics(trajectories, episode_indices, flat_to_combo):
     return results
 
 
+def compute_per_turn_step_cosine_curves(
+    trajectories, episode_indices, flat_to_combo, labels, dimension,
+):
+    """
+    Per category: at each dialogue step t, mean cos(z_t, z_{t+1}) in SVD space
+    over test episodes in that category (only episodes with a step at t).
+    """
+    by_cat = defaultdict(list)
+    for i, ep_idx in enumerate(episode_indices):
+        traj = trajectories[i]
+        if traj.shape[0] < 2:
+            continue
+        combo_idx = flat_to_combo[ep_idx]
+        lab = labels.get(str(combo_idx))
+        if lab is None:
+            continue
+        cat = lab.get(dimension)
+        if cat is None:
+            continue
+        by_cat[cat].append(traj)
+
+    out = {}
+    for cat, trajs in by_cat.items():
+        if not trajs:
+            continue
+        max_steps = max(t.shape[0] - 1 for t in trajs)
+        sums = np.zeros(max_steps, dtype=np.float64)
+        counts = np.zeros(max_steps, dtype=np.int32)
+        for traj in trajs:
+            for t in range(traj.shape[0] - 1):
+                z0, z1 = traj[t], traj[t + 1]
+                n0, n1 = np.linalg.norm(z0), np.linalg.norm(z1)
+                if n0 > 1e-8 and n1 > 1e-8:
+                    sums[t] += float(np.dot(z0, z1) / (n0 * n1))
+                    counts[t] += 1
+        with np.errstate(invalid="ignore", divide="ignore"):
+            means = np.where(counts > 0, sums / np.maximum(counts, 1), np.nan)
+        out[cat] = {
+            "turn_means": [float(x) for x in means],
+            "turn_counts": [int(x) for x in counts],
+            "n_episodes": len(trajs),
+        }
+    return out
+
+
 def stratify_metrics(metrics, labels, dimension):
     """Group trajectory metrics by alignment category."""
-    if dimension == "alignment_binary":
-        cat_map = {}
-        for m in metrics:
-            label = labels.get(str(m["combo_idx"]))
-            if label is None or label.get("alignment_score") is None:
-                continue
-            score = label["alignment_score"]
-            if score >= 0.5:
-                cat_map.setdefault("high_align", []).append(m)
-            elif score <= -0.5:
-                cat_map.setdefault("low_align", []).append(m)
-    else:
-        cat_map = defaultdict(list)
-        for m in metrics:
-            label = labels.get(str(m["combo_idx"]))
-            if label is None or label.get(dimension) is None:
-                continue
-            cat_map[label[dimension]].append(m)
+    cat_map = defaultdict(list)
+    for m in metrics:
+        label = labels.get(str(m["combo_idx"]))
+        if label is None:
+            continue
+        cat = label.get(dimension)
+        if cat is None:
+            continue
+        cat_map[cat].append(m)
 
     return dict(cat_map)
 
@@ -254,19 +296,10 @@ def compute_pairwise_category_similarity(
         label = labels.get(str(combo_idx))
         if label is None:
             continue
-        if dimension == "alignment_binary":
-            score = label.get("alignment_score")
-            if score is None:
-                continue
-            if score >= 0.5:
-                ep_to_cat[ep_idx] = "high_align"
-            elif score <= -0.5:
-                ep_to_cat[ep_idx] = "low_align"
-        else:
-            cat = label.get(dimension)
-            if cat is None:
-                continue
-            ep_to_cat[ep_idx] = cat
+        cat = label.get(dimension)
+        if cat is None:
+            continue
+        ep_to_cat[ep_idx] = cat
 
     labeled_eps = [ep for ep in episode_means if ep in ep_to_cat]
     if len(labeled_eps) < 2:
@@ -357,26 +390,16 @@ def plot_trajectories_2d(
 
     os.makedirs(PLOTS_DIR, exist_ok=True)
 
-    if dimension == "alignment_binary":
-        cat_map = {}
-        for i, ep_idx in enumerate(episode_indices):
-            combo_idx = flat_to_combo[ep_idx]
-            label = labels.get(str(combo_idx))
-            if label is None or label.get("alignment_score") is None:
-                continue
-            score = label["alignment_score"]
-            if score >= 0.5:
-                cat_map[i] = "high_align"
-            elif score <= -0.5:
-                cat_map[i] = "low_align"
-    else:
-        cat_map = {}
-        for i, ep_idx in enumerate(episode_indices):
-            combo_idx = flat_to_combo[ep_idx]
-            label = labels.get(str(combo_idx))
-            if label is None or label.get(dimension) is None:
-                continue
-            cat_map[i] = label[dimension]
+    cat_map = {}
+    for i, ep_idx in enumerate(episode_indices):
+        combo_idx = flat_to_combo[ep_idx]
+        label = labels.get(str(combo_idx))
+        if label is None:
+            continue
+        cat = label.get(dimension)
+        if cat is None:
+            continue
+        cat_map[i] = cat
 
     categories = sorted(set(cat_map.values()))
     colors = plt.cm.tab10(np.linspace(0, 1, max(len(categories), 1)))
@@ -499,99 +522,353 @@ def plot_pairwise_similarity_summary(
 # Orchestration: per-agent analysis
 # ---------------------------------------------------------------------------
 
-def run_agent_analysis(
-    activations, agent_label, layer, flat_to_combo, labels,
-    model_tag, k=50, seed=0,
-):
-    """Run the full SVD pipeline for a single agent."""
-    all_indices = list(range(len(activations)))
-    rng = np.random.default_rng(seed)
-    train_eps, test_eps = split_episodes(all_indices, train_frac=0.8, rng=rng)
-
-    print(f"\n  --- {agent_label}, Layer {layer} ---")
-    print(f"    Train: {len(train_eps)} episodes, Test: {len(test_eps)} episodes")
-
-    # --- Analysis 1: Spectrum ---
+def _run_single_fold(activations, layer, train_eps, test_eps,
+                     flat_to_combo, labels, k=50):
+    """Run SVD analysis for one train/test fold. Returns raw results dict."""
     V_k, S, mean_vec, n_samples = compute_svd_basis(activations, layer, train_eps, k=k)
     if V_k is None:
-        print(f"    No data for {agent_label}, skipping.")
         return None
 
-    print(f"    SVD computed on {n_samples} turns, k={V_k.shape[0]}")
-    spectrum = analyze_spectrum(S, model_tag, agent_label, layer, k_highlight=k)
-    plot_spectrum(spectrum, model_tag, agent_label, layer)
+    spectrum = analyze_spectrum(S, "", "", layer, k_highlight=k)
 
-    # --- Analysis 2: Trajectories on TEST episodes ---
     test_trajectories = project_episodes(activations, layer, V_k, mean_vec, test_eps)
     metrics = compute_trajectory_metrics(test_trajectories, test_eps, flat_to_combo)
-    print(f"    Computed trajectory metrics for {len(metrics)} test episodes")
 
     trajectory_results = {}
-    for dimension in ["goal_structure", "value_compatibility", "alignment_binary"]:
+    for dimension in ["task_structure", "outcome_correspondence"]:
         cat_map = stratify_metrics(metrics, labels, dimension)
         if len(cat_map) < 2:
             continue
-
-        print(f"\n    [{dimension}]")
-        for metric_name in ["path_length", "net_displacement", "mean_step_cosine", "straightness"]:
-            summary = summarize_stratified_metrics(cat_map, metric_name)
-            for cat in sorted(summary.keys()):
-                s = summary[cat]
-                print(f"      {cat:25s}: {metric_name}={s['mean']:.4f} ± {s['std']:.4f} (n={s['n']})")
-
-            plot_trajectory_metrics_by_category(
-                cat_map, metric_name, model_tag, agent_label, layer, dimension)
-
-        vals_by_cat = defaultdict(list)
-        for cat, ms in cat_map.items():
-            for m in ms:
-                vals_by_cat[cat].append(m["path_length"])
-        group_vals = [np.array(v) for v in vals_by_cat.values()]
-        if len(group_vals) >= 2:
-            if len(group_vals) == 2:
-                t_stat, t_p = stats.ttest_ind(*group_vals)
-                print(f"      path_length t-test: t={t_stat:.3f}, p={t_p:.4e}")
-            else:
-                f_stat, f_p = stats.f_oneway(*group_vals)
-                print(f"      path_length ANOVA: F={f_stat:.3f}, p={f_p:.4e}")
-
         trajectory_results[dimension] = {
-            metric_name: summarize_stratified_metrics(cat_map, metric_name)
-            for metric_name in ["path_length", "net_displacement", "mean_step_cosine", "straightness"]
+            mn: summarize_stratified_metrics(cat_map, mn)
+            for mn in ["path_length", "net_displacement", "mean_step_cosine", "straightness"]
         }
 
-        plot_trajectories_2d(
-            test_trajectories, test_eps, flat_to_combo, labels,
-            dimension, model_tag, agent_label, layer)
-
-    # --- Analysis 3: Pairwise similarity ---
+    all_indices = list(range(len(activations)))
     all_trajectories = project_episodes(activations, layer, V_k, mean_vec, all_indices)
     episode_means = compute_episode_mean_projections(all_trajectories, all_indices)
 
     sim_results = {}
-    print(f"\n    Pairwise cosine similarity:")
-    for dimension in ["goal_structure", "value_compatibility", "alignment_binary"]:
+    for dimension in ["task_structure", "outcome_correspondence"]:
         sim = compute_pairwise_category_similarity(
             episode_means, flat_to_combo, labels, dimension)
         sim_results[dimension] = sim
-        if sim is not None:
-            print(f"      [{dimension}] same={sim['same_cat_mean']:.4f}, "
-                  f"cross={sim['cross_cat_mean']:.4f}, "
-                  f"p={sim['p_value']:.2e}")
 
-    plot_pairwise_similarity_summary(sim_results, model_tag, agent_label, layer)
+    per_turn_curves = {}
+    for dimension in ["task_structure", "outcome_correspondence"]:
+        per_turn_curves[dimension] = compute_per_turn_step_cosine_curves(
+            test_trajectories, test_eps, flat_to_combo, labels, dimension,
+        )
 
     return {
-        "agent": agent_label,
-        "layer": layer,
-        "k": k,
-        "n_train_episodes": len(train_eps),
-        "n_test_episodes": len(test_eps),
+        "n_train": len(train_eps),
+        "n_test": len(test_eps),
         "n_train_turns": n_samples,
         "spectrum": spectrum,
         "trajectory_metrics": trajectory_results,
         "pairwise_similarity": sim_results,
+        "per_turn_step_cosine": per_turn_curves,
     }
+
+
+def _average_per_turn_step_cosine(fold_results):
+    """Mean step-cosine vs turn index, averaged across CV folds (mean of fold means per t)."""
+    out = {}
+    for dim in ["task_structure", "outcome_correspondence"]:
+        cats = set()
+        for f in fold_results:
+            p = f.get("per_turn_step_cosine") or {}
+            if dim in p:
+                cats.update(p[dim].keys())
+        out[dim] = {}
+        for cat in sorted(cats):
+            fold_series = []
+            for f in fold_results:
+                block = (f.get("per_turn_step_cosine") or {}).get(dim, {}).get(cat)
+                if block and block.get("turn_means"):
+                    fold_series.append(block["turn_means"])
+            if not fold_series:
+                continue
+            max_len = max(len(s) for s in fold_series)
+            agg_mean, agg_std = [], []
+            for t in range(max_len):
+                vals = []
+                for s in fold_series:
+                    if t < len(s):
+                        v = s[t]
+                        if v == v and not np.isnan(v):
+                            vals.append(v)
+                if vals:
+                    agg_mean.append(float(np.mean(vals)))
+                    agg_std.append(float(np.std(vals)) if len(vals) > 1 else 0.0)
+                else:
+                    agg_mean.append(float("nan"))
+                    agg_std.append(0.0)
+            out[dim][cat] = {
+                "turn_means": agg_mean,
+                "turn_means_std_across_folds": agg_std,
+                "n_folds": len(fold_series),
+            }
+    return out
+
+
+def _average_fold_results(fold_results):
+    """Average numeric results across folds, returning mean ± std."""
+    if not fold_results:
+        return None
+
+    # Spectrum: average k90, k95, k99, top_k_explained
+    spec_keys = ["k90", "k95", "k99", "top_k_explained"]
+    avg_spectrum = {}
+    for sk in spec_keys:
+        vals = [f["spectrum"][sk] for f in fold_results if sk in f["spectrum"]]
+        if vals:
+            avg_spectrum[sk] = float(np.mean(vals))
+            avg_spectrum[f"{sk}_std"] = float(np.std(vals))
+    avg_spectrum["k_highlight"] = fold_results[0]["spectrum"].get("k_highlight", 50)
+
+    # Trajectory metrics: for each dimension -> metric -> category, average the means
+    all_dims = set()
+    for f in fold_results:
+        all_dims.update(f["trajectory_metrics"].keys())
+
+    avg_traj = {}
+    for dim in sorted(all_dims):
+        avg_traj[dim] = {}
+        all_metrics = set()
+        for f in fold_results:
+            if dim in f["trajectory_metrics"]:
+                all_metrics.update(f["trajectory_metrics"][dim].keys())
+        for mn in sorted(all_metrics):
+            avg_traj[dim][mn] = {}
+            all_cats = set()
+            for f in fold_results:
+                if dim in f["trajectory_metrics"] and mn in f["trajectory_metrics"][dim]:
+                    all_cats.update(f["trajectory_metrics"][dim][mn].keys())
+            for cat in sorted(all_cats):
+                fold_means = []
+                fold_ns = []
+                for f in fold_results:
+                    try:
+                        entry = f["trajectory_metrics"][dim][mn][cat]
+                        fold_means.append(entry["mean"])
+                        fold_ns.append(entry["n"])
+                    except KeyError:
+                        pass
+                if fold_means:
+                    avg_traj[dim][mn][cat] = {
+                        "mean": float(np.mean(fold_means)),
+                        "std_across_folds": float(np.std(fold_means)),
+                        "n": int(np.mean(fold_ns)),
+                        "n_folds": len(fold_means),
+                    }
+
+    # Pairwise similarity: average same_cat_mean, cross_cat_mean
+    all_sim_dims = set()
+    for f in fold_results:
+        all_sim_dims.update(f["pairwise_similarity"].keys())
+
+    avg_sim = {}
+    for dim in sorted(all_sim_dims):
+        same_vals, cross_vals = [], []
+        for f in fold_results:
+            s = f["pairwise_similarity"].get(dim)
+            if s and s.get("same_cat_mean") is not None:
+                same_vals.append(s["same_cat_mean"])
+                cross_vals.append(s["cross_cat_mean"])
+        if same_vals:
+            avg_sim[dim] = {
+                "same_cat_mean": float(np.mean(same_vals)),
+                "same_cat_std": float(np.std(same_vals)),
+                "cross_cat_mean": float(np.mean(cross_vals)),
+                "cross_cat_std": float(np.std(cross_vals)),
+                "gap_mean": float(np.mean([s - c for s, c in zip(same_vals, cross_vals)])),
+                "gap_std": float(np.std([s - c for s, c in zip(same_vals, cross_vals)])),
+                "n_folds": len(same_vals),
+            }
+
+    per_turn_avg = _average_per_turn_step_cosine(fold_results)
+
+    return {
+        "n_folds": len(fold_results),
+        "n_train_episodes": int(np.mean([f["n_train"] for f in fold_results])),
+        "n_test_episodes": int(np.mean([f["n_test"] for f in fold_results])),
+        "n_train_turns": int(np.mean([f["n_train_turns"] for f in fold_results])),
+        "spectrum": avg_spectrum,
+        "trajectory_metrics": avg_traj,
+        "pairwise_similarity": avg_sim,
+        "per_turn_step_cosine": per_turn_avg,
+        "per_fold": fold_results,
+    }
+
+
+def _run_single_joint_fold(allAs, allBs, layer, train_eps, test_eps, k=50):
+    """
+    Joint SVD for one fold: learn basis from train episodes' A+B turns,
+    compute A-vs-B cosine on held-out test episodes.
+    """
+    joint_rows = []
+    for idx in train_eps:
+        ep_A, ep_B = allAs[idx], allBs[idx]
+        n = min(ep_A.shape[0], ep_B.shape[0])
+        if n < 1:
+            continue
+        joint_rows.append(np.concatenate([
+            ep_A[:n, layer, :], ep_B[:n, layer, :],
+        ], axis=0))
+
+    if not joint_rows:
+        return None
+
+    X = np.concatenate(joint_rows, axis=0).astype(np.float32)
+    mean_vec = X.mean(axis=0)
+    X_centered = X - mean_vec
+    _, S, Vt = np.linalg.svd(X_centered, full_matrices=False)
+    V_k = Vt[:min(k, Vt.shape[0])]
+
+    spectrum = analyze_spectrum(S, "", "Joint", layer, k_highlight=k)
+
+    ab_cosines = []
+    for idx in test_eps:
+        ep_A, ep_B = allAs[idx], allBs[idx]
+        n = min(ep_A.shape[0], ep_B.shape[0])
+        if n < 1:
+            continue
+        proj_a = (ep_A[:n, layer, :].astype(np.float32) - mean_vec) @ V_k.T
+        proj_b = (ep_B[:n, layer, :].astype(np.float32) - mean_vec) @ V_k.T
+        mean_a = proj_a.mean(axis=0)
+        mean_b = proj_b.mean(axis=0)
+        na, nb = np.linalg.norm(mean_a), np.linalg.norm(mean_b)
+        if na > 1e-8 and nb > 1e-8:
+            ab_cosines.append(float(np.dot(mean_a, mean_b) / (na * nb)))
+
+    return {
+        "n_train": len(train_eps),
+        "n_test": len(test_eps),
+        "n_train_turns": X.shape[0],
+        "spectrum": spectrum,
+        "ab_cosines": ab_cosines,
+        "ab_cosine_mean": float(np.mean(ab_cosines)) if ab_cosines else 0.0,
+        "ab_cosine_std": float(np.std(ab_cosines)) if ab_cosines else 0.0,
+        "n_episodes_tested": len(ab_cosines),
+    }
+
+
+def _average_joint_fold_results(fold_results):
+    """Average joint SVD results across folds."""
+    if not fold_results:
+        return None
+
+    spec_keys = ["k90", "k95", "k99", "top_k_explained"]
+    avg_spectrum = {}
+    for sk in spec_keys:
+        vals = [f["spectrum"][sk] for f in fold_results if sk in f["spectrum"]]
+        if vals:
+            avg_spectrum[sk] = float(np.mean(vals))
+            avg_spectrum[f"{sk}_std"] = float(np.std(vals))
+    avg_spectrum["k_highlight"] = fold_results[0]["spectrum"].get("k_highlight", 50)
+
+    all_cosines = []
+    for f in fold_results:
+        all_cosines.extend(f["ab_cosines"])
+
+    fold_means = [f["ab_cosine_mean"] for f in fold_results if f["ab_cosines"]]
+
+    return {
+        "n_folds": len(fold_results),
+        "n_train_episodes": int(np.mean([f["n_train"] for f in fold_results])),
+        "n_test_episodes": int(np.mean([f["n_test"] for f in fold_results])),
+        "spectrum": avg_spectrum,
+        "agent_ab_cosine_mean": float(np.mean(all_cosines)) if all_cosines else 0.0,
+        "agent_ab_cosine_std": float(np.std(all_cosines)) if all_cosines else 0.0,
+        "agent_ab_cosine_mean_across_folds": float(np.mean(fold_means)) if fold_means else 0.0,
+        "agent_ab_cosine_std_across_folds": float(np.std(fold_means)) if fold_means else 0.0,
+        "n_episodes": len(all_cosines),
+    }
+
+
+def run_agent_analysis(
+    activations, agent_label, layer, flat_to_combo, labels,
+    model_tag, k=50, seed=0, n_folds=5,
+):
+    """Run k-fold cross-validated SVD pipeline for a single agent.
+
+    If ``n_folds == 1``, run a single non-CV fit: learn the SVD basis on all
+    episodes and compute test metrics (including per-turn step cosine) on all
+    episodes (same train/test set).
+    """
+    all_indices = np.array(list(range(len(activations))))
+
+    if n_folds == 1:
+        print(f"\n  --- {agent_label}, Layer {layer}, n_folds=1 (all data, no CV) ---")
+        train_eps = all_indices.tolist()
+        test_eps = all_indices.tolist()
+        result = _run_single_fold(
+            activations, layer, train_eps, test_eps,
+            flat_to_combo, labels, k=k)
+        if result is None:
+            return None
+        averaged = _average_fold_results([result])
+        averaged["agent"] = agent_label
+        averaged["layer"] = layer
+        averaged["k"] = k
+        sp = averaged["spectrum"]
+        print(f"    Full-data: k90={sp.get('k90','?'):.1f}, "
+              f"k95={sp.get('k95','?'):.1f}, "
+              f"top-{sp.get('k_highlight',k)} var={sp.get('top_k_explained',0):.1%}")
+        return averaged
+
+    rng = np.random.default_rng(seed)
+    perm = rng.permutation(len(all_indices))
+
+    fold_size = len(all_indices) // n_folds
+    fold_results = []
+
+    print(f"\n  --- {agent_label}, Layer {layer}, {n_folds}-fold CV ---")
+
+    for fold_i in range(n_folds):
+        test_start = fold_i * fold_size
+        test_end = test_start + fold_size if fold_i < n_folds - 1 else len(all_indices)
+        test_mask = perm[test_start:test_end]
+        train_mask = np.concatenate([perm[:test_start], perm[test_end:]])
+
+        train_eps = all_indices[train_mask].tolist()
+        test_eps = all_indices[test_mask].tolist()
+
+        result = _run_single_fold(
+            activations, layer, train_eps, test_eps,
+            flat_to_combo, labels, k=k)
+
+        if result is None:
+            print(f"    Fold {fold_i+1}/{n_folds}: no data, skipping")
+            continue
+
+        fold_results.append(result)
+        sp = result["spectrum"]
+        print(f"    Fold {fold_i+1}/{n_folds}: train={len(train_eps)}, "
+              f"test={len(test_eps)}, k90={sp.get('k90','?')}")
+
+    if not fold_results:
+        return None
+
+    averaged = _average_fold_results(fold_results)
+    averaged["agent"] = agent_label
+    averaged["layer"] = layer
+    averaged["k"] = k
+
+    sp = averaged["spectrum"]
+    print(f"    CV mean: k90={sp.get('k90','?'):.1f}, "
+          f"k95={sp.get('k95','?'):.1f}, "
+          f"top-{sp.get('k_highlight',k)} var={sp.get('top_k_explained',0):.1%}")
+
+    for dim in ["task_structure", "outcome_correspondence"]:
+        sim = averaged["pairwise_similarity"].get(dim)
+        if sim:
+            print(f"    [{dim}] same={sim['same_cat_mean']:.4f}±{sim['same_cat_std']:.4f}, "
+                  f"cross={sim['cross_cat_mean']:.4f}±{sim['cross_cat_std']:.4f}, "
+                  f"gap={sim['gap_mean']:.4f}±{sim['gap_std']:.4f}")
+
+    return averaged
 
 
 # ---------------------------------------------------------------------------
@@ -606,9 +883,9 @@ def is_same_model_pair(model_name):
 
 
 def run_single_model(model_name, layers=None, k=50, setting_str="A_forward",
-                     output_prefix="svd_analysis"):
+                     output_prefix="svd_analysis", n_folds=5):
     setting = (setting_str.split("_")[0], setting_str.split("_")[1])
-    labels = load_labels()
+    labels = load_labels_v2()
 
     if layers is None:
         (layer_A, layer_B), _ = find_best_layer_pair(model_name, setting_str)
@@ -660,9 +937,14 @@ def run_single_model(model_name, layers=None, k=50, setting_str="A_forward",
             summary["agent_B"] = existing.get("agent_B", {})
             prev_joint = existing.get("joint", {})
             if isinstance(prev_joint, dict) and "layer" in prev_joint:
-                summary["joint"] = {f"L{prev_joint['layer']}": prev_joint}
-            else:
-                summary["joint"] = prev_joint if isinstance(prev_joint, dict) else {}
+                prev_joint = {f"L{prev_joint['layer']}": prev_joint}
+            elif not isinstance(prev_joint, dict):
+                prev_joint = {}
+            # Only keep joint entries computed with CV (have n_folds key)
+            summary["joint"] = {
+                lk: v for lk, v in prev_joint.items()
+                if isinstance(v, dict) and "n_folds" in v
+            }
             print(f"  Loaded existing results: {len(summary['agent_A'])} A layers, "
                   f"{len(summary['agent_B'])} B layers, "
                   f"{len(summary['joint'])} joint layers")
@@ -675,7 +957,8 @@ def run_single_model(model_name, layers=None, k=50, setting_str="A_forward",
             print(f"  Skipping Agent A {lk} (already computed)")
             continue
         result = run_agent_analysis(
-            allAs, "AgentA", layer, flat_to_combo, labels, model_tag, k=k)
+            allAs, "AgentA", layer, flat_to_combo, labels, model_tag,
+            k=k, n_folds=n_folds)
         if result is not None:
             summary["agent_A"][lk] = result
 
@@ -685,66 +968,75 @@ def run_single_model(model_name, layers=None, k=50, setting_str="A_forward",
             print(f"  Skipping Agent B {lk} (already computed)")
             continue
         result = run_agent_analysis(
-            allBs, "AgentB", layer, flat_to_combo, labels, model_tag, k=k)
+            allBs, "AgentB", layer, flat_to_combo, labels, model_tag,
+            k=k, n_folds=n_folds)
         if result is not None:
             summary["agent_B"][lk] = result
 
     if is_same_model_pair(model_name):
-        print(f"\n  --- Joint SVD (same-model pair) ---")
-        all_indices = list(range(len(allAs)))
+        all_indices = np.array(list(range(len(allAs))))
         joint_layers = sorted(set(layers_A) | set(layers_B))
 
-        for layer in joint_layers:
-            lk = f"L{layer}"
-            if lk in summary["joint"]:
-                print(f"  Skipping Joint {lk} (already computed)")
-                continue
-
-            print(f"  Joint SVD layer {layer}...")
-            joint_acts = []
-            for idx in all_indices:
-                ep_A = allAs[idx]
-                ep_B = allBs[idx]
-                n = min(ep_A.shape[0], ep_B.shape[0])
-                if n < 1:
+        if n_folds == 1:
+            print("\n  --- Joint SVD (same-model pair, n_folds=1 all data, no CV) ---")
+            for layer in joint_layers:
+                lk = f"L{layer}"
+                if lk in summary["joint"]:
+                    print(f"  Skipping Joint {lk} (already computed)")
                     continue
-                combined = np.concatenate([
-                    ep_A[:n, layer, :],
-                    ep_B[:n, layer, :],
-                ], axis=0)
-                joint_acts.append(combined)
-
-            joint_stacked = np.concatenate(joint_acts, axis=0).astype(np.float32)
-            mean_vec = joint_stacked.mean(axis=0)
-            X_centered = joint_stacked - mean_vec
-            _, S_joint, Vt_joint = np.linalg.svd(X_centered, full_matrices=False)
-            V_k_joint = Vt_joint[:k]
-
-            spectrum_joint = analyze_spectrum(S_joint, model_tag, "Joint", layer, k_highlight=k)
-            plot_spectrum(spectrum_joint, model_tag, "Joint", layer)
-
-            proj_A = project_episodes(allAs, layer, V_k_joint, mean_vec)
-            proj_B = project_episodes(allBs, layer, V_k_joint, mean_vec)
-
-            ab_cosines = []
-            for i in range(len(proj_A)):
-                if proj_A[i].shape[0] < 1 or proj_B[i].shape[0] < 1:
+                train_eps = all_indices.tolist()
+                test_eps = all_indices.tolist()
+                print(f"  Joint SVD layer {layer}, full-data fit...")
+                result = _run_single_joint_fold(
+                    allAs, allBs, layer, train_eps, test_eps, k=k)
+                if result is None:
+                    print(f"    No data for joint L{layer}, skipping")
                     continue
-                mean_a = proj_A[i].mean(axis=0)
-                mean_b = proj_B[i].mean(axis=0)
-                na, nb = np.linalg.norm(mean_a), np.linalg.norm(mean_b)
-                if na > 1e-8 and nb > 1e-8:
-                    ab_cosines.append(float(np.dot(mean_a, mean_b) / (na * nb)))
+                averaged = _average_joint_fold_results([result])
+                averaged["layer"] = layer
+                summary["joint"][lk] = averaged
+                print(f"    A-B cosine = {averaged['agent_ab_cosine_mean']:.4f} ± "
+                      f"{averaged['agent_ab_cosine_std']:.4f}")
+        else:
+            print(f"\n  --- Joint SVD (same-model pair, {n_folds}-fold CV) ---")
+            rng = np.random.default_rng(0)
+            perm = rng.permutation(len(all_indices))
+            fold_size = len(all_indices) // n_folds
 
-            summary["joint"][lk] = {
-                "layer": layer,
-                "spectrum": spectrum_joint,
-                "agent_ab_cosine_mean": float(np.mean(ab_cosines)) if ab_cosines else 0.0,
-                "agent_ab_cosine_std": float(np.std(ab_cosines)) if ab_cosines else 0.0,
-                "n_episodes": len(ab_cosines),
-            }
-            print(f"    L{layer}: Agent A vs B cosine = "
-                  f"{np.mean(ab_cosines):.4f} ± {np.std(ab_cosines):.4f}")
+            for layer in joint_layers:
+                lk = f"L{layer}"
+                if lk in summary["joint"]:
+                    print(f"  Skipping Joint {lk} (already computed)")
+                    continue
+
+                print(f"  Joint SVD layer {layer}, {n_folds}-fold CV...")
+                fold_results = []
+                for fold_i in range(n_folds):
+                    test_start = fold_i * fold_size
+                    test_end = test_start + fold_size if fold_i < n_folds - 1 else len(all_indices)
+                    test_mask = perm[test_start:test_end]
+                    train_mask = np.concatenate([perm[:test_start], perm[test_end:]])
+
+                    train_eps = all_indices[train_mask].tolist()
+                    test_eps = all_indices[test_mask].tolist()
+
+                    result = _run_single_joint_fold(
+                        allAs, allBs, layer, train_eps, test_eps, k=k)
+                    if result is None:
+                        print(f"    Fold {fold_i+1}/{n_folds}: no data, skipping")
+                        continue
+                    fold_results.append(result)
+                    print(f"    Fold {fold_i+1}/{n_folds}: train={len(train_eps)}, "
+                          f"test={len(test_eps)}, A-B cos={result['ab_cosine_mean']:.4f}")
+
+                if fold_results:
+                    averaged = _average_joint_fold_results(fold_results)
+                    averaged["layer"] = layer
+                    summary["joint"][lk] = averaged
+                    print(f"    CV mean: A-B cosine = "
+                          f"{averaged['agent_ab_cosine_mean']:.4f} ± "
+                          f"{averaged['agent_ab_cosine_std']:.4f} "
+                          f"(fold std={averaged['agent_ab_cosine_std_across_folds']:.4f})")
 
     if not summary["joint"]:
         del summary["joint"]
@@ -776,13 +1068,18 @@ def main():
     parser.add_argument("--all_pairs", action="store_true")
     parser.add_argument("--output_prefix", type=str, default="svd_analysis",
                         help="Prefix for output JSON filenames")
+    parser.add_argument("--n_folds", type=int, default=5,
+                        help="CV folds (default: 5). Use 1 for non-CV: SVD on all episodes, "
+                             "metrics and per_turn_step_cosine on all (same train=test).")
     args = parser.parse_args()
+    if args.n_folds < 1:
+        parser.error("--n_folds must be >= 1")
 
     if args.all_pairs:
         all_summaries = []
         for model in ALL_MISTRAL_PAIRS:
             s = run_single_model(model, args.layers, args.k, args.setting,
-                                 args.output_prefix)
+                                 args.output_prefix, args.n_folds)
             all_summaries.append(s)
 
         print(f"\n\n{'='*60}")
@@ -794,17 +1091,22 @@ def main():
             for agent_key in ["agent_A", "agent_B"]:
                 for layer_key, info in s[agent_key].items():
                     sp = info["spectrum"]
-                    print(f"    {agent_key} {layer_key}: k90={sp['k90']}, k95={sp['k95']}, "
-                          f"top-{sp['k_highlight']} var={sp['top_k_explained']:.1%}")
+                    k90 = sp.get('k90', '?')
+                    k95 = sp.get('k95', '?')
+                    topk = sp.get('top_k_explained', 0)
+                    k90_s = f"{k90:.1f}" if isinstance(k90, float) else str(k90)
+                    k95_s = f"{k95:.1f}" if isinstance(k95, float) else str(k95)
+                    print(f"    {agent_key} {layer_key}: k90={k90_s}, k95={k95_s}, "
+                          f"top-{sp.get('k_highlight',50)} var={topk:.1%}")
             if "joint" in s:
                 joint = s["joint"]
-                if isinstance(joint, dict) and "layer" in joint:
-                    print(f"    Joint L{joint['layer']}: A-B cosine={joint['agent_ab_cosine_mean']:.4f}")
-                elif isinstance(joint, dict):
+                if isinstance(joint, dict):
                     for jk in sorted(joint.keys(), key=lambda x: int(x[1:]) if x.startswith('L') else -1):
                         j = joint[jk]
+                        fold_std = j.get('agent_ab_cosine_std_across_folds')
+                        fold_info = f" (fold_std={fold_std:.4f})" if fold_std is not None else ""
                         print(f"    Joint {jk}: A-B cosine={j['agent_ab_cosine_mean']:.4f} "
-                              f"± {j['agent_ab_cosine_std']:.4f}")
+                              f"± {j['agent_ab_cosine_std']:.4f}{fold_info}")
 
         agg_path = os.path.join(SCRIPT_DIR, f"{args.output_prefix}_summary.json")
         with open(agg_path, "w") as f:
@@ -813,10 +1115,10 @@ def main():
 
     elif args.model:
         run_single_model(args.model, args.layers, args.k, args.setting,
-                         args.output_prefix)
+                         args.output_prefix, args.n_folds)
     else:
         run_single_model(ALL_MISTRAL_PAIRS[0], args.layers, args.k, args.setting,
-                         args.output_prefix)
+                         args.output_prefix, args.n_folds)
 
 
 def _make_serializable(obj):

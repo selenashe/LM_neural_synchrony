@@ -12,6 +12,12 @@ parser.add_argument('--model_1', type=str, default="Mistral-7B-Instruct-v0.3")
 parser.add_argument('--model_2', type=str, default="Mistral-7B-Instruct-v0.3")
 parser.add_argument('--affected_type', type=str, default="None")
 parser.add_argument('--value', type=float, default=0)
+parser.add_argument(
+    '--run_label',
+    type=str,
+    default=os.environ.get('SOTOPIA_RUN_LABEL', ''),
+    help='Optional suffix for sotopia_results paths (default: SOTOPIA_RUN_LABEL env if set) so runs do not overwrite prior outputs.',
+)
 args = parser.parse_args()
 
 max_new_tokens = 300
@@ -26,12 +32,11 @@ if args.value == 0.0:
 model_1_name = f"{args.model_1}_{args.affected_type}_{args.value}"
 model_2_name = f"{args.model_2}_{args.affected_type}_{args.value}"
 
-save_dir_base = os.path.join(
-    REPO_ROOT, "sotopia_results", f"{model_1_name}_{model_2_name}"
-)
-dialog_base = os.path.join(
-    REPO_ROOT, "sotopia_results", "dialogs", f"{model_1_name}_{model_2_name}"
-)
+_run = (args.run_label or os.environ.get('SOTOPIA_RUN_LABEL', '') or '').strip()
+_leaf = f"{model_1_name}_{model_2_name}" + (f"_{_run}" if _run else '')
+
+save_dir_base = os.path.join(REPO_ROOT, "sotopia_results", _leaf)
+dialog_base = os.path.join(REPO_ROOT, "sotopia_results", "dialogs", _leaf)
 create_folder_if_not_there(dialog_base)
 
 for seed in seeds:

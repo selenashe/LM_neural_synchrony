@@ -199,11 +199,27 @@ def get_short_names_and_identifiers(models):
     return short_names, models_identifier
 
 
+def _sotopia_reference_suffix():
+    """Prefer Mia+Ava 90-ep runs when combo list is short; override with SOTOPIA_REFERENCE_SUFFIX."""
+    if "SOTOPIA_REFERENCE_SUFFIX" in os.environ:
+        return os.environ["SOTOPIA_REFERENCE_SUFFIX"].strip()
+    try:
+        from experiment_config import EPISODES_NUM, MIA_AVA_RESULTS_POSTFIX
+
+        if EPISODES_NUM <= 120:
+            return MIA_AVA_RESULTS_POSTFIX
+    except Exception:
+        pass
+    return ""
+
+
 def _discover_sotopia_reference_pair_path():
     """
     Path to one completed run under sotopia_results/ used only to list mode
     names and episode indices (same layout for all model pairs).
     Override with env SOTOPIA_REFERENCE_RUN=<folder_name_under_sotopia_results>.
+    If SOTOPIA_REFERENCE_SUFFIX is set (or inferred for <=120 episodes), prefer dirs whose
+    names end with that suffix (e.g. *_mia_ava_fixed_two_agents).
     """
     sr = os.path.join(REPO_ROOT, "sotopia_results")
     if not os.path.isdir(sr):
@@ -216,11 +232,26 @@ def _discover_sotopia_reference_pair_path():
         if os.path.isdir(p):
             return p
 
+    suffix = _sotopia_reference_suffix()
     candidates = sorted(
         d
         for d in os.listdir(sr)
         if os.path.isdir(os.path.join(sr, d)) and d != "dialogs"
     )
+    if suffix:
+        filtered = [d for d in candidates if d.endswith(suffix)]
+        if filtered:
+            chosen_name = filtered[0]
+            print(
+                f"get_all_modes: using pair dir {chosen_name!r} (suffix {suffix!r}; "
+                "set SOTOPIA_REFERENCE_RUN to pin another folder)"
+            )
+            return os.path.join(sr, chosen_name)
+        print(
+            f"get_all_modes: no folder ending with {suffix!r} under {sr}; "
+            "falling back to first available pair dir"
+        )
+
     if not candidates:
         raise FileNotFoundError(f"No model pair directories under {sr}")
     chosen = os.path.join(sr, candidates[0])
