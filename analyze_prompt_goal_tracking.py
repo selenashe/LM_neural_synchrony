@@ -6,8 +6,9 @@ API parameters match goal_alignment_labels.classify_combo (LiteLLM completion).
 Note: build_labels_v2.py does not perform API calls; labeling uses goal_alignment_labels.py.
 
 Usage:
-    python analyze_prompt_goal_tracking.py [--prompt-dir prompt_records] [--output analysis_outputs/goal_tracking_by_file.json]
-    python analyze_prompt_goal_tracking.py --only 6_temp0.7_seed0.csv
+    python analyze_prompt_goal_tracking.py [--dataset prompt_records|llama7b_llama7b]
+    python analyze_prompt_goal_tracking.py [--prompt-dir DIR] [--output PATH]  # overrides --dataset paths
+    python analyze_prompt_goal_tracking.py --dataset llama7b_llama7b --only 6_temp0.7_seed0.csv
 """
 
 from __future__ import annotations
@@ -23,6 +24,18 @@ from pathlib import Path
 from litellm import completion
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Preset roots + default output JSON per corpus (same CSV shape: save_states column).
+DATASETS: dict[str, tuple[str, str]] = {
+    "prompt_records": (
+        os.path.join(SCRIPT_DIR, "prompt_records"),
+        os.path.join(SCRIPT_DIR, "analysis_outputs", "goal_tracking_by_file.json"),
+    ),
+    "llama7b_llama7b": (
+        os.path.join(SCRIPT_DIR, "prompt_records_llama7b_llama7b"),
+        os.path.join(SCRIPT_DIR, "analysis_outputs", "goal_tracking_llama7b_llama7b_by_file.json"),
+    ),
+}
 
 # Same as goal_alignment_labels.classify_combo (build_labels_v2.py has no API layer)
 DEFAULT_MODEL = "vertex_ai/gemini-3.1-pro-preview"
@@ -237,13 +250,20 @@ def call_analyze(
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
+        "--dataset",
+        choices=tuple(DATASETS.keys()),
+        default="prompt_records",
+        help="Which prompt CSV tree to annotate (sets default --prompt-dir and --output unless overridden)",
+    )
+    parser.add_argument(
         "--prompt-dir",
-        default=os.path.join(SCRIPT_DIR, "prompt_records"),
-        help="Directory containing *_temp*_seed*.csv files",
+        default=None,
+        help="Directory containing *_temp*_seed*.csv files (overrides --dataset prompt dir)",
     )
     parser.add_argument(
         "--output",
-        default=os.path.join(SCRIPT_DIR, "analysis_outputs", "goal_tracking_by_file.json"),
+        default=None,
+        help="Output JSON path (overrides --dataset default)",
     )
     parser.add_argument("--model", default=DEFAULT_MODEL)
     parser.add_argument("--only", default=None, help="Single filename under prompt-dir to process")
@@ -255,8 +275,9 @@ def main():
     )
     args = parser.parse_args()
 
-    prompt_dir = Path(args.prompt_dir)
-    out_path = Path(args.output)
+    default_prompt, default_out = DATASETS[args.dataset]
+    prompt_dir = Path(args.prompt_dir or default_prompt)
+    out_path = Path(args.output or default_out)
     out_path.parent.mkdir(parents=True, exist_ok=True)
 
     results: dict = {}
