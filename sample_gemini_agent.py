@@ -5,6 +5,8 @@ Run Sotopia simulations with Gemini on Vertex AI (same episode loop as sample_no
 Uses private per-agent intros, alternating turns, max_turns / temperature / max_new_tokens
 aligned with sample_normal_agent.py. Writes the same dialog CSV + prompt_records layout
 under sotopia_results_gemini/dialogs/ (no hidden-state .npy files).
+Defaults to the fixed two-agent combos file:
+  sotopia_utils/sotopia_data/env_agent_combos_fixed_two_agents.json
 
 Vertex / LiteLLM settings match goal_alignment_labels.classify_combo:
   vertex_ai/gemini-3.1-pro-preview, project hs-soil-gemini, location global, timeout 120.
@@ -14,7 +16,6 @@ Requires gcloud / Vertex auth appropriate for LiteLLM (same as goal_alignment_la
 Smoke test (few episodes):
   cd /juice6/u/jshe/nlp/LM_neural_synchrony
   conda activate neural_sync
-  export SOTOPIA_ENV_AGENT_COMBOS_BASENAME=env_agent_combos_fixed_two_agents.json  # optional
   export SOTOPIA_RUN_LABEL=mia_ava_fixed_two_agents  # optional
   python sample_gemini_agent.py --model_1 gemini-3.1-pro-preview --model_2 gemini-3.1-pro-preview \\
     --max_episodes 2
@@ -42,6 +43,10 @@ from gemini_sot_env import (
     GeminiSotopiaEnv,
 )
 from utils import REPO_ROOT, create_folder_if_not_there, set_seed
+
+DEFAULT_GEMINI_ENV_AGENT_COMBOS_PATH = os.path.join(
+    REPO_ROOT, "sotopia_utils", "sotopia_data", "env_agent_combos_fixed_two_agents.json"
+)
 
 
 def main():
@@ -82,6 +87,12 @@ def main():
     )
     parser.add_argument("--vertex_project", type=str, default=DEFAULT_VERTEX_PROJECT)
     parser.add_argument("--vertex_location", type=str, default=DEFAULT_VERTEX_LOCATION)
+    parser.add_argument(
+        "--env_agent_combos_path",
+        type=str,
+        default=DEFAULT_GEMINI_ENV_AGENT_COMBOS_PATH,
+        help="Path to env-agent combos JSON (default: fixed_two_agents list).",
+    )
     parser.add_argument("--max_new_tokens", type=int, default=300)
     parser.add_argument("--max_turns", type=int, default=16)
     parser.add_argument("--temperature", type=float, default=0.7)
@@ -125,6 +136,7 @@ def main():
             vertex_model_2=vm2,
             vertex_project=args.vertex_project,
             vertex_location=args.vertex_location,
+            env_agent_combos_path=args.env_agent_combos_path,
             max_turns=args.max_turns,
             saving_dir_base=save_dir_base,
             save_states=False,

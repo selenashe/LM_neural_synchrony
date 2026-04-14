@@ -135,6 +135,7 @@ class GeminiSotopiaEnv:
         probing_self_goal: bool = False,
         saving_dir: str | None = None,
         saving_dir_base: str | None = None,
+        env_agent_combos_path: str = ENV_AGENT_COMBOS_PATH,
         mask_history: bool = False,
         verbose: bool = False,
         seed: int = 0,
@@ -197,6 +198,7 @@ class GeminiSotopiaEnv:
         self.save_states_without_goal = save_states_without_goal
         self.probing_goal = probing_goal
         self.probing_self_goal = probing_self_goal
+        self.env_agent_combos_path = env_agent_combos_path
         self.load_scenarios()
         self.prompts: list[str] = []
         self.prompts_only_dialogs: list = []
@@ -211,7 +213,7 @@ class GeminiSotopiaEnv:
         self.source_name = None
 
     def load_scenarios(self):
-        with open(ENV_AGENT_COMBOS_PATH, "r", encoding="utf-8") as f:
+        with open(self.env_agent_combos_path, "r", encoding="utf-8") as f:
             self.env_agent_combos = json.load(f)
 
         with open(os.path.join(directory, "sotopia_utils/sotopia_data/envs.json"), "r") as f:
