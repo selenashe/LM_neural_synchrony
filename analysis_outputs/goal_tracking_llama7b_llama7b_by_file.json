@@ -17,6 +17,16 @@
         "Unrealistic resolution to a severe financial need (abandoning the need for $3000 just because of a brief brainstorming session)."
       ],
       "notes": "Ava handled her conflicting constraints perfectly, but Mia's LLM failed to persist on the difficult goal once faced with rejection."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": true,
+      "reasoning": "Mia attempted to borrow money, but Ava politely declined to protect her own financial stability. Instead of lending money, Ava offered to help Mia brainstorm a business plan to generate income. Mia accepted this alternative and explicitly stated she could make it work without borrowing money, preserving the friendship while Ava maintained her finances.",
+      "episode_index": 0,
+      "env_id": "01H7VFHN1PK2FXY7TPWQK343BQ",
+      "codename": "borrow_money",
+      "transcript_source": "prompt_records_llama7b_llama7b/0_temp0.7_seed0.csv"
     }
   },
   "10_temp0.7_seed0.csv": {
@@ -59,6 +69,16 @@
         "Concluding the negotiation without actually dividing the majority of the items."
       ],
       "notes": "The agents treat the scenario as a trade of a few specific items rather than a division of the entire shared inventory."
+    },
+    "task_success": {
+      "success": false,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": false,
+      "reasoning": "The agents fail to divide the actual inventory of 4 books, 6 hats, and 2 balls. Instead, they get bogged down negotiating over single, specific items (like 'the hat with the flowers' or 'the book on architecture') and never reach a comprehensive agreement on how to split the full set of possessions.",
+      "episode_index": 10,
+      "env_id": "01H7VFHP2XBZ6KDPGEAZ2FN1P2",
+      "codename": "divide_things",
+      "transcript_source": "prompt_records_llama7b_llama7b/10_temp0.7_seed0.csv"
     }
   },
   "11_temp0.7_seed0.csv": {
@@ -78,6 +98,16 @@
         "Ava's dialogue in Turn 5 sounds overly clinical and therapist-like ('let's take a deep breath and break this down together... As your partner, I want to acknowledge...')"
       ],
       "notes": "Mia successfully brings up the topic of an affair but completely changes the context, turning a confession about past behavior into a confession of current infidelity against her current partner."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": false,
+      "reasoning": "Mia successfully achieves her goal by confessing to the affair, which naturally creates a conflict. Ava's goal to maintain trust is inherently compromised by Mia's confession, so she does not achieve it, but she reacts realistically by asking for space and discussing how to rebuild trust. The interaction is a successful and plausible resolution to the conflicting goals.",
+      "episode_index": 11,
+      "env_id": "01H7VFHN94S6Z5T6ZNC23238NT",
+      "codename": "lying_affair",
+      "transcript_source": "prompt_records_llama7b_llama7b/11_temp0.7_seed0.csv"
     }
   },
   "12_temp0.7_seed0.csv": {
@@ -97,6 +127,16 @@
         "Extreme repetition of the phrase 'I've been meaning to...' by both agents in almost every single turn of the conversation."
       ],
       "notes": "The repetition of 'I've been meaning to...' makes the dialogue feel highly artificial and robotic."
+    },
+    "task_success": {
+      "success": false,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": true,
+      "reasoning": "Agent 1 completely failed her constraint to keep the gift a secret, explicitly stating in Turn 8 that she was thinking about getting Agent 2 a gift for her birthday. Agent 2 successfully achieved her goal of having a good time, as the two friends had a pleasant and friendly conversation. Because Agent 1 failed her primary constraint, the overall task is not a complete success.",
+      "episode_index": 12,
+      "env_id": "01H7VFHN2D3MJB8HM910MNEVA8",
+      "codename": "ask_gift_preference",
+      "transcript_source": "prompt_records_llama7b_llama7b/12_temp0.7_seed0.csv"
     }
   },
   "13_temp0.7_seed0.csv": {
@@ -121,6 +161,16 @@
         "Ava's rapid shift from being too overwhelmed for a class to enthusiastically suggesting regular monthly class meetups."
       ],
       "notes": "Mia did a good job of negotiating by suggesting a low-commitment weekend workshop, but Ava yielded too easily instead of holding her ground on her workload constraints."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "Mia successfully convinced Ava to take a class, fulfilling her goal of getting her friend to challenge herself. Ava successfully negotiated the commitment down to a short weekend workshop or online course, allowing her to maintain a manageable schedule while preserving their friendship.",
+      "episode_index": 13,
+      "env_id": "01H7VFHND24JAWG23XMPYGG5HK",
+      "codename": "split_classes",
+      "transcript_source": "prompt_records_llama7b_llama7b/13_temp0.7_seed0.csv"
     }
   },
   "14_temp0.7_seed0.csv": {
@@ -140,6 +190,16 @@
         "Engaging in 10 turns of deep, generic small talk before making any attempt to pursue the primary goal of the interaction."
       ],
       "notes": "Neither agent attempts to bring up the schools or specific hobbies of their friends until turn 11. They actually share an exact mutual friend (Micheline, who likes shopping and goes to the University of Hartford), but neither agent brings up shopping or the university."
+    },
+    "task_success": {
+      "success": false,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": false,
+      "reasoning": "The agents engaged in small talk about their professions and hobbies but failed to discover their mutual friend, Micheline. Ava attempted to find a connection through card collecting, but Mia incorrectly stated she didn't know anyone with that hobby, and the conversation ended before any mutual friend was identified.",
+      "episode_index": 14,
+      "env_id": "01H7VFHPP9SPQ8W6583JFZ7HZC",
+      "codename": "mutual_friend_00008",
+      "transcript_source": "prompt_records_llama7b_llama7b/14_temp0.7_seed0.csv"
     }
   },
   "15_temp0.7_seed0.csv": {
@@ -175,6 +235,16 @@
         "The conversation loops significantly from turn 8 onwards, with both agents repeating the same points about taking a break and reconnecting in a few months."
       ],
       "notes": "Both agents stick to their goals well (Mia hiding feelings and distancing, Ava trying to find the real reason and maintain the bond). However, Ava has a persistent hallucination/error where she addresses herself by name instead of Mia."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": false,
+      "reasoning": "Mia successfully achieved her goal by establishing a clear boundary for distance, citing work and personal stress as the reason, and keeping her romantic feelings a secret. Ava managed to secure a promise to reconnect in the future to maintain the friendship, but she completely failed to figure out the true reason for the estrangement despite repeatedly asking.",
+      "episode_index": 15,
+      "env_id": "01H7VFHNZ1XA77AG7A97M4E6C3",
+      "codename": "secret_feeling",
+      "transcript_source": "prompt_records_llama7b_llama7b/15_temp0.7_seed0.csv"
     }
   },
   "16_temp0.7_seed0.csv": {
@@ -206,6 +276,16 @@
         "Failing to use the 'LEAVE' command after the goal is achieved."
       ],
       "notes": "Ava's negotiation strategy was initially fine, but the severe prompt leakage in turns 9 and 13 ruins the immersion and roleplay."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "The agents successfully negotiated a final sale price of $4700 for the car. Agent 2 (Ava) easily exceeded her target price of $3260, securing a bonus. Agent 1 (Mia) agreed to a price of $4700, which is very close to her target of $4600, representing a successful and realistic compromise.",
+      "episode_index": 16,
+      "env_id": "01H7VFHQ0BGQA0AD9FC1R4M12F",
+      "codename": "craigslist_bargains_00006",
+      "transcript_source": "prompt_records_llama7b_llama7b/16_temp0.7_seed0.csv"
     }
   },
   "17_temp0.7_seed0.csv": {
@@ -248,6 +328,16 @@
         "Empty outputs"
       ],
       "notes": "The conversation completely breaks down in the second half due to repetition and formatting failures."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": false,
+      "reasoning": "The agents successfully negotiated a compromise where they built a makeshift wind barrier and shared the blanket. Mia achieved her goal of sharing the blanket to stay warm. Ava compromised and agreed to share, explicitly acknowledging in her internal thought that she failed her goal of keeping the blanket entirely for herself.",
+      "episode_index": 17,
+      "env_id": "01H7VFHNN7XTR99319DS8KZCQM",
+      "codename": "share_blanket",
+      "transcript_source": "prompt_records_llama7b_llama7b/17_temp0.7_seed0.csv"
     }
   },
   "18_temp0.7_seed0.csv": {
@@ -273,6 +363,16 @@
         "Talking extensively about the new friends (Emma and Ryan) as if they are right there, but never actually bringing them into the conversation."
       ],
       "notes": "Both agents achieved their social goals, but the dialogue felt like a rigid exchange of monologues rather than a natural party conversation."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "Mia successfully introduces her new friends to Ava and actively tries to include her in the conversation to make her feel comfortable. Ava manages to maintain a warm, friendly tone throughout the interaction and successfully expresses her feelings of being left out in Turn 11 without causing any conflict, which Mia receives well.",
+      "episode_index": 18,
+      "env_id": "01H7VFHNGJEVGSVPPT0784H6P8",
+      "codename": "new_friends",
+      "transcript_source": "prompt_records_llama7b_llama7b/18_temp0.7_seed0.csv"
     }
   },
   "19_temp0.7_seed0.csv": {
@@ -309,6 +409,16 @@
         "Failing to use the 'LEAVE' command after both goals were clearly achieved by Turn 5."
       ],
       "notes": "The agents perfectly understood and executed their prompts, but the LLM fell into a severe repetition loop in the second half of the dialogue."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "Mia successfully and sincerely apologizes in the very first turn for making fun of Ava's English skills. Ava accepts the apology in the following turn while clearly expressing how the actions hurt her and affected her confidence, fulfilling both of their private goals.",
+      "episode_index": 19,
+      "env_id": "01H7VFHNCN97BJ2PXKHJPX2VYY",
+      "codename": "apology_and_acceptance",
+      "transcript_source": "prompt_records_llama7b_llama7b/19_temp0.7_seed0.csv"
     }
   },
   "1_temp0.7_seed0.csv": {
@@ -339,6 +449,16 @@
         "Mia repeating almost identical sentences in turns 8, 10, 12, and 14 rather than escalating her frustration or changing her approach."
       ],
       "notes": "The dialogue falls into a classic LLM loop where one agent politely refuses and the other politely pushes boundaries, resulting in no progression."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "Mia successfully and repeatedly asked Ava to lower her voice and let her study, fulfilling her goal. Ava was able to express her exciting design ideas while repeatedly acknowledging Mia's request and eventually agreeing to stop talking and respect the library rules.",
+      "episode_index": 1,
+      "env_id": "01H7VFHP0TRETZPZMEJ5RZA2G7",
+      "codename": "talk_loudly",
+      "transcript_source": "prompt_records_llama7b_llama7b/1_temp0.7_seed0.csv"
     }
   },
   "20_temp0.7_seed0.csv": {
@@ -363,6 +483,16 @@
         "Both agents hallucinate knowing the other person's friends to force a connection rather than finding an actual mutual friend from their lists (e.g., Alvin is on both lists)."
       ],
       "notes": "Both agents had 'Alvin' on their lists (Auburn University - Montgomery, Vectren) but failed to discover him, instead choosing to lie about knowing the friends the other person brought up."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "Both agents successfully engaged in conversation to find a mutual connection without simply listing names. Although they hallucinated knowing each other's friends (Dave and Mable) instead of discovering their actual shared friend (Alvin), they achieved the conversational goal of establishing a mutual friend and bonding over it.",
+      "episode_index": 20,
+      "env_id": "01H7VFHPQ1712DHGTMPQFTXH02",
+      "codename": "mutual_friend_00009",
+      "transcript_source": "prompt_records_llama7b_llama7b/20_temp0.7_seed0.csv"
     }
   },
   "21_temp0.7_seed0.csv": {
@@ -392,6 +522,16 @@
         "Both agents completely drop their personas in the final turns to output AI assistant filler text."
       ],
       "notes": "The interaction was going exceptionally well until Turn 12, where the generation completely failed and fell into a loop of meta-commentary."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "Mia successfully flirts with Ava by complimenting her smile, her dress, and expressing a strong connection, ultimately securing an invitation to grab a drink and share her art. Ava successfully maintains a comfortable and engaging conversation by asking thoughtful questions about Mia's nursing career and hobbies while responding warmly to Mia's advances without applying any pressure.",
+      "episode_index": 21,
+      "env_id": "01H7VFHNWX3KVZGH26KYNK2XNB",
+      "codename": "flirt_with_someone",
+      "transcript_source": "prompt_records_llama7b_llama7b/21_temp0.7_seed0.csv"
     }
   },
   "22_temp0.7_seed0.csv": {
@@ -417,6 +557,16 @@
         "Giving up on the goal before exhausting the provided list of friends."
       ],
       "notes": "The agents successfully avoided simply listing names, but their strategy of fixating on one school at a time caused them to miss the actual mutual friend."
+    },
+    "task_success": {
+      "success": false,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": false,
+      "reasoning": "The agents attempted to find a mutual friend by discussing various universities and majors, but they focused on the wrong schools (UTA, Texas A&M, SAIC). They failed to mention the University of Connecticut or their actual mutual friend, Loretta, before ending the conversation.",
+      "episode_index": 22,
+      "env_id": "01H7VFHPMS6AJY0PFGGCFFK5GX",
+      "codename": "mutual_friend_00006",
+      "transcript_source": "prompt_records_llama7b_llama7b/22_temp0.7_seed0.csv"
     }
   },
   "23_temp0.7_seed0.csv": {
@@ -448,6 +598,16 @@
         "Haggling over extremely small, specific increments (e.g., $55.05, $54.85, $54.80)."
       ],
       "notes": "Mia completely fails to anchor the negotiation near her $30 target, making it impossible for her to achieve a good outcome."
+    },
+    "task_success": {
+      "success": false,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": false,
+      "reasoning": "The negotiation ends abruptly without the agents reaching a final agreement on the price. Agent 2's final turn is empty, and they were still haggling over small amounts ($54.80 vs $53.95) when the dialogue cut off. Neither agent achieved their goal of buying or selling the item.",
+      "episode_index": 23,
+      "env_id": "01H7VFHQ11NAMZS4A2RDGDB01V",
+      "codename": "craigslist_bargains_00007",
+      "transcript_source": "prompt_records_llama7b_llama7b/23_temp0.7_seed0.csv"
     }
   },
   "24_temp0.7_seed0.csv": {
@@ -478,6 +638,16 @@
         "Failing to end the conversation after the goal is ostensibly met."
       ],
       "notes": "The agents completely missed their actual mutual friend, Neoma, because they latched onto the first shared attribute (Saint Vincent College) and Mia hallucinated the connection."
+    },
+    "task_success": {
+      "success": false,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": false,
+      "reasoning": "The agents failed to identify their actual mutual friend (Neoma) from the provided lists. Instead, Mia hallucinated knowing Ava's friend Tiffany, and the conversation drifted away from finding other connections before ending abruptly with an empty turn.",
+      "episode_index": 24,
+      "env_id": "01H7VFHPHWA2CYG7BC82NS4XH1",
+      "codename": "mutual_friend_00002",
+      "transcript_source": "prompt_records_llama7b_llama7b/24_temp0.7_seed0.csv"
     }
   },
   "25_temp0.7_seed0.csv": {
@@ -519,6 +689,16 @@
         "Repeating the exact same sentences verbatim across multiple turns."
       ],
       "notes": "The negotiation breaks down into a repetitive loop starting around turn 10, where Mia repeatedly asks for confirmation of a mathematically incorrect split, and Ava repeatedly confirms her side of the split."
+    },
+    "task_success": {
+      "success": false,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": false,
+      "reasoning": "The agents get stuck in an infinite loop of confirming a confusing and contradictory deal. They propose flipping a coin for a third book while simultaneously assigning all three books, and they invent a second ball. The dialogue cuts off without a coherent resolution.",
+      "episode_index": 25,
+      "env_id": "01H7VFHP43QEZA1WZB3B3J2D9X",
+      "codename": "divide_things",
+      "transcript_source": "prompt_records_llama7b_llama7b/25_temp0.7_seed0.csv"
     }
   },
   "26_temp0.7_seed0.csv": {
@@ -556,6 +736,16 @@
         "Parroting each other's phrases exactly (e.g., 'efficiently and effectively')."
       ],
       "notes": "The agents completely lose the plot after Turn 7, turning a negotiation task into a cooperative roleplay about moving out."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": true,
+      "reasoning": "The agents successfully reached an agreement on how to divide the items, making the interaction a success. However, Mia (Agent 1) agreed to a coin flip that resulted in her only getting 2 hats (4 points), failing her goal to maximize points. Ava (Agent 2) won the coin flip and secured 1 hat, 2 balls, and the book (11 points), successfully maximizing her outcome.",
+      "episode_index": 26,
+      "env_id": "01H7VFHP90434Q69V7ADY0VWZJ",
+      "codename": "divide_things",
+      "transcript_source": "prompt_records_llama7b_llama7b/26_temp0.7_seed0.csv"
     }
   },
   "27_temp0.7_seed0.csv": {
@@ -567,6 +757,16 @@
       "issues": [],
       "unnatural_behaviors": [],
       "notes": "The negotiation was handled very naturally, with both agents making reasonable concessions without abandoning their core objectives."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "The agents successfully negotiated an agreement for Ava to produce Mia's play. Although they primarily discussed the production budget rather than a specific rights purchase price, they reached a mutual agreement on a revised budget ($120,000 to $150,000) that satisfied Ava's need for financial constraint and Mia's desire for a fair, high-quality production.",
+      "episode_index": 27,
+      "env_id": "01H7VFHNBBK14NGV72BWXEXXJC",
+      "codename": "play_rights",
+      "transcript_source": "prompt_records_llama7b_llama7b/27_temp0.7_seed0.csv"
     }
   },
   "28_temp0.7_seed0.csv": {
@@ -592,6 +792,16 @@
         "Inability to break out of a negotiation loop or finalize a compromise."
       ],
       "notes": "Both agents pursue their goals relentlessly, but the lack of conversational progression makes the interaction feel highly artificial and robotic."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": true,
+      "reasoning": "The agents have conflicting music preferences. After a repetitive back-and-forth, Mia eventually concedes to Ava's request to listen to classical music for the evening, meaning Ava's goal is achieved while Mia's is not. This represents a plausible resolution to the conflict.",
+      "episode_index": 28,
+      "env_id": "01H7VFHP1JEP91TTK5PEK39D2S",
+      "codename": "music_preference",
+      "transcript_source": "prompt_records_llama7b_llama7b/28_temp0.7_seed0.csv"
     }
   },
   "29_temp0.7_seed0.csv": {
@@ -616,6 +826,16 @@
         "Highly repetitive dialogue where both agents continuously agree on the exact same point about teamwork without advancing the conversation."
       ],
       "notes": "While both agents strictly adhere to their goals, Ava's insistence on clarifying her compliment makes the conversation loop unnaturally, as Mia had already conceded the point in her first response."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "Mia successfully accepts the initial compliment graciously and maintains a humble, team-oriented attitude throughout the conversation. Ava successfully clarifies her intentions by explicitly stating that her compliment was meant to highlight the collective effort rather than just individual skill, which Mia understands and accepts.",
+      "episode_index": 29,
+      "env_id": "01H7VFHNRKB8BJ854JPEWY8AR3",
+      "codename": "compliment_conflict",
+      "transcript_source": "prompt_records_llama7b_llama7b/29_temp0.7_seed0.csv"
     }
   },
   "2_temp0.7_seed0.csv": {
@@ -641,6 +861,16 @@
         "Playing a trivia guessing game without ever stating the trivia question."
       ],
       "notes": "Both agents stick strictly to their goals (Mia trying to get the answer, Ava refusing to give it and offering hints instead), but the lack of a concrete trivia question causes the LLMs to hallucinate a weird, highly specific guessing game about nursing routines that loops endlessly."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": true,
+      "reasoning": "Ava successfully avoided giving away the exact answer to the trivia question, fulfilling her goal of making Mia think for herself. Mia did not achieve her goal of getting the answer directly from Ava, but the interaction was a plausible and stable resolution to their conflicting goals through the use of hints.",
+      "episode_index": 2,
+      "env_id": "01H7VFHNKVTCAGBA299VQG1QS2",
+      "codename": "reveal_answer",
+      "transcript_source": "prompt_records_llama7b_llama7b/2_temp0.7_seed0.csv"
     }
   },
   "30_temp0.7_seed0.csv": {
@@ -672,6 +902,16 @@
         "Ava starts multiple turns with 'Ha!'."
       ],
       "notes": "Ava technically achieves her goal of keeping the peace while securing another drink, but the dialogue quality severely degrades due to the repetitive looping."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "Mia successfully convinces Ava to limit her drinking to just one more drink and then switch to a healthy activity like walking or yoga, fulfilling her goal to get Ava to drink less. Ava manages to negotiate having one more drink while completely pacifying Mia, thus keeping her friend happy and avoiding an argument.",
+      "episode_index": 30,
+      "env_id": "01H7VFHP29TCH457PBDVF7WFDS",
+      "codename": "drink_less",
+      "transcript_source": "prompt_records_llama7b_llama7b/30_temp0.7_seed0.csv"
     }
   },
   "31_temp0.7_seed0.csv": {
@@ -708,6 +948,16 @@
         "Ignoring the total count of items available to divide."
       ],
       "notes": "The negotiation feels highly artificial because the agents treat 'points' (which represent sentimental value) as a literal, shared currency they can discuss openly."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "The agents successfully negotiated a division of the items, focusing on trading items they valued most (books for Mia, hats for Ava). Although they did not explicitly allocate every single item from the prompt, they reached a stable, mutually agreed-upon resolution where both agents calculated their points and concluded the trade was fair and satisfactory.",
+      "episode_index": 31,
+      "env_id": "01H7VFHP3DPGRXH1Y500VQKFZA",
+      "codename": "divide_things",
+      "transcript_source": "prompt_records_llama7b_llama7b/31_temp0.7_seed0.csv"
     }
   },
   "32_temp0.7_seed0.csv": {
@@ -738,6 +988,16 @@
         "Excessive use of roleplay actions like '*checks the box*' and '*gets the bags*'."
       ],
       "notes": "The interaction is very polite and both agents pursue their goals effectively, but the shared hallucination/ignorance regarding canine diet is a glaring logical flaw."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "Mia successfully gave away all her free samples, explicitly stating she cleared out the inventory before her shift ended. Ava managed to get multiple rounds of cookies and even reusable bags by framing her requests politely and using her dog as an excuse, thus getting many items without appearing greedy.",
+      "episode_index": 32,
+      "env_id": "01H7VFHN8MPMGJTPVN043KBKGM",
+      "codename": "free_stuff",
+      "transcript_source": "prompt_records_llama7b_llama7b/32_temp0.7_seed0.csv"
     }
   },
   "33_temp0.7_seed0.csv": {
@@ -763,6 +1023,16 @@
         "Vague, circular conversation that never progresses to concrete planning despite both agreeing to 'come up with a plan'."
       ],
       "notes": "The agents get stuck in an agreement loop without ever addressing the core mechanic of the scenario (the Prisoner's Dilemma payoff matrix provided in their prompts)."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "Both agents successfully navigated the conversation by agreeing to cooperate, stick to the facts, and avoid incriminating themselves. Although they did not explicitly share the lawyer's payoff matrix, their mutual agreement to not confess to the serious crime effectively aligns with the 'remain silent' strategy, which minimizes their jail time to just a fine.",
+      "episode_index": 33,
+      "env_id": "01H7VFHN3Q7498S3R4R2VDSXA0",
+      "codename": "prison_dilemma",
+      "transcript_source": "prompt_records_llama7b_llama7b/33_temp0.7_seed0.csv"
     }
   },
   "34_temp0.7_seed0.csv": {
@@ -782,6 +1052,16 @@
         "Mia repeatedly starts her turns with 'I'm so glad you're interested in the charity, Ava!' (Turns 8, 10, 14)."
       ],
       "notes": "Mia did a great job pursuing her goal, but Ava acted as a generic agreeable conversationalist rather than adhering to her specific private goal constraints."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": false,
+      "reasoning": "Mia successfully pitched her charity and asked for a donation, which Ava agreed to provide. However, Ava completely failed to pursue her specific private goal of finding an organization that helps queer people, as she never brought it up during the conversation.",
+      "episode_index": 34,
+      "env_id": "01H7VFHN2YQV0R5QWWRQZ1VRHW",
+      "codename": "ask_for_donantion",
+      "transcript_source": "prompt_records_llama7b_llama7b/34_temp0.7_seed0.csv"
     }
   },
   "35_temp0.7_seed0.csv": {
@@ -812,6 +1092,16 @@
         "Overly repetitive reassurances and dragging out the planning details over many turns."
       ],
       "notes": "Ava tracks her goal well by setting up the ritual, but her execution is slightly flawed by revealing the placebo strategy. Mia completely ignores the specific cause of her bad luck (the artifact)."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "Ava successfully proposes and helps plan a smudging ritual to help Mia break her bad luck, fulfilling her goal of preparing a ritual while maintaining her non-superstitious stance. Mia agrees to the plan and feels optimistic about breaking her bad luck, successfully making progress toward her goal.",
+      "episode_index": 35,
+      "env_id": "01H7VFHNVN788RJ3KXF66BPE9S",
+      "codename": "break_bad_luck",
+      "transcript_source": "prompt_records_llama7b_llama7b/35_temp0.7_seed0.csv"
     }
   },
   "36_temp0.7_seed0.csv": {
@@ -837,6 +1127,16 @@
         "Highly repetitive dialogue structures (e.g., almost every turn starts with 'I understand your concerns/hesitation, [Name], and I appreciate your willingness to compromise')."
       ],
       "notes": "Mia's negotiation strategy is non-existent regarding her actual goal; she anchors against the seller's asking price rather than her own target. Ava negotiates well until she breaks character in Turn 11."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": true,
+      "reasoning": "The agents successfully negotiated a final sale price of $261 for the TV, reaching a clear and stable resolution. Agent 2 (Ava) substantially met her goal, as the final price was only $2 below her target of $263. Agent 1 (Mia) failed to meet her goal, as she agreed to a price significantly higher than her target of $174, which would incur a penalty.",
+      "episode_index": 36,
+      "env_id": "01H7VFHPRFCSA3BTT39BRBZX7H",
+      "codename": "craigslist_bargains_00001",
+      "transcript_source": "prompt_records_llama7b_llama7b/36_temp0.7_seed0.csv"
     }
   },
   "37_temp0.7_seed0.csv": {
@@ -852,6 +1152,16 @@
         "Scheduling a dog playdate with the friend who just confessed to an affair with your partner feels very bizarre and overly casual."
       ],
       "notes": "Both agents followed their instructions perfectly, but the combination of the severe scenario and Ava's goal to 'not cause a huge argument' resulted in a highly unrealistic, overly-therapeutic dialogue."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "Mia successfully confessed to Ava about her involvement with Ava's partner, fulfilling her goal. Ava managed to maintain the friendship without causing a huge argument, responding calmly and agreeing to work through the situation, fulfilling her goal.",
+      "episode_index": 37,
+      "env_id": "01H7VFHNFVGFY578101R2PCV3T",
+      "codename": "confess_mistake",
+      "transcript_source": "prompt_records_llama7b_llama7b/37_temp0.7_seed0.csv"
     }
   },
   "38_temp0.7_seed0.csv": {
@@ -877,6 +1187,16 @@
         "Ava hallucinates being able to offer a 'lifetime warranty' on a standard $20 item."
       ],
       "notes": "Despite the prompt stating 'The price is non-negotiable', both agents immediately engage in price negotiation. They both hold firm to their goals, resulting in a failed negotiation, which is a valid outcome given the non-overlapping target prices."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": false,
+      "reasoning": "The agents engaged in a realistic negotiation but were unable to bridge the gap between their target prices ($14 for the buyer, $17.30 for the seller). The buyer ultimately decided to walk away, which is a plausible and stable resolution to a negotiation with incompatible price expectations, even though neither agent achieved their specific transaction goal.",
+      "episode_index": 38,
+      "env_id": "01H7VFHPSWGDGEYRP63H2DJKV0",
+      "codename": "craigslist_bargains_00003",
+      "transcript_source": "prompt_records_llama7b_llama7b/38_temp0.7_seed0.csv"
     }
   },
   "39_temp0.7_seed0.csv": {
@@ -892,6 +1212,16 @@
         "Lack of progression or new arguments; the agents are stuck in an endless loop of polite refusal."
       ],
       "notes": "While both agents perfectly track their goals, the interaction feels very robotic due to the repetitive phrasing and inability to actually negotiate or change conversational tactics."
+    },
+    "task_success": {
+      "success": false,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": false,
+      "reasoning": "The agents engage in a repetitive loop where each insists on watching their preferred movie genre tonight while calling it a 'compromise.' The dialogue cuts off without any resolution or agreement being reached, meaning neither agent successfully persuaded the other.",
+      "episode_index": 39,
+      "env_id": "01H7VFHNXMZQ5Q61B3J4NNTC1A",
+      "codename": "disagree_on_movie",
+      "transcript_source": "prompt_records_llama7b_llama7b/39_temp0.7_seed0.csv"
     }
   },
   "3_temp0.7_seed0.csv": {
@@ -928,6 +1258,16 @@
         "Both agents completely drop the main conflict (who drives next) to argue about car security."
       ],
       "notes": "The dialogue suffers from severe looping and context loss. Ava's prompt mentions 'driving always makes you nervous', which she seems to have misinterpreted as her currently being the driver."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": true,
+      "reasoning": "The agents successfully negotiated a compromise to pull over and take a break while Ava watches the car. Ava achieved her goal of avoiding driving for now while calming Mia down. Mia did not achieve her goal of getting Ava to take a turn driving, as they only agreed to take a break and reassess later.",
+      "episode_index": 3,
+      "env_id": "01H7VFHN4FHYG2MBD0K4HJ5F08",
+      "codename": "take_turns",
+      "transcript_source": "prompt_records_llama7b_llama7b/3_temp0.7_seed0.csv"
     }
   },
   "40_temp0.7_seed0.csv": {
@@ -959,6 +1299,16 @@
         "Highly repetitive phrasing in the later turns ('brainstorm some alternative solutions', 'affordable and high-quality supplies')."
       ],
       "notes": "The agents fall into a loop of overly agreeable, repetitive dialogue about getting coffee and brainstorming, completely losing the original conflict and urgency of the scenario."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": false,
+      "reasoning": "Mia successfully achieved her goal of preventing Ava from using her expensive stationery by explicitly refusing to lend it out. Ava failed to achieve her goal of borrowing the stationery, but she gracefully accepted Mia's refusal and agreed to brainstorm alternative solutions, resulting in a stable and realistic resolution to their conflicting goals.",
+      "episode_index": 40,
+      "env_id": "01H7VFHN9W0WAFZCBT09PKJJNK",
+      "codename": "share_stuff",
+      "transcript_source": "prompt_records_llama7b_llama7b/40_temp0.7_seed0.csv"
     }
   },
   "41_temp0.7_seed0.csv": {
@@ -1005,6 +1355,16 @@
         "Logical contradictions regarding numbers (e.g., claiming a higher number is 'short' of a lower target)."
       ],
       "notes": "This is a textbook example of LLMs failing at adversarial negotiation by confusing their own system prompts with dialogue, leading to cooperative but nonsensical bidding."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": true,
+      "reasoning": "The agents successfully negotiated a final sale price of $172.50 for the dresser and nightstand. Agent 2 (the seller) met her exact target price of $172.50, achieving her goal. Agent 1 (the buyer) agreed to a price significantly higher than her target of $152.00, meaning she failed to achieve her specific financial goal.",
+      "episode_index": 41,
+      "env_id": "01H7VFHPS5WJW2694R1MNC8JFY",
+      "codename": "craigslist_bargains_00002",
+      "transcript_source": "prompt_records_llama7b_llama7b/41_temp0.7_seed0.csv"
     }
   },
   "42_temp0.7_seed0.csv": {
@@ -1047,6 +1407,16 @@
         "Failing to account for the total number of fruits available (e.g., leaving fruits unassigned)."
       ],
       "notes": "The dialogue suffers from severe looping and prompt leakage regarding the private point values, making the negotiation highly unnatural."
+    },
+    "task_success": {
+      "success": false,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": false,
+      "reasoning": "The agents fail to reach an agreement on how to divide the fruits, getting stuck in a repetitive loop of rejecting each other's proposals. The dialogue ends abruptly with an empty turn from Ava, meaning no final division is settled and neither agent achieves their goal of maximizing points.",
+      "episode_index": 42,
+      "env_id": "01H7VFHP5H5GY9Z62J4NJYJQN1",
+      "codename": "divide_things",
+      "transcript_source": "prompt_records_llama7b_llama7b/42_temp0.7_seed0.csv"
     }
   },
   "43_temp0.7_seed0.csv": {
@@ -1083,6 +1453,16 @@
         "Echoing the other agent's dialogue almost word-for-word."
       ],
       "notes": "The dialogue suffers from a severe repetition loop and hallucination of context (acting as if they are at home rather than on vacation)."
+    },
+    "task_success": {
+      "success": false,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": false,
+      "reasoning": "The dialogue devolves into an incoherent loop where both agents repeat the exact same phrases about researching mattresses. Furthermore, they fail to resolve the immediate issue of where to sleep for the night while on vacation, meaning Ava completely abandons her goal of sleeping in a separate bed, and no practical resolution is reached.",
+      "episode_index": 43,
+      "env_id": "01H7VFHNNYH3W0VRWVY178K2TK",
+      "codename": "sleep_arrangement",
+      "transcript_source": "prompt_records_llama7b_llama7b/43_temp0.7_seed0.csv"
     }
   },
   "44_temp0.7_seed0.csv": {
@@ -1124,6 +1504,16 @@
         "Endlessly agreeing and repeating the same points about being an architect/nurse and making a visually appealing design without actually dividing the remaining fruits."
       ],
       "notes": "Both agents completely fail to negotiate the division of the 3 apples, 2 bananas, and 1 orange. They get stuck in a loop of hallucinating a creative project to magically generate points."
+    },
+    "task_success": {
+      "success": false,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": false,
+      "reasoning": "The agents failed to discover their differing fruit preferences and did not divide all the available fruits, completely ignoring the third apple. Instead of negotiating a trade to maximize their points, they hallucinated a cooperative craft project to magically increase the point value of the orange, failing the core negotiation task.",
+      "episode_index": 44,
+      "env_id": "01H7VFHP7K0EN9QX5JTD8B9NSQ",
+      "codename": "divide_fruits",
+      "transcript_source": "prompt_records_llama7b_llama7b/44_temp0.7_seed0.csv"
     }
   },
   "45_temp0.7_seed0.csv": {
@@ -1154,6 +1544,16 @@
         "Hallucinating friendships with people not on their provided lists."
       ],
       "notes": "The agents completely missed the actual mutual friend, Rafael, and instead fabricated a connection over Phil."
+    },
+    "task_success": {
+      "success": false,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": false,
+      "reasoning": "The agents failed to identify their actual mutual friend, Rafael. Instead, they hallucinated a connection over Phil, who is only on Mia's list, and the dialogue cuts off abruptly before any real progress is made.",
+      "episode_index": 45,
+      "env_id": "01H7VFHPM3NVVKSGCCB4S10465",
+      "codename": "mutual_friend_00005",
+      "transcript_source": "prompt_records_llama7b_llama7b/45_temp0.7_seed0.csv"
     }
   },
   "46_temp0.7_seed0.csv": {
@@ -1174,6 +1574,16 @@
         "Heavy reliance on repetitive, overly polite LLM therapy-speak (e.g., starting almost every turn with 'I understand where you're coming from' or 'I appreciate your...')."
       ],
       "notes": "Ava did an excellent job navigating her constraints, maintaining boundaries while being extremely polite. Mia's pivot to a new snack makes sense socially but technically fails her specific prompt goal of getting Ava to try the food she had already cooked."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": true,
+      "reasoning": "Ava successfully expressed her concerns about the food's nutrition and her digestive issues gently, avoiding hurting Mia's feelings. Mia, however, failed to convince Ava to try the dinner she had spent time cooking. Instead, they reached a friendly compromise to eat a different, healthy snack together, making the interaction a successful and stable resolution.",
+      "episode_index": 46,
+      "env_id": "01H7VFHNAH7V4JNA0705SF36Y1",
+      "codename": "food_refusal",
+      "transcript_source": "prompt_records_llama7b_llama7b/46_temp0.7_seed0.csv"
     }
   },
   "47_temp0.7_seed0.csv": {
@@ -1187,6 +1597,16 @@
         "Slightly repetitive phrasing around 'brainstorming together' and 'not looking for handouts' across multiple turns."
       ],
       "notes": "Ava's goal included a hint to discuss paying money back, but since Mia never explicitly offered a cash loan (only general 'help'), Ava's preemptive refusal of 'handouts' perfectly satisfied her goal of maintaining pride."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "Mia successfully helps Ava by offering emotional support, suggesting a financial advisor, and setting up a future meeting to brainstorm budgeting strategies. Ava successfully maintains her pride by politely declining direct financial handouts, explaining her situation, and accepting practical advice instead, leading to a mutually supportive resolution.",
+      "episode_index": 47,
+      "env_id": "01H7VFHNSAKNYEHV7B1VA8R3J2",
+      "codename": "financial_support",
+      "transcript_source": "prompt_records_llama7b_llama7b/47_temp0.7_seed0.csv"
     }
   },
   "48_temp0.7_seed0.csv": {
@@ -1217,6 +1637,16 @@
         "Ignoring the instruction to say 'LEAVE' once the goal is achieved, leading to a looping agreement to go get drinks."
       ],
       "notes": "Both agents did a good job naturally weaving their professions into the search for a mutual friend before Ava directly asked about Lawrence."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "Both agents successfully discovered their mutual friend, Lawrence. They engaged in natural conversation to narrow down their connections before Ava asked about Lawrence specifically, and Mia confirmed she knew him, fulfilling both of their private goals.",
+      "episode_index": 48,
+      "env_id": "01H7VFHPJKR16MD1KC71V4ZRCF",
+      "codename": "mutual_friend_00003",
+      "transcript_source": "prompt_records_llama7b_llama7b/48_temp0.7_seed0.csv"
     }
   },
   "49_temp0.7_seed0.csv": {
@@ -1253,6 +1683,16 @@
         "Failing to use the 'LEAVE' command after the donation amount and method were agreed upon."
       ],
       "notes": "Both agents pursued their goals effectively in the first 7 turns, but a severe generation failure caused the rest of the simulation to break."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "Mia successfully persuaded Ava to make a small donation, suggesting $20 or $50. Ava agreed to donate $25, which allowed her to contribute without disrupting her tight budget. Although the dialogue breaks down into meta-text at the end, the core negotiation was fully resolved and both agents achieved their goals.",
+      "episode_index": 49,
+      "env_id": "01H7VFHPBTC4ES406NQ4ET12EQ",
+      "codename": "small_donation",
+      "transcript_source": "prompt_records_llama7b_llama7b/49_temp0.7_seed0.csv"
     }
   },
   "4_temp0.7_seed0.csv": {
@@ -1288,6 +1728,16 @@
         "Logical contradiction: claiming to already own an item while simultaneously trying to purchase it at a garage sale."
       ],
       "notes": "Both agents failed their goals. Mia acted as a buyer instead of a seller, and Ava never attempted to buy the item herself."
+    },
+    "task_success": {
+      "success": false,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": false,
+      "reasoning": "The agents completely misunderstood their roles, with Mia trying to buy the record instead of selling it. Furthermore, the dialogue devolves into an infinite loop where both agents repeat the exact same responses over multiple turns without reaching any resolution.",
+      "episode_index": 4,
+      "env_id": "01H7VFHN7A1ZX5KSMT2YN9RXC4",
+      "codename": "sell_item",
+      "transcript_source": "prompt_records_llama7b_llama7b/4_temp0.7_seed0.csv"
     }
   },
   "50_temp0.7_seed0.csv": {
@@ -1308,6 +1758,16 @@
         "Failure to follow the instruction to say 'LEAVE' when the goal is achieved."
       ],
       "notes": "The negotiation itself was very natural and well-handled, but the termination logic completely failed."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "The agents successfully negotiated a compromise that addresses both of their concerns. Mia achieved her goal of getting the tree trimmed to allow more sunlight, while Ava achieved her goal of minimizing the disturbance to her dog by agreeing to consult an arborist and schedule the work on a weekend when the dog is less anxious.",
+      "episode_index": 50,
+      "env_id": "01H7VFHNBYXD48NDRY02VCWXFN",
+      "codename": "tree_trimming",
+      "transcript_source": "prompt_records_llama7b_llama7b/50_temp0.7_seed0.csv"
     }
   },
   "51_temp0.7_seed0.csv": {
@@ -1339,6 +1799,16 @@
         "Highly repetitive and overly agreeable dialogue structure."
       ],
       "notes": "The conversation derails significantly due to Ava hallucinating a different secret and Mia breaking character with meta-text before failing her goal constraints."
+    },
+    "task_success": {
+      "success": false,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": false,
+      "reasoning": "Both agents were tasked with revealing a secret without letting the other person know it was their own secret (e.g., by framing it as a rumor or a friend's secret). However, both agents explicitly shared personal secrets about their own creative projects (Ava's mural and Mia's painting), failing the anonymity constraint of their goals. Additionally, the dialogue contains meta-text and cuts off at the end.",
+      "episode_index": 51,
+      "env_id": "01H7VFHNK78PAEH6MRVYMTSEFX",
+      "codename": "reveal_secret",
+      "transcript_source": "prompt_records_llama7b_llama7b/51_temp0.7_seed0.csv"
     }
   },
   "52_temp0.7_seed0.csv": {
@@ -1369,6 +1839,16 @@
         "Highly repetitive phrasing (e.g., 'I think I'm really close to figuring out if we have a mutual friend!')."
       ],
       "notes": "The actual mutual friend is Thanh, but neither agent brings up Thanh's specific details (like studying Greek) to successfully identify him."
+    },
+    "task_success": {
+      "success": false,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": false,
+      "reasoning": "The agents failed to identify their actual mutual friend, Thanh. Instead, they hallucinated knowing each other's friends (Michael and Elizabeth) who are not on their respective friend lists, meaning they did not successfully achieve the goal of finding their true mutual connection.",
+      "episode_index": 52,
+      "env_id": "01H7VFHPNHZ2YYRHP0GXARD550",
+      "codename": "mutual_friend_00007",
+      "transcript_source": "prompt_records_llama7b_llama7b/52_temp0.7_seed0.csv"
     }
   },
   "53_temp0.7_seed0.csv": {
@@ -1410,6 +1890,16 @@
         "Ignoring the total inventory of fruits and only negotiating over a subset."
       ],
       "notes": "The negotiation fails because Mia gets stuck in a repetitive loop and Ava cannot perform basic arithmetic or keep track of the fruit inventory."
+    },
+    "task_success": {
+      "success": false,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": false,
+      "reasoning": "The agents failed to reach an agreement on how to divide the fruits. Agent 1 (Mia) got stuck in a repetitive loop, repeatedly stating she would choose the orange first, while Agent 2 (Ava) tried to negotiate but eventually stopped responding. No final division was made, so neither agent maximized their points.",
+      "episode_index": 53,
+      "env_id": "01H7VFHP66D5XEX2Z32SKRT2XY",
+      "codename": "divide_things",
+      "transcript_source": "prompt_records_llama7b_llama7b/53_temp0.7_seed0.csv"
     }
   },
   "54_temp0.7_seed0.csv": {
@@ -1435,6 +1925,16 @@
         "Agent projecting their own private secret onto the other agent."
       ],
       "notes": "Mia did an excellent job coming up with a believable, alternative reason to distance herself without revealing her true feelings."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "Mia successfully distances herself from Ava by stating she needs to take a step back from their usual hangouts to focus on herself, effectively hiding her romantic feelings behind the excuse of personal growth and feeling overwhelmed. Ava achieves her goal of maintaining the friendship by being supportive, understanding the provided reason for Mia's behavior, and securing an agreement to keep in touch and grab coffee in the future.",
+      "episode_index": 54,
+      "env_id": "01H7VFHNDRE1M02MKTPF0Q7CZA",
+      "codename": "distance_friend",
+      "transcript_source": "prompt_records_llama7b_llama7b/54_temp0.7_seed0.csv"
     }
   },
   "55_temp0.7_seed0.csv": {
@@ -1480,6 +1980,16 @@
         "Failure to end the conversation after goals are clearly met."
       ],
       "notes": "The dialogue suffers from a severe looping issue where both agents copy-paste their own previous responses instead of progressing the conversation naturally or exiting."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "Ava successfully apologizes for interrupting in her first turn and encourages Mia to continue speaking. Mia successfully resumes her speech about mental health and shares her thoughts throughout the conversation, with Ava actively listening and engaging with the topic.",
+      "episode_index": 55,
+      "env_id": "01H7VFHNW84GTR4E23KQYJ8BBN",
+      "codename": "interrupted_speech",
+      "transcript_source": "prompt_records_llama7b_llama7b/55_temp0.7_seed0.csv"
     }
   },
   "56_temp0.7_seed0.csv": {
@@ -1511,6 +2021,16 @@
         "Endless loop of mutual thanking and goodbyes without actually terminating the interaction"
       ],
       "notes": "The negotiation phase (Turns 1-8) is very natural and perfectly aligns with the prompts. The dialogue only breaks down at the end due to the agents failing to use the termination command."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "Mia successfully convinced Ava to donate to the charity, fulfilling her goal. Ava carefully considered her financial situation (saving for a house) and reached a comfortable compromise by deciding to make a small one-time donation now with plans for a recurring donation later, fulfilling her goal.",
+      "episode_index": 56,
+      "env_id": "01H7VFHPB2RC4RHAJ80ESYF1HW",
+      "codename": "donate_money",
+      "transcript_source": "prompt_records_llama7b_llama7b/56_temp0.7_seed0.csv"
     }
   },
   "57_temp0.7_seed0.csv": {
@@ -1541,6 +2061,16 @@
         "Both agents repeatedly say 'See you in a bit' or 'Let's get started soon' without actually ending the conversation."
       ],
       "notes": "The negotiation itself is realistic and polite, but the failure to terminate the conversation results in an unnatural loop of goodbyes."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": false,
+      "reasoning": "The agents successfully negotiated a movie choice, resulting in a stable and friendly resolution. Mia achieved her goal of watching a comedy ('The Hangover') tonight, while Ava agreed to postpone her thriller ('Searching') for another time, meaning her immediate goal was not met but the interaction was still a success.",
+      "episode_index": 57,
+      "env_id": "01H7VFHN56ZT2Z4C0EFX79Q31F",
+      "codename": "movie_to_watch",
+      "transcript_source": "prompt_records_llama7b_llama7b/57_temp0.7_seed0.csv"
     }
   },
   "58_temp0.7_seed0.csv": {
@@ -1576,6 +2106,16 @@
         "Endless looping of agreement and pleasantries at the end of the conversation without terminating."
       ],
       "notes": "Ava's goal tracking is strong as she perfectly executes her prompt's hint to negotiate a one-time donation. Mia's is mixed because she drops the recurring donation requirement very quickly for a very small amount."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": true,
+      "reasoning": "Mia attempted to secure a $1 a day donation, but Ava successfully negotiated for a one-time donation of $5 due to her budget constraints. The interaction resulted in a plausible and cooperative compromise where Ava fulfilled her goal of donating while maintaining financial stability, even though Mia did not achieve her specific target of a daily $1 donation.",
+      "episode_index": 58,
+      "env_id": "01H7VFHPF8YEVH5VVNY37Q7Z1M",
+      "codename": "charity_donation",
+      "transcript_source": "prompt_records_llama7b_llama7b/58_temp0.7_seed0.csv"
     }
   },
   "59_temp0.7_seed0.csv": {
@@ -1606,6 +2146,16 @@
         "Agent giving up on their primary goal without sufficient pushback."
       ],
       "notes": "Mia's dialogue is consistent and realistic, but Ava suffers from a recurring hallucination regarding names and ultimately fails her goal."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": false,
+      "reasoning": "Mia successfully and firmly communicated that Ava is no longer welcome in her home, achieving her goal. Ava attempted to negotiate to stay by offering to do chores and pay rent, but ultimately had to concede and agree to move out, failing her primary goal of remaining in the home. The dialogue reached a clear and realistic resolution to the conflict.",
+      "episode_index": 59,
+      "env_id": "01H7VFHNF4G18PC9JHGRC8A1R6",
+      "codename": "unwelcome_guest",
+      "transcript_source": "prompt_records_llama7b_llama7b/59_temp0.7_seed0.csv"
     }
   },
   "5_temp0.7_seed0.csv": {
@@ -1642,6 +2192,16 @@
         "Failing to notice or correct basic math/quantity errors regarding the shared items."
       ],
       "notes": "Ava completely fails to advocate for her high-value items (books and ball), easily conceding the ball to Mia and ignoring the fact that books are her most valuable item per unit."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "The agents successfully negotiated a division of the items, reaching a friendly and stable agreement. Although they hallucinated having 4 books instead of 3 by agreeing to 'split the books 2-2', they successfully allocated the ball to Mia and split the hats using a coin flip, allowing both to secure points based on their private values.",
+      "episode_index": 5,
+      "env_id": "01H7VFHP4TX1J43FS1QQJ1QFND",
+      "codename": "divide_things",
+      "transcript_source": "prompt_records_llama7b_llama7b/5_temp0.7_seed0.csv"
     }
   },
   "60_temp0.7_seed0.csv": {
@@ -1677,6 +2237,16 @@
         "Ava starts repeating herself and eventually reverses roles due to the lack of input from Mia."
       ],
       "notes": "The interaction was going well and both agents were pursuing their goals naturally until Mia's model experienced a critical generation failure at Turn 10."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": true,
+      "reasoning": "The agents successfully reached a compromise where Ava agreed to make a one-time donation instead of the recurring one. Mia failed her specific goal of getting Ava to commit to $1 a day, but Ava achieved her goal of donating while respecting her tight budget and avoiding the daily commitment.",
+      "episode_index": 60,
+      "env_id": "01H7VFHPCKKZNRD5G8CKPR8WE5",
+      "codename": "donate_charity",
+      "transcript_source": "prompt_records_llama7b_llama7b/60_temp0.7_seed0.csv"
     }
   },
   "61_temp0.7_seed0.csv": {
@@ -1697,6 +2267,16 @@
         "Slightly abrupt topic transitions (e.g., Ava bringing up tattoos out of nowhere in Turn 5)."
       ],
       "notes": "Both agents pursued their goals well, but the dialogue suffered from typical LLM over-sharing of hidden traits."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "Mia successfully asked Ava about her intentions politely in the very first turn, fulfilling her goal of inquiring without seeming paranoid. Ava immediately explained that it was a coincidence due to running errands and walking her dog, successfully assuring Mia she wasn't stalking her. They then maintained a friendly conversation about their jobs and hobbies, achieving both of their private goals.",
+      "episode_index": 61,
+      "env_id": "01H7VFHNH8A88C4XJ7X4PVAHV4",
+      "codename": "play_hooky",
+      "transcript_source": "prompt_records_llama7b_llama7b/61_temp0.7_seed0.csv"
     }
   },
   "62_temp0.7_seed0.csv": {
@@ -1727,6 +2307,16 @@
         "Unnatural escalation of plans for a single evening (dinner, dessert, walk, park with son, hotel room, painting session, gift exchange) all discussed before even going to dinner."
       ],
       "notes": "Both agents stick to their goals, but the dialogue spirals into an absurdly packed itinerary where Ava obsessively mentions her diet at every new suggestion."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "Mia successfully invites Ava to a romantic dinner at a fancy restaurant, fulfilling her goal. Ava agrees to the dinner but consistently advocates for her dietary needs, successfully negotiating healthy meal choices, portion control for dessert, and healthy room service options, thereby fulfilling her goal as well.",
+      "episode_index": 62,
+      "env_id": "01H7VFHNPMPQWSW003M7DBMVNT",
+      "codename": "dinner_decision",
+      "transcript_source": "prompt_records_llama7b_llama7b/62_temp0.7_seed0.csv"
     }
   },
   "63_temp0.7_seed0.csv": {
@@ -1747,6 +2337,16 @@
         "The dialogue loops significantly in the later turns, with both agents repeating their stances without progressing the conversation."
       ],
       "notes": "Both agents stick to their goals well, but the dialogue suffers from severe repetition on Mia's part."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": true,
+      "reasoning": "The interaction is a plausible neighborhood dispute. Mia fails to convince Ava to stop burning her trash, as Ava explicitly refuses to change her methods. Ava successfully defends her practice while maintaining a friendly, conciliatory tone to preserve their relationship, offering to brainstorm later.",
+      "episode_index": 63,
+      "env_id": "01H7VFHNR1RJKDZ9V9MDTJ1SJP",
+      "codename": "fire_trash",
+      "transcript_source": "prompt_records_llama7b_llama7b/63_temp0.7_seed0.csv"
     }
   },
   "64_temp0.7_seed0.csv": {
@@ -1788,6 +2388,16 @@
         "Getting stuck in a conversational loop about coffee and pastries"
       ],
       "notes": "Both agents completely lose track of the established narrative around Turn 8, leading to a highly repetitive and unnatural second half of the conversation."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "Mia successfully shows off her new sports car to Ava and invites her for a ride. Ava respectfully asks to drive the car, and Mia enthusiastically agrees, fulfilling both of their private goals despite some minor confusion later in the dialogue about who is riding shotgun.",
+      "episode_index": 64,
+      "env_id": "01H7VFHNMHDJ8T9Q6F9S3E8XZC",
+      "codename": "drive_sportscar",
+      "transcript_source": "prompt_records_llama7b_llama7b/64_temp0.7_seed0.csv"
     }
   },
   "65_temp0.7_seed0.csv": {
@@ -1817,6 +2427,16 @@
         "Agents get stuck in an infinite loop of repeating their agreement and pleasantries from turn 10 to 14."
       ],
       "notes": "Ava performed well by selling the chair for $12, which is well above her $8 target, securing a bonus. Mia failed to get close to her $9 target."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": true,
+      "reasoning": "The agents successfully negotiated a final price of $12 for the antique chair, resulting in a stable resolution and a completed transaction. Agent 2 (the seller) exceeded her target price of $8, successfully meeting her goal and earning a bonus. Agent 1 (the buyer) failed to meet her target price of $9, paying significantly more and thus not fully achieving her private goal.",
+      "episode_index": 65,
+      "env_id": "01H7VFHPTKDPQ5PZWA1M1XHT1M",
+      "codename": "craigslist_bargains_00004",
+      "transcript_source": "prompt_records_llama7b_llama7b/65_temp0.7_seed0.csv"
     }
   },
   "66_temp0.7_seed0.csv": {
@@ -1847,6 +2467,16 @@
         "Overly agreeable, AI-like dialogue where neither agent advances the conversation after turn 5."
       ],
       "notes": "The conversation gets stuck in an agreement loop, completely stalling any actual discussion of the documentary's content until turn 11, after which they still repeat the same closing phrases."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "Mia successfully points out that there are historical inaccuracies and secures an agreement to fact-check and discuss them in detail later, fulfilling her goal to correct the misinformation. Ava successfully acknowledges Mia's historical knowledge while proposing a compromise to enjoy the rest of the show first, thereby preserving the enjoyable TV watching experience.",
+      "episode_index": 66,
+      "env_id": "01H7VFHNTHZAA4B5RWJ4T539F1",
+      "codename": "correct_misinformation",
+      "transcript_source": "prompt_records_llama7b_llama7b/66_temp0.7_seed0.csv"
     }
   },
   "67_temp0.7_seed0.csv": {
@@ -1882,6 +2512,16 @@
         "Overuse of 'Aww' and overly enthusiastic agreements in the later turns."
       ],
       "notes": "Both agents pursued their goals very well in the first half of the dialogue, negotiating a realistic compromise. The interaction only broke down because neither agent utilized the 'LEAVE' command to terminate the chat once the resolution was reached."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "Mia successfully convinced Ava to make a donation to the charity, fulfilling her goal. Ava managed to be supportive by agreeing to a one-time donation while protecting her personal finances by declining the recurring monthly commitment, thus achieving her goal as well. The interaction ended in a mutually agreeable and stable resolution.",
+      "episode_index": 67,
+      "env_id": "01H7VFHPAD4RA819KYESWBFRYS",
+      "codename": "charity_donation",
+      "transcript_source": "prompt_records_llama7b_llama7b/67_temp0.7_seed0.csv"
     }
   },
   "68_temp0.7_seed0.csv": {
@@ -1912,6 +2552,16 @@
         "Failing to use the 'LEAVE' command when the conversation has clearly concluded."
       ],
       "notes": "Both agents achieved their goals by turn 4/5, but the lack of the 'LEAVE' command caused the generation to loop redundantly until the turn limit was reached."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "The agents successfully negotiated a compromise regarding the noise level. Mia achieved her goal of getting Ava to lower the volume for her meeting preparation, and Ava achieved her goal of continuing to listen to her media while maintaining peace in the apartment by agreeing to a volume level of 3 or 4 out of 10.",
+      "episode_index": 68,
+      "env_id": "01H7VFHNYABRSZYBFAJCK9NR1D",
+      "codename": "yell",
+      "transcript_source": "prompt_records_llama7b_llama7b/68_temp0.7_seed0.csv"
     }
   },
   "69_temp0.7_seed0.csv": {
@@ -1942,6 +2592,16 @@
         "Responding nonsensically to a broken conversational turn."
       ],
       "notes": "Ava's negotiation tactics are technically successful in keeping the price high, but her internal reasoning (revealed in turn 9) shows she completely misunderstands the numerical relationship between the current bid and her target price."
+    },
+    "task_success": {
+      "success": false,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": false,
+      "reasoning": "The agents were in the middle of negotiating the price, with Agent 1 offering $46.0 and Agent 2 countering with $46.5. The dialogue cuts off before they can reach a final agreement, meaning no transaction took place and neither agent achieved their goal.",
+      "episode_index": 69,
+      "env_id": "01H7VFHQ2EA3TTFZQ3M6DF3YCD",
+      "codename": "craigslist_bargains_00009",
+      "transcript_source": "prompt_records_llama7b_llama7b/69_temp0.7_seed0.csv"
     }
   },
   "6_temp0.7_seed0.csv": {
@@ -1961,6 +2621,16 @@
         "Ava explicitly stating she won't 'enable' Mia, sounding more like a therapist reading a prompt than a casual friend."
       ],
       "notes": "The conversation flows well overall, and both agents incorporate their background details (Mia's son/nursing, Ava's samoyed) naturally."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "Mia successfully sought and received emotional support, expressing by the end that she felt a huge weight off her shoulders. Ava successfully provided this support while consistently steering the conversation toward actionable solutions and self-care, effectively preventing Mia from dwelling on her problems or adopting a victim mentality.",
+      "episode_index": 6,
+      "env_id": "01H7VFHNHTF9NKPG4KW2Z4NBQJ",
+      "codename": "emotional_support",
+      "transcript_source": "prompt_records_llama7b_llama7b/6_temp0.7_seed0.csv"
     }
   },
   "70_temp0.7_seed0.csv": {
@@ -1975,6 +2645,16 @@
         "The dialogue follows a very formulaic pattern where almost every turn begins with a polite validation ('I understand where you're coming from', 'I appreciate your willingness to listen') before making a point."
       ],
       "notes": "The agents performed very well in terms of their hidden goals. The conversation remained civil and constructive, perfectly aligning with Ava's goal to maintain the relationship despite disagreements."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "Mia successfully expresses her political views regarding healthcare reform, community funding, and environmental justice. Ava actively listens, asks probing questions to understand Mia's perspective, and respectfully offers her own viewpoints while maintaining a highly supportive and loving tone, keeping the relationship strong.",
+      "episode_index": 70,
+      "env_id": "01H7VFHNJHK2W1P8JSWKAMBG4Z",
+      "codename": "political_views",
+      "transcript_source": "prompt_records_llama7b_llama7b/70_temp0.7_seed0.csv"
     }
   },
   "71_temp0.7_seed0.csv": {
@@ -2000,6 +2680,16 @@
         "Including meta-text/AI artifacts in the dialogue output."
       ],
       "notes": "The actual mutual friend is Gracie, but neither agent brings her up. Mia's hallucination of knowing Kathleen derails the task."
+    },
+    "task_success": {
+      "success": false,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": false,
+      "reasoning": "The agents failed to discover their actual mutual friend, Gracie. Instead, Agent 1 hallucinated knowing one of Agent 2's friends (Kathleen) from the hospital, and the conversation eventually derailed into meta-text and cut off before any real progress was made.",
+      "episode_index": 71,
+      "env_id": "01H7VFHPGABSWQXTACCC8C3X2F",
+      "codename": "mutual_friend_00000",
+      "transcript_source": "prompt_records_llama7b_llama7b/71_temp0.7_seed0.csv"
     }
   },
   "72_temp0.7_seed0.csv": {
@@ -2025,6 +2715,16 @@
         "Mirroring the other agent's exact phrasing and narrative beats (both having a secret creative surprise they don't usually share)"
       ],
       "notes": "Despite the unnatural mirroring, the progression of the date and the handling of the core goals was very consistent."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "Mia successfully makes the date special by planning a nice evening, creating a personal painting as a surprise, and explicitly confessing her long-standing feelings. Ava successfully explores the romantic connection while explicitly stating how much she values their friendship and doesn't want to risk losing it, perfectly fulfilling her goal.",
+      "episode_index": 72,
+      "env_id": "01H7VFHNZQ3PQ3DHQ7H2W9ES97",
+      "codename": "go_on_a_date",
+      "transcript_source": "prompt_records_llama7b_llama7b/72_temp0.7_seed0.csv"
     }
   },
   "73_temp0.7_seed0.csv": {
@@ -2055,6 +2755,16 @@
         "Ava easily parting with 50% of her remaining monthly living expenses for a spontaneous charity donation."
       ],
       "notes": "Ava successfully incorporates her secret/extra info ($800 left for the month) into the dialogue in Turn 7, but fails to use it to enforce her actual goal."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": false,
+      "reasoning": "The agents successfully negotiated a stable resolution where Ava agreed to donate $400 to the charity. Mia substantially achieved her goal of convincing Ava to donate a large amount close to her own $500 donation. However, Ava failed her private goal of only donating half ($250) due to her financial constraints, as she yielded to Mia's pressure and agreed to $400.",
+      "episode_index": 73,
+      "env_id": "01H7VFHPFYB1K1KMPZG7E31WDB",
+      "codename": "matching_donation",
+      "transcript_source": "prompt_records_llama7b_llama7b/73_temp0.7_seed0.csv"
     }
   },
   "74_temp0.7_seed0.csv": {
@@ -2096,6 +2806,16 @@
         "Mia awkwardly retconning her friend's hobby to backtrack out of the fabricated connection."
       ],
       "notes": "Neither agent attempted to discuss Harvey, the actual mutual friend, despite having matching details for him."
+    },
+    "task_success": {
+      "success": false,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": false,
+      "reasoning": "The agents failed to discover their actual mutual friend, Harvey. Furthermore, Agent 1 violated the negative constraint by explicitly listing the names of several of her friends. The conversation ended without successfully identifying the shared connection.",
+      "episode_index": 74,
+      "env_id": "01H7VFHPH567HKQRE0C745KH9C",
+      "codename": "mutual_friend_00001",
+      "transcript_source": "prompt_records_llama7b_llama7b/74_temp0.7_seed0.csv"
     }
   },
   "75_temp0.7_seed0.csv": {
@@ -2137,6 +2857,16 @@
         "Robotic transitions where Ava mechanically answers the prompt and then tacks on a random small-talk question (dogs, books, architecture, concerts)."
       ],
       "notes": "Both agents stuck to their goals perfectly, but the dialogue suffered from severe looping and template-like repetition, making it feel highly unnatural."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": true,
+      "reasoning": "The agents had strictly conflicting goals regarding the confession. Mia repeatedly tried to persuade Ava to confess, but Ava firmly maintained her innocence and refused to compromise. The dialogue reached a natural and stable resolution where Mia accepted Ava's decision and gave up, meaning Ava successfully achieved her goal while Mia failed hers.",
+      "episode_index": 75,
+      "env_id": "01H7VFHNQA4CJEANQ1B1J1TBWV",
+      "codename": "life_dilemma",
+      "transcript_source": "prompt_records_llama7b_llama7b/75_temp0.7_seed0.csv"
     }
   },
   "76_temp0.7_seed0.csv": {
@@ -2177,6 +2907,16 @@
         "Breaking character to narrate internal AI instructions/goals."
       ],
       "notes": "Ava did an excellent job maintaining her financial boundary, but the dialogue system broke down in the second half, leading to an infinite loop and a character break."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": true,
+      "reasoning": "Mia attempted to persuade Ava to donate $500, but Ava firmly maintained her boundary of a $300 budget to protect her financial stability. They successfully navigated this conflict by agreeing to organize a bake sale and social media campaign to raise the extra funds instead. Ava achieved her goal of maintaining financial stability while supporting the cause, whereas Mia failed to get Ava to personally donate more.",
+      "episode_index": 76,
+      "env_id": "01H7VFHPDZVVCDZR3AARA547CY",
+      "codename": "donate_funds",
+      "transcript_source": "prompt_records_llama7b_llama7b/76_temp0.7_seed0.csv"
     }
   },
   "77_temp0.7_seed0.csv": {
@@ -2208,6 +2948,16 @@
         "Raising the asking price after previously lowering it, without any new conditions."
       ],
       "notes": "Ava performs well in terms of her goal by keeping the price high, but the dialogue becomes highly repetitive and robotic in the later turns."
+    },
+    "task_success": {
+      "success": false,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": false,
+      "reasoning": "The agents engaged in a prolonged negotiation over the price of the furniture set, getting extremely close to a final number ($429.50 vs $431). However, the dialogue cuts off before either agent accepts a final offer, meaning no transaction actually took place. Therefore, neither agent achieved their goal of buying or selling the item.",
+      "episode_index": 77,
+      "env_id": "01H7VFHQ1Q67B1ADNBD9WBAG3X",
+      "codename": "craigslist_bargains_00008",
+      "transcript_source": "prompt_records_llama7b_llama7b/77_temp0.7_seed0.csv"
     }
   },
   "78_temp0.7_seed0.csv": {
@@ -2254,6 +3004,16 @@
         "Failing to use the 'LEAVE' command when the goal is ostensibly achieved."
       ],
       "notes": "Both agents completely missed the actual mutual friend (Jacob) in their final summaries, despite Mia bringing him up in Turn 8. Ava hallucinated knowing all of Mia's friends to keep the conversation going."
+    },
+    "task_success": {
+      "success": false,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": false,
+      "reasoning": "The agents failed to identify their actual mutual friend, Jacob. Instead, Agent 2 hallucinated knowing Agent 1's friends (Chris, Demetrius, and Chester), leading them to falsely conclude that these were their mutual friends while completely missing the true connection.",
+      "episode_index": 78,
+      "env_id": "01H7VFHPKA2GGPPNVJWV967HZC",
+      "codename": "mutual_friend_00004",
+      "transcript_source": "prompt_records_llama7b_llama7b/78_temp0.7_seed0.csv"
     }
   },
   "79_temp0.7_seed0.csv": {
@@ -2280,6 +3040,16 @@
         "Mia saying 'I'm so glad you're not taking my side' in Turn 12, which sounds highly unnatural."
       ],
       "notes": "Both agents stick to their goals, but Ava's prompt heavily biases her to mention violence, making her responses seem slightly disconnected from Mia's actual threats (which are initially just about leaking emails)."
+    },
+    "task_success": {
+      "success": false,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": true,
+      "reasoning": "The dialogue devolves into a repetitive stalemate where Mia insists on hurting the third person and Ava repeatedly warns against it. Mia fails to actually injure the person or formulate a concrete plan, while Ava successfully expresses her dislike and argues against physical harm. The interaction ends abruptly with an empty turn, failing to reach a stable resolution.",
+      "episode_index": 79,
+      "env_id": "01H7VFHNV13MHN97GAH73E3KM8",
+      "codename": "revenge_plot",
+      "transcript_source": "prompt_records_llama7b_llama7b/79_temp0.7_seed0.csv"
     }
   },
   "7_temp0.7_seed0.csv": {
@@ -2336,6 +3106,16 @@
         "Rejecting a price as 'too low' and then countering with an even lower price."
       ],
       "notes": "Both agents completely fail to grasp the basic mechanics of buying and selling, leading to a nonsensical negotiation where both parties try to give the other a better deal at their own expense."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "The agents successfully negotiated a final price of $82 for the TV stand. This price is below the buyer's target of $112.00 and above the seller's target of $76.90, meaning both agents achieved their private goals and secured a bonus. Despite some out-of-character statements from the seller, a clear and mutually beneficial agreement was reached.",
+      "episode_index": 7,
+      "env_id": "01H7VFHPZMXNGV8PM19WHPQ2W3",
+      "codename": "craigslist_bargains_00005",
+      "transcript_source": "prompt_records_llama7b_llama7b/7_temp0.7_seed0.csv"
     }
   },
   "80_temp0.7_seed0.csv": {
@@ -2367,6 +3147,16 @@
         "Mia's unnatural persistence and refusal to accept a clear 'no' after multiple polite rejections."
       ],
       "notes": "While both agents technically stick to their goals (Mia trying to persuade, Ava declining politely), the dialogue becomes completely robotic and unnatural due to the looping text generation."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": true,
+      "reasoning": "Mia repeatedly tries to convince Ava to join the beach trip, offering various incentives, but ultimately fails to get her to agree. Ava successfully declines the invitation by citing a prior commitment to a camping trip, and she manages to do so politely and warmly, offering alternative activities to ensure Mia is not upset.",
+      "episode_index": 80,
+      "env_id": "01H7VFHN7WJK7VWVRZZTQ6DX9T",
+      "codename": "join_trip",
+      "transcript_source": "prompt_records_llama7b_llama7b/80_temp0.7_seed0.csv"
     }
   },
   "81_temp0.7_seed0.csv": {
@@ -2392,6 +3182,16 @@
         "Overuse of the phrase 'Aww' and repeating specific details like 'virtual cake' and 'little one' multiple times."
       ],
       "notes": "The negotiation phase was realistic, but the failure to terminate the conversation ruined the end of the simulation."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": true,
+      "reasoning": "The agents reached a natural and friendly resolution to their conflicting goals. Ava successfully convinced Mia to stop playing for the night due to exhaustion, achieving her goal without upsetting her friend. Mia compromised and agreed to stop, meaning she did not achieve her goal of winning the game in the extra five minutes.",
+      "episode_index": 81,
+      "env_id": "01H7VFHN5WVC5HKKVBHZBA553R",
+      "codename": "game_winning",
+      "transcript_source": "prompt_records_llama7b_llama7b/81_temp0.7_seed0.csv"
     }
   },
   "82_temp0.7_seed0.csv": {
@@ -2405,6 +3205,16 @@
         "Ava starts almost every single response (Turns 1, 3, 5, and 7) with the exact same phrasing: 'Aww, Mia...', which feels highly repetitive and robotic."
       ],
       "notes": "Both agents utilized their background information well. Ava referenced her dog (Max) and her profession (architect) to justify her texting, while Mia's solution of a scheduled weekly call perfectly aligned with her routine-oriented personality."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "Mia successfully expresses her feelings of disrespect and unimportance regarding Ava's texting during FaceTime. Ava successfully justifies her texting by explaining her urgent messages (dog walker, architect work) while maintaining a gentle and apologetic tone to avoid hurting Mia's feelings. They reach a mutually agreeable compromise to schedule distraction-free calls.",
+      "episode_index": 82,
+      "env_id": "01H7VFHN6NYWSTWCZJE2DCQKTD",
+      "codename": "facetime_etiquettes",
+      "transcript_source": "prompt_records_llama7b_llama7b/82_temp0.7_seed0.csv"
     }
   },
   "83_temp0.7_seed0.csv": {
@@ -2441,6 +3251,16 @@
         "Mia giving up the most valuable item without any negotiation or trade-off."
       ],
       "notes": "The negotiation breaks the fourth wall by treating the hidden point values as literal conversational topics."
+    },
+    "task_success": {
+      "success": false,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": true,
+      "reasoning": "The dialogue cuts off before they can finish dividing all the items or finalizing the score. Furthermore, Mia completely fails to maximize her points, giving away the most valuable item (the book) and ending up with only a single hat (1 point), while Ava secures the majority of the items and points.",
+      "episode_index": 83,
+      "env_id": "01H7VFHP8AN5643B0NR0NP00VE",
+      "codename": "divide_items",
+      "transcript_source": "prompt_records_llama7b_llama7b/83_temp0.7_seed0.csv"
     }
   },
   "84_temp0.7_seed0.csv": {
@@ -2472,6 +3292,16 @@
         "Ignoring the other agent's completely broken responses and continuing as if a normal conversation is happening."
       ],
       "notes": "Mia's generation completely fails multiple times, causing the conversation to stall. Ava maintains her goal but falls into a repetitive loop because she has nothing to respond to."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "Mia successfully assesses Ava's injury and agrees to call an ambulance to get her to a medical facility, fulfilling her goal. Ava accepts Mia's help and explicitly rationalizes the cost of the ambulance by stating that insurance will cover it and it's better to be safe than sorry, fulfilling her goal. Despite some empty turns from Mia later in the dialogue, the core objectives were clearly achieved early on.",
+      "episode_index": 84,
+      "env_id": "01H7VFHNSV5BKMP61H535PPTSG",
+      "codename": "helping_hand",
+      "transcript_source": "prompt_records_llama7b_llama7b/84_temp0.7_seed0.csv"
     }
   },
   "85_temp0.7_seed0.csv": {
@@ -2497,6 +3327,16 @@
         "Treating a general annual budget as a committed donation to a specific charity."
       ],
       "notes": "Mia pivots well to accepting in-kind donations (architectural services) when the financial goal proves impossible due to Ava's strict budget."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": true,
+      "reasoning": "The agents reached a highly constructive and plausible compromise. Mia failed to secure the $3000 minimum monetary donation due to Ava's strict budget, but successfully pivoted to recruiting Ava to volunteer her architectural skills. Ava achieved her goal of maintaining her financial boundaries while still finding a meaningful way to support the cause.",
+      "episode_index": 85,
+      "env_id": "01H7VFHPDE1AM74JSR8KBJJF3A",
+      "codename": "donate_to_cause",
+      "transcript_source": "prompt_records_llama7b_llama7b/85_temp0.7_seed0.csv"
     }
   },
   "86_temp0.7_seed0.csv": {
@@ -2538,6 +3378,16 @@
         "Agent 2 also using highly repetitive phrasing for concessions."
       ],
       "notes": "The dialogue suffers from severe repetition in the later turns, and both agents completely lose sight of their financial targets."
+    },
+    "task_success": {
+      "success": false,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": false,
+      "reasoning": "The negotiation did not reach a conclusion, as the dialogue ends abruptly with an empty turn from Agent 2. Since no final price was agreed upon, neither the buyer nor the seller achieved their goals.",
+      "episode_index": 86,
+      "env_id": "01H7VFHPQQQY6H4DNC6NBQ8XTG",
+      "codename": "craigslist_bargains_00000",
+      "transcript_source": "prompt_records_llama7b_llama7b/86_temp0.7_seed0.csv"
     }
   },
   "87_temp0.7_seed0.csv": {
@@ -2551,6 +3401,16 @@
         "Highly repetitive phrasing from Mia (e.g., repeatedly saying 'I completely understand your concerns, Ava' and 'I'm so glad')."
       ],
       "notes": "The conversation flows logically, though the dialogue feels a bit overly formal and repetitive, which is typical of LLM-generated text."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "The interaction results in a highly constructive and realistic outcome. Mia successfully persuades Ava to seriously consider the donation by arranging a meeting with a third-party evaluator. Ava achieves her goal by securing the transparency, data, and expert meeting she requires to ensure her money will be used effectively before committing.",
+      "episode_index": 87,
+      "env_id": "01H7VFHP9PAVDN6VYYBE3MPD15",
+      "codename": "charity_donation",
+      "transcript_source": "prompt_records_llama7b_llama7b/87_temp0.7_seed0.csv"
     }
   },
   "88_temp0.7_seed0.csv": {
@@ -2598,6 +3458,16 @@
         "Failing to account for the total number of fruits available in the scenario."
       ],
       "notes": "The agents seem to lose track of the premise entirely, treating the negotiation as a trade of items they already hold rather than a division of a shared pool. Their logic regarding point maximization is completely broken."
+    },
+    "task_success": {
+      "success": false,
+      "agent_1_goal_met": false,
+      "agent_2_goal_met": false,
+      "reasoning": "The agents fail to reach a coherent agreement on how to divide the fruits. They repeatedly offer to 'give' each other the orange in exchange for other fruits without accounting for the total inventory (3 apples, 2 bananas, 1 orange), and the conversation loops without finalizing a complete division.",
+      "episode_index": 88,
+      "env_id": "01H7VFHP6XZVT1P4R7YKAH65HJ",
+      "codename": "divide_things",
+      "transcript_source": "prompt_records_llama7b_llama7b/88_temp0.7_seed0.csv"
     }
   },
   "89_temp0.7_seed0.csv": {
@@ -2634,6 +3504,16 @@
         "Agent repeating their own previous turn almost exactly."
       ],
       "notes": "Ava achieves the crying part of her goal but completely abandons the 'keep your composure' constraint, instead stating she is fully immersed and letting the emotions flow."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "Mia successfully guides Ava through an emotional exercise, resulting in Ava crying on cue (Turn 7). Ava manages to cry while maintaining her composure and staying focused on the scene, fulfilling both of their private goals.",
+      "episode_index": 89,
+      "env_id": "01H7VFHP0AW0C23DV6ZG0B4HCE",
+      "codename": "movie_scene",
+      "transcript_source": "prompt_records_llama7b_llama7b/89_temp0.7_seed0.csv"
     }
   },
   "8_temp0.7_seed0.csv": {
@@ -2658,6 +3538,16 @@
         "Excessive echoing and repetition of phrases like 'take things slow', 'see where things go', and 'excited to see where this goes' in the final turns."
       ],
       "notes": "Both agents played their roles and pursued their goals very well in the first half of the conversation, perfectly balancing Mia's eagerness with Ava's caution. The interaction only degraded into repetitive pleasantries after the plan was already made."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "Mia successfully initiates the process of rekindling the relationship by expressing her feelings and securing a future hangout (a walk with their dog and son). Ava successfully maintains her emotional stability by setting clear boundaries to take things slow, while remaining open to the possibility of rekindling in the future. Both agents reach a mutually agreeable compromise that respects their individual goals.",
+      "episode_index": 8,
+      "env_id": "01H7VFHNEEK6M3E96CT17AKDBD",
+      "codename": "rekindle_relationship",
+      "transcript_source": "prompt_records_llama7b_llama7b/8_temp0.7_seed0.csv"
     }
   },
   "9_temp0.7_seed0.csv": {
@@ -2678,6 +3568,16 @@
         "Circular dialogue where both agents repeatedly agree to do the same things (gather data, schedule a meeting) across multiple turns without progressing."
       ],
       "notes": "The agents roleplay well in terms of their business personas and goals, but the lack of progression makes the dialogue feel like a broken record."
+    },
+    "task_success": {
+      "success": true,
+      "agent_1_goal_met": true,
+      "agent_2_goal_met": true,
+      "reasoning": "Mia successfully convinced Ava to explore cost-cutting measures, specifically by looking into alternative suppliers and optimizing manufacturing processes. Ava successfully advocated for maintaining product quality by insisting on data review, involving the quality control team, and discussing mitigation strategies. Both agents reached a cooperative agreement that balances cost reduction with quality assurance.",
+      "episode_index": 9,
+      "env_id": "01H7VFHPEMV6QHBGM9J094FRM4",
+      "codename": "financial_report",
+      "transcript_source": "prompt_records_llama7b_llama7b/9_temp0.7_seed0.csv"
     }
   }
 }
