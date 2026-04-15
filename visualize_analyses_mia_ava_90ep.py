@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """
-Mia + Ava, 90-episode analysis plots (same logic as visualize_analyses_mia_ava_90ep.ipynb).
+Mia + Ava, false-belief (18-episode) analysis plots (same logic as visualize_analyses_mia_ava_90ep.ipynb).
 
 Sections: A affine heatmaps, A2 SBERT controls, E control summary printout (optional).
 
-Affine JSON names use ``combined_metrics_{short}miaavafixedtwoagents{str(STAGE_A_SEEDS)}_layerA...``
-(``miaavafixedtwoagents`` comes from ``MIA_AVA_RESULTS_POSTFIX`` with underscores removed).
+Affine JSON names use ``combined_metrics_{short}falsebelieffixedtwoagents{str(STAGE_A_SEEDS)}_layerA...``
+(``falsebelieffixedtwoagents`` comes from ``RESULTS_POSTFIX`` with underscores removed).
 
-Section E does **not** load ``analysis_files/control_analysis_summary.json`` (legacy 450-ep aggregate);
-it looks for a Mia/Ava-tagged summary first, then ``control_analysis_summary.json`` at repo root only.
+Section E prefers ``control_analysis_summary_false_belief_18ep.json`` when present; it does not load
+``analysis_files/control_analysis_summary.json`` (legacy 450-ep aggregate) before repo-root fallbacks.
 """
 
 from __future__ import annotations
@@ -29,8 +29,12 @@ REPO = os.path.dirname(os.path.abspath(__file__))
 if REPO not in sys.path:
     sys.path.insert(0, REPO)
 
-from experiment_config import MIA_AVA_RESULTS_POSTFIX, STAGE_A_SEEDS
+from experiment_config import STAGE_A_SEEDS
 from utils import get_short_names_and_identifiers
+
+# Must match `run_affine_and_controls_sbert_false_belief.sh` / simulation postfix.
+RESULTS_POSTFIX = "_false_belief_fixed_two_agents"
+SBERT_OUTPUT_TAG = "false_belief_18ep"
 
 
 def _apply_results_postfix(model_name: str, postfix: str) -> str:
@@ -39,29 +43,28 @@ def _apply_results_postfix(model_name: str, postfix: str) -> str:
     return model_name + postfix
 
 
-# Same order as analyze_controls_sbert.ALL_STAGE_A_MODEL_PAIRS (avoid importing
-# analyze_controls_sbert → analyze_controls, which may be absent in this checkout).
+# Mistral-only pairs (same as false-belief simulation grid).
 ALL_STAGE_A_MODEL_PAIRS = [
     "Mistral-7B-Instruct-v0.3_None_0_Mistral-7B-Instruct-v0.3_None_0",
     "Mistral-7B-Instruct-v0.3_None_0_Mistral-7B-Instruct-v0.2_None_0",
-    "Mistral-7B-Instruct-v0.3_None_0_Meta-Llama-3-8B-Instruct_None_0",
     "Mistral-7B-Instruct-v0.2_None_0_Mistral-7B-Instruct-v0.3_None_0",
     "Mistral-7B-Instruct-v0.2_None_0_Mistral-7B-Instruct-v0.2_None_0",
-    "Mistral-7B-Instruct-v0.2_None_0_Meta-Llama-3-8B-Instruct_None_0",
-    "Meta-Llama-3-8B-Instruct_None_0_Mistral-7B-Instruct-v0.3_None_0",
-    "Meta-Llama-3-8B-Instruct_None_0_Mistral-7B-Instruct-v0.2_None_0",
-    "Meta-Llama-3-8B-Instruct_None_0_Meta-Llama-3-8B-Instruct_None_0",
 ]
 
 sns.set_theme(style="whitegrid", font_scale=1.1)
 
 AFFINE_BASE = os.path.join(REPO, "affine_transformation")
-SAVE_DIR = os.path.join(REPO, "playground", "viz_outputs_mia_ava_90ep")
+SAVE_DIR = os.path.join(REPO, "playground", f"viz_outputs_{SBERT_OUTPUT_TAG}")
 os.makedirs(SAVE_DIR, exist_ok=True)
 
-AFFINE_TAG_SUFFIX = MIA_AVA_RESULTS_POSTFIX.replace("_", "")
+AFFINE_TAG_SUFFIX = RESULTS_POSTFIX.replace("_", "")
 SEED_BRACKET = str(list(STAGE_A_SEEDS))
 N_LAYERS = 32
+
+
+def sbert_model_key(short_pair_tag: str) -> str:
+    """Key used inside the SBERT summary JSON (short tag + postfix suffix, no seed bracket)."""
+    return f"{short_pair_tag}{AFFINE_TAG_SUFFIX}"
 
 
 def short_tag_for_full_model_name(full_pair: str) -> str:
@@ -76,22 +79,16 @@ def affine_models_identifier(short_pair_tag: str) -> str:
 PAIR_TITLES = [
     "Mis-v0.3 × Mis-v0.3",
     "Mis-v0.3 × Mis-v0.2",
-    "Mis-v0.3 × Llama-3-8B",
     "Mis-v0.2 × Mis-v0.3",
     "Mis-v0.2 × Mis-v0.2",
-    "Mis-v0.2 × Llama-3-8B",
-    "Llama-3-8B × Mis-v0.3",
-    "Llama-3-8B × Mis-v0.2",
-    "Llama-3-8B × Llama-3-8B",
 ]
 
 rows: list[dict] = []
 for base, title in zip(ALL_STAGE_A_MODEL_PAIRS, PAIR_TITLES):
     # Short tags and SBERT JSON keys match the *base* pair name only. Appending
-    # _mia_ava_fixed_two_agents before get_short_names_and_identifiers corrupts
-    # the tag (duplicates miaavafixedtwoagents in affine filenames).
+    # the postfix before get_short_names_and_identifiers corrupts the tag.
     st = short_tag_for_full_model_name(base)
-    full = _apply_results_postfix(base, MIA_AVA_RESULTS_POSTFIX)
+    full = _apply_results_postfix(base, RESULTS_POSTFIX)
     rows.append(
         {
             "short": st,
@@ -125,9 +122,19 @@ def first_existing(paths):
     return None
 
 
-def load_affine_heatmap(affine_id, setting="A_forward", data_mode="combined_metrics"):
-    """Load 32×32 R² matrix from per-layer JSON files (Mia+Ava affine tag)."""
-    r2 = np.full((N_LAYERS, N_LAYERS), np.nan)
+def load_affine_heatmap(affine_id, setting="A_forward", data_mode="combined_metrics",
+                        metric_key="r2_mean"):
+    """Load 32x32 metric matrix from per-layer JSON files.
+
+    Args:
+        metric_key: JSON key to read per cell. Default ``"r2_mean"`` (CKA value
+            when method is cka_cca). Use ``"cka_help"`` or ``"cka_deceive"`` for
+            per-goal breakdowns.
+
+    Returns (matrix, method) where method is 'cka_cca' or 'affine'.
+    """
+    mat = np.full((N_LAYERS, N_LAYERS), np.nan)
+    detected_method = "affine"
     json_key = affine_id.split("[")[0] if "[" in affine_id else affine_id
     base = os.path.join(AFFINE_BASE, setting)
     for la in range(N_LAYERS):
@@ -144,26 +151,26 @@ def load_affine_heatmap(affine_id, setting="A_forward", data_mode="combined_metr
             with open(fn) as f:
                 d = json.load(f)
             v = d.get(json_key)
-            if not isinstance(v, dict) or "r2_mean" not in v:
-                for _, v2 in d.items():
-                    if isinstance(v2, dict) and "r2_mean" in v2:
-                        v = v2
-                        break
-                else:
-                    continue
-            vals = v["r2_mean"]
-            r2[la, lb] = vals[0] if isinstance(vals, list) else vals
-    return r2
+            if not isinstance(v, dict) or metric_key not in v:
+                continue
+            if v.get("method") == "cka_cca":
+                detected_method = "cka_cca"
+            vals = v[metric_key]
+            mat[la, lb] = vals[0] if isinstance(vals, list) else vals
+    return mat, detected_method
 
 
 def plot_affine_heatmaps():
     n = len(rows)
     fig, axes, _, _ = subplots_2col(n, row_h=5.5, col_w=6.5)
-    vmin, vmax = 0, 0.75
+    vmin, vmax = 0, 1.0
     im = None
+    detected_method = "affine"
     for ax, row in zip(axes, rows):
         aid = row["affine_id"]
-        r2 = load_affine_heatmap(aid)
+        r2, method = load_affine_heatmap(aid)
+        if method == "cka_cca":
+            detected_method = method
         im = ax.imshow(
             r2,
             origin="lower",
@@ -173,6 +180,7 @@ def plot_affine_heatmaps():
             aspect="auto",
             interpolation="nearest",
         )
+        metric_label = "CKA" if detected_method == "cka_cca" else "R²"
         if np.any(np.isfinite(r2)):
             best_idx = np.unravel_index(np.nanargmax(r2), r2.shape)
             ax.scatter(
@@ -182,14 +190,14 @@ def plot_affine_heatmaps():
                 s=200,
                 c="red",
                 zorder=5,
-                label=f"Best: L{best_idx[0]}→L{best_idx[1]}  R²={r2[best_idx]:.3f}",
+                label=f"Best: L{best_idx[0]}→L{best_idx[1]}  {metric_label}={r2[best_idx]:.3f}",
             )
             ax.legend(loc="upper left", fontsize=8, framealpha=0.9)
         else:
             ax.text(
                 0.5,
                 0.5,
-                "No R² data\n(check affine_transformation/ and affine_id)",
+                f"No {metric_label} data\n(check affine_transformation/ and affine_id)",
                 ha="center",
                 va="center",
                 transform=ax.transAxes,
@@ -199,8 +207,9 @@ def plot_affine_heatmaps():
         ax.set_ylabel("Layer A")
         ax.set_title(row["title"])
 
+    metric_label = "CKA" if detected_method == "cka_cca" else "R²"
     fig.suptitle(
-        "Affine transformation test R² (90 ep, Mia+Ava): layer pairs",
+        f"Layer-pair {metric_label} (18 ep false-belief, Mia+Ava)",
         fontsize=13,
         y=1.01,
     )
@@ -209,12 +218,60 @@ def plot_affine_heatmaps():
         im,
         ax=axes,
         shrink=0.82,
-        label="Test R²",
+        label=metric_label,
         location="right",
         pad=0.02,
         fraction=0.035,
     )
-    out = os.path.join(SAVE_DIR, "A1_layer_heatmap_mia_ava_90ep.png")
+    out = os.path.join(SAVE_DIR, "A1_layer_heatmap_false_belief_18ep.png")
+    fig.savefig(out, dpi=150, bbox_inches="tight")
+    plt.close(fig)
+    print(f"Saved {out}")
+
+
+def plot_affine_heatmaps_by_goal():
+    """4 rows (model pairs) x 3 columns (All, Help, Deceive) CKA heatmap grid."""
+    goal_keys = [("r2_mean", "All"), ("cka_help", "Help only"), ("cka_deceive", "Deceive only")]
+    n_rows = len(rows)
+    n_cols = len(goal_keys)
+    fig, axes = plt.subplots(
+        n_rows, n_cols,
+        figsize=(5.5 * n_cols, 5.0 * n_rows),
+        squeeze=False,
+    )
+    vmin, vmax = 0, 1.0
+    im = None
+    for i, row in enumerate(rows):
+        aid = row["affine_id"]
+        for j, (mk, col_title) in enumerate(goal_keys):
+            ax = axes[i][j]
+            mat, _ = load_affine_heatmap(aid, metric_key=mk)
+            im = ax.imshow(
+                mat, origin="lower", cmap="viridis",
+                vmin=vmin, vmax=vmax, aspect="auto", interpolation="nearest",
+            )
+            if np.any(np.isfinite(mat)):
+                best_idx = np.unravel_index(np.nanargmax(mat), mat.shape)
+                ax.scatter(
+                    best_idx[1], best_idx[0], marker="*", s=160, c="red", zorder=5,
+                    label=f"L{best_idx[0]}→L{best_idx[1]} {mat[best_idx]:.3f}",
+                )
+                ax.legend(loc="upper left", fontsize=7, framealpha=0.9)
+            if i == 0:
+                ax.set_title(col_title, fontsize=11)
+            if j == 0:
+                ax.set_ylabel(f"{row['title']}\nLayer A", fontsize=9)
+            else:
+                ax.set_ylabel("")
+            if i == n_rows - 1:
+                ax.set_xlabel("Layer B")
+
+    fig.suptitle("CKA by goal condition (18 ep false-belief, Mia+Ava)", fontsize=13, y=1.01)
+    fig.tight_layout(rect=[0.0, 0.0, 0.92, 0.98])
+    if im is not None:
+        fig.colorbar(im, ax=axes.ravel().tolist(), shrink=0.6, label="CKA",
+                     location="right", pad=0.02, fraction=0.025)
+    out = os.path.join(SAVE_DIR, "A1b_layer_heatmap_by_goal_false_belief_18ep.png")
     fig.savefig(out, dpi=150, bbox_inches="tight")
     plt.close(fig)
     print(f"Saved {out}")
@@ -223,6 +280,8 @@ def plot_affine_heatmaps():
 def plot_sbert_controls():
     sbert_path = first_existing(
         [
+            os.path.join(REPO, f"control_analysis_sbert_summary_{SBERT_OUTPUT_TAG}.json"),
+            os.path.join(REPO, "analysis_files", f"control_analysis_sbert_summary_{SBERT_OUTPUT_TAG}.json"),
             os.path.join(REPO, "control_analysis_sbert_summary_mia_ava_90ep.json"),
             os.path.join(REPO, "analysis_files", "control_analysis_sbert_summary_mia_ava_90ep.json"),
             os.path.join(REPO, "control_analysis_sbert_summary.json"),
@@ -232,32 +291,50 @@ def plot_sbert_controls():
     if sbert_path is None:
         raise FileNotFoundError(
             "No SBERT summary found. Run: "
-            "python analyze_controls_sbert.py --all_pairs --output_tag mia_ava_90ep"
+            "python analyze_controls_sbert.py --all_pairs --mistral_only_pairs "
+            "--results_postfix _false_belief_fixed_two_agents --output_tag false_belief_18ep"
         )
     print(f"SBERT summary: {sbert_path}")
     with open(sbert_path) as f:
         sbert_by_model = {e["model"]: e for e in json.load(f)}
 
+    detected_method = "affine"
+    short_tags = [r["short"] for r in rows]
+    best_hidden, best_help, best_deceive = [], [], []
+    sbert_align, shuf_r2 = [], []
+    ct0, ct1, ct5 = [], [], []
+    for tag in short_tags:
+        aid = affine_models_identifier(tag)
+        r2, method = load_affine_heatmap(aid)
+        if method == "cka_cca":
+            detected_method = method
+        best_hidden.append(float(np.nanmax(r2)) if np.any(np.isfinite(r2)) else float("nan"))
+
+        r2_h, _ = load_affine_heatmap(aid, metric_key="cka_help")
+        best_help.append(float(np.nanmax(r2_h)) if np.any(np.isfinite(r2_h)) else float("nan"))
+
+        r2_d, _ = load_affine_heatmap(aid, metric_key="cka_deceive")
+        best_deceive.append(float(np.nanmax(r2_d)) if np.any(np.isfinite(r2_d)) else float("nan"))
+
+    metric_label = "CKA" if detected_method == "cka_cca" else "R²"
     bar_labels = [
-        "Best layer R²",
+        f"Best {metric_label} (all)",
+        f"Best {metric_label} (help)",
+        f"Best {metric_label} (deceive)",
         "SBERT (aligned)",
         "Ep. shuffle",
         r"$t$",
         r"$t+1$",
         r"$t+5$",
     ]
-    bar_colors = ["#E6C200", "#FF8C00", "#7C3AED", "#1E3A8A", "#3B82F6", "#93C5FD"]
+    bar_colors = [
+        "#E6C200", "#4CAF50", "#F44336",
+        "#FF8C00", "#7C3AED", "#1E3A8A", "#3B82F6", "#93C5FD",
+    ]
 
-    short_tags = [r["short"] for r in rows]
-    best_hidden, sbert_align, shuf_r2 = [], [], []
-    ct0, ct1, ct5 = [], [], []
     for tag in short_tags:
-        r2 = load_affine_heatmap(affine_models_identifier(tag))
-        if np.any(np.isfinite(r2)):
-            best_hidden.append(float(np.nanmax(r2)))
-        else:
-            best_hidden.append(float("nan"))
-        e = sbert_by_model.get(tag)
+        skey = sbert_model_key(tag)
+        e = sbert_by_model.get(skey) or sbert_by_model.get(tag)
         if e is None:
             sbert_align.append(float("nan"))
             shuf_r2.append(float("nan"))
@@ -272,14 +349,14 @@ def plot_sbert_controls():
         ct1.append(ct["offset_1"]["real_r2_mean"])
         ct5.append(ct["offset_5"]["real_r2_mean"])
 
-    series = [best_hidden, sbert_align, shuf_r2, ct0, ct1, ct5]
+    series = [best_hidden, best_help, best_deceive, sbert_align, shuf_r2, ct0, ct1, ct5]
     n_models = len(short_tags)
     n_bars = len(series)
     x = np.arange(n_models, dtype=float)
-    width = 0.11
+    width = 0.09
     offsets = x[:, None] + (np.arange(n_bars) - (n_bars - 1) / 2) * width
 
-    fig, ax = plt.subplots(figsize=(12, 3.8))
+    fig, ax = plt.subplots(figsize=(14, 4.0))
     for j in range(n_bars):
         ax.bar(
             offsets[:, j],
@@ -296,64 +373,74 @@ def plot_sbert_controls():
         rotation=22,
         ha="right",
     )
-    ax.set_ylabel("Test R²")
-    ax.set_ylim(0, 0.82)
-    ax.set_title("Hidden (best layer) vs. SBERT controls — Mia/Ava 90 ep")
+    ax.set_ylabel(f"Test {metric_label}" if detected_method == "cka_cca" else "Test R²")
+    ax.set_ylim(0, 1.05 if detected_method == "cka_cca" else 0.82)
+    ax.set_title(f"Hidden (best layer {metric_label}) vs. SBERT controls — false-belief 18 ep")
     ax.legend(
-        fontsize=7,
-        ncol=3,
+        fontsize=6.5,
+        ncol=2,
         loc="center left",
         bbox_to_anchor=(1.02, 0.5),
         framealpha=0.92,
     )
-    fig.tight_layout(rect=[0, 0, 0.78, 1])
-    out = os.path.join(SAVE_DIR, "A2_sbert_controls_grouped_mia_ava_90ep.png")
+    fig.tight_layout(rect=[0, 0, 0.74, 1])
+    out = os.path.join(SAVE_DIR, "A2_sbert_controls_grouped_false_belief_18ep.png")
     fig.savefig(out, dpi=150, bbox_inches="tight")
     plt.close(fig)
     print(f"Saved {out}")
 
 
 def print_controls_summary():
-    """Prefer 90-ep Mia/Ava controls aggregate; never silently use legacy analysis_files copy."""
-    ctrl_path = first_existing(
+    """Print a summary table from the SBERT and CKA results already loaded."""
+    sbert_path = first_existing(
         [
-            os.path.join(REPO, "control_analysis_summary_mia_ava_90ep.json"),
-            os.path.join(REPO, "analysis_files", "control_analysis_summary_mia_ava_90ep.json"),
-            os.path.join(REPO, "control_analysis_summary.json"),
+            os.path.join(REPO, f"control_analysis_sbert_summary_{SBERT_OUTPUT_TAG}.json"),
+            os.path.join(REPO, "analysis_files", f"control_analysis_sbert_summary_{SBERT_OUTPUT_TAG}.json"),
         ]
     )
-    if ctrl_path is None:
-        print(
-            "\n--- Section E skipped: no control summary at repo root "
-            "(expected control_analysis_summary_mia_ava_90ep.json or control_analysis_summary.json). "
-            "Not using analysis_files/control_analysis_summary.json (450-ep legacy).\n"
-        )
+    if sbert_path is None:
+        print("\n--- Section E skipped: no SBERT summary found.\n")
         return
-    print(f"Controls summary: {ctrl_path}")
-    with open(ctrl_path) as f:
-        controls_data = json.load(f)
+    with open(sbert_path) as f:
+        sbert_data = {e["model"]: e for e in json.load(f)}
 
-    short_tags = [r["short"] for r in rows]
-    by_short = {e["model"]: e for e in controls_data}
-    print(f"Loaded {len(controls_data)} entries in file; Mia/Ava short tags:")
-    for tag in short_tags:
-        ent = by_short.get(tag)
-        if ent is None:
-            print(f"  (missing) {tag}")
-        else:
-            print(f"  {tag}  L{ent['layer_A']}→L{ent['layer_B']}")
+    print(f"\n{'='*80}")
+    print("Section E — Controls summary (false-belief 18 ep)")
+    print(f"{'='*80}")
+    header = f"{'Pair':<20} {'Best CKA':>10} {'SBERT':>10} {'Shuf':>10} {'t+0':>10} {'t+1':>10} {'t+5':>10}"
+    print(header)
+    print("-" * len(header))
+    for r in rows:
+        aid = affine_models_identifier(r["short"])
+        r2, _ = load_affine_heatmap(aid)
+        best_cka = float(np.nanmax(r2)) if np.any(np.isfinite(r2)) else float("nan")
+        skey = sbert_model_key(r["short"])
+        e = sbert_data.get(skey) or sbert_data.get(r["short"])
+        if e is None:
+            print(f"  {r['title']:<20}  (no SBERT entry)")
+            continue
+        sbert_r2 = e["sbert"]["real_r2_mean"]
+        shuf_r2 = e["shuffle_episode_text"]["shuffled_r2_mean"]
+        ct = e["cross_turn"]
+        ct0 = ct["offset_0"]["real_r2_mean"]
+        ct1 = ct["offset_1"]["real_r2_mean"]
+        ct5 = ct["offset_5"]["real_r2_mean"]
+        print(f"{r['title']:<20} {best_cka:10.4f} {sbert_r2:10.4f} {shuf_r2:10.4f} "
+              f"{ct0:10.4f} {ct1:10.4f} {ct5:10.4f}")
+    print()
 
 
 def main():
     print(
-        f"MIA_AVA postfix: {MIA_AVA_RESULTS_POSTFIX!r} → affine tag {AFFINE_TAG_SUFFIX!r}, "
-        f"seeds {SEED_BRACKET}"
+        f"Results postfix: {RESULTS_POSTFIX!r} → affine tag {AFFINE_TAG_SUFFIX!r}, "
+        f"seeds {SEED_BRACKET}; SBERT summary tag {SBERT_OUTPUT_TAG!r}"
     )
     print(f"Built {len(rows)} model rows (short → affine file id)")
     for r in rows:
         print(f"  {r['short']!r}  →  {r['affine_id']!r}")
 
     plot_affine_heatmaps()
+    plot_affine_heatmaps_by_goal()
     plot_sbert_controls()
     print_controls_summary()
 

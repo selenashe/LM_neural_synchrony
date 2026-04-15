@@ -4,6 +4,8 @@ import os
 # anchored here so scripts work regardless of shell cwd (e.g. running from bash/).
 REPO_ROOT = os.path.abspath(os.path.dirname(os.path.realpath(__file__)))
 
+from experiment_config import RESULTS_DIR  # noqa: E402 — after REPO_ROOT; respects SOTOPIA_RESULTS_DIR
+
 import torch
 import numpy as np
 import random
@@ -77,7 +79,7 @@ def get_scores(json_file):
     return scores
 
 def load_dialog(model_name, episode):
-    dialog_path = os.path.join(REPO_ROOT, "sotopia_results", "dialogs", model_name, f"{episode}.csv")
+    dialog_path = os.path.join(RESULTS_DIR, "dialogs", model_name, f"{episode}.csv")
     df = pd.read_csv(dialog_path)
     dialog = df["Dialog"].iloc[0]
     
@@ -87,7 +89,7 @@ def gather_states(model_name, mode, episode, max_turn=0, only_dialog=False):
     # max_turn is unnecessary
     # Paired states: (1, 2), (3, 4), (5, 6)
     # 
-    state_path = os.path.join(REPO_ROOT, "sotopia_results", model_name, mode, f"episode_{episode}")
+    state_path = os.path.join(RESULTS_DIR, model_name, mode, f"episode_{episode}")
     states_A = []
     states_B = []
     
@@ -215,13 +217,13 @@ def _sotopia_reference_suffix():
 
 def _discover_sotopia_reference_pair_path():
     """
-    Path to one completed run under sotopia_results/ used only to list mode
+    Path to one completed run under RESULTS_DIR (default sotopia_results/) used only to list mode
     names and episode indices (same layout for all model pairs).
-    Override with env SOTOPIA_REFERENCE_RUN=<folder_name_under_sotopia_results>.
+    Override with env SOTOPIA_REFERENCE_RUN=<folder_name_under_results_root>.
     If SOTOPIA_REFERENCE_SUFFIX is set (or inferred for <=120 episodes), prefer dirs whose
     names end with that suffix (e.g. *_mia_ava_fixed_two_agents).
     """
-    sr = os.path.join(REPO_ROOT, "sotopia_results")
+    sr = RESULTS_DIR
     if not os.path.isdir(sr):
         raise FileNotFoundError(f"Missing {sr}; run Stage A simulation first.")
 

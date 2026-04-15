@@ -1,25 +1,0 @@
-Downloading shards:   0%|          | 0/3 [00:00<?, ?it/s]Downloading shards:  33%|███▎      | 1/3 [10:16<20:32, 616.05s/it]Downloading shards:  33%|███▎      | 1/3 [36:08<1:12:17, 2168.90s/it]
-Traceback (most recent call last):
-  File "/juice6/u/jshe/nlp/LM_neural_synchrony/logit_lens_mistral.py", line 678, in <module>
-    main()
-  File "/juice6/u/jshe/nlp/LM_neural_synchrony/logit_lens_mistral.py", line 555, in main
-    tok1, mdl1 = load_mistral(args.model_1, args.device)
-  File "/juice6/u/jshe/nlp/LM_neural_synchrony/logit_lens_mistral.py", line 80, in load_mistral
-    model = AutoModelForCausalLM.from_pretrained(
-  File "/nlp/scr/jshe/miniconda3/envs/neural_sync/lib/python3.10/site-packages/transformers/models/auto/auto_factory.py", line 564, in from_pretrained
-    return model_class.from_pretrained(
-  File "/nlp/scr/jshe/miniconda3/envs/neural_sync/lib/python3.10/site-packages/transformers/modeling_utils.py", line 3974, in from_pretrained
-    resolved_archive_file, sharded_metadata = get_checkpoint_shard_files(
-  File "/nlp/scr/jshe/miniconda3/envs/neural_sync/lib/python3.10/site-packages/transformers/utils/hub.py", line 1098, in get_checkpoint_shard_files
-    cached_filename = cached_file(
-  File "/nlp/scr/jshe/miniconda3/envs/neural_sync/lib/python3.10/site-packages/transformers/utils/hub.py", line 403, in cached_file
-    resolved_file = hf_hub_download(
-  File "/nlp/scr/jshe/miniconda3/envs/neural_sync/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
-    return fn(*args, **kwargs)
-  File "/nlp/scr/jshe/miniconda3/envs/neural_sync/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1014, in hf_hub_download
-    return _hf_hub_download_to_cache_dir(
-  File "/nlp/scr/jshe/miniconda3/envs/neural_sync/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1175, in _hf_hub_download_to_cache_dir
-    _download_to_tmp_and_move(
-  File "/nlp/scr/jshe/miniconda3/envs/neural_sync/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1713, in _download_to_tmp_and_move
-    with incomplete_path.open("ab") as f:
-OSError: [Errno 122] Disk quota exceeded

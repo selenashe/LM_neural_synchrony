@@ -16,6 +16,12 @@ ENV_AGENT_COMBOS_PATH = os.path.join(SOTOPIA_DATA_DIR, ENV_AGENT_COMBOS_BASENAME
 # Alias for scripts that refer to the combo list path as COMBOS_PATH.
 COMBOS_PATH = ENV_AGENT_COMBOS_PATH
 
+ENVS_BASENAME = os.environ.get("SOTOPIA_ENVS_BASENAME", "envs.json")
+ENVS_PATH = os.path.join(SOTOPIA_DATA_DIR, ENVS_BASENAME)
+
+RESULTS_DIR_NAME = os.environ.get("SOTOPIA_RESULTS_DIR", "sotopia_results")
+RESULTS_DIR = os.path.join(REPO_ROOT, RESULTS_DIR_NAME)
+
 with open(ENV_AGENT_COMBOS_PATH, "r", encoding="utf-8") as _f:
     EPISODES_NUM = len(json.load(_f))
 

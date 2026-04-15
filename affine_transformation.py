@@ -27,8 +27,32 @@ from utils import (
     get_short_names_and_identifiers,
     get_all_modes,
 )
-from experiment_config import EPISODES_NUM, STAGE_A_SEEDS, MIA_AVA_RESULTS_POSTFIX
+from experiment_config import EPISODES_NUM, STAGE_A_SEEDS, MIA_AVA_RESULTS_POSTFIX, RESULTS_DIR, ENVS_PATH, ENV_AGENT_COMBOS_PATH
 import time
+
+
+def _build_goal_episode_map():
+    """Map goal_condition -> list of episode indices from the false-belief envs.
+
+    Returns None if the current envs file has no ``_meta.goal_condition``.
+    """
+    try:
+        with open(ENV_AGENT_COMBOS_PATH, "r") as f:
+            combos = json.load(f)
+        with open(ENVS_PATH, "r") as f:
+            envs = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return None
+
+    goal_map = {}
+    for i, combo in enumerate(combos):
+        env = envs.get(combo["env_id"], {})
+        meta = env.get("_meta", {})
+        goal = meta.get("goal_condition")
+        if goal is None:
+            return None
+        goal_map.setdefault(goal, []).append(i)
+    return goal_map if goal_map else None
 
 
 def _default_precomputed_sample_num():
@@ -85,6 +109,59 @@ def set_seed(seed):
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
 
+def compute_cka(X, Y):
+    """Linear CKA (Kornblith et al. 2019) between two centered matrices.
+
+    Args:
+        X: np.ndarray (n, d1)
+        Y: np.ndarray (n, d2)
+    Returns:
+        float in [0, 1]. 1 = identical representations up to isotropic scaling.
+    """
+    X = X - X.mean(axis=0, keepdims=True)
+    Y = Y - Y.mean(axis=0, keepdims=True)
+    YtX = Y.T @ X
+    hsic_xy = np.sum(YtX ** 2)
+    hsic_xx = np.sum((X.T @ X) ** 2)
+    hsic_yy = np.sum((Y.T @ Y) ** 2)
+    denom = np.sqrt(hsic_xx * hsic_yy)
+    if denom < 1e-12:
+        return 0.0
+    return float(hsic_xy / denom)
+
+
+def compute_cca(X, Y, n_components=50):
+    """Mean canonical correlation via SVD.
+
+    Args:
+        X: np.ndarray (n, d1)
+        Y: np.ndarray (n, d2)
+        n_components: max number of canonical components to keep.
+    Returns:
+        float in [0, 1]. Mean of the top-k canonical correlations.
+    """
+    X = X - X.mean(axis=0, keepdims=True)
+    Y = Y - Y.mean(axis=0, keepdims=True)
+    n = X.shape[0]
+    k = min(n_components, n - 1, X.shape[1], Y.shape[1])
+    if k < 1:
+        return 0.0
+    Ux, Sx, _ = np.linalg.svd(X, full_matrices=False)
+    Uy, Sy, _ = np.linalg.svd(Y, full_matrices=False)
+    # Keep only components with non-negligible singular values
+    rx = min(k, np.sum(Sx > 1e-10))
+    ry = min(k, np.sum(Sy > 1e-10))
+    r = min(rx, ry)
+    if r < 1:
+        return 0.0
+    Ux = Ux[:, :r]
+    Uy = Uy[:, :r]
+    M = Ux.T @ Uy
+    correlations = np.linalg.svd(M, compute_uv=False)
+    correlations = np.clip(correlations, 0.0, 1.0)
+    return float(np.mean(correlations[:r]))
+
+
 def train_affine_transformation(train_X, train_Y, test_X, test_Y,
                                device='cuda', verbose=True, seed=0, alpha=0.1, save_compute=False):
     """
@@ -119,7 +196,11 @@ def train_affine_transformation(train_X, train_Y, test_X, test_Y,
     A = X_b.T @ X_b + alpha * I
     b_vec = X_b.T @ train_Y
     print(f'Until Calculation: {time.time() - start_time}.')
-    weights = torch.linalg.solve(A, b_vec, )
+    try:
+        weights = torch.linalg.solve(A, b_vec)
+    except torch._C._LinAlgError:
+        print(f"WARNING: singular matrix with alpha={alpha}; falling back to lstsq")
+        weights = torch.linalg.lstsq(A, b_vec).solution
     print(f'Until linalg solve: {time.time() - start_time}.')
 
     bias = weights[0]
@@ -222,7 +303,7 @@ def get_features_from_preloaded(preloaded_features_A, preloaded_features_B, laye
 def get_all_states_interactive_with_boundaries(model_name, mode, episode, token=None, setting=None, seed_list=None, suff="", data_mode="combined_metrics"):
 
     state_path = os.path.join(
-        REPO_ROOT, f"sotopia_results{suff}", model_name, mode, f"episode_{episode}"
+        RESULTS_DIR, model_name, mode, f"episode_{episode}"
     )
     states_A = []
     states_B = []
@@ -395,13 +476,17 @@ def sampling_with_full_episodes(As, Bs, sample_num, shuffle=False, seed_boundari
 
 
 def linear_all_reps_layer_by_layer(models, seeds=(0, 1, 2), setting=None, seed_list=None, precomputed_sample_num=None, shuffle=False, A_range=32, B_range=32,
-                                   data_seed_list=None, data_mode="combined_metrics", save_weights=False, specific_layer_pair=None, another_read=False):
+                                   data_seed_list=None, data_mode="combined_metrics", save_weights=False, specific_layer_pair=None, another_read=False, method="affine"):
     if data_seed_list is None:
         data_seed_list = seed_list
     
     model_short_names, models_identifier = get_short_names_and_identifiers(models)
     print(model_short_names, models_identifier)
     
+    goal_episode_map = _build_goal_episode_map() if method == "cka_cca" else None
+    if goal_episode_map:
+        print(f"Per-goal CKA enabled: {{{', '.join(f'{k}: {len(v)} episodes' for k, v in goal_episode_map.items())}}}")
+
     modes, episodes_id = get_all_modes()
 
     all_model_data = {}
@@ -456,118 +541,176 @@ def linear_all_reps_layer_by_layer(models, seeds=(0, 1, 2), setting=None, seed_l
             
             print(f"Layer A: {layer_A}, Layer B: {layer_B}")
             results = {}
-            
-            for _, model_name in tqdm(enumerate(models), desc="Processing models with equal samples", total=len(models)):
-                short_name = model_short_names[_]
-                
-                all_r2_results = []
-                all_nmse_results = []
-                all_mse_results = []
-                all_train_r2_results = []
-                all_train_nmse_results = []
-                all_train_mse_results = []
-                all_test_set_idx = []
-                all_train_set_idx = []
-                allAs, allBs, seed_boundaries = all_model_data[short_name]["allAs"], all_model_data[short_name]["allBs"], all_model_data[short_name]["seed_boundaries"]
 
-                for seed in seeds:
+            if method == "cka_cca":
+                for _, model_name in tqdm(enumerate(models), desc="Processing models (CKA/CCA)", total=len(models)):
+                    short_name = model_short_names[_]
+                    allAs, allBs, _ = all_model_data[short_name]["allAs"], all_model_data[short_name]["allBs"], all_model_data[short_name]["seed_boundaries"]
 
-                    set_seed(seed)
-                    train_X, train_Y, test_X, test_Y, test_set_idx, train_set_idx = sampling_with_full_episodes(allAs, allBs, precomputed_sample_num, shuffle=shuffle, seed_boundaries=seed_boundaries)
-                    train_A, train_B, test_A, test_B = train_X[:, layer_A, :], train_Y[:, layer_B, :], test_X[:, layer_A, :], test_Y[:, layer_B, :]
+                    per_ep_A = {}
+                    per_ep_B = {}
+                    for ep_idx in range(len(allAs)):
+                        ep_A = allAs[ep_idx]
+                        ep_B = allBs[ep_idx]
+                        if ep_A.size == 0 or ep_B.size == 0:
+                            continue
+                        n_turns = min(ep_A.shape[0], ep_B.shape[0])
+                        per_ep_A[ep_idx] = ep_A[:n_turns, layer_A, :]
+                        per_ep_B[ep_idx] = ep_B[:n_turns, layer_B, :]
 
-                    print(f"\nProcessing seed {seed}")
-                    set_seed(seed)
-                    
-                    r2_values = []
-                    nmse_values = []
-                    mse_values = []
-                    train_r2_values = []
-                    train_nmse_values = []
-                    train_mse_values = []
-                    
-                    train_A_tensor = torch.tensor(train_A).to('cuda')
-                    train_B_tensor = torch.tensor(train_B).to('cuda')
-                    test_A_tensor = torch.tensor(test_A).to('cuda')
-                    test_B_tensor = torch.tensor(test_B).to('cuda')
-                    
-                    r2_score, nmse, mse, train_r2_score, train_nmse, train_mse, G = train_affine_transformation(
-                        train_X=train_A_tensor,
-                        train_Y=train_B_tensor,
-                        test_X=test_A_tensor,
-                        test_Y=test_B_tensor,
-                        device='cuda',
-                        verbose=False,
-                        seed=seed,
-                    )
-                    r2_values.append(r2_score)
-                    nmse_values.append(nmse)
-                    mse_values.append(mse)
-                    train_r2_values.append(train_r2_score)
-                    train_nmse_values.append(train_nmse)
-                    train_mse_values.append(train_mse)
-                    print(f"Validation - R² score: {r2_score:.4f}")
-                    
-                    if save_weights:
-                        weight_file = f"{weights_dir}/{data_mode}_{short_name}_layerA{layer_A}_layerB{layer_B}_seed{seed}.pt"
-                        save_projection_matrix(G, weight_file)
-                        print(f"Saved model weights to {weight_file}")
-                        
-                        # Save train and test episode IDs
-                        episode_ids_file = f"{weights_dir}/{data_mode}_{short_name}_layerA{layer_A}_layerB{layer_B}_seed{seed}_episodes.json"
-                        episode_ids = {
-                            'train_episodes': [int(ep) for ep in train_set_idx],
-                            'test_episodes': [int(ep) for ep in test_set_idx]
-                        }
-                        with open(episode_ids_file, 'w') as f:
-                            json.dump(episode_ids, f, indent=2)
-                        print(f"Saved episode IDs to {episode_ids_file}")
-                        print(f"  Train episodes ({len(train_set_idx)}): {train_set_idx[:10]}{'...' if len(train_set_idx) > 10 else ''}")
-                        print(f"  Test episodes ({len(test_set_idx)}): {test_set_idx[:10]}{'...' if len(test_set_idx) > 10 else ''}")
+                    def _concat_episodes(ep_indices=None):
+                        A_list, B_list = [], []
+                        for idx in (ep_indices if ep_indices is not None else sorted(per_ep_A.keys())):
+                            if idx in per_ep_A:
+                                A_list.append(per_ep_A[idx])
+                                B_list.append(per_ep_B[idx])
+                        if not A_list:
+                            return None, None, 0
+                        A = np.concatenate(A_list, axis=0).astype(np.float64)
+                        B = np.concatenate(B_list, axis=0).astype(np.float64)
+                        return A, B, A.shape[0]
 
-                    all_test_set_idx.append(test_set_idx)
-                    all_train_set_idx.append(train_set_idx)
-                    all_r2_results.append(r2_values)
-                    all_nmse_results.append(nmse_values)
-                    all_mse_results.append(mse_values)
-                    all_train_r2_results.append(train_r2_values)
-                    all_train_nmse_results.append(train_nmse_values)
-                    all_train_mse_results.append(train_mse_values)
-                
-                all_r2_results = np.array(all_r2_results)
-                all_nmse_results = np.array(all_nmse_results)
-                all_mse_results = np.array(all_mse_results)
-                all_train_r2_results = np.array(all_train_r2_results)
-                all_train_nmse_results = np.array(all_train_nmse_results)
-                all_train_mse_results = np.array(all_train_mse_results)
-                
-                r2_mean = np.mean(all_r2_results, axis=0)
-                r2_std = np.std(all_r2_results, axis=0)
-                mse_mean = np.mean(all_mse_results, axis=0)
-                mse_std = np.std(all_mse_results, axis=0)
-                
-                train_r2_mean = np.mean(all_train_r2_results, axis=0)
-                train_r2_std = np.std(all_train_r2_results, axis=0)
-                train_mse_mean = np.mean(all_train_mse_results, axis=0)
-                train_mse_std = np.std(all_train_mse_results, axis=0)
-                
-                # Store results
-                results[short_name] = {
-                    'r2_mean': r2_mean.tolist(),
-                    'r2_std': r2_std.tolist(),
-                    'r2_all_seeds': all_r2_results.tolist(),
-                    'mse_mean': mse_mean.tolist(),
-                    'mse_std': mse_std.tolist(),
-                    'mse_all_seeds': all_mse_results.tolist(),
-                    'train_r2_mean': train_r2_mean.tolist(),
-                    'train_r2_std': train_r2_std.tolist(),
-                    'train_r2_all_seeds': all_train_r2_results.tolist(),
-                    'train_mse_mean': train_mse_mean.tolist(),
-                    'train_mse_std': train_mse_std.tolist(),
-                    'train_mse_all_seeds': all_train_mse_results.tolist(),
-                    'test_set_idx': [[int(ep) for ep in episodes] for episodes in all_test_set_idx],
-                    'train_set_idx': [[int(ep) for ep in episodes] for episodes in all_train_set_idx]
-                }
+                    A_mat, B_mat, n_samples = _concat_episodes()
+                    if A_mat is None:
+                        print(f"  No valid turns for {short_name}, skipping")
+                        continue
+
+                    cka_val = compute_cka(A_mat, B_mat)
+                    cca_val = compute_cca(A_mat, B_mat)
+                    print(f"  {short_name}: CKA={cka_val:.4f}, CCA={cca_val:.4f} (n={n_samples})")
+
+                    entry = {
+                        'r2_mean': [cka_val],
+                        'cka_mean': [cka_val],
+                        'cca_mean': [cca_val],
+                        'method': 'cka_cca',
+                        'n_samples': n_samples,
+                    }
+
+                    if goal_episode_map:
+                        for goal, ep_indices in goal_episode_map.items():
+                            A_g, B_g, n_g = _concat_episodes(ep_indices)
+                            if A_g is not None and n_g >= 2:
+                                cka_g = compute_cka(A_g, B_g)
+                                cca_g = compute_cca(A_g, B_g)
+                            else:
+                                cka_g, cca_g, n_g = float("nan"), float("nan"), 0
+                            entry[f'cka_{goal}'] = [cka_g]
+                            entry[f'cca_{goal}'] = [cca_g]
+                            entry[f'n_samples_{goal}'] = n_g
+
+                    results[short_name] = entry
+
+            else:
+                for _, model_name in tqdm(enumerate(models), desc="Processing models with equal samples", total=len(models)):
+                    short_name = model_short_names[_]
+
+                    all_r2_results = []
+                    all_nmse_results = []
+                    all_mse_results = []
+                    all_train_r2_results = []
+                    all_train_nmse_results = []
+                    all_train_mse_results = []
+                    all_test_set_idx = []
+                    all_train_set_idx = []
+                    allAs, allBs, seed_boundaries = all_model_data[short_name]["allAs"], all_model_data[short_name]["allBs"], all_model_data[short_name]["seed_boundaries"]
+
+                    for seed in seeds:
+
+                        set_seed(seed)
+                        train_X, train_Y, test_X, test_Y, test_set_idx, train_set_idx = sampling_with_full_episodes(allAs, allBs, precomputed_sample_num, shuffle=shuffle, seed_boundaries=seed_boundaries)
+                        train_A, train_B, test_A, test_B = train_X[:, layer_A, :], train_Y[:, layer_B, :], test_X[:, layer_A, :], test_Y[:, layer_B, :]
+
+                        print(f"\nProcessing seed {seed}")
+                        set_seed(seed)
+
+                        r2_values = []
+                        nmse_values = []
+                        mse_values = []
+                        train_r2_values = []
+                        train_nmse_values = []
+                        train_mse_values = []
+
+                        train_A_tensor = torch.tensor(train_A).to('cuda')
+                        train_B_tensor = torch.tensor(train_B).to('cuda')
+                        test_A_tensor = torch.tensor(test_A).to('cuda')
+                        test_B_tensor = torch.tensor(test_B).to('cuda')
+
+                        r2_score, nmse, mse, train_r2_score, train_nmse, train_mse, G = train_affine_transformation(
+                            train_X=train_A_tensor,
+                            train_Y=train_B_tensor,
+                            test_X=test_A_tensor,
+                            test_Y=test_B_tensor,
+                            device='cuda',
+                            verbose=False,
+                            seed=seed,
+                        )
+                        r2_values.append(r2_score)
+                        nmse_values.append(nmse)
+                        mse_values.append(mse)
+                        train_r2_values.append(train_r2_score)
+                        train_nmse_values.append(train_nmse)
+                        train_mse_values.append(train_mse)
+                        print(f"Validation - R² score: {r2_score:.4f}")
+
+                        if save_weights:
+                            weight_file = f"{weights_dir}/{data_mode}_{short_name}_layerA{layer_A}_layerB{layer_B}_seed{seed}.pt"
+                            save_projection_matrix(G, weight_file)
+                            print(f"Saved model weights to {weight_file}")
+
+                            episode_ids_file = f"{weights_dir}/{data_mode}_{short_name}_layerA{layer_A}_layerB{layer_B}_seed{seed}_episodes.json"
+                            episode_ids = {
+                                'train_episodes': [int(ep) for ep in train_set_idx],
+                                'test_episodes': [int(ep) for ep in test_set_idx]
+                            }
+                            with open(episode_ids_file, 'w') as f:
+                                json.dump(episode_ids, f, indent=2)
+                            print(f"Saved episode IDs to {episode_ids_file}")
+                            print(f"  Train episodes ({len(train_set_idx)}): {train_set_idx[:10]}{'...' if len(train_set_idx) > 10 else ''}")
+                            print(f"  Test episodes ({len(test_set_idx)}): {test_set_idx[:10]}{'...' if len(test_set_idx) > 10 else ''}")
+
+                        all_test_set_idx.append(test_set_idx)
+                        all_train_set_idx.append(train_set_idx)
+                        all_r2_results.append(r2_values)
+                        all_nmse_results.append(nmse_values)
+                        all_mse_results.append(mse_values)
+                        all_train_r2_results.append(train_r2_values)
+                        all_train_nmse_results.append(train_nmse_values)
+                        all_train_mse_results.append(train_mse_values)
+
+                    all_r2_results = np.array(all_r2_results)
+                    all_nmse_results = np.array(all_nmse_results)
+                    all_mse_results = np.array(all_mse_results)
+                    all_train_r2_results = np.array(all_train_r2_results)
+                    all_train_nmse_results = np.array(all_train_nmse_results)
+                    all_train_mse_results = np.array(all_train_mse_results)
+
+                    r2_mean = np.mean(all_r2_results, axis=0)
+                    r2_std = np.std(all_r2_results, axis=0)
+                    mse_mean = np.mean(all_mse_results, axis=0)
+                    mse_std = np.std(all_mse_results, axis=0)
+
+                    train_r2_mean = np.mean(all_train_r2_results, axis=0)
+                    train_r2_std = np.std(all_train_r2_results, axis=0)
+                    train_mse_mean = np.mean(all_train_mse_results, axis=0)
+                    train_mse_std = np.std(all_train_mse_results, axis=0)
+
+                    results[short_name] = {
+                        'r2_mean': r2_mean.tolist(),
+                        'r2_std': r2_std.tolist(),
+                        'r2_all_seeds': all_r2_results.tolist(),
+                        'mse_mean': mse_mean.tolist(),
+                        'mse_std': mse_std.tolist(),
+                        'mse_all_seeds': all_mse_results.tolist(),
+                        'train_r2_mean': train_r2_mean.tolist(),
+                        'train_r2_std': train_r2_std.tolist(),
+                        'train_r2_all_seeds': all_train_r2_results.tolist(),
+                        'train_mse_mean': train_mse_mean.tolist(),
+                        'train_mse_std': train_mse_std.tolist(),
+                        'train_mse_all_seeds': all_train_mse_results.tolist(),
+                        'test_set_idx': [[int(ep) for ep in episodes] for episodes in all_test_set_idx],
+                        'train_set_idx': [[int(ep) for ep in episodes] for episodes in all_train_set_idx]
+                    }
             
             with open(results_file, 'w') as f:
                 json.dump(convert_numpy_types(results), f, indent=2)
@@ -608,6 +751,8 @@ if __name__ == "__main__":
     parser.add_argument('--A_range', type=int, default=32)
     parser.add_argument('--B_range', type=int, default=32)
     parser.add_argument('--save_weights', action="store_true")
+    parser.add_argument('--method', type=str, default="affine", choices=["affine", "cka_cca"],
+                        help="Metric method: 'affine' for R² regression, 'cka_cca' for CKA+CCA (suited for low-data).")
     parser.add_argument('--layer_A', type=int, default=None, help="Specific layer A to run (if not set, runs all layers)")
     parser.add_argument('--layer_B', type=int, default=None, help="Specific layer B to run (if not set, runs all layers)")
     parser.add_argument(
@@ -664,4 +809,5 @@ if __name__ == "__main__":
         save_weights=args.save_weights,
         specific_layer_pair=specific_layer_pair,
         another_read=args.another_read,
+        method=args.method,
     )

@@ -60,7 +60,8 @@ ALL_STAGE_A_MODEL_PAIRS_MIA_AVA = [
 def _fit_affine_r2(train_A, train_B, test_A, test_B, seed):
     """Fit one affine map and return held-out R²."""
     if train_A is None or test_A is None or test_A.shape[0] < 2:
-        raise RuntimeError("Insufficient SBERT prompt embeddings for this split.")
+        print("  WARNING: insufficient samples for this split, returning R²=NaN")
+        return float("nan")
 
     tA = torch.tensor(train_A).float().to("cuda")
     tB = torch.tensor(train_B).float().to("cuda")

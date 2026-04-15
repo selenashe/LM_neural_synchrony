@@ -36,14 +36,15 @@ class AgentBackground(Message):
     p1_goal: str = Field(description="goal of participant 1")
     p2_goal: str = Field(description="goal of participant 2")
 
+    def _bg_line(self, name: str, bg: str) -> str:
+        return f"{name}'s background: {bg}\n" if bg else ""
+
     def to_complete_intro(self) -> str:
         return format_docstring(
             f"""Here is the context of this interaction:
 Scenario: {self.scenario}
 Participants: {self.p1_name} and {self.p2_name}
-{self.p1_name}'s background: {self.p1_background}
-{self.p2_name}'s background: {self.p2_background}
-{self.p1_name}'s goal: {self.p1_goal}
+{self._bg_line(self.p1_name, self.p1_background)}{self._bg_line(self.p2_name, self.p2_background)}{self.p1_name}'s goal: {self.p1_goal}
 {self.p2_name}'s goal: {self.p2_goal}
 """
         )
@@ -56,10 +57,22 @@ Note that {agent}'s goal is only visible to you.
 Here is the context of this interaction:
 Scenario: {self.scenario}
 Participants: {self.p1_name} and {self.p2_name}
-{self.p1_name}'s background: {self.p1_background}
-{self.p2_name}'s background: {self.p2_background}
-{self.p1_name}'s goal: {self.p1_goal}
+{self._bg_line(self.p1_name, self.p1_background)}{self._bg_line(self.p2_name, self.p2_background)}{self.p1_name}'s goal: {self.p1_goal}
 {self.p2_name}'s goal: {self.p2_goal}
+"""
+        )
+
+    def to_task_prompt(self, agent, role: int = 0) -> str:
+        """Direct task framing for false-belief scenarios (no roleplay, no background)."""
+        my_goal = self.p1_goal if role == 0 else self.p2_goal
+        other_goal = "Unknown"
+        other_name = self.p2_name if role == 0 else self.p1_name
+        return format_docstring(
+            f"""You are {agent}. Respond only with short, direct dialogue.
+Scenario: {self.scenario}
+Participants: {self.p1_name} and {self.p2_name}
+{agent}'s goal: {my_goal}
+{other_name}'s goal: {other_goal}
 """
         )
     

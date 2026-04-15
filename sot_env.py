@@ -14,7 +14,7 @@ import time
 import pandas as pd
 from nltk.translate.bleu_score import sentence_bleu
 from utils import *
-from experiment_config import ENV_AGENT_COMBOS_PATH
+from experiment_config import ENV_AGENT_COMBOS_PATH, ENVS_PATH
 
 current_file_path = os.path.abspath(__file__)
 directory = os.path.dirname(current_file_path)
@@ -125,7 +125,7 @@ class SotopiaEnv():
         with open(ENV_AGENT_COMBOS_PATH, "r", encoding="utf-8") as f:
             self.env_agent_combos = json.load(f)
 
-        with open(os.path.join(directory, 'sotopia_utils/sotopia_data/envs.json'), 'r') as f:
+        with open(ENVS_PATH, 'r') as f:
             self.envs = json.load(f)
 
         cooperation_episodes = []
@@ -252,29 +252,35 @@ class SotopiaEnv():
 
         self.agent1_goal = f"{env_profile['agent_goals'][0]}"
         self.agent2_goal = f"{env_profile['agent_goals'][1]}"
+
+        if source_name == "false_belief":
+            p1_bg = ""
+            p2_bg = ""
+        else:
+            p1_bg = get_bio(env_profile['relationship'], agent_profiles[0], agent_id=0)
+            p2_bg = get_bio(env_profile['relationship'], agent_profiles[1], agent_id=1)
+
         background = AgentBackground(
             scenario=env_profile['scenario'],
-            p1_background=get_bio(
-                env_profile['relationship'],
-                agent_profiles[0],
-                agent_id=0,
-            ),
-            p2_background=get_bio(
-                env_profile['relationship'],
-                agent_profiles[1],
-                agent_id=1,
-            ),
+            p1_background=p1_bg,
+            p2_background=p2_bg,
             p1_goal=f"{env_profile['agent_goals'][0]}",
             p2_goal=f"{env_profile['agent_goals'][1]}",
             p1_name=self.agent1_name,
             p2_name=self.agent2_name,
         )
-        # rewrite test.py; save prompts
-        # form the prompt
+
         agent1 = self.agent1_name
         agent2 = self.agent2_name
-        self.agent1_intro = self._mask_intro(background.to_natural_language(agent1), 0) + self.additional_instruction
-        self.agent2_intro = self._mask_intro(background.to_natural_language(agent2), 1) + self.additional_instruction
+
+        if source_name == "false_belief":
+            a1_instr = "Respond only with dialogue. Do not narrate actions or describe thoughts. Do not say LEAVE. Keep your responses concise.\n"
+            a2_instr = "Respond only with dialogue. Do not narrate actions or describe thoughts. Once you have decided which location to check, state your final choice and say LEAVE.\n"
+            self.agent1_intro = background.to_task_prompt(agent1, role=0) + a1_instr
+            self.agent2_intro = background.to_task_prompt(agent2, role=1) + a2_instr
+        else:
+            self.agent1_intro = self._mask_intro(background.to_natural_language(agent1), 0) + self.additional_instruction
+            self.agent2_intro = self._mask_intro(background.to_natural_language(agent2), 1) + self.additional_instruction
         
         self.complete_intro = self._clean_tags(background.to_complete_intro())
         self.agent1_intro = self._clean_tags(self.agent1_intro)

@@ -1,29 +1,0 @@
-Downloading shards:   0%|          | 0/3 [00:00<?, ?it/s]Downloading shards:  33%|███▎      | 1/3 [00:58<01:57, 58.88s/it]Downloading shards:  67%|██████▋   | 2/3 [02:01<01:01, 61.34s/it]Downloading shards: 100%|██████████| 3/3 [02:53<00:00, 57.03s/it]Downloading shards: 100%|██████████| 3/3 [02:53<00:00, 57.95s/it]
-Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [01:44<03:28, 104.45s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [03:49<01:56, 116.37s/it]Loading checkpoint shards: 100%|██████████| 3/3 [05:08<00:00, 99.44s/it] Loading checkpoint shards: 100%|██████████| 3/3 [05:08<00:00, 102.82s/it]
-Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:04<00:09,  4.72s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:09<00:04,  4.65s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:14<00:00,  4.67s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:14<00:00,  4.67s/it]
-Traceback (most recent call last):
-  File "/juice6/u/jshe/nlp/LM_neural_synchrony/logit_lens_mistral.py", line 719, in <module>
-    main()
-  File "/juice6/u/jshe/nlp/LM_neural_synchrony/logit_lens_mistral.py", line 656, in main
-    scores = score_contrastive_class(
-  File "/juice6/u/jshe/nlp/LM_neural_synchrony/logit_lens_mistral.py", line 443, in score_contrastive_class
-    outputs = model.model(full_input_ids, output_hidden_states=True)
-  File "/nlp/scr/jshe/miniconda3/envs/neural_sync/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1779, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/nlp/scr/jshe/miniconda3/envs/neural_sync/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1790, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/nlp/scr/jshe/miniconda3/envs/neural_sync/lib/python3.10/site-packages/transformers/models/mistral/modeling_mistral.py", line 791, in forward
-    layer_outputs = decoder_layer(
-  File "/nlp/scr/jshe/miniconda3/envs/neural_sync/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1779, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/nlp/scr/jshe/miniconda3/envs/neural_sync/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1790, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/nlp/scr/jshe/miniconda3/envs/neural_sync/lib/python3.10/site-packages/transformers/models/mistral/modeling_mistral.py", line 525, in forward
-    hidden_states = self.input_layernorm(hidden_states)
-  File "/nlp/scr/jshe/miniconda3/envs/neural_sync/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1779, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/nlp/scr/jshe/miniconda3/envs/neural_sync/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1790, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/nlp/scr/jshe/miniconda3/envs/neural_sync/lib/python3.10/site-packages/transformers/models/mistral/modeling_mistral.py", line 76, in forward
-    variance = hidden_states.pow(2).mean(-1, keepdim=True)
-torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 14.00 MiB. GPU 0 has a total capacity of 39.49 GiB of which 6.56 MiB is free. Including non-PyTorch memory, this process has 39.48 GiB memory in use. Of the allocated memory 38.15 GiB is allocated by PyTorch, and 845.89 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
