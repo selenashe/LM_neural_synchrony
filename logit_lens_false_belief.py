@@ -763,6 +763,13 @@ def main() -> None:
     summary_dir = os.path.join(out_dir, "summary")
     os.makedirs(summary_dir, exist_ok=True)
 
+    # ── skip if already completed ──
+    contrastive_summary_path = os.path.join(out_dir, "contrastive_summary.json")
+    stem_summary_path = os.path.join(out_dir, "stem_summary.json")
+    if os.path.exists(contrastive_summary_path) and os.path.exists(stem_summary_path):
+        print(f"  Already completed — skipping (found contrastive_summary.json & stem_summary.json)")
+        return
+
     behavioral = build_behavioral_summary_fb(dialog_record, agent1_name, agent2_name, meta)
     save_json(os.path.join(out_dir, "behavioral_summary.json"), behavioral)
     print(f"  final_choice={behavioral['final_choice']}, correct={behavioral['correct']}")
@@ -773,10 +780,14 @@ def main() -> None:
     W_U1, rms_w1, eps1 = get_unembedding_params(mdl1)
     W_U1, rms_w1 = W_U1.cpu(), rms_w1.cpu()
 
-    print(f"Loading agent-2 model ({args.model_2}) ...")
-    tok2, mdl2 = load_mistral(args.model_2, args.device, cache_dir=hf_cache)
-    W_U2, rms_w2, eps2 = get_unembedding_params(mdl2)
-    W_U2, rms_w2 = W_U2.cpu(), rms_w2.cpu()
+    if args.model_1 == args.model_2:
+        print(f"Agent-2 uses the same model — reusing loaded weights.")
+        tok2, mdl2, W_U2, rms_w2, eps2 = tok1, mdl1, W_U1, rms_w1, eps1
+    else:
+        print(f"Loading agent-2 model ({args.model_2}) ...")
+        tok2, mdl2 = load_mistral(args.model_2, args.device, cache_dir=hf_cache)
+        W_U2, rms_w2, eps2 = get_unembedding_params(mdl2)
+        W_U2, rms_w2 = W_U2.cpu(), rms_w2.cpu()
 
     agent_resources = {
         1: (tok1, mdl1, W_U1, rms_w1, eps1, args.model_1),
@@ -918,8 +929,8 @@ def main() -> None:
             summary_json[agent_key][cls_name] = {}
             for t, arr in contrastive_all[agent][cls_name].items():
                 summary_json[agent_key][cls_name][str(t)] = arr.tolist()
-    save_json(os.path.join(out_dir, "contrastive_summary.json"), summary_json)
-    save_json(os.path.join(out_dir, "stem_summary.json"), stem_summary)
+    save_json(contrastive_summary_path, summary_json)
+    save_json(stem_summary_path, stem_summary)
 
     print(f"\nDone. Results saved to {out_dir}")
 
