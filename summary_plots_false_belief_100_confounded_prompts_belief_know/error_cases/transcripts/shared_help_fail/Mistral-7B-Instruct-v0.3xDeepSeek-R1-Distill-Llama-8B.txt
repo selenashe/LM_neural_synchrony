@@ -1,0 +1,71 @@
+================================================================================
+PAIR: Mistral-7B-Instruct-v0.3 x DeepSeek-R1-Distill-Llama-8B
+CASE TYPE: shared_help_fail
+COUNT: 3 episodes
+================================================================================
+
+--- Episode 6 (wallet_shared_help) ---
+Item: wallet | True location: drawer | Ava's belief: drawer | Final choice: desk | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a room with a desk and a drawer. A wallet has been left in one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the wallet. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The wallet is in the drawer.)
+  Ava Thompson's goal: You need to find the wallet. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You know the wallet is in the drawer.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's in the drawer."
+  Turn 1 [Ava]: Which drawer?
+  Turn 2 [Mia]: The one on the desk.
+  Turn 3 [Ava]: Which drawer?
+  Turn 4 [Mia]: The one you're closest to.
+  Turn 5 [Ava]: The wallet is in the drawer on the desk. LEAVE.
+
+--- Episode 438 (mask_shared_help) ---
+Item: mask | True location: drawer | Ava's belief: drawer | Final choice: hook | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a hallway with a hook and a drawer. A face mask has been left on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the mask. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The mask is on the drawer.)
+  Ava Thompson's goal: You need to find the mask. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You know the mask is on the drawer.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's on the drawer."
+  Turn 1 [Ava]: Mia Sanders said it's on the drawer, but I know the mask is on the hook. I'll check the hook.
+  Turn 2 [Mia]: Try the drawer, Ava. That's where I saw it.
+  Turn 3 [Ava]: Mia, check the hook.
+  Turn 4 [Mia]: Alright, Ava. Let's both check our spots. I'll check the drawer, you check the hook. The mask is there if it's where I left it.
+  ** FLAGS: no_leave, prompt_leakage **
+
+--- Episode 480 (whisk_shared_help) ---
+Item: whisk | True location: drawer | Ava's belief: drawer | Final choice: hook | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a kitchen with a drawer and a hook. A whisk has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the whisk. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The whisk is on the drawer.)
+  Ava Thompson's goal: You need to find the whisk. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You know the whisk is on the drawer.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's in the drawer."
+  Turn 1 [Ava]: Ava Thompson said"Where do you think it is?"
+  Turn 2 [Mia]: "In the drawer, Ava."
+  Turn 3 [Ava]: I'll check the drawer.
+  Turn 4 [Mia]: Good, you found it.
+  Turn 5 [Ava]: I'll check the drawer.
+  Turn 6 [Mia]: It's still in the drawer, Ava.
+  Turn 7 [Ava]: I'll check the hook.
+  Turn 8 [Mia]: The whisk isn't on the hook, Ava. It's in the drawer.
+  Turn 9 [Ava]: Where do you think it is?
+  Turn 10 [Mia]: "In the drawer, Ava. Check again."
+  Turn 11 [Ava]: I'll check the drawer.
+  Turn 12 [Mia]: You found it, Ava. It's in the drawer.
+  Turn 13 [Ava]: I'll check the drawer.
+  Turn 14 [Mia]: It's in the drawer, Ava. Please check again.
+  Turn 15 [Ava]: I'll check the hook.
+  ** FLAGS: no_leave, prompt_leakage, repetitive_loop, max_turns_hit **
+

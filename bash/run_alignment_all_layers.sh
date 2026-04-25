@@ -24,7 +24,7 @@ echo ""
 
 for L in $(seq 0 31); do
     echo "===== analyze_alignment.py — Layer ${L} ====="
-    python analyze_alignment.py --all_pairs --layer_A "$L" --layer_B "$L"
+    python analysis/analyze_alignment.py --all_pairs --layer_A "$L" --layer_B "$L"
     echo ""
 done
 

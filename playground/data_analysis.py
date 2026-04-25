@@ -8,7 +8,7 @@ _ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 if _ROOT not in sys.path:
     sys.path.insert(0, _ROOT)
 from experiment_config import EPISODES_NUM, STAGE_A_SEEDS
-from utils import *
+from core.utils import *
 import seaborn as sns
 from scipy.stats import pearsonr
 from matplotlib.patches import Patch

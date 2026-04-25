@@ -1,0 +1,51 @@
+================================================================================
+PAIR: Qwen_Qwen3-14B x Qwen2.5-7B-Instruct
+CASE TYPE: false_help_success
+COUNT: 3 episodes
+================================================================================
+
+--- Episode 70 (umbrella_false_help) ---
+Item: umbrella | True location: hook | Ava's belief: stand | Final choice: hook | Correct: True
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in an entryway with an umbrella stand and a wall hook. An umbrella has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the umbrella. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The umbrella is on the hook.)
+  Ava Thompson's goal: You need to find the umbrella. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the umbrella is on the stand.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "Did you put it on the stand?"
+  Turn 1 [Ava]: I don't think so. Let me check the wall hook. LEAVE
+  ** FLAGS: guide_goal_failure **
+
+--- Episode 88 (towel_false_help) ---
+Item: towel | True location: rack | Ava's belief: basket | Final choice: rack | Correct: True
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a bathroom with a towel rack and a laundry basket. A towel has been placed in one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the towel. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The towel is in the rack.)
+  Ava Thompson's goal: You need to find the towel. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the towel is in the basket.)
+
+CONVERSATION:
+  Turn 0 [Mia]: Looking for the towel?
+  Turn 1 [Ava]: Did you put it on the towel rack or in the basket?
+  Turn 2 [Mia]: The rack.
+  Turn 3 [Ava]: LEAVE
+
+--- Episode 388 (lens_false_help) ---
+Item: lens | True location: bag | Ava's belief: case | Final choice: bag | Correct: True
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a studio with a camera bag and a lens case. A lens has been placed in one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the lens. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The lens is in the bag.)
+  Ava Thompson's goal: You need to find the lens. Ask the other person and decide which one to check. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the lens is in the case.)
+
+CONVERSATION:
+  Turn 0 [Mia]: The lens is in the bag.
+  Turn 1 [Ava]: That's not where I think it is. LEAVE
+

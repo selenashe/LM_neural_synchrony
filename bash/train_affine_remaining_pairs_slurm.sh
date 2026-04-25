@@ -31,12 +31,12 @@ source /nlp/scr/jshe/miniconda3/etc/profile.d/conda.sh
 conda activate neural_sync
 
 REPO_FALLBACK="/juice6/u/jshe/nlp/LM_neural_synchrony"
-if [[ -n "${SLURM_SUBMIT_DIR:-}" && -f "${SLURM_SUBMIT_DIR}/affine_transformation.py" ]]; then
+if [[ -n "${SLURM_SUBMIT_DIR:-}" && -f "${SLURM_SUBMIT_DIR}/analysis/affine_transformation.py" ]]; then
   REPO="$(cd "${SLURM_SUBMIT_DIR}" && pwd)"
-elif [[ -f "${REPO_FALLBACK}/affine_transformation.py" ]]; then
+elif [[ -f "${REPO_FALLBACK}/analysis/affine_transformation.py" ]]; then
   REPO="${REPO_FALLBACK}"
 else
-  echo "Cannot find repo: no affine_transformation.py in SLURM_SUBMIT_DIR=${SLURM_SUBMIT_DIR:-} or ${REPO_FALLBACK}" >&2
+  echo "Cannot find repo: no analysis/affine_transformation.py in SLURM_SUBMIT_DIR=${SLURM_SUBMIT_DIR:-} or ${REPO_FALLBACK}" >&2
   exit 1
 fi
 
@@ -90,19 +90,19 @@ M22="Mistral-7B-Instruct-v0.2_None_0_Mistral-7B-Instruct-v0.2_None_0"
 case "${SLURM_ARRAY_TASK_ID}" in
   0)
     echo "Running A_forward for v0.2 (A) × v0.3 (B)"
-    python affine_transformation.py --model "${M23}" --setting A_forward
+    python analysis/affine_transformation.py --model "${M23}" --setting A_forward
     ;;
   1)
     echo "Running B_forward for v0.2 (A) × v0.3 (B)"
-    python affine_transformation.py --model "${M23}" --setting B_forward
+    python analysis/affine_transformation.py --model "${M23}" --setting B_forward
     ;;
   2)
     echo "Running A_forward for v0.2 × v0.2"
-    python affine_transformation.py --model "${M22}" --setting A_forward
+    python analysis/affine_transformation.py --model "${M22}" --setting A_forward
     ;;
   3)
     echo "Running B_forward for v0.2 × v0.2"
-    python affine_transformation.py --model "${M22}" --setting B_forward
+    python analysis/affine_transformation.py --model "${M22}" --setting B_forward
     ;;
   *)
     echo "Unexpected SLURM_ARRAY_TASK_ID=${SLURM_ARRAY_TASK_ID}" >&2

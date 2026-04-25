@@ -12,11 +12,11 @@ tok = AutoTokenizer.from_pretrained(paths.get("Mistral-7B-Instruct-v0.2",
                                                "mistralai/Mistral-7B-Instruct-v0.2"),
                                     cache_dir=os.environ.get("LM_HF_CACHE"))
 
-SCENARIO_VOCAB = {
-    "key_in_boxes": {"item": "key", "locations": ("red box", "blue box"), "prep": "in the"},
-    "wallet_desk_drawer": {"item": "wallet", "locations": ("desk", "drawer"), "prep": "in the"},
-    "package_door_porch": {"item": "package", "locations": ("front door", "back porch"), "prep": "at the"},
-}
+SOTOPIA_DATA_DIR = os.path.join(REPO_ROOT, "sotopia_utils", "sotopia_data")
+with open(os.path.join(SOTOPIA_DATA_DIR, "scenario_vocab_false_belief.json"), encoding="utf-8") as f:
+    SCENARIO_VOCAB = json.load(f)
+for _k, _v in SCENARIO_VOCAB.items():
+    _v["locations"] = tuple(_v["locations"])
 
 a1, a2 = "Mia", "Ava"
 

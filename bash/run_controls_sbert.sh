@@ -22,7 +22,7 @@ echo "=== Job started at $(date) ==="
 echo "Node: $(hostname)"
 echo ""
 
-python analyze_controls_sbert.py --all_pairs
+python analysis/analyze_controls_sbert.py --all_pairs
 
 echo ""
 echo "=== Job finished at $(date) ==="

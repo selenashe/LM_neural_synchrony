@@ -1,0 +1,63 @@
+================================================================================
+PAIR: DeepSeek-R1-Distill-Llama-8B x Qwen2.5-7B-Instruct
+CASE TYPE: shared_help_fail
+COUNT: 4 episodes
+================================================================================
+
+--- Episode 0 (key_shared_help) ---
+Item: key | True location: red box | Ava's belief: red box | Final choice: None | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a room with a red box and a blue box. A key has been placed in one of the boxes.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the key. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The key is in the red box.)
+  Ava Thompson's goal: You need to find the key. Ask the other person and decide which box to check. Once you have decided, state your final choice and say LEAVE. (Extra information: You know the key is in the red box.)
+
+CONVERSATION:
+  Turn 0 [Mia]: Mia Sanders saidI know where the key is.
+  Turn 1 [Ava]: Which box did you put it in? LEAVE
+  ** FLAGS: prompt_leakage **
+
+--- Episode 84 (towel_shared_help) ---
+Item: towel | True location: rack | Ava's belief: rack | Final choice: basket | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a bathroom with a towel rack and a laundry basket. A towel has been placed in one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the towel. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The towel is in the rack.)
+  Ava Thompson's goal: You need to find the towel. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You know the towel is in the rack.)
+
+CONVERSATION:
+  Turn 0 [Mia]: Where's the towel?
+  Turn 1 [Ava]: Have you seen it on the towel rack or in the laundry basket? LEAVE
+
+--- Episode 282 (sponge_shared_help) ---
+Item: sponge | True location: counter | Ava's belief: counter | Final choice: sink | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a kitchen with a sink and a counter. A sponge has been left on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the sponge. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The sponge is on the counter.)
+  Ava Thompson's goal: You need to find the sponge. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You know the sponge is on the counter.)
+
+CONVERSATION:
+  Turn 0 [Mia]: Where is the sponge?
+  Turn 1 [Ava]: Have you seen it near the sink? LEAVE
+
+--- Episode 558 (dice_shared_help) ---
+Item: dice | True location: table | Ava's belief: table | Final choice: cup | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a game room with a cup and a table. A pair of dice has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the dice. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The dice is on the table.)
+  Ava Thompson's goal: You need to find the dice. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You know the dice is on the table.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "Check the table."
+  Turn 1 [Ava]: The cup. LEAVE
+

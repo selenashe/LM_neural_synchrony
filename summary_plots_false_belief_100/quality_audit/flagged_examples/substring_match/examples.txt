@@ -1,0 +1,79 @@
+--- episode_211_wrench_shared_deceive ---
+Item: wrench | True location: toolbox | Ava belief: toolbox | Final choice: toolbox | Correct: True
+Condition: shared_truth + deceive
+
+  Turn 0 [Mia]: Ava, the wrench isn't on the workbench.
+  Turn 1 [Ava]: Mia, the wrench is on the toolbox. LEAVE.
+  ** FLAGS: substring_match **
+
+--- episode_212_wrench_ignorance_help ---
+Item: wrench | True location: toolbox | Ava belief: unknown | Final choice: bench | Correct: False
+Condition: ignorance + help
+
+  Turn 0 [Mia]: Ava, the wrench is on the toolbox.
+  Turn 1 [Ava]: Let's check the workbench then. LEAVE.
+  ** FLAGS: substring_match **
+
+--- episode_213_wrench_ignorance_deceive ---
+Item: wrench | True location: toolbox | Ava belief: unknown | Final choice: toolbox | Correct: True
+Condition: ignorance + deceive
+
+  Turn 0 [Mia]: Ava, the wrench isn't on the workbench.
+  Turn 1 [Ava]: Let's check the toolbox then. LEAVE.
+  ** FLAGS: substring_match **
+
+--- episode_215_wrench_false_deceive ---
+Item: wrench | True location: toolbox | Ava belief: bench | Final choice: toolbox | Correct: True
+Condition: false_belief + deceive
+
+  Turn 0 [Mia]: Ava, the wrench isn't on the workbench.
+  Turn 1 [Ava]: Mia, check the toolbox then. LEAVE.
+  ** FLAGS: substring_match **
+
+--- episode_324_drill_shared_help ---
+Item: drill | True location: bench | Ava belief: bench | Final choice: bench | Correct: True
+Condition: shared_truth + help
+
+  Turn 0 [Mia]: The drill is on the workbench.
+  Turn 1 [Ava]: Let's check the workbench then. LEAVE.
+  ** FLAGS: substring_match **
+
+--- episode_326_drill_ignorance_help ---
+Item: drill | True location: bench | Ava belief: unknown | Final choice: case | Correct: False
+Condition: ignorance + help
+
+  Turn 0 [Mia]: The drill is on the workbench.
+  Turn 1 [Ava]: Let's check the tool case then. LEAVE.
+  ** FLAGS: substring_match **
+
+--- episode_327_drill_ignorance_deceive ---
+Item: drill | True location: bench | Ava belief: unknown | Final choice: bench | Correct: True
+Condition: ignorance + deceive
+
+  Turn 0 [Mia]: It's in the tool case.
+  Turn 1 [Ava]: Let's check the workbench then. LEAVE.
+  ** FLAGS: substring_match **
+
+--- episode_328_drill_false_help ---
+Item: drill | True location: bench | Ava belief: case | Final choice: case | Correct: False
+Condition: false_belief + help
+
+  Turn 0 [Mia]: The drill is on the workbench.
+  Turn 1 [Ava]: I think it's on the tool case. LEAVE.
+  ** FLAGS: substring_match **
+
+--- episode_469_paint_shared_deceive ---
+Item: paint | True location: shelf | Ava belief: shelf | Final choice: shelf | Correct: True
+Condition: shared_truth + deceive
+
+  Turn 0 [Mia]: It's not on the workbench.
+  Turn 1 [Ava]: The paint is on the shelf. LEAVE.
+  ** FLAGS: substring_match **
+
+--- episode_470_paint_ignorance_help ---
+Item: paint | True location: shelf | Ava belief: unknown | Final choice: shelf | Correct: True
+Condition: ignorance + help
+
+  Turn 0 [Mia]: It's on the shelf.
+  Turn 1 [Ava]: Let me check the workbench then. If it's not there, I'll look on the shelf. LEAVE.
+  ** FLAGS: ambiguous_leave, substring_match **

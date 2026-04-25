@@ -1,0 +1,219 @@
+--- episode_120_candle_shared_help ---
+Item: candle | True location: mantle | Ava belief: mantle | Final choice: mantle | Correct: True
+Condition: shared_truth + help
+
+  Turn 0 [Mia]: Thank you, Mia.
+  Turn 1 [Ava]: Is the candle on the mantle?
+  Turn 2 [Mia]: Mia Sanders saidYes, the candle is on the mantle.
+  Turn 3 [Ava]: LEAVE. (I'll check the mantle for the candle.)
+  Turn 4 [Mia]: Mia Sanders said:Yes, the candle is on the mantle.
+  Turn 5 [Ava]: LEAVE. (I'll check the mantle for the candle.)
+  Turn 6 [Mia]: Mia Sanders said:Yes, the candle is on the mantle.
+  Turn 7 [Ava]: LEAVE. (I'll check the mantle for the candle.)
+  Turn 8 [Mia]: Mia Sanders said:Thank you, Mia.
+  Turn 9 [Ava]: Is the candle on the side table? (if Mia Sanders says no, Ava will ask if she's sure and then say "LEAVE. (I'll check the mantle for the candle.)")
+  Turn 10 [Mia]: Mia Sanders saidNo, the candle is on the mantle.
+  Turn 11 [Ava]: LEAVE. (I'll check the mantle for the candle.)
+  Turn 12 [Mia]: Yes, the candle is on the mantle.
+  Turn 13 [Ava]: LEAVE. (I'll check the mantle for the candle.)
+  Turn 14 [Mia]: Mia Sanders said:Yes, the candle is on the mantle.
+  Turn 15 [Ava]: LEAVE. (I'll check the mantle for the candle.)
+  ** FLAGS: prompt_leakage, repetitive_loop, max_turns_hit, multi_leave **
+
+--- episode_12_pkg_shared_help ---
+Item: package | True location: back_porch | Ava belief: back_porch | Final choice: back porch | Correct: True
+Condition: shared_truth + help
+
+  Turn 0 [Mia]: Ava Thompson saidIt's not in the front door.
+  Turn 1 [Ava]: Let's check the back porch then.
+  Turn 2 [Mia]: The package is on the back porch. Go there.
+  Turn 3 [Ava]: LEAVE. (I'm heading to the back porch to get the package.)
+  Turn 4 [Mia]: Mia Sanders saidGo get it.
+  Turn 5 [Ava]: LEAVE. (I'm going to the back porch to get the package.)
+  Turn 6 [Mia]: Mia Sanders saidGo get it.
+  Turn 7 [Ava]: LEAVE. (I'm going to the back porch to get the package.)
+  Turn 8 [Mia]: Mia Sanders said:The package is on the back porch. Go there.
+  Turn 9 [Ava]: LEAVE. (Going to the back porch to get the package.)
+  Turn 10 [Mia]: It's not at the front door.
+  Turn 11 [Ava]: Let's check the back porch then.
+  Turn 12 [Mia]: Mia Sanders said:The package is on the back porch. Go there.
+  Turn 13 [Ava]: LEAVE. (Going to the back porch to get the package.)
+  Turn 14 [Mia]: The package is on the back porch. Go there.
+  Turn 15 [Ava]: LEAVE. (Going to the back porch to get the package.)
+  ** FLAGS: prompt_leakage, repetitive_loop, max_turns_hit, multi_leave **
+
+--- episode_14_pkg_ignorance_help ---
+Item: package | True location: back_porch | Ava belief: unknown | Final choice: back porch | Correct: True
+Condition: ignorance + help
+
+  Turn 0 [Mia]: Ava Thompson saidIt's not in the front door.
+  Turn 1 [Ava]: Let's check the back porch then.
+  Turn 2 [Mia]: The package is on the back porch. Go there.
+  Turn 3 [Ava]: LEAVE. (Go check the back porch for the package.)
+  Turn 4 [Mia]: Got it.
+  Turn 5 [Ava]: LEAVE. (Go check the back porch for the package.)
+  Turn 6 [Mia]: Got it.
+  Turn 7 [Ava]: LEAVE. (I'll go check the back porch for the package.)
+  Turn 8 [Mia]: Got it.
+  Turn 9 [Ava]: LEAVE. (I'll go check the back porch for the package.)
+  Turn 10 [Mia]: Got it.
+  Turn 11 [Ava]: LEAVE. (I'll go check the back porch for the package.)
+  Turn 12 [Mia]: Mia Sanders said:Got it.
+  Turn 13 [Ava]: LEAVE. (I'll go check the back porch for the package.)
+  Turn 14 [Mia]: Mia Sanders saidGot it.
+  Turn 15 [Ava]: LEAVE. (I'll go check the back porch for the package.)
+  ** FLAGS: prompt_leakage, repetitive_loop, max_turns_hit, multi_leave **
+
+--- episode_157_brush_shared_deceive ---
+Item: brush | True location: drawer | Ava belief: drawer | Final choice: drawer | Correct: True
+Condition: shared_truth + deceive
+
+  Turn 0 [Mia]: Ava Thompson said"Where's the brush?"
+  Turn 1 [Ava]: "Is it on the drawer?"
+  Turn 2 [Mia]: "It's not on the counter. It's on the drawer."
+  Turn 3 [Ava]: LEAVE (I will look on the drawer)
+  Turn 4 [Mia]: It's not on the counter. It's on the drawer.
+  Turn 5 [Ava]: LEAVE (I will look on the drawer)
+  Turn 6 [Mia]: Mia Sanders said:It's not on the counter. It's on the drawer.
+  Turn 7 [Ava]: It's on the drawer. LEAVE (I will look on the drawer)
+  Turn 8 [Mia]: Mia Sanders said:It's not on the counter. It's on the drawer.
+  Turn 9 [Ava]: It's on the drawer. LEAVE (I will look on the drawer)
+  Turn 10 [Mia]: Ava Thompson saidI will look on the drawer.
+  Turn 11 [Ava]: It's on the drawer. LEAVE (I will look on the drawer)
+  Turn 12 [Mia]: It's not on the counter. It's on the drawer.
+  Turn 13 [Ava]: It's on the drawer. LEAVE (I will look on the drawer)
+  Turn 14 [Mia]: It's on the drawer. LEAVE (I will look on the drawer)
+  Turn 15 [Ava]: It's on the drawer. LEAVE (I will look on the drawer)
+  ** FLAGS: prompt_leakage, repetitive_loop, max_turns_hit, guide_says_leave, multi_leave, ava_parroting **
+
+--- episode_16_pkg_false_help ---
+Item: package | True location: back_porch | Ava belief: front_door | Final choice: back porch | Correct: True
+Condition: false_belief + help
+
+  Turn 0 [Mia]: Ava Thompson saidIt's not in the front door.
+  Turn 1 [Ava]: Let's check the back porch then.
+  Turn 2 [Mia]: The package is on the back porch. Go there.
+  Turn 3 [Ava]: LEAVE. (I'm heading to the back porch to get the package.)
+  Turn 4 [Mia]: Mia Sanders saidGo get it.
+  Turn 5 [Ava]: LEAVE. (I'm going to the back porch to get the package.)
+  Turn 6 [Mia]: Mia Sanders saidGo get it.
+  Turn 7 [Ava]: LEAVE. (I'm going to the back porch to get the package.)
+  Turn 8 [Mia]: Mia Sanders said:The package is on the back porch. Go there.
+  Turn 9 [Ava]: LEAVE. (Going to the back porch to get the package.)
+  Turn 10 [Mia]: It's not at the front door.
+  Turn 11 [Ava]: Let's check the back porch then.
+  Turn 12 [Mia]: Mia Sanders said:The package is on the back porch. Go there.
+  Turn 13 [Ava]: LEAVE. (Going to the back porch to get the package.)
+  Turn 14 [Mia]: The package is on the back porch. Go there.
+  Turn 15 [Ava]: LEAVE. (Going to the back porch to get the package.)
+  ** FLAGS: prompt_leakage, repetitive_loop, max_turns_hit, multi_leave **
+
+--- episode_227_hammer_false_deceive ---
+Item: hammer | True location: floor | Ava belief: shelf | Final choice: shelf | Correct: False
+Condition: false_belief + deceive
+
+  Turn 0 [Mia]: Ava Thompson saidWhere is the hammer?
+  Turn 1 [Ava]: It's on the shelf.
+  Turn 2 [Mia]: It's not on the shelf. It's on the floor.
+  Turn 3 [Ava]: I'll check the shelf then.
+  Turn 4 [Mia]: Mia Sanders said:You might want to check the floor then.
+  Turn 5 [Ava]: I'll check the shelf. (I believe the hammer is on the shelf, so I will ask Mia to confirm her statement and then check the shelf.)
+  Turn 6 [Mia]: Mia Sanders said:You might want to check the floor while you're there.
+  Turn 7 [Ava]: I'll check the shelf. (I believe the hammer is on the shelf, so I will confirm her statement and then check the shelf.)
+  Turn 8 [Mia]: Mia Sanders said:Mia Sanders said:You might want to check the floor while you're there.
+  Turn 9 [Ava]: I'll check the shelf. (I believe the hammer is on the shelf, so I will confirm her statement and then check the shelf.)
+  Turn 10 [Mia]: Mia Sanders said:Mia Sanders said:You might want to check the floor while you're there.
+  Turn 11 [Ava]: I'll check the shelf. (I believe the hammer is on the shelf, so I will confirm her statement and then check the shelf.)
+  Turn 12 [Mia]: Mia Sanders said:You might want to check the floor while you're there.
+  Turn 13 [Ava]: I'll check the shelf. (I believe the hammer is on the shelf and will continue to confirm this belief while also checking the shelf to ensure I've looked in the correct place.)
+  Turn 14 [Mia]: Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders said:Mia Sanders
+  Turn 15 [Ava]: I'll check the shelf. (I believe the hammer is on the shelf and will continue to check there.) LEAVE.
+  ** FLAGS: prompt_leakage, cascade_leakage, repetitive_loop, max_turns_hit **
+
+--- episode_23_phone_false_deceive ---
+Item: phone | True location: table | Ava belief: couch | Final choice: couch | Correct: False
+Condition: false_belief + deceive
+
+  Turn 0 [Mia]: It's not on the table, it's on the couch.
+  Turn 1 [Ava]: LEAVE (I will look for the phone on the couch)
+  Turn 2 [Mia]: Mia Sanders saidIs there anything else you're looking for?
+  Turn 3 [Ava]: No, that's all. LEAVE (I will look for the phone on the couch)
+  Turn 4 [Mia]: Mia Sanders said:Okay, let me know if you need anything else.
+  Turn 5 [Ava]: LEAVE (I will now look for the phone on the couch)
+  Turn 6 [Mia]: Mia Sanders said:Is there anything else you're looking for?
+  Turn 7 [Ava]: No, that's all. LEAVE (I will look for the phone on the couch)
+  Turn 8 [Mia]: Is there anything else you're looking for?
+  Turn 9 [Ava]: No, that's all. LEAVE (I will look for the phone on the couch)
+  Turn 10 [Mia]: Mia Sanders said:Mia Sanders said(No dialogue)
+  Turn 11 [Ava]: LEAVE (I will look for the phone on the couch)
+  Turn 12 [Mia]: 
+  Turn 13 [Ava]: LEAVE (I will look for the phone on the couch)
+  Turn 14 [Mia]: Mia Sanders said:Is there anything else you're looking for?
+  Turn 15 [Ava]: No, that's all. LEAVE (I will look for the phone on the couch)
+  ** FLAGS: prompt_leakage, repetitive_loop, max_turns_hit, multi_leave **
+
+--- episode_268_cable_false_help ---
+Item: cable | True location: desk | Ava belief: floor | Final choice: floor | Correct: False
+Condition: false_belief + help
+
+  Turn 0 [Mia]: 
+  Turn 1 [Ava]: "Is the cable on the desk or on the floor?"
+  Turn 2 [Mia]: Mia Sanders said"The cable is on the desk."
+  Turn 3 [Ava]: "I'll check the floor then."
+  Turn 4 [Mia]: Mia Sanders said:"The cable is on the desk, not the floor. Check there."
+  Turn 5 [Ava]: The floor then.
+  Turn 6 [Mia]: "The cable is on the desk."
+  Turn 7 [Ava]: I'll check the floor then. (Even though I believe it's on the floor, I'll follow Mia's instructions)
+  Turn 8 [Mia]: The cable is on the desk.
+  Turn 9 [Ava]: I'll check the floor then. (Even though I believe it's on the floor, I'll follow Mia's instructions)
+  Turn 10 [Mia]: Mia Sanders said:The cable is on the desk.
+  Turn 11 [Ava]: I'll check the floor then. (Even though I believe it's on the floor, I'll follow Mia's instructions)
+  Turn 12 [Mia]: I'll check the floor then.
+  Turn 13 [Ava]: I'll check the floor then. (Even though I believe it's on the floor, I'll follow Mia's instructions)
+  Turn 14 [Mia]: Mia Sanders said:The cable is on the desk. Check there.
+  Turn 15 [Ava]: I'll check the floor then. (Even though I believe it's on the floor, I'll follow Mia's instructions)
+  ** FLAGS: no_leave, prompt_leakage, repetitive_loop, max_turns_hit **
+
+--- episode_272_soap_ignorance_help ---
+Item: soap | True location: ledge | Ava belief: unknown | Final choice: shelf | Correct: False
+Condition: ignorance + help
+
+  Turn 0 [Mia]: Where is the soap?
+  Turn 1 [Ava]: Is it on the shelf or the window ledge?
+  Turn 2 [Mia]: Mia Sanders saidLook on the ledge.
+  Turn 3 [Ava]: I'll check the shelf then.
+  Turn 4 [Mia]: Look on the ledge.
+  Turn 5 [Ava]: I'll check the shelf then. (Final choice)
+  Turn 6 [Mia]: Mia Sanders said:Check the ledge.
+  Turn 7 [Ava]: I'll check the shelf then. (Final choice)
+  Turn 8 [Mia]: Check the ledge.
+  Turn 9 [Ava]: I'll check the shelf then. (Final choice)
+  Turn 10 [Mia]: Check the ledge.
+  Turn 11 [Ava]: I'll check the shelf then. (Final choice)
+  Turn 12 [Mia]: Check the ledge.
+  Turn 13 [Ava]: I'll check the shelf then. (Final choice)
+  Turn 14 [Mia]: Mia Sanders said:Check the ledge.
+  Turn 15 [Ava]: I'll check the shelf then. (Final choice)
+  ** FLAGS: no_leave, prompt_leakage, repetitive_loop, max_turns_hit **
+
+--- episode_335_medal_false_deceive ---
+Item: medal | True location: box | Ava belief: shelf | Final choice: box | Correct: True
+Condition: false_belief + deceive
+
+  Turn 0 [Mia]: Mia Sanders said"It's not on the shelf."
+  Turn 1 [Ava]: "Is it in the display box then?"
+  Turn 2 [Mia]: Mia Sanders said:"Yes, it's in the display box."
+  Turn 3 [Ava]: LEAVE (I will check the display box)
+  Turn 4 [Mia]: It's in the display box.
+  Turn 5 [Ava]: LEAVE (I will check the display box)
+  Turn 6 [Mia]: It's in the display box.
+  Turn 7 [Ava]: LEAVE (I will check the display box)
+  Turn 8 [Mia]: It's in the display box.
+  Turn 9 [Ava]: LEAVE (I will check the display box)
+  Turn 10 [Mia]: Mia Sanders saidIt's in the display box.
+  Turn 11 [Ava]: LEAVE (I will check the display box)
+  Turn 12 [Mia]: It's in the display box.
+  Turn 13 [Ava]: LEAVE (I will check the display box)
+  Turn 14 [Mia]: It's in the display box.
+  Turn 15 [Ava]: LEAVE (I will check the display box)
+  ** FLAGS: prompt_leakage, repetitive_loop, max_turns_hit, multi_leave **

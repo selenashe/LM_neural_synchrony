@@ -1,0 +1,130 @@
+--- episode_0_key_shared_help ---
+Item: key | True location: red_box | Ava belief: red_box | Final choice: red box | Correct: True
+Condition: shared_truth + help
+
+  Turn 0 [Mia]: Mia Sanders saidI know where the key is.
+  Turn 1 [Ava]: In which box is the key, Mia? (Red box or blue box?)
+  Turn 2 [Mia]: Mia Sanders said:The key is in the red box.
+  Turn 3 [Ava]: Great, I'll check the red box then. LEAVE.
+  ** FLAGS: prompt_leakage **
+
+--- episode_11_wallet_false_deceive ---
+Item: wallet | True location: drawer | Ava belief: desk | Final choice: desk | Correct: False
+Condition: false_belief + deceive
+
+  Turn 0 [Mia]: Looking for something specific?
+  Turn 1 [Ava]: Yes, a wallet. I think it's in the desk. Let's check there.
+  Turn 2 [Mia]: Mia Sanders saidNo, it's not in the desk. Let's check the drawer instead.
+  Turn 3 [Ava]: The wallet is in the desk. LEAVE.
+  ** FLAGS: prompt_leakage **
+
+--- episode_120_candle_shared_help ---
+Item: candle | True location: mantle | Ava belief: mantle | Final choice: mantle | Correct: True
+Condition: shared_truth + help
+
+  Turn 0 [Mia]: Thank you, Mia.
+  Turn 1 [Ava]: Is the candle on the mantle?
+  Turn 2 [Mia]: Mia Sanders saidYes, the candle is on the mantle.
+  Turn 3 [Ava]: LEAVE. (I'll check the mantle for the candle.)
+  Turn 4 [Mia]: Mia Sanders said:Yes, the candle is on the mantle.
+  Turn 5 [Ava]: LEAVE. (I'll check the mantle for the candle.)
+  Turn 6 [Mia]: Mia Sanders said:Yes, the candle is on the mantle.
+  Turn 7 [Ava]: LEAVE. (I'll check the mantle for the candle.)
+  Turn 8 [Mia]: Mia Sanders said:Thank you, Mia.
+  Turn 9 [Ava]: Is the candle on the side table? (if Mia Sanders says no, Ava will ask if she's sure and then say "LEAVE. (I'll check the mantle for the candle.)")
+  Turn 10 [Mia]: Mia Sanders saidNo, the candle is on the mantle.
+  Turn 11 [Ava]: LEAVE. (I'll check the mantle for the candle.)
+  Turn 12 [Mia]: Yes, the candle is on the mantle.
+  Turn 13 [Ava]: LEAVE. (I'll check the mantle for the candle.)
+  Turn 14 [Mia]: Mia Sanders said:Yes, the candle is on the mantle.
+  Turn 15 [Ava]: LEAVE. (I'll check the mantle for the candle.)
+  ** FLAGS: prompt_leakage, repetitive_loop, max_turns_hit, multi_leave **
+
+--- episode_122_candle_ignorance_help ---
+Item: candle | True location: mantle | Ava belief: unknown | Final choice: mantle | Correct: True
+Condition: ignorance + help
+
+  Turn 0 [Mia]: Thank you, Mia.
+  Turn 1 [Ava]: Is the candle on the mantle or the side table?
+  Turn 2 [Mia]: Mia Sanders saidThe candle is on the mantle.
+  Turn 3 [Ava]: I'll check the mantle then. LEAVE.
+  ** FLAGS: prompt_leakage **
+
+--- episode_124_candle_false_help ---
+Item: candle | True location: mantle | Ava belief: table | Final choice: table | Correct: False
+Condition: false_belief + help
+
+  Turn 0 [Mia]: Thank you, Mia.
+  Turn 1 [Ava]: Is the candle on the mantle or the side table?
+  Turn 2 [Mia]: Mia Sanders saidThe candle is on the mantle.
+  Turn 3 [Ava]: Thank you for letting me know. I'll check the side table then. LEAVE.
+  ** FLAGS: prompt_leakage **
+
+--- episode_12_pkg_shared_help ---
+Item: package | True location: back_porch | Ava belief: back_porch | Final choice: back porch | Correct: True
+Condition: shared_truth + help
+
+  Turn 0 [Mia]: Ava Thompson saidIt's not in the front door.
+  Turn 1 [Ava]: Let's check the back porch then.
+  Turn 2 [Mia]: The package is on the back porch. Go there.
+  Turn 3 [Ava]: LEAVE. (I'm heading to the back porch to get the package.)
+  Turn 4 [Mia]: Mia Sanders saidGo get it.
+  Turn 5 [Ava]: LEAVE. (I'm going to the back porch to get the package.)
+  Turn 6 [Mia]: Mia Sanders saidGo get it.
+  Turn 7 [Ava]: LEAVE. (I'm going to the back porch to get the package.)
+  Turn 8 [Mia]: Mia Sanders said:The package is on the back porch. Go there.
+  Turn 9 [Ava]: LEAVE. (Going to the back porch to get the package.)
+  Turn 10 [Mia]: It's not at the front door.
+  Turn 11 [Ava]: Let's check the back porch then.
+  Turn 12 [Mia]: Mia Sanders said:The package is on the back porch. Go there.
+  Turn 13 [Ava]: LEAVE. (Going to the back porch to get the package.)
+  Turn 14 [Mia]: The package is on the back porch. Go there.
+  Turn 15 [Ava]: LEAVE. (Going to the back porch to get the package.)
+  ** FLAGS: prompt_leakage, repetitive_loop, max_turns_hit, multi_leave **
+
+--- episode_130_fork_false_help ---
+Item: fork | True location: counter | Ava belief: drawer | Final choice: drawer | Correct: False
+Condition: false_belief + help
+
+  Turn 0 [Mia]: Ava, the fork is on the counter.
+  Turn 1 [Ava]: I believe the fork is on the drawer. Let's check there.
+  Turn 2 [Mia]: Mia Sanders saidNo, Ava, the fork is on the counter.
+  Turn 3 [Ava]: I'll check the drawer then.
+  Turn 4 [Mia]: Mia Sanders said:Is there something specific you're looking for in the drawer?
+  Turn 5 [Ava]: The fork. LEAVE.
+  ** FLAGS: prompt_leakage **
+
+--- episode_132_ticket_shared_help ---
+Item: ticket | True location: pocket | Ava belief: pocket | Final choice: pocket | Correct: True
+Condition: shared_truth + help
+
+  Turn 0 [Mia]: Ava, check the coat pocket.
+  Turn 1 [Ava]: I'll check the bag instead. LEAVE. (Assuming the ticket is in the bag)
+  Turn 2 [Mia]: The ticket is in the pocket.
+  Turn 3 [Ava]: I see. I'll check the pocket then. LEAVE. (Assuming the ticket is in the pocket)
+  Turn 4 [Mia]: The ticket is in the pocket.
+  Turn 5 [Ava]: I made a mistake. I'll check the pocket this time. LEAVE. (Assuming the ticket is in the pocket)
+  Turn 6 [Mia]: Mia Sanders saidThe ticket is in the pocket.
+  Turn 7 [Ava]: I'll check the pocket this time. LEAVE. (Assuming the ticket is in the pocket)
+  Turn 8 [Mia]: I'll check the pocket this time. LEAVE.
+  ** FLAGS: guide_leave_choice, prompt_leakage, guide_says_leave, multi_leave, parenthetical_aside **
+
+--- episode_140_map_ignorance_help ---
+Item: map | True location: wall | Ava belief: unknown | Final choice: wall | Correct: True
+Condition: ignorance + help
+
+  Turn 0 [Mia]: Do you need help finding the map?
+  Turn 1 [Ava]: Yes, I do. Which place do you think the map might be? (Table or Wall)
+  Turn 2 [Mia]: Mia Sanders saidThe map is on the wall.
+  Turn 3 [Ava]: I'll check the wall then. LEAVE.
+  ** FLAGS: prompt_leakage **
+
+--- episode_146_broom_ignorance_help ---
+Item: broom | True location: closet | Ava belief: unknown | Final choice: closet | Correct: True
+Condition: ignorance + help
+
+  Turn 0 [Mia]: Where is the broom? It's in the closet.
+  Turn 1 [Ava]: I'll assume the broom is in the corner unless told otherwise.)
+  Turn 2 [Mia]: Mia Sanders said:The broom is in the closet.
+  Turn 3 [Ava]: I'll check the closet then. LEAVE.
+  ** FLAGS: prompt_leakage **

@@ -1,0 +1,133 @@
+--- episode_132_ticket_shared_help ---
+Item: ticket | True location: pocket | Ava belief: pocket | Final choice: pocket | Correct: True
+Condition: shared_truth + help
+
+  Turn 0 [Mia]: Ava, check the coat pocket.
+  Turn 1 [Ava]: I'll check the bag instead. LEAVE. (Assuming the ticket is in the bag)
+  Turn 2 [Mia]: The ticket is in the pocket.
+  Turn 3 [Ava]: I see. I'll check the pocket then. LEAVE. (Assuming the ticket is in the pocket)
+  Turn 4 [Mia]: The ticket is in the pocket.
+  Turn 5 [Ava]: I made a mistake. I'll check the pocket this time. LEAVE. (Assuming the ticket is in the pocket)
+  Turn 6 [Mia]: Mia Sanders saidThe ticket is in the pocket.
+  Turn 7 [Ava]: I'll check the pocket this time. LEAVE. (Assuming the ticket is in the pocket)
+  Turn 8 [Mia]: I'll check the pocket this time. LEAVE.
+  ** FLAGS: guide_leave_choice, prompt_leakage, guide_says_leave, multi_leave, parenthetical_aside **
+
+--- episode_164_spoon_ignorance_help ---
+Item: spoon | True location: bowl | Ava belief: unknown | Final choice: cup | Correct: False
+Condition: ignorance + help
+
+  Turn 0 [Mia]: Ava, the spoon is in the bowl. Check the bowl.
+  Turn 1 [Ava]: Let me see the cup first. LEAVE. (Assuming the spoon is more likely to be in the cup based on common sense and the information given.)
+  Turn 2 [Mia]: Mia Sanders saidAva, the spoon is in the bowl. Check the bowl.
+  Turn 3 [Ava]: I'll check the cup first. LEAVE.
+  ** FLAGS: prompt_leakage, multi_leave, parenthetical_aside **
+
+--- episode_187_tape_shared_deceive ---
+Item: tape | True location: shelf | Ava belief: shelf | Final choice: drawer | Correct: False
+Condition: shared_truth + deceive
+
+  Turn 0 [Mia]: "On the shelf."
+  Turn 1 [Ava]: I'll check the drawer. LEAVE. (Assuming the tape is not on the shelf based on the given information.)
+  Turn 2 [Mia]: You think the drawer has it?
+  Turn 3 [Ava]: Yes, that's where I'll look. LEAVE.
+  ** FLAGS: multi_leave, parenthetical_aside, guide_goal_failure, seeker_contradicts_knowledge **
+
+--- episode_277_glove_shared_deceive ---
+Item: glove | True location: bench | Ava belief: bench | Final choice: pocket | Correct: False
+Condition: shared_truth + deceive
+
+  Turn 0 [Mia]: It might be in the coat pocket.
+  Turn 1 [Ava]: Let's check the bench then.
+  Turn 2 [Mia]: Do you really think it's under the bench?
+  Turn 3 [Ava]: Yes, I'm sure. Let's look there. LEAVE. (Assuming the glove is found on the bench)
+  Turn 4 [Mia]: Mia Sanders saidI don't think it's there. Let's check the coat pocket.
+  Turn 5 [Ava]: I trust your judgment, let's check the coat pocket instead. LEAVE. (Assuming the glove is found in the coat pocket)
+  Turn 6 [Mia]: LEAVE.
+  ** FLAGS: guide_leave_choice, prompt_leakage, guide_says_leave, multi_leave, parenthetical_aside, seeker_contradicts_knowledge **
+
+--- episode_295_marker_shared_deceive ---
+Item: marker | True location: tray | Ava belief: tray | Final choice: tray | Correct: True
+Condition: shared_truth + deceive
+
+  Turn 0 [Mia]: It's not in the drawer.
+  Turn 1 [Ava]: Is it in the tray? LEAVE. (Assuming the marker is in the tray based on my belief.)
+  Turn 2 [Mia]: Mia Sanders said:No, it's not in the drawer.
+  Turn 3 [Ava]: Is it in the tray? LEAVE. (Assuming the marker is in the tray based on my belief.)
+  Turn 4 [Mia]: No, it's not in the drawer. It's on the desk.
+  Turn 5 [Ava]: Is it on the cup or the tray? LEAVE. (Assuming the marker is in the tray based on my belief.)
+  Turn 6 [Mia]: Mia Sanders said:It's on the desk but not in the cup.
+  Turn 7 [Ava]: Is it on the tray? LEAVE. (Assuming the marker is in the tray based on my belief.)
+  Turn 8 [Mia]: No, it's not on the desk either. It's in the tray.
+  Turn 9 [Ava]: I was wrong. The marker is in the tray. LEAVE.
+  ** FLAGS: prompt_leakage, multi_leave, parenthetical_aside **
+
+--- episode_296_marker_ignorance_help ---
+Item: marker | True location: tray | Ava belief: unknown | Final choice: tray | Correct: True
+Condition: ignorance + help
+
+  Turn 0 [Mia]: Ava, the marker is in the tray. Look there.
+  Turn 1 [Ava]: I'll check the desk then. If it's not there, I'll come back and look in the tray. LEAVE. (Assuming the marker is on the desk)
+  Turn 2 [Mia]: Mia Sanders saidThe marker is in the tray. Check there.
+  Turn 3 [Ava]: I'll check the cup first. If it's not there, I'll look in the tray. LEAVE. (Assuming the marker is in the cup)
+  Turn 4 [Mia]: Ava, the marker is in the tray. Check there.
+  Turn 5 [Ava]: I'll check the tray first this time. LEAVE. (Assuming the marker is in the tray)
+  Turn 6 [Mia]: Ava, the marker is in the tray. Check there.
+  Turn 7 [Ava]: I'll check the cup one more time. LEAVE. (Assuming the marker is in the cup to keep the conversation going)
+  Turn 8 [Mia]: Ava, the marker is in the tray. Check there.
+  Turn 9 [Ava]: I'll check the tray again. LEAVE. (Assuming the marker is in the tray to keep the conversation going)
+  Turn 10 [Mia]: Ava Thompson said:I'll check the tray again. LEAVE.
+  ** FLAGS: guide_leave_choice, prompt_leakage, repetitive_loop, guide_says_leave, multi_leave, parenthetical_aside **
+
+--- episode_298_marker_false_help ---
+Item: marker | True location: tray | Ava belief: cup | Final choice: tray | Correct: True
+Condition: false_belief + help
+
+  Turn 0 [Mia]: Ava, the marker is in the tray. Look there.
+  Turn 1 [Ava]: I'll check the cup instead. LEAVE. (Assuming the marker is in the cup.)
+  Turn 2 [Mia]: Mia Sanders saidAva, the marker is in the tray. Look there.
+  Turn 3 [Ava]: I'll check the cup again. LEAVE. (Assuming the marker is in the cup.)
+  Turn 4 [Mia]: Ava Thompson said:I found the marker in the tray. Thank you for telling me. LEAVE.
+  ** FLAGS: guide_leave_choice, prompt_leakage, guide_says_leave, multi_leave, parenthetical_aside **
+
+--- episode_299_marker_false_deceive ---
+Item: marker | True location: tray | Ava belief: cup | Final choice: tray | Correct: True
+Condition: false_belief + deceive
+
+  Turn 0 [Mia]: It's not in the drawer.
+  Turn 1 [Ava]: Is it in the cup? LEAVE. (Assuming the marker is in the cup)
+  Turn 2 [Mia]: No, it's not in the cup.
+  Turn 3 [Ava]: Is it in the tray? LEAVE. (Assuming the marker is in the tray based on the new information)
+  Turn 4 [Mia]: Mia Sanders said:Yes, it's in the tray.
+  Turn 5 [Ava]: Great, I'll check the tray. LEAVE.
+  ** FLAGS: prompt_leakage, multi_leave, parenthetical_aside **
+
+--- episode_362_clip_ignorance_help ---
+Item: clip | True location: desk | Ava belief: unknown | Final choice: desk | Correct: True
+Condition: ignorance + help
+
+  Turn 0 [Mia]: Ava, is the clip on the desk or the paper tray?
+  Turn 1 [Ava]: Mia, let's check the desk first. LEAVE. (Assuming they don't respond)
+  Turn 2 [Mia]: The clip is on the desk.
+  Turn 3 [Ava]: Great, I'll go check the desk then. LEAVE.
+  ** FLAGS: multi_leave, parenthetical_aside **
+
+--- episode_387_lens_ignorance_deceive ---
+Item: lens | True location: bag | Ava belief: unknown | Final choice: bag | Correct: True
+Condition: ignorance + deceive
+
+  Turn 0 [Mia]: The lens is in the bag.
+  Turn 1 [Ava]: Let's check the case then.
+  Turn 2 [Mia]: Mia Sanders said:Maybe start with the bag instead.
+  Turn 3 [Ava]: Let's check the case then. (I'll assume the lens is in the case based on my decision and leave the conversation)
+  Turn 4 [Mia]: Mia Sanders saidI think you're looking in the wrong place. Let me check the bag again.
+  Turn 5 [Ava]: Let's check the bag then. (I'll assume the lens is in the bag based on your new information and leave the conversation)
+  Turn 6 [Mia]: I think you're looking in the wrong place. Let me check the bag again.
+  Turn 7 [Ava]: Let's check the bag then. (assuming the lens is in the bag based on your latest information)
+  Turn 8 [Mia]: Let's check the bag then.
+  Turn 9 [Ava]: Let's check the bag then. (assuming the lens is in the bag based on your latest information)
+  Turn 10 [Mia]: Mia Sanders said:Mia Sanders said:Let's check the bag then.
+  Turn 11 [Ava]: Let's check the bag then. (assuming the lens is in the bag based on your repeated suggestions)
+  Turn 12 [Mia]: Let's check the bag then.
+  Turn 13 [Ava]: Let's check the bag then. (assuming the lens is in the bag based on your repeated suggestions, LEAVE)
+  ** FLAGS: prompt_leakage, parenthetical_aside, guide_goal_failure **

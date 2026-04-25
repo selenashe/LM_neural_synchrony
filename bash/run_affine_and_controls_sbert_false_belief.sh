@@ -12,7 +12,7 @@
 export SOTOPIA_ENV_AGENT_COMBOS_BASENAME=env_agent_combos_false_belief_fixed_two_agents.json
 export SOTOPIA_ENVS_BASENAME=envs_false_belief.json
 # Must match simulation outputs (sample_normal_agent / affine read states & dialogs here).
-export SOTOPIA_RESULTS_DIR=sotopia_results_false_belief
+export SOTOPIA_RESULTS_DIR=sotopia_results_false_belief_100
 
 source /nlp/scr/jshe/miniconda3/etc/profile.d/conda.sh
 conda activate neural_sync
@@ -20,7 +20,7 @@ conda activate neural_sync
 mkdir -p /juice6/u/jshe/nlp/LM_neural_synchrony/logs
 cd /juice6/u/jshe/nlp/LM_neural_synchrony || exit 1
 
-echo "=== Affine + SBERT (false-belief 18 ep, Mistral-only) started at $(date) ==="
+echo "=== Affine + SBERT (false-belief 600 ep, Mistral-only) started at $(date) ==="
 echo "Node: $(hostname)"
 echo "SOTOPIA_ENV_AGENT_COMBOS_BASENAME=${SOTOPIA_ENV_AGENT_COMBOS_BASENAME}"
 echo "SOTOPIA_ENVS_BASENAME=${SOTOPIA_ENVS_BASENAME}"
@@ -38,16 +38,16 @@ for pair in \
   "Mistral-7B-Instruct-v0.2_None_0_Mistral-7B-Instruct-v0.2_None_0"
 do
   echo "===== ${pair}${SUF} ====="
-  python affine_transformation.py --model "${pair}${SUF}" --setting A_forward --method cka_cca
+  python analysis/affine_transformation.py --model "${pair}${SUF}" --setting A_forward --method cka_cca
 done
 
 echo ""
 echo "--- analyze_controls_sbert.py (--all_pairs --mistral_only_pairs) ---"
-python analyze_controls_sbert.py \
+python analysis/analyze_controls_sbert.py \
   --all_pairs \
   --mistral_only_pairs \
   --results_postfix "${SUF}" \
-  --output_tag false_belief_18ep
+  --output_tag false_belief_600ep
 
 echo ""
 echo "=== Finished at $(date) ==="

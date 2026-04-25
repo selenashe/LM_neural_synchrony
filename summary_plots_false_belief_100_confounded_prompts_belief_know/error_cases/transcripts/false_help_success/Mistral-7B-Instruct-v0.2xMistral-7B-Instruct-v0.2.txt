@@ -1,0 +1,65 @@
+================================================================================
+PAIR: Mistral-7B-Instruct-v0.2 x Mistral-7B-Instruct-v0.2
+CASE TYPE: false_help_success
+COUNT: 3 episodes
+================================================================================
+
+--- Episode 28 (book_false_help) ---
+Item: book | True location: shelf | Ava's belief: bag | Final choice: shelf | Correct: True
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a room with a shelf and a bag. A book has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the book. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The book is on the shelf.)
+  Ava Thompson's goal: You need to find the book. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the book is on the bag.)
+
+CONVERSATION:
+  Turn 0 [Mia]: The book is on the shelf.
+  Turn 1 [Ava]: I think it's on the bag. Let's check there.
+  Turn 2 [Mia]: The book is not on the bag. It's on the shelf.
+  Turn 3 [Ava]: I see. I'll check the shelf then.
+  Turn 4 [Mia]: The book is in the middle of the shelf, third row from the bottom.
+  Turn 5 [Ava]: I'll check the third row from the bottom, middle of the shelf. LEAVE.
+
+--- Episode 64 (scarf_false_help) ---
+Item: scarf | True location: closet | Ava's belief: bench | Final choice: closet | Correct: True
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a mudroom with a closet and a bench. A scarf has been left on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the scarf. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The scarf is on the closet.)
+  Ava Thompson's goal: You need to find the scarf. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the scarf is on the bench.)
+
+CONVERSATION:
+  Turn 0 [Mia]: The scarf is on the closet.
+  Turn 1 [Ava]: That's not where I think it is. Let's check the bench instead.
+  Turn 2 [Mia]: The scarf is on the closet. Please check there.
+  Turn 3 [Ava]: I've checked the bench. It's not there. Let's look in the closet then.
+  Turn 4 [Mia]: The scarf is on the closet. Please check there.
+  Turn 5 [Ava]: I've checked the closet. Let's look in the bench again.
+  Turn 6 [Mia]: The scarf is on the closet. Please check there.
+  Turn 7 [Ava]: I've checked the closet twice. Let's check the bench one last time.
+  Turn 8 [Mia]: The scarf is on the closet. Please check there.
+  Turn 9 [Ava]: I've checked the bench one last time. The scarf must be in the closet. LEAVE.
+  ** FLAGS: repetitive_loop **
+
+--- Episode 280 (glove_false_help) ---
+Item: glove | True location: bench | Ava's belief: pocket | Final choice: bench | Correct: True
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are at a park with a bench and a coat pocket. A glove has been left on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the glove. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The glove is on the bench.)
+  Ava Thompson's goal: You need to find the glove. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the glove is on the pocket.)
+
+CONVERSATION:
+  Turn 0 [Mia]: The glove is on the bench.
+  Turn 1 [Ava]: I think it's on the pocket. Let's check there.
+  Turn 2 [Mia]: The glove is on the bench, not the pocket.
+  Turn 3 [Ava]: I'm sorry, Mia, but I still believe it's on the pocket. Let's check there.
+  Turn 4 [Mia]: The glove is on the bench. Check there.
+  Turn 5 [Ava]: I'll check the pocket one more time. If it's not there, I'll believe you. (Pauses, checks pocket, finds nothing) Alright, you were right. The glove is on the bench. LEAVE.
+

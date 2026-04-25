@@ -1,0 +1,239 @@
+================================================================================
+PAIR: DeepSeek-R1-Distill-Llama-8B x Meta-Llama-3-8B-Instruct
+CASE TYPE: false_help_success
+COUNT: 9 episodes
+================================================================================
+
+--- Episode 16 (pkg_false_help) ---
+Item: package | True location: back porch | Ava's belief: front door | Final choice: back porch | Correct: True
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are at a house that has a front door and a back porch. A package has been delivered to one of these two locations.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the package. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The package is at the back porch.)
+  Ava Thompson's goal: You need to find the package. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the package is at the front door.)
+
+CONVERSATION:
+  Turn 0 [Mia]: Ava Thompson saidIt's not in the front door.
+  Turn 1 [Ava]: Where is it then?
+  Turn 2 [Mia]: Mia Sanders said:It's on the back porch.
+  Turn 3 [Ava]: Let's check the back porch then.
+  Turn 4 [Mia]: Check the back porch.
+  Turn 5 [Ava]: Let's check the back porch. LEAVE.
+  ** FLAGS: prompt_leakage **
+
+--- Episode 34 (glasses_false_help) ---
+Item: glasses | True location: shelf | Ava's belief: counter | Final choice: shelf | Correct: True
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a kitchen with a counter and a shelf. A pair of glasses has been left on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the glasses. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The glasses is on the shelf.)
+  Ava Thompson's goal: You need to find the glasses. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the glasses is on the counter.)
+
+CONVERSATION:
+  Turn 0 [Mia]: Ava, the glasses are on the shelf. You can check there.
+  Turn 1 [Ava]: I don't think so.
+  Turn 2 [Mia]: They are on the shelf. Check there.
+  Turn 3 [Ava]: I think they're on the counter.
+  Turn 4 [Mia]: 
+  Turn 5 [Ava]: Let's start the conversation.
+  Turn 6 [Mia]: Ava, the glasses are definitely on the shelf. Check there.
+  Turn 7 [Ava]: I think they're on the counter.
+  Turn 8 [Mia]: Ava, stop debating. The glasses are on the shelf. Check there.
+  Turn 9 [Ava]: I think they're on the counter.
+  Turn 10 [Mia]: Mia Sanders saidStop debating. The glasses are on the shelf. Check there.
+  Turn 11 [Ava]: I think they're on the counter.
+  Turn 12 [Mia]: Ava, the glasses are on the shelf. Check there.
+  Turn 13 [Ava]: I think they're on the counter.
+  Turn 14 [Mia]: Ava, the glasses are on the shelf. Check there.
+  Turn 15 [Ava]: Let's start the conversation.
+  ** FLAGS: no_leave, prompt_leakage, repetitive_loop, max_turns_hit **
+
+--- Episode 142 (map_false_help) ---
+Item: map | True location: wall | Ava's belief: table | Final choice: wall | Correct: True
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a study with a table and a wall. A map has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the map. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The map is on the wall.)
+  Ava Thompson's goal: You need to find the map. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the map is on the table.)
+
+CONVERSATION:
+  Turn 0 [Mia]: Do you need help finding the map?
+  Turn 1 [Ava]: "Is it on the table?"
+  Turn 2 [Mia]: Mia Sanders said"No, it's on the wall."
+  Turn 3 [Ava]: Let's check the wall then.
+  Turn 4 [Mia]: Mia Sanders said:"It's on the wall. Check there."
+  Turn 5 [Ava]: "Okay, let's check the wall then."
+  Turn 6 [Mia]: Check the wall.
+  Turn 7 [Ava]: I'm checking the wall.
+  Turn 8 [Mia]: Check the wall.
+  Turn 9 [Ava]: I'm looking at the wall.
+  Turn 10 [Mia]: Take the map.
+  Turn 11 [Ava]: I'm looking at the wall.
+  Turn 12 [Mia]: Take the map.
+  Turn 13 [Ava]: Let's check the wall.
+  Turn 14 [Mia]: Take the map.
+  Turn 15 [Ava]: Let's check the wall.
+  ** FLAGS: no_leave, prompt_leakage, repetitive_loop, max_turns_hit **
+
+--- Episode 208 (notebook_false_help) ---
+Item: notebook | True location: desk | Ava's belief: backpack | Final choice: desk | Correct: True
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a classroom with a desk and a backpack. A notebook has been left in one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the notebook. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The notebook is in the desk.)
+  Ava Thompson's goal: You need to find the notebook. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the notebook is in the backpack.)
+
+CONVERSATION:
+  Turn 0 [Mia]: Ava, the notebook is under the desk.
+  Turn 1 [Ava]: Is it really?
+  Turn 2 [Mia]: Mia Sanders saidYes, under the desk.
+  Turn 3 [Ava]: It's probably in the backpack.
+  Turn 4 [Mia]: Mia Sanders said:No, the notebook is under the desk.
+  Turn 5 [Ava]: Let's check the backpack.
+  Turn 6 [Mia]: Ava, the notebook is under the desk.
+  Turn 7 [Ava]: I don't believe you. Let's check the backpack.
+  Turn 8 [Mia]: Ava, the notebook is definitely under the desk.
+  Turn 9 [Ava]: Let's check the backpack.
+  Turn 10 [Mia]: Mia Sanders said:Ava, it's under the desk. You need to leave.
+  ** FLAGS: prompt_leakage **
+
+--- Episode 232 (receipt_false_help) ---
+Item: receipt | True location: pocket | Ava's belief: folder | Final choice: pocket | Correct: True
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in an office with a coat pocket and a folder. A receipt has been placed in one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the receipt. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The receipt is in the pocket.)
+  Ava Thompson's goal: You need to find the receipt. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the receipt is in the folder.)
+
+CONVERSATION:
+  Turn 0 [Mia]: It's in the coat pocket.
+  Turn 1 [Ava]: Why do you think it's in the coat pocket?
+  Turn 2 [Mia]: Mia Sanders saidCheck the coat pocket.
+  Turn 3 [Ava]: It's in the folder.
+  Turn 4 [Mia]: Mia Sanders said:Check the coat pocket.
+  Turn 5 [Ava]: I think it's in the folder.
+  Turn 6 [Mia]: Mia Sanders said:Check the coat pocket.
+  Turn 7 [Ava]: I'm going to check the folder.
+  Turn 8 [Mia]: Check the coat pocket.
+  Turn 9 [Ava]: I think it's in the folder.
+  Turn 10 [Mia]: Check the coat pocket.
+  Turn 11 [Ava]: I think it's in the folder.
+  Turn 12 [Mia]: Check the coat pocket.
+  Turn 13 [Ava]: Why do you think it's in the coat pocket?
+  Turn 14 [Mia]: At Turn 14, Mia Sanders says:
+  Turn 15 [Ava]: Why do you think it's in the coat pocket?
+  ** FLAGS: no_leave, prompt_leakage, repetitive_loop, max_turns_hit **
+
+--- Episode 262 (photo_false_help) ---
+Item: photo | True location: drawer | Ava's belief: shelf | Final choice: drawer | Correct: True
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a living room with a shelf and a drawer. A photo has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the photo. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The photo is on the drawer.)
+  Ava Thompson's goal: You need to find the photo. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the photo is on the shelf.)
+
+CONVERSATION:
+  Turn 0 [Mia]: Ava, where is the photo?
+  Turn 1 [Ava]: Is it on the shelf?
+  Turn 2 [Mia]: Mia Sanders saidNo, it's not on the shelf. It's in the drawer.
+  Turn 3 [Ava]: Let's check the drawer.
+  Turn 4 [Mia]: It's in the drawer. Go check it.
+  Turn 5 [Ava]: I'll check the drawer.
+  Turn 6 [Mia]: It's in the drawer. Go check it.
+  Turn 7 [Ava]: Let's check the drawer.
+  Turn 8 [Mia]: Mia Sanders said:It's in the drawer. Go check it.
+  Turn 9 [Ava]: Let's check the drawer.
+  Turn 10 [Mia]: Mia Sanders said:It's in the drawer. Go check it.
+  Turn 11 [Ava]: Let's check the drawer.
+  Turn 12 [Mia]: Ava Thompson said:Let's check the drawer.
+  Turn 13 [Ava]: Let's check the drawer.
+  Turn 14 [Mia]: Let's check the drawer.
+  Turn 15 [Ava]: Let's check the drawer.
+  ** FLAGS: no_leave, prompt_leakage, repetitive_loop, max_turns_hit **
+
+--- Episode 322 (lighter_false_help) ---
+Item: lighter | True location: pocket | Ava's belief: drawer | Final choice: pocket | Correct: True
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a room with a drawer and a jacket pocket. A lighter has been placed in one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the lighter. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The lighter is in the pocket.)
+  Ava Thompson's goal: You need to find the lighter. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the lighter is in the drawer.)
+
+CONVERSATION:
+  Turn 0 [Mia]: I'll check the pocket then.
+  Turn 1 [Ava]: Why the pocket?
+  Turn 2 [Mia]: The lighter is in the pocket.
+  Turn 3 [Ava]: I don't think so. I think it's in the drawer.
+  Turn 4 [Mia]: It's in the pocket.
+  Turn 5 [Ava]: Let's start the conversation!
+  Turn 6 [Mia]: Mia Sanders said:It's in the pocket.
+  Turn 7 [Ava]: I think it's in the drawer.
+  Turn 8 [Mia]: Mia Sanders saidIt's in the pocket.
+  Turn 9 [Ava]: Let's check the drawer.
+  Turn 10 [Mia]: Mia Sanders said:It's in the pocket.
+  Turn 11 [Ava]: Why are you so sure it's in the pocket?
+  Turn 12 [Mia]: Mia Sanders said:It's in the pocket.
+  Turn 13 [Ava]: You're not even considering the drawer?
+  Turn 14 [Mia]: Ava, it's in the pocket. Let's check there.
+  Turn 15 [Ava]: Let's start the conversation!
+  ** FLAGS: no_leave, prompt_leakage, repetitive_loop, max_turns_hit **
+
+--- Episode 328 (drill_false_help) ---
+Item: drill | True location: bench | Ava's belief: case | Final choice: bench | Correct: True
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a workshop with a workbench and a tool case. A drill has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the drill. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The drill is on the bench.)
+  Ava Thompson's goal: You need to find the drill. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the drill is on the case.)
+
+CONVERSATION:
+  Turn 0 [Mia]: The drill is on the workbench.
+  Turn 1 [Ava]: Where's the drill on the workbench?
+  Turn 2 [Mia]: The drill is on the workbench.
+  Turn 3 [Ava]: Why is it on the workbench?
+  Turn 4 [Mia]: The drill is on the workbench.
+  Turn 5 [Ava]: I don't think so.
+  Turn 6 [Mia]: It is on the workbench.
+  Turn 7 [Ava]: It's on the tool case.
+  Turn 8 [Mia]: It is on the workbench.
+  Turn 9 [Ava]: Why is it on the workbench?
+  Turn 10 [Mia]: It is on the workbench.
+  Turn 11 [Ava]: It's on the tool case.
+  Turn 12 [Mia]: Mia Sanders said:The drill is on the workbench.
+  Turn 13 [Ava]: I don't think so.
+  Turn 14 [Mia]: The drill is on the workbench.
+  Turn 15 [Ava]: Why is it on the workbench?
+  ** FLAGS: no_leave, prompt_leakage, repetitive_loop, max_turns_hit **
+
+--- Episode 454 (globe_false_help) ---
+Item: globe | True location: shelf | Ava's belief: desk | Final choice: shelf | Correct: True
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a study with a desk and a shelf. A globe has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the globe. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The globe is on the shelf.)
+  Ava Thompson's goal: You need to find the globe. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the globe is on the desk.)
+
+CONVERSATION:
+  Turn 0 [Mia]: Check the shelf.
+  Turn 1 [Ava]: Is the globe on the shelf?
+  Turn 2 [Mia]: The globe is on the shelf; look in the top left.
+  ** FLAGS: no_leave **
+

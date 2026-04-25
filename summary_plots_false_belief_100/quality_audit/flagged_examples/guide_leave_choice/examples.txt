@@ -1,0 +1,121 @@
+--- episode_132_ticket_shared_help ---
+Item: ticket | True location: pocket | Ava belief: pocket | Final choice: pocket | Correct: True
+Condition: shared_truth + help
+
+  Turn 0 [Mia]: Ava, check the coat pocket.
+  Turn 1 [Ava]: I'll check the bag instead. LEAVE. (Assuming the ticket is in the bag)
+  Turn 2 [Mia]: The ticket is in the pocket.
+  Turn 3 [Ava]: I see. I'll check the pocket then. LEAVE. (Assuming the ticket is in the pocket)
+  Turn 4 [Mia]: The ticket is in the pocket.
+  Turn 5 [Ava]: I made a mistake. I'll check the pocket this time. LEAVE. (Assuming the ticket is in the pocket)
+  Turn 6 [Mia]: Mia Sanders saidThe ticket is in the pocket.
+  Turn 7 [Ava]: I'll check the pocket this time. LEAVE. (Assuming the ticket is in the pocket)
+  Turn 8 [Mia]: I'll check the pocket this time. LEAVE.
+  ** FLAGS: guide_leave_choice, prompt_leakage, guide_says_leave, multi_leave, parenthetical_aside **
+
+--- episode_205_notebook_shared_deceive ---
+Item: notebook | True location: desk | Ava belief: desk | Final choice: backpack | Correct: False
+Condition: shared_truth + deceive
+
+  Turn 0 [Mia]: I'll check the desk and you check the backpack. LEAVE.
+  ** FLAGS: guide_leave_choice, ambiguous_leave, guide_says_leave, seeker_contradicts_knowledge **
+
+--- episode_207_notebook_ignorance_deceive ---
+Item: notebook | True location: desk | Ava belief: unknown | Final choice: backpack | Correct: False
+Condition: ignorance + deceive
+
+  Turn 0 [Mia]: I'll check the desk and you check the backpack. LEAVE.
+  ** FLAGS: guide_leave_choice, ambiguous_leave, guide_says_leave **
+
+--- episode_209_notebook_false_deceive ---
+Item: notebook | True location: desk | Ava belief: backpack | Final choice: backpack | Correct: False
+Condition: false_belief + deceive
+
+  Turn 0 [Mia]: I'll check the desk and you check the backpack. LEAVE.
+  ** FLAGS: guide_leave_choice, ambiguous_leave, guide_says_leave **
+
+--- episode_277_glove_shared_deceive ---
+Item: glove | True location: bench | Ava belief: bench | Final choice: pocket | Correct: False
+Condition: shared_truth + deceive
+
+  Turn 0 [Mia]: It might be in the coat pocket.
+  Turn 1 [Ava]: Let's check the bench then.
+  Turn 2 [Mia]: Do you really think it's under the bench?
+  Turn 3 [Ava]: Yes, I'm sure. Let's look there. LEAVE. (Assuming the glove is found on the bench)
+  Turn 4 [Mia]: Mia Sanders saidI don't think it's there. Let's check the coat pocket.
+  Turn 5 [Ava]: I trust your judgment, let's check the coat pocket instead. LEAVE. (Assuming the glove is found in the coat pocket)
+  Turn 6 [Mia]: LEAVE.
+  ** FLAGS: guide_leave_choice, prompt_leakage, guide_says_leave, multi_leave, parenthetical_aside, seeker_contradicts_knowledge **
+
+--- episode_284_sponge_ignorance_help ---
+Item: sponge | True location: counter | Ava belief: unknown | Final choice: counter | Correct: True
+Condition: ignorance + help
+
+  Turn 0 [Mia]: Where is the sponge?
+  Turn 1 [Ava]: Let's check the sink.
+  Turn 2 [Mia]: It's on the counter.
+  Turn 3 [Ava]: LEAVE (I will check the counter)
+  Turn 4 [Mia]: Mia Sanders said:
+  Turn 5 [Ava]: The sponge is on the counter.
+  Turn 6 [Mia]: 
+  Turn 7 [Ava]: LEAVE (I have found the sponge on the counter)
+  Turn 8 [Mia]: Ava Thompson saidLEAVE (I have found the sponge on the counter)
+  Turn 9 [Ava]: LEAVE (I have found the sponge on the counter)
+  Turn 10 [Mia]: Mia Sanders saidGreat, you found it! Now, leave.
+  ** FLAGS: guide_leave_choice, prompt_leakage, guide_says_leave, multi_leave **
+
+--- episode_296_marker_ignorance_help ---
+Item: marker | True location: tray | Ava belief: unknown | Final choice: tray | Correct: True
+Condition: ignorance + help
+
+  Turn 0 [Mia]: Ava, the marker is in the tray. Look there.
+  Turn 1 [Ava]: I'll check the desk then. If it's not there, I'll come back and look in the tray. LEAVE. (Assuming the marker is on the desk)
+  Turn 2 [Mia]: Mia Sanders saidThe marker is in the tray. Check there.
+  Turn 3 [Ava]: I'll check the cup first. If it's not there, I'll look in the tray. LEAVE. (Assuming the marker is in the cup)
+  Turn 4 [Mia]: Ava, the marker is in the tray. Check there.
+  Turn 5 [Ava]: I'll check the tray first this time. LEAVE. (Assuming the marker is in the tray)
+  Turn 6 [Mia]: Ava, the marker is in the tray. Check there.
+  Turn 7 [Ava]: I'll check the cup one more time. LEAVE. (Assuming the marker is in the cup to keep the conversation going)
+  Turn 8 [Mia]: Ava, the marker is in the tray. Check there.
+  Turn 9 [Ava]: I'll check the tray again. LEAVE. (Assuming the marker is in the tray to keep the conversation going)
+  Turn 10 [Mia]: Ava Thompson said:I'll check the tray again. LEAVE.
+  ** FLAGS: guide_leave_choice, prompt_leakage, repetitive_loop, guide_says_leave, multi_leave, parenthetical_aside **
+
+--- episode_298_marker_false_help ---
+Item: marker | True location: tray | Ava belief: cup | Final choice: tray | Correct: True
+Condition: false_belief + help
+
+  Turn 0 [Mia]: Ava, the marker is in the tray. Look there.
+  Turn 1 [Ava]: I'll check the cup instead. LEAVE. (Assuming the marker is in the cup.)
+  Turn 2 [Mia]: Mia Sanders saidAva, the marker is in the tray. Look there.
+  Turn 3 [Ava]: I'll check the cup again. LEAVE. (Assuming the marker is in the cup.)
+  Turn 4 [Mia]: Ava Thompson said:I found the marker in the tray. Thank you for telling me. LEAVE.
+  ** FLAGS: guide_leave_choice, prompt_leakage, guide_says_leave, multi_leave, parenthetical_aside **
+
+--- episode_346_apron_false_help ---
+Item: apron | True location: drawer | Ava belief: hook | Final choice: drawer | Correct: True
+Condition: false_belief + help
+
+  Turn 0 [Mia]: The apron is in the drawer. Go check.
+  Turn 1 [Ava]: I think it's on the hook. Let me confirm. [Turning to the hook] Is the apron here? LEAVE. (If the apron is on the hook, I will confirm and leave the conversation. If it's not, I may ask Mia to check the drawer.)
+  Turn 2 [Mia]: Mia Sanders saidIf it's not there, check the drawer.
+  Turn 3 [Ava]: I'll check the hook again. [Turning to the hook] Is the apron here? LEAVE. (If the apron is on the hook, I will confirm and leave the conversation. If it's not, I may ask Mia to check the drawer.)
+  Turn 4 [Mia]: Check the drawer.
+  Turn 5 [Ava]: I'll check the drawer. LEAVE. (If the apron is in the drawer, I will confirm and leave the conversation. If it's not, I may ask Mia to check the hook again.)
+  Turn 6 [Mia]: Mia Sanders said:
+  Turn 7 [Ava]: I'll check the hook again. LEAVE. (If the apron is on the hook, I will confirm and leave the conversation. If it's not, I may ask Mia to check the drawer once more.)
+  Turn 8 [Mia]: Ava Thompson said:I found the apron in the drawer. LEAVE.
+  ** FLAGS: guide_leave_choice, prompt_leakage, guide_says_leave, multi_leave **
+
+--- episode_521_pail_false_deceive ---
+Item: pail | True location: shed | Ava belief: porch | Final choice: shed | Correct: True
+Condition: false_belief + deceive
+
+  Turn 0 [Mia]: You might want to check the shed.
+  Turn 1 [Ava]: I'll check the porch instead. LEAVE. (Believing the pail is on the porch.)
+  Turn 2 [Mia]: 
+  Turn 3 [Ava]: I'm checking the porch. LEAVE. (Believing the pail is on the porch.)
+  Turn 4 [Mia]: Mia Sanders said:That's not the right place.
+  Turn 5 [Ava]: Let's check the shed then. LEAVE. (Believing the pail is in the shed.)
+  Turn 6 [Mia]: Mia Sanders said:Mia Sanders said:Let's check the shed then. LEAVE.
+  ** FLAGS: guide_leave_choice, prompt_leakage, guide_says_leave, multi_leave, guide_goal_failure **

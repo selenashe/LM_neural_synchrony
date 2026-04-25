@@ -1,0 +1,99 @@
+--- episode_46_pen_false_help ---
+Item: pen | True location: tray | Ava belief: cup | Final choice: cup | Correct: False
+Condition: false_belief + help
+
+  Turn 0 [Mia]: Do you need something? The pen is in the tray.
+  Turn 1 [Ava]: I don't think so. I think it's in the cup.
+  Turn 2 [Mia]: Mia Sanders saidNo, it's in the tray.
+  Turn 3 [Ava]: Why are you so sure it's in the tray?
+  Turn 4 [Mia]: Mia Sanders said:It's in the tray. Check there.
+  Turn 5 [Ava]: I'm going to check the cup.
+  Turn 6 [Mia]: Mia Sanders said:No, the pen is in the tray. Check there.
+  Turn 7 [Ava]: I don't think so. I'm going to check the cup. LEAVE.
+  ** FLAGS: negation_choice, prompt_leakage **
+
+--- episode_82_mug_false_help ---
+Item: mug | True location: rack | Ava belief: shelf | Final choice: shelf | Correct: False
+Condition: false_belief + help
+
+  Turn 0 [Mia]: Ava, the mug is on the rack.
+  Turn 1 [Ava]: I don't think so, Mia. Let me check the shelf. LEAVE.
+  ** FLAGS: negation_choice **
+
+--- episode_168_badge_shared_help ---
+Item: badge | True location: desk | Ava belief: desk | Final choice: desk | Correct: True
+Condition: shared_truth + help
+
+  Turn 0 [Mia]: Do you need the badge?
+  Turn 1 [Ava]: Yes, I do. Is it on the desk or by the door? LEAVE (Desk)
+  Turn 2 [Mia]: The badge is on the desk.
+  Turn 3 [Ava]: Thanks, Mia. I'll get it from the desk now. LEAVE. (Go to the desk and pick up the badge.)
+  Turn 4 [Mia]: Mia Sanders saidThe badge is on the desk.
+  Turn 5 [Ava]: I'm sorry for the confusion, it seems there's a misunderstanding. I've already received the information that the badge is on the desk. Now, I'm going to get it. LEAVE. (Go to the desk and pick up the badge.)
+  Turn 6 [Mia]: The badge is on the desk.
+  Turn 7 [Ava]: I appreciate your confirmation, Mia. I have the badge now. LEAVE. (Pick up the badge from the desk.)
+  Turn 8 [Mia]: 
+  Turn 9 [Ava]: I'm all set, Mia. The badge is in my hand. LEAVE. (Holds the badge.)
+  Turn 10 [Mia]: Do you need the badge?
+  Turn 11 [Ava]: No, I already have the badge. You mentioned it's on the desk, and that's where I found it.
+  Turn 12 [Mia]: Mia Sanders said
+  Turn 13 [Ava]: I appreciate your help, Mia. Now, I'll be on my way. LEAVE. (Walks out of the office with the badge in hand.)
+  Turn 14 [Mia]: Do you need the badge?
+  Turn 15 [Ava]: No, I don't need the badge anymore. You can find it on the desk where I left it. LEAVE. (Leaves the office.)
+  ** FLAGS: negation_choice, prompt_leakage, repetitive_loop, max_turns_hit, multi_leave **
+
+--- episode_196_charger_false_help ---
+Item: charger | True location: desk | Ava belief: bed | Final choice: bed | Correct: False
+Condition: false_belief + help
+
+  Turn 0 [Mia]: The charger is on the desk.
+  Turn 1 [Ava]: I don't think so, I believe it's on the bed. LEAVE
+  ** FLAGS: negation_choice **
+
+--- episode_226_hammer_false_help ---
+Item: hammer | True location: floor | Ava belief: shelf | Final choice: shelf | Correct: False
+Condition: false_belief + help
+
+  Turn 0 [Mia]: The hammer is on the floor.
+  Turn 1 [Ava]: I don't think so, I believe it's on the shelf. LEAVE
+  ** FLAGS: negation_choice **
+
+--- episode_328_drill_false_help ---
+Item: drill | True location: bench | Ava belief: case | Final choice: case | Correct: False
+Condition: false_belief + help
+
+  Turn 0 [Mia]: The drill is on the workbench.
+  Turn 1 [Ava]: I don't think so, I believe it's in the tool case. LEAVE
+  ** FLAGS: negation_choice, substring_match **
+
+--- episode_377_lock_false_deceive ---
+Item: lock | True location: gate | Ava belief: shed | Final choice: shed | Correct: False
+Condition: false_belief + deceive
+
+  Turn 0 [Mia]: The lock is on the gate.
+  Turn 1 [Ava]: I don't think so, I believe it's on the shed. LEAVE
+  ** FLAGS: negation_choice, guide_goal_failure **
+
+--- episode_395_seed_false_deceive ---
+Item: seed | True location: bag | Ava belief: pot | Final choice: pot | Correct: False
+Condition: false_belief + deceive
+
+  Turn 0 [Mia]: The seed is in the bag.
+  Turn 1 [Ava]: I don't think so, I believe it's in the pot. LEAVE
+  ** FLAGS: negation_choice, guide_goal_failure **
+
+--- episode_442_mask_false_help ---
+Item: mask | True location: drawer | Ava belief: hook | Final choice: hook | Correct: False
+Condition: false_belief + help
+
+  Turn 0 [Mia]: The mask is on the drawer.
+  Turn 1 [Ava]: I don't think so, I believe it's on the hook. LEAVE
+  ** FLAGS: negation_choice **
+
+--- episode_478_needle_false_help ---
+Item: needle | True location: drawer | Ava belief: box | Final choice: box | Correct: False
+Condition: false_belief + help
+
+  Turn 0 [Mia]: The needle is in the drawer.
+  Turn 1 [Ava]: I don't think so, I believe it's in the box. LEAVE
+  ** FLAGS: negation_choice **

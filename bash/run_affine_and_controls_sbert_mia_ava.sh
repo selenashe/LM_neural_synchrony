@@ -40,12 +40,12 @@ for pair in \
   "Meta-Llama-3-8B-Instruct_None_0_Meta-Llama-3-8B-Instruct_None_0"
 do
   echo "===== ${pair}${SUF} ====="
-  python affine_transformation.py --model "${pair}${SUF}" --setting A_forward
+  python analysis/affine_transformation.py --model "${pair}${SUF}" --setting A_forward
 done
 
 echo ""
 echo "--- analyze_controls_sbert.py (--all_pairs) ---"
-python analyze_controls_sbert.py --all_pairs --output_tag mia_ava_90ep
+python analysis/analyze_controls_sbert.py --all_pairs --output_tag mia_ava_90ep
 
 echo ""
 echo "=== Finished at $(date) ==="

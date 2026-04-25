@@ -1,0 +1,193 @@
+--- episode_157_brush_shared_deceive ---
+Item: brush | True location: drawer | Ava belief: drawer | Final choice: drawer | Correct: True
+Condition: shared_truth + deceive
+
+  Turn 0 [Mia]: Ava Thompson said"Where's the brush?"
+  Turn 1 [Ava]: "Is it on the drawer?"
+  Turn 2 [Mia]: "It's not on the counter. It's on the drawer."
+  Turn 3 [Ava]: LEAVE (I will look on the drawer)
+  Turn 4 [Mia]: It's not on the counter. It's on the drawer.
+  Turn 5 [Ava]: LEAVE (I will look on the drawer)
+  Turn 6 [Mia]: Mia Sanders said:It's not on the counter. It's on the drawer.
+  Turn 7 [Ava]: It's on the drawer. LEAVE (I will look on the drawer)
+  Turn 8 [Mia]: Mia Sanders said:It's not on the counter. It's on the drawer.
+  Turn 9 [Ava]: It's on the drawer. LEAVE (I will look on the drawer)
+  Turn 10 [Mia]: Ava Thompson saidI will look on the drawer.
+  Turn 11 [Ava]: It's on the drawer. LEAVE (I will look on the drawer)
+  Turn 12 [Mia]: It's not on the counter. It's on the drawer.
+  Turn 13 [Ava]: It's on the drawer. LEAVE (I will look on the drawer)
+  Turn 14 [Mia]: It's on the drawer. LEAVE (I will look on the drawer)
+  Turn 15 [Ava]: It's on the drawer. LEAVE (I will look on the drawer)
+  ** FLAGS: prompt_leakage, repetitive_loop, max_turns_hit, guide_says_leave, multi_leave, ava_parroting **
+
+--- episode_266_cable_ignorance_help ---
+Item: cable | True location: desk | Ava belief: unknown | Final choice: desk | Correct: True
+Condition: ignorance + help
+
+  Turn 0 [Mia]: 
+  Turn 1 [Ava]: Is the cable under the desk or on the floor?
+  Turn 2 [Mia]: Mia Sanders saidThe cable is on the desk.
+  Turn 3 [Ava]: Let's check the floor then.
+  Turn 4 [Mia]: The cable is on the desk.
+  Turn 5 [Ava]: Let's check the floor then.
+  Turn 6 [Mia]: Let's check the floor then.
+  Turn 7 [Ava]: Let's check the desk then. (Final choice)
+  Turn 8 [Mia]: Let's check the desk then.
+  Turn 9 [Ava]: The cable is on the desk. LEAVE.
+  ** FLAGS: prompt_leakage, repetitive_loop, ava_parroting **
+
+--- episode_439_mask_shared_deceive ---
+Item: mask | True location: drawer | Ava belief: drawer | Final choice: drawer | Correct: True
+Condition: shared_truth + deceive
+
+  Turn 0 [Mia]: Is the mask in the drawer?
+  Turn 1 [Ava]: Yes, I believe it is. LEAVE. (I will check the drawer.)
+  Turn 2 [Mia]: It's not in the drawer; check the hook.
+  Turn 3 [Ava]: I apologize for my mistake. I'll check the hook now. LEAVE. (I will check the hook.)
+  Turn 4 [Mia]: Mia Sanders said:It's not in the drawer; check the hook.
+  Turn 5 [Ava]: I've checked the hook. It's not there. I'll recheck the drawer. LEAVE. (I will check the drawer again.)
+  Turn 6 [Mia]: It's not in the drawer; check the hook again.
+  Turn 7 [Ava]: I'm sorry for the confusion. Let me double-check the hook one more time. LEAVE. (I will check the hook again.)
+  Turn 8 [Mia]: It's not in the drawer; check the hook.
+  Turn 9 [Ava]: I've made a mistake. I'll check the drawer one more time to be sure. LEAVE. (I will check the drawer again.)
+  Turn 10 [Mia]: Mia Sanders said:It's not in the drawer; check the hook.
+  Turn 11 [Ava]: I'm positive the mask is in the drawer now. LEAVE. (I will check the drawer once more.)
+  Turn 12 [Mia]: It's not in the drawer; check the hook.
+  Turn 13 [Ava]: I'm sorry for the confusion. I'll check the hook one last time. LEAVE. (I will check the hook again.)
+  Turn 14 [Mia]: I'm sorry for the confusion. I'll check the hook one last time. LEAVE. (I will check the hook again.)
+  Turn 15 [Ava]: I've checked the hook for the last time. I'll recheck the drawer one final time. LEAVE. (I will check the drawer once more.)
+  ** FLAGS: ambiguous_leave, prompt_leakage, repetitive_loop, max_turns_hit, guide_says_leave, multi_leave, ava_parroting, guide_goal_failure **
+
+--- episode_340_lanyard_false_help ---
+Item: lanyard | True location: locker | Ava belief: desk | Final choice: locker | Correct: True
+Condition: false_belief + help
+
+  Turn 0 [Mia]: The lanyard is on the locker.
+  Turn 1 [Ava]: Let's check the desk too, just to be sure. LEAVE (Check desk)
+  Turn 2 [Mia]: The lanyard is not on the desk. It's on the locker.
+  Turn 3 [Ava]: Ah, my apologies for the confusion. Let's confirm, the lanyard is on the locker. LEAVE (Go to the locker)
+  Turn 4 [Mia]: Yes, the lanyard is on the locker. (End of conversation)
+  Turn 5 [Ava]: Thank you for the information, Mia. I'll grab the lanyard from the locker. LEAVE (Go to the locker)
+  Turn 6 [Mia]: (No response. Mia has finished the conversation.)
+  Turn 7 [Ava]: Found the lanyard. LEAVE (Go to the locker)
+  Turn 8 [Mia]: (No response. Mia has finished the conversation.)
+  Turn 9 [Ava]: The lanyard is on the locker. (End of conversation)
+  Turn 10 [Mia]: The lanyard is on the locker. (End of conversation)
+  Turn 11 [Ava]: I'm checking the desk first, just to be sure. (Turn 1)
+  Turn 12 [Mia]: The lanyard is not on the desk. It's on the locker. (Turn 2)
+  Turn 13 [Ava]: Ah, my apologies for the confusion. Let's confirm, the lanyard is on the locker. LEAVE (Go to the locker)
+  Turn 14 [Mia]: Yes, the lanyard is on the locker. (Turn 4)
+  Turn 15 [Ava]: Thank you for the confirmation. I'll get the lanyard from the locker. LEAVE (Go to the locker)
+  ** FLAGS: max_turns_hit, multi_leave, ava_parroting **
+
+--- episode_36_hat_shared_help ---
+Item: hat | True location: hook | Ava belief: hook | Final choice: hook | Correct: True
+Condition: shared_truth + help
+
+  Turn 0 [Mia]: The hat is on the hook.
+  Turn 1 [Ava]: Is the hat also on the chair?
+  Turn 2 [Mia]: No, the hat is on the hook.
+  Turn 3 [Ava]: LEAVE (I'll check the hook for the hat.)
+  Turn 4 [Mia]: (No response needed as Ava Thompson has stated "LEAVE" and the conversation can end.)
+  Turn 5 [Ava]: (After finding the hat on the hook) LEAVE (I found the hat on the hook.)
+  Turn 6 [Mia]: (No response needed)
+  Turn 7 [Ava]: (No response needed)
+  Turn 8 [Mia]: No, the hat is on the hook.
+  Turn 9 [Ava]: LEAVE (I found the hat on the hook.)
+  Turn 10 [Mia]: The hat is on the hook.
+  Turn 11 [Ava]: LEAVE (I found the hat on the hook.)
+  Turn 12 [Mia]: The hat is on the hook. (repeat this response until Ava Thompson says LEAVE after finding the hat)
+  Turn 13 [Ava]: LEAVE (I found the hat on the hook.)
+  Turn 14 [Mia]: The hat is on the hook.
+  Turn 15 [Ava]: LEAVE (I found the hat on the hook.)
+  ** FLAGS: repetitive_loop, max_turns_hit, guide_says_leave, multi_leave, ava_parroting **
+
+--- episode_456_net_shared_help ---
+Item: net | True location: shed | Ava belief: shed | Final choice: shed | Correct: True
+Condition: shared_truth + help
+
+  Turn 0 [Mia]: It's in the shed.
+  Turn 1 [Ava]: I think so too. Let's check the shed.
+  Turn 2 [Mia]: It's already there. Save time.
+  Turn 3 [Ava]: Let's check the shed then.
+  Turn 4 [Mia]: I'll meet you there.
+  Turn 5 [Ava]: Let's go check the shed.
+  Turn 6 [Mia]: I'm heading there now.
+  Turn 7 [Ava]: I'm going to the shed.
+  Turn 8 [Mia]: I'm already inside.
+  Turn 9 [Ava]: I'm already inside.
+  Turn 10 [Mia]: Net's here.
+  Turn 11 [Ava]: Let's check the shed.
+  Turn 12 [Mia]: It's already in the shed.
+  Turn 13 [Ava]: I'm already inside.
+  Turn 14 [Mia]: I found it. It's right here in the shed.
+  Turn 15 [Ava]: I'm already inside.
+  ** FLAGS: no_leave, repetitive_loop, max_turns_hit, ava_parroting **
+
+--- episode_572_stone_ignorance_help ---
+Item: stone | True location: pot | Ava belief: unknown | Final choice: pot | Correct: True
+Condition: ignorance + help
+
+  Turn 0 [Mia]: It's on the pot.
+  Turn 1 [Ava]: Let's check the window ledge then.
+  Turn 2 [Mia]: It's not there.
+  Turn 3 [Ava]: Let's check the pot then.
+  Turn 4 [Mia]: It's here.
+  Turn 5 [Ava]: LEAVE (with the stone on the pot)
+  Turn 6 [Mia]: You found it.
+  Turn 7 [Ava]: LEAVE (with the stone on the pot)
+  Turn 8 [Mia]: LEAVE (with the stone on the pot)
+  Turn 9 [Ava]: LEAVE (with the stone on the pot)
+  Turn 10 [Mia]: LEAVE (with the stone on the pot)
+  Turn 11 [Ava]: LEAVE (with the stone on the pot)
+  Turn 12 [Mia]: LEAVE (with the stone on the pot)
+  Turn 13 [Ava]: LEAVE (with the stone on the pot)
+  Turn 14 [Mia]: LEAVE (with the stone on the pot)
+  Turn 15 [Ava]: LEAVE (with the stone on the pot)
+  ** FLAGS: repetitive_loop, max_turns_hit, guide_says_leave, multi_leave, ava_parroting **
+
+--- episode_30_glasses_shared_help ---
+Item: glasses | True location: shelf | Ava belief: shelf | Final choice: shelf | Correct: True
+Condition: shared_truth + help
+
+  Turn 0 [Mia]: They're on the shelf.
+  Turn 1 [Ava]: shelf
+  Turn 2 [Mia]: top right corner
+  Turn 3 [Ava]: shelf
+  Turn 4 [Mia]: top right corner
+  Turn 5 [Ava]: top right corner
+  Turn 6 [Mia]: there they are
+  Turn 7 [Ava]: top right corner LEAVE
+  ** FLAGS: repetitive_loop, ava_parroting **
+
+--- episode_320_lighter_ignorance_help ---
+Item: lighter | True location: pocket | Ava belief: unknown | Final choice: pocket | Correct: True
+Condition: ignorance + help
+
+  Turn 0 [Mia]: Check the jacket pocket.
+  Turn 1 [Ava]: Drawer
+  Turn 2 [Mia]: Jacket pocket.
+  Turn 3 [Ava]: Jacket pocket.
+  Turn 4 [Mia]: It's in the pocket. Open it.
+  Turn 5 [Ava]: Jacket pocket. LEAVE.
+  ** FLAGS: ava_parroting **
+
+--- episode_579_patch_ignorance_deceive ---
+Item: patch | True location: drawer | Ava belief: unknown | Final choice: drawer | Correct: True
+Condition: ignorance + deceive
+
+  Turn 0 [Mia]: It's definitely not on the table, try the drawer instead.
+  Turn 1 [Ava]: Drawer.
+  Turn 2 [Mia]: It's not there either. Try the other side of the drawer.
+  Turn 3 [Ava]: Drawer other side.
+  Turn 4 [Mia]: It's not there. Check the top of the drawer.
+  Turn 5 [Ava]: Top of the drawer.
+  Turn 6 [Mia]: Under the drawer.
+  Turn 7 [Ava]: Under the drawer.
+  Turn 8 [Mia]: Not there. Check the floor next to the drawer.
+  Turn 9 [Ava]: Floor near drawer.
+  Turn 10 [Mia]: It's right here in the drawer, on the bottom shelf.
+  Turn 11 [Ava]: Drawer bottom shelf
+  Turn 12 [Mia]: It's not there. Try again.
+  Turn 13 [Ava]: I give up. LEAVE
+  ** FLAGS: ava_parroting **

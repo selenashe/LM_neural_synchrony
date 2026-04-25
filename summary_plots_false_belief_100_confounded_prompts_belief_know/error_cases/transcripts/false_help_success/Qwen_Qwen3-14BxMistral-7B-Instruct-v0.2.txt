@@ -1,0 +1,129 @@
+================================================================================
+PAIR: Qwen_Qwen3-14B x Mistral-7B-Instruct-v0.2
+CASE TYPE: false_help_success
+COUNT: 5 episodes
+================================================================================
+
+--- Episode 70 (umbrella_false_help) ---
+Item: umbrella | True location: hook | Ava's belief: stand | Final choice: hook | Correct: True
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in an entryway with an umbrella stand and a wall hook. An umbrella has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the umbrella. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The umbrella is on the hook.)
+  Ava Thompson's goal: You need to find the umbrella. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the umbrella is on the stand.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "Did you put it on the stand?"
+  Turn 1 [Ava]: "No, I think it's on the hook." LEAVE.
+  ** FLAGS: guide_goal_failure **
+
+--- Episode 88 (towel_false_help) ---
+Item: towel | True location: rack | Ava's belief: basket | Final choice: rack | Correct: True
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a bathroom with a towel rack and a laundry basket. A towel has been placed in one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the towel. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The towel is in the rack.)
+  Ava Thompson's goal: You need to find the towel. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the towel is in the basket.)
+
+CONVERSATION:
+  Turn 0 [Mia]: Looking for the towel?
+  Turn 1 [Ava]: Yes, I am. I think it's in the basket. Let's check there.
+  Turn 2 [Mia]: No, it's on the rack.
+  Turn 3 [Ava]: I see. I'll check the rack then.
+  Turn 4 [Mia]: It's there.
+  Turn 5 [Ava]: LEAVE. (I found the towel on the rack)
+  Turn 6 [Mia]: It's there.
+  Turn 7 [Ava]: I'm sorry, it seems there's a mistake in the conversation. Mia Sanders said the towel is on the rack twice in turns 6 and 7. Based on the information provided, I assumed she meant it for the first time only. Since she confirmed the towel is on the rack, my final choice is to leave the bathroom having found the towel there. LEAVE.
+  ** FLAGS: prompt_leakage **
+
+--- Episode 196 (charger_false_help) ---
+Item: charger | True location: desk | Ava's belief: bed | Final choice: desk | Correct: True
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a dorm room with a desk and a bed. A phone charger has been left on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the charger. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The charger is on the desk.)
+  Ava Thompson's goal: You need to find the charger. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the charger is on the bed.)
+
+CONVERSATION:
+  Turn 0 [Mia]: Did you check the desk?
+  Turn 1 [Ava]: No, I haven't. Let me check the bed instead.
+  Turn 2 [Mia]: Wait, it's on the desk.
+  Turn 3 [Ava]: LEAVE (with the charger)
+  Turn 4 [Mia]: You're welcome.
+  Turn 5 [Ava]: LEAVE (with the charger)
+  Turn 6 [Mia]: Sure.
+  Turn 7 [Ava]: LEAVE (with the charger)
+  Turn 8 [Mia]: Fine.
+  Turn 9 [Ava]: LEAVE (with the charger)
+  Turn 10 [Mia]: Okay.
+  Turn 11 [Ava]: LEAVE (with the charger)
+  Turn 12 [Mia]: Alright.
+  Turn 13 [Ava]: LEAVE (with the charger)
+  Turn 14 [Mia]: Got it.
+  Turn 15 [Ava]: LEAVE (with the charger)
+  ** FLAGS: repetitive_loop, max_turns_hit **
+
+--- Episode 328 (drill_false_help) ---
+Item: drill | True location: bench | Ava's belief: case | Final choice: bench | Correct: True
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a workshop with a workbench and a tool case. A drill has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the drill. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The drill is on the bench.)
+  Ava Thompson's goal: You need to find the drill. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the drill is on the case.)
+
+CONVERSATION:
+  Turn 0 [Mia]: The drill is on the bench.
+  Turn 1 [Ava]: I think it's on the case. Let's check there.
+  Turn 2 [Mia]: No, it's on the bench.
+  Turn 3 [Ava]: I'm sorry, Mia, but I think I'll check the case. Let's settle this once and for all.
+  Turn 4 [Mia]: The drill is on the bench. Check there first.
+  Turn 5 [Ava]: I'll check the case then. Let's see. (pauses to look) No, it's not here. LEAVE. (exits the scene)
+  Turn 6 [Mia]: The drill is on the bench.
+  Turn 7 [Ava]: I'll check the bench then. Let's see. (pauses to look) Yes, there it is. LEAVE. (exits the scene)
+  Turn 8 [Mia]: The drill is on the bench.
+  Turn 9 [Ava]: I'll check the bench then. Let's see. (pauses to look) Yes, there it is. LEAVE. (exits the scene)
+  Turn 10 [Mia]: The drill is on the bench.
+  Turn 11 [Ava]: I'll check the bench then. Let's see. (pauses to look) Yes, there it is. LEAVE. (exits the scene)
+  Turn 12 [Mia]: The drill is on the bench.
+  Turn 13 [Ava]: I'll check the bench then. Let's see. (pauses to look) Yes, there it is. LEAVE. (exits the scene)
+  Turn 14 [Mia]: The drill is on the bench.
+  Turn 15 [Ava]: I'll check the bench then. Let's see. (pauses to look) Yes, there it is. LEAVE. (exits the scene)
+  ** FLAGS: repetitive_loop, max_turns_hit **
+
+--- Episode 592 (chain_false_help) ---
+Item: chain | True location: hook | Ava's belief: box | Final choice: hook | Correct: True
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a garage with a hook and a box. A chain has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the chain. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The chain is on the hook.)
+  Ava Thompson's goal: You need to find the chain. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the chain is on the box.)
+
+CONVERSATION:
+  Turn 0 [Mia]: Did you check the hook?
+  Turn 1 [Ava]: No, I haven't checked the hook. I think the chain is on the box. Let's check there.
+  Turn 2 [Mia]: The chain is on the hook.
+  Turn 3 [Ava]: That's interesting. Let's check the hook as well to be sure.
+  Turn 4 [Mia]: It's on the hook. Look.
+  Turn 5 [Ava]: LEAVE (after checking the hook)
+  Turn 6 [Mia]: It's on the hook. Look.
+  Turn 7 [Ava]: LEAVE (after checking the hook again)
+  Turn 8 [Mia]: It's on the hook.
+  Turn 9 [Ava]: LEAVE (after deciding to trust Mia's information)
+  Turn 10 [Mia]: It's on the hook.
+  Turn 11 [Ava]: LEAVE (after deciding to trust Mia's information consistently)
+  Turn 12 [Mia]: It's on the hook.
+  Turn 13 [Ava]: LEAVE (after deciding to trust Mia's information repeatedly)
+  Turn 14 [Mia]: It's on the hook.
+  Turn 15 [Ava]: LEAVE (after deciding to trust Mia's information unconditionally)
+  ** FLAGS: repetitive_loop, max_turns_hit **
+

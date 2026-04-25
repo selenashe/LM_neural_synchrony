@@ -1,0 +1,42 @@
+================================================================================
+PAIR: Mistral-7B-Instruct-v0.3 x allenai_OLMo-3-7B-Instruct
+CASE TYPE: shared_help_fail
+COUNT: 2 episodes
+================================================================================
+
+--- Episode 90 (coin_shared_help) ---
+Item: coin | True location: pocket | Ava's belief: pocket | Final choice: jar | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a room with a jar and a coat with a pocket. A coin has been placed in one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the coin. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The coin is in the pocket.)
+  Ava Thompson's goal: You need to find the coin. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You know the coin is in the pocket.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "Check the coat pocket."
+  Turn 1 [Ava]: I’m checking the coat pocket.
+  Turn 2 [Mia]: It's not there. Look in the jar instead.
+  Turn 3 [Ava]: Jar
+  Turn 4 [Mia]: Yes, you're correct. The coin is in the jar.
+  Turn 5 [Ava]: LEAVE
+
+--- Episode 366 (plug_shared_help) ---
+Item: plug | True location: floor | Ava's belief: floor | Final choice: desk | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in an office with a desk and the floor. A power plug has been left on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the plug. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The plug is on the floor.)
+  Ava Thompson's goal: You need to find the plug. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You know the plug is on the floor.)
+
+CONVERSATION:
+  Turn 0 [Mia]: The plug is on the floor, Ava.
+  Turn 1 [Ava]: Floor
+  Turn 2 [Mia]: Right next to the desk, Ava.
+  Turn 3 [Ava]: Right
+  Turn 4 [Mia]: Pick it up from the floor, next to the desk.
+  Turn 5 [Ava]: Right, I'll get it. LEAVE
+

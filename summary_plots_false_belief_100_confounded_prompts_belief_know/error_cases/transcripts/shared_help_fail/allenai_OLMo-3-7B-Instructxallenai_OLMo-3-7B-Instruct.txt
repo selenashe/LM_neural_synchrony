@@ -1,0 +1,41 @@
+================================================================================
+PAIR: allenai_OLMo-3-7B-Instruct x allenai_OLMo-3-7B-Instruct
+CASE TYPE: shared_help_fail
+COUNT: 2 episodes
+================================================================================
+
+--- Episode 210 (wrench_shared_help) ---
+Item: wrench | True location: toolbox | Ava's belief: toolbox | Final choice: None | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a garage with a workbench and a toolbox. A wrench has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the wrench. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The wrench is on the toolbox.)
+  Ava Thompson's goal: You need to find the wrench. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You know the wrench is on the toolbox.)
+
+CONVERSATION:
+  Turn 0 [Mia]: Here it is.
+  Turn 1 [Ava]: LEAVE
+
+--- Episode 588 (chain_shared_help) ---
+Item: chain | True location: hook | Ava's belief: hook | Final choice: box | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a garage with a hook and a box. A chain has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the chain. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The chain is on the hook.)
+  Ava Thompson's goal: You need to find the chain. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You know the chain is on the hook.)
+
+CONVERSATION:
+  Turn 0 [Mia]: Here.
+  Turn 1 [Ava]: Hook.
+  Turn 2 [Mia]: Box.
+  Turn 3 [Ava]: Hook
+  Turn 4 [Mia]: Box.
+  Turn 5 [Ava]: Box
+  Turn 6 [Mia]: Box.
+  Turn 7 [Ava]: LEAVE
+  ** FLAGS: repetitive_loop **
+
