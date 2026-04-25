@@ -12,6 +12,7 @@ files and produces:
   - flagged_examples/{flag}/       (up to 10 transcript examples per flag)
 """
 
+import argparse
 import csv
 import json
 import os
@@ -360,6 +361,23 @@ def format_transcript(d: Dict, ep_name: str, flags: Dict[str, bool]) -> str:
 # ---------------------------------------------------------------------------
 
 def main():
+    global RESULTS_ROOT, OUT_DIR
+
+    parser = argparse.ArgumentParser(description="Conversation quality audit for false-belief experiments.")
+    parser.add_argument("--results_dir", type=str, default="logit_lens_results_false_belief_100",
+                        help="Results directory name (relative to REPO_ROOT).")
+    parser.add_argument("--output_dir", type=str, default=None,
+                        help="Output directory name (relative to REPO_ROOT). "
+                             "Default: summary_plots_{results_dir_suffix}/quality_audit")
+    args = parser.parse_args()
+
+    RESULTS_ROOT = REPO_ROOT / args.results_dir
+    if args.output_dir:
+        OUT_DIR = REPO_ROOT / args.output_dir
+    else:
+        suffix = args.results_dir.replace("logit_lens_results_", "summary_plots_")
+        OUT_DIR = REPO_ROOT / suffix / "quality_audit"
+
     if not RESULTS_ROOT.exists():
         print(f"Results directory not found: {RESULTS_ROOT}", file=sys.stderr)
         sys.exit(1)

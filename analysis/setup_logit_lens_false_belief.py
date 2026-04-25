@@ -58,6 +58,8 @@ def main():
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--temp", type=float, default=0.7)
     parser.add_argument("--results_dir", type=str, default="sotopia_results_false_belief_100")
+    parser.add_argument("--output_dir", type=str, default="logit_lens_results_false_belief_100",
+                        help="Output directory name (relative to REPO_ROOT).")
     args = parser.parse_args()
 
     if args.n_episodes is None:
@@ -86,7 +88,7 @@ def main():
             try:
                 meta = load_scenario_meta(episode)
                 out_dir = os.path.join(
-                    REPO_ROOT, "logit_lens_results_false_belief_100", pair_name,
+                    REPO_ROOT, args.output_dir, pair_name,
                     f"episode_{episode}_{meta['codename']}",
                 )
                 os.makedirs(out_dir, exist_ok=True)

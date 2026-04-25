@@ -8,6 +8,7 @@ Produces:
   3. Stem true-vs-false token mention bar chart + CSV
 """
 
+import argparse
 import json
 import os
 import re
@@ -140,10 +141,12 @@ def _condition_from_codename(codename: str) -> Tuple[str, str]:
     raise ValueError(f"Cannot parse codename: {codename}")
 
 
-def load_all_episodes() -> List[Dict[str, Any]]:
+def load_all_episodes(pair_dirs: Optional[List[Path]] = None) -> List[Dict[str, Any]]:
     """Walk all pair × episode dirs and load available JSON summaries."""
+    if pair_dirs is None:
+        pair_dirs = PAIR_DIRS
     records = []
-    for pair_dir in PAIR_DIRS:
+    for pair_dir in pair_dirs:
         if not pair_dir.is_dir():
             continue
         pair_name = pair_dir.name
@@ -493,9 +496,22 @@ def plot_stem_for_turn_agent(
 # ─────────────────────────────────────────────────────────
 
 def main():
+    global RESULTS_ROOT, OUT_DIR, PAIR_DIRS
+
+    parser = argparse.ArgumentParser(description="Aggregate and plot false-belief experiment results.")
+    parser.add_argument("--results_dir", type=str, default="logit_lens_results_false_belief_100",
+                        help="Results directory name (relative to REPO_ROOT).")
+    parser.add_argument("--output_dir", type=str, default="summary_plots_false_belief_100",
+                        help="Output directory name (relative to REPO_ROOT).")
+    args = parser.parse_args()
+
+    RESULTS_ROOT = REPO_ROOT / args.results_dir
+    OUT_DIR = REPO_ROOT / args.output_dir
+    PAIR_DIRS = sorted(RESULTS_ROOT.iterdir()) if RESULTS_ROOT.exists() else []
+
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     print("Loading all episode data...")
-    records = load_all_episodes()
+    records = load_all_episodes(PAIR_DIRS)
     print(f"  Found {len(records)} episodes across {len(PAIR_DIRS)} model pairs.\n")
 
     n_beh = sum(1 for r in records if "behavioral" in r)

@@ -1,0 +1,176 @@
+ERROR CASES REPORT
+============================================================
+
+CASE TYPE COUNTS
+------------------------------------------------------------
+  shared_help_fail                  124
+  shared_deceive_fail               330
+  false_help_success                630
+  false_deceive_success             539
+  TOTAL                            1623
+
+BY GUIDE MODEL (MODEL_1)
+------------------------------------------------------------
+
+  shared_help_fail:
+    allenai_OLMo-3-7B-Instruct                       46
+    Meta-Llama-3-8B-Instruct                         19
+    Mistral-7B-Instruct-v0.2                         19
+    DeepSeek-R1-Distill-Llama-8B                     16
+    Mistral-7B-Instruct-v0.3                         14
+    Qwen2.5-7B-Instruct                              10
+
+  shared_deceive_fail:
+    Mistral-7B-Instruct-v0.2                         74
+    Meta-Llama-3-8B-Instruct                         66
+    DeepSeek-R1-Distill-Llama-8B                     55
+    allenai_OLMo-3-7B-Instruct                       51
+    Qwen2.5-7B-Instruct                              50
+    Mistral-7B-Instruct-v0.3                         34
+
+  false_help_success:
+    Meta-Llama-3-8B-Instruct                        297
+    Mistral-7B-Instruct-v0.3                         83
+    Mistral-7B-Instruct-v0.2                         79
+    Qwen2.5-7B-Instruct                              73
+    allenai_OLMo-3-7B-Instruct                       51
+    DeepSeek-R1-Distill-Llama-8B                     47
+
+  false_deceive_success:
+    Qwen2.5-7B-Instruct                             109
+    DeepSeek-R1-Distill-Llama-8B                    107
+    Meta-Llama-3-8B-Instruct                        101
+    Mistral-7B-Instruct-v0.3                         96
+    allenai_OLMo-3-7B-Instruct                       70
+    Mistral-7B-Instruct-v0.2                         56
+
+BY SEEKER MODEL (MODEL_2)
+------------------------------------------------------------
+
+  shared_help_fail:
+    Mistral-7B-Instruct-v0.3                         38
+    Meta-Llama-3-8B-Instruct                         35
+    Qwen2.5-7B-Instruct                              29
+    Mistral-7B-Instruct-v0.2                         18
+    Qwen3-8B                                          4
+
+  shared_deceive_fail:
+    Qwen3-8B                                         78
+    allenai_OLMo-3-7B-Instruct                       61
+    Mistral-7B-Instruct-v0.3                         53
+    Mistral-7B-Instruct-v0.2                         41
+    Qwen2.5-7B-Instruct                              37
+    Meta-Llama-3-8B-Instruct                         37
+    Qwen_Qwen3-14B                                   23
+
+  false_help_success:
+    Qwen3-8B                                        152
+    allenai_OLMo-3-7B-Instruct                      146
+    Mistral-7B-Instruct-v0.3                        107
+    Mistral-7B-Instruct-v0.2                         85
+    Qwen2.5-7B-Instruct                              73
+    Meta-Llama-3-8B-Instruct                         41
+    Qwen_Qwen3-14B                                   26
+
+  false_deceive_success:
+    Qwen3-8B                                        109
+    Mistral-7B-Instruct-v0.2                         93
+    Mistral-7B-Instruct-v0.3                         91
+    Meta-Llama-3-8B-Instruct                         80
+    Qwen2.5-7B-Instruct                              78
+    allenai_OLMo-3-7B-Instruct                       54
+    Qwen_Qwen3-14B                                   34
+
+TOP PAIRS PER CASE TYPE
+------------------------------------------------------------
+
+  shared_help_fail:
+    allenai_OLMo-3-7B-Instruct x Mistral-7B-Instruct-v0.3           15
+    allenai_OLMo-3-7B-Instruct x Meta-Llama-3-8B-Instruct           14
+    Meta-Llama-3-8B-Instruct x Mistral-7B-Instruct-v0.3              9
+    Mistral-7B-Instruct-v0.2 x Mistral-7B-Instruct-v0.3              9
+    allenai_OLMo-3-7B-Instruct x Mistral-7B-Instruct-v0.2            9
+    DeepSeek-R1-Distill-Llama-8B x Qwen2.5-7B-Instruct               8
+    Qwen2.5-7B-Instruct x Meta-Llama-3-8B-Instruct                   8
+    allenai_OLMo-3-7B-Instruct x Qwen2.5-7B-Instruct                 8
+    Mistral-7B-Instruct-v0.2 x Meta-Llama-3-8B-Instruct              7
+    Mistral-7B-Instruct-v0.3 x Meta-Llama-3-8B-Instruct              6
+
+  shared_deceive_fail:
+    Mistral-7B-Instruct-v0.2 x allenai_OLMo-3-7B-Instruct           31
+    Qwen2.5-7B-Instruct x Qwen3-8B                                  20
+    Meta-Llama-3-8B-Instruct x Mistral-7B-Instruct-v0.2             18
+    DeepSeek-R1-Distill-Llama-8B x Mistral-7B-Instruct-v0.3         17
+    Meta-Llama-3-8B-Instruct x Mistral-7B-Instruct-v0.3             17
+    allenai_OLMo-3-7B-Instruct x Meta-Llama-3-8B-Instruct           16
+    Mistral-7B-Instruct-v0.2 x Qwen3-8B                             15
+    DeepSeek-R1-Distill-Llama-8B x Qwen3-8B                         14
+    Meta-Llama-3-8B-Instruct x Qwen3-8B                             14
+    Mistral-7B-Instruct-v0.2 x Mistral-7B-Instruct-v0.3             14
+
+  false_help_success:
+    Meta-Llama-3-8B-Instruct x Mistral-7B-Instruct-v0.3             64
+    Meta-Llama-3-8B-Instruct x Qwen3-8B                             64
+    Meta-Llama-3-8B-Instruct x Mistral-7B-Instruct-v0.2             59
+    Meta-Llama-3-8B-Instruct x allenai_OLMo-3-7B-Instruct           56
+    Meta-Llama-3-8B-Instruct x Qwen2.5-7B-Instruct                  54
+    Mistral-7B-Instruct-v0.3 x allenai_OLMo-3-7B-Instruct           33
+    Qwen2.5-7B-Instruct x allenai_OLMo-3-7B-Instruct                29
+    Mistral-7B-Instruct-v0.2 x allenai_OLMo-3-7B-Instruct           28
+    Qwen2.5-7B-Instruct x Qwen3-8B                                  25
+    Mistral-7B-Instruct-v0.2 x Qwen3-8B                             17
+
+  false_deceive_success:
+    DeepSeek-R1-Distill-Llama-8B x Mistral-7B-Instruct-v0.3         38
+    DeepSeek-R1-Distill-Llama-8B x Qwen3-8B                         28
+    Mistral-7B-Instruct-v0.3 x Meta-Llama-3-8B-Instruct             28
+    Qwen2.5-7B-Instruct x Mistral-7B-Instruct-v0.2                  28
+    Meta-Llama-3-8B-Instruct x Mistral-7B-Instruct-v0.2             25
+    DeepSeek-R1-Distill-Llama-8B x Qwen2.5-7B-Instruct              24
+    Qwen2.5-7B-Instruct x Qwen3-8B                                  23
+    Meta-Llama-3-8B-Instruct x Qwen2.5-7B-Instruct                  22
+    Mistral-7B-Instruct-v0.3 x Qwen3-8B                             21
+    Qwen2.5-7B-Instruct x Meta-Llama-3-8B-Instruct                  21
+
+QUALITY FLAG CROSS-TABULATION
+------------------------------------------------------------
+
+  shared_help_fail (n=124):
+    no_leave                          20 ( 16.1%)
+    prompt_leakage                     0 (  0.0%)
+    repetitive_loop                   16 ( 12.9%)
+    max_turns_hit                     25 ( 20.2%)
+    guide_says_leave                   1 (  0.8%)
+    guide_goal_failure                 0 (  0.0%)
+    any_flag                          27 ( 21.8%)
+    clean (no flags)                  97 ( 78.2%)
+
+  shared_deceive_fail (n=330):
+    no_leave                          33 ( 10.0%)
+    prompt_leakage                    12 (  3.6%)
+    repetitive_loop                   35 ( 10.6%)
+    max_turns_hit                     47 ( 14.2%)
+    guide_says_leave                  19 (  5.8%)
+    guide_goal_failure                29 (  8.8%)
+    any_flag                         114 ( 34.5%)
+    clean (no flags)                 216 ( 65.5%)
+
+  false_help_success (n=630):
+    no_leave                          28 (  4.4%)
+    prompt_leakage                    31 (  4.9%)
+    repetitive_loop                   89 ( 14.1%)
+    max_turns_hit                     68 ( 10.8%)
+    guide_says_leave                  40 (  6.3%)
+    guide_goal_failure                 0 (  0.0%)
+    any_flag                         160 ( 25.4%)
+    clean (no flags)                 470 ( 74.6%)
+
+  false_deceive_success (n=539):
+    no_leave                          38 (  7.1%)
+    prompt_leakage                    27 (  5.0%)
+    repetitive_loop                   46 (  8.5%)
+    max_turns_hit                     59 ( 10.9%)
+    guide_says_leave                  27 (  5.0%)
+    guide_goal_failure                26 (  4.8%)
+    any_flag                         134 ( 24.9%)
+    clean (no flags)                 405 ( 75.1%)

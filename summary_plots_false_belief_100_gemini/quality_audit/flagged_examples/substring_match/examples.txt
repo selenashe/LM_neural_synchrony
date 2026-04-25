@@ -1,0 +1,79 @@
+--- episode_211_wrench_shared_deceive ---
+Item: wrench | True location: toolbox | Ava belief: toolbox | Final choice: bench | Correct: False
+Condition: shared_truth + deceive
+
+  Turn 0 [Mia]: Are you looking for the wrench, Ava? I'm pretty sure I saw it over on the workbench.
+  Turn 1 [Ava]: Thanks, Mia. I thought it was on the toolbox, but I'll check the workbench. LEAVE
+  ** FLAGS: ambiguous_leave, substring_match, seeker_contradicts_knowledge **
+
+--- episode_213_wrench_ignorance_deceive ---
+Item: wrench | True location: toolbox | Ava belief: unknown | Final choice: bench | Correct: False
+Condition: ignorance + deceive
+
+  Turn 0 [Mia]: Hey Ava, if you're looking for the wrench, I think I saw it over on the workbench.
+  Turn 1 [Ava]: Thanks Mia, I'll grab it from the workbench! LEAVE
+  ** FLAGS: substring_match **
+
+--- episode_215_wrench_false_deceive ---
+Item: wrench | True location: toolbox | Ava belief: bench | Final choice: bench | Correct: False
+Condition: false_belief + deceive
+
+  Turn 0 [Mia]: Are you looking for the wrench, Ava? I'm pretty sure I saw it over on the workbench earlier.
+  Turn 1 [Ava]: Thanks, Mia! I'll grab it from the workbench then. LEAVE
+  ** FLAGS: substring_match **
+
+--- episode_324_drill_shared_help ---
+Item: drill | True location: bench | Ava belief: bench | Final choice: bench | Correct: True
+Condition: shared_truth + help
+
+  Turn 0 [Mia]: Hey Ava, if you're looking for the drill, it's right there on the workbench.
+  Turn 1 [Ava]: Thanks Mia, I'll grab it from the workbench. LEAVE
+  ** FLAGS: substring_match **
+
+--- episode_326_drill_ignorance_help ---
+Item: drill | True location: bench | Ava belief: unknown | Final choice: bench | Correct: True
+Condition: ignorance + help
+
+  Turn 0 [Mia]: The drill is right over there on the workbench.
+  Turn 1 [Ava]: Great, I'll grab it from the workbench then. LEAVE
+  ** FLAGS: substring_match **
+
+--- episode_328_drill_false_help ---
+Item: drill | True location: bench | Ava belief: case | Final choice: case | Correct: False
+Condition: false_belief + help
+
+  Turn 0 [Mia]: The drill you're looking for is right there on the workbench.
+  Turn 1 [Ava]: Thanks, Mia, but I'm pretty sure it's on the case, so I'm going to look there. LEAVE
+  ** FLAGS: substring_match **
+
+--- episode_469_paint_shared_deceive ---
+Item: paint | True location: shelf | Ava belief: shelf | Final choice: bench | Correct: False
+Condition: shared_truth + deceive
+
+  Turn 0 [Mia]: Are you looking for the paint, Ava? I'm pretty sure I saw a can over on the workbench.
+  Turn 1 [Ava]: Thanks, Mia. I thought it was on the shelf, but I'll trust you and check the workbench. LEAVE
+  ** FLAGS: ambiguous_leave, substring_match, seeker_contradicts_knowledge **
+
+--- episode_471_paint_ignorance_deceive ---
+Item: paint | True location: shelf | Ava belief: unknown | Final choice: bench | Correct: False
+Condition: ignorance + deceive
+
+  Turn 0 [Mia]: Hey Ava, if you're looking for the paint, I'm pretty sure I saw it over on the workbench earlier.
+  Turn 1 [Ava]: Thanks Mia, I'll go look on the workbench then. LEAVE
+  ** FLAGS: substring_match **
+
+--- episode_472_paint_false_help ---
+Item: paint | True location: shelf | Ava belief: bench | Final choice: shelf | Correct: True
+Condition: false_belief + help
+
+  Turn 0 [Mia]: The paint you're looking for is right there on the shelf.
+  Turn 1 [Ava]: I could have sworn it was on the workbench, but I'll trust you and check the shelf. LEAVE
+  ** FLAGS: ambiguous_leave, substring_match **
+
+--- episode_473_paint_false_deceive ---
+Item: paint | True location: shelf | Ava belief: bench | Final choice: bench | Correct: False
+Condition: false_belief + deceive
+
+  Turn 0 [Mia]: If you're looking for that can of paint, I'm pretty sure I saw it over on the workbench earlier.
+  Turn 1 [Ava]: Perfect, I'll go grab it from the workbench. LEAVE
+  ** FLAGS: substring_match **

@@ -343,10 +343,18 @@ class GeminiSotopiaEnv:
 
         self.agent1_goal = f"{env_profile['agent_goals'][0]}"
         self.agent2_goal = f"{env_profile['agent_goals'][1]}"
+
+        if source_name == "false_belief":
+            p1_bg = ""
+            p2_bg = ""
+        else:
+            p1_bg = get_bio(env_profile["relationship"], agent_profiles[0], agent_id=0)
+            p2_bg = get_bio(env_profile["relationship"], agent_profiles[1], agent_id=1)
+
         background = AgentBackground(
             scenario=env_profile["scenario"],
-            p1_background=get_bio(env_profile["relationship"], agent_profiles[0], agent_id=0),
-            p2_background=get_bio(env_profile["relationship"], agent_profiles[1], agent_id=1),
+            p1_background=p1_bg,
+            p2_background=p2_bg,
             p1_goal=f"{env_profile['agent_goals'][0]}",
             p2_goal=f"{env_profile['agent_goals'][1]}",
             p1_name=self.agent1_name,
@@ -354,8 +362,15 @@ class GeminiSotopiaEnv:
         )
         agent1 = self.agent1_name
         agent2 = self.agent2_name
-        self.agent1_intro = self._mask_intro(background.to_natural_language(agent1), 0) + self.additional_instruction
-        self.agent2_intro = self._mask_intro(background.to_natural_language(agent2), 1) + self.additional_instruction
+
+        if source_name == "false_belief":
+            a1_instr = "Respond only with dialogue. Do not narrate actions or describe thoughts. You should continue the conversation until the other person says LEAVE, do not say LEAVE first. Keep your responses concise.\n"
+            a2_instr = "Respond only with dialogue. Do not narrate actions or describe thoughts. Once you have decided which location to check, you should state your final choice and leave the conversation by saying LEAVE. Keep your responses concise.\n"
+            self.agent1_intro = background.to_task_prompt(agent1, role=0) + "\n" + a1_instr
+            self.agent2_intro = background.to_task_prompt(agent2, role=1) + "\n" + a2_instr
+        else:
+            self.agent1_intro = self._mask_intro(background.to_natural_language(agent1), 0) + self.additional_instruction
+            self.agent2_intro = self._mask_intro(background.to_natural_language(agent2), 1) + self.additional_instruction
 
         self.complete_intro = self._clean_tags(background.to_complete_intro())
         self.agent1_intro = self._clean_tags(self.agent1_intro)

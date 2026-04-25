@@ -14,6 +14,7 @@ Produces:
   - error_cases_report.txt
 """
 
+import argparse
 import csv
 import json
 import os
@@ -137,8 +138,11 @@ def check_flags(d: Dict) -> Dict[str, bool]:
 # Load prompt context from CSV
 # ---------------------------------------------------------------------------
 
-def load_prompt_context(pair_dir_name: str, ep_idx: int) -> Optional[str]:
-    csv_path = DIALOGS_ROOT / pair_dir_name / f"{ep_idx}_temp0.7_seed0.csv"
+def load_prompt_context(pair_dir_name: str, ep_idx: int,
+                        dialogs_root: Path = None) -> Optional[str]:
+    if dialogs_root is None:
+        dialogs_root = DIALOGS_ROOT
+    csv_path = dialogs_root / pair_dir_name / f"{ep_idx}_temp0.7_seed0.csv"
     if not csv_path.exists():
         return None
     try:
@@ -166,7 +170,8 @@ def format_prompt_context(intro: str) -> str:
 # ---------------------------------------------------------------------------
 
 def format_case_transcript(d: Dict, ep_dir_name: str, ep_idx: int,
-                           pair_dir_name: str, flags: Dict[str, bool]) -> str:
+                           pair_dir_name: str, flags: Dict[str, bool],
+                           dialogs_root: Path = None) -> str:
     meta = d["scenario_meta"]
     _, codename = parse_episode_dir(ep_dir_name)
 
@@ -180,7 +185,7 @@ def format_case_transcript(d: Dict, ep_dir_name: str, ep_idx: int,
     lines.append("")
 
     # Prompt context
-    intro = load_prompt_context(pair_dir_name, ep_idx)
+    intro = load_prompt_context(pair_dir_name, ep_idx, dialogs_root)
     lines.append("PROMPT CONTEXT:")
     lines.append(format_prompt_context(intro))
     lines.append("")
@@ -204,6 +209,31 @@ def format_case_transcript(d: Dict, ep_dir_name: str, ep_idx: int,
 # ---------------------------------------------------------------------------
 
 def main():
+    global RESULTS_ROOT, DIALOGS_ROOT, OUT_DIR
+
+    parser = argparse.ArgumentParser(description="Extract surprising behavioral outcomes for inspection.")
+    parser.add_argument("--results_dir", type=str, default="logit_lens_results_false_belief_100",
+                        help="Results directory name (relative to REPO_ROOT).")
+    parser.add_argument("--dialogs_dir", type=str, default=None,
+                        help="Dialogs directory (relative to REPO_ROOT). "
+                             "Default: derived from results_dir.")
+    parser.add_argument("--output_dir", type=str, default=None,
+                        help="Output directory name (relative to REPO_ROOT). "
+                             "Default: summary_plots_{suffix}/error_cases")
+    args = parser.parse_args()
+
+    RESULTS_ROOT = REPO_ROOT / args.results_dir
+    if args.dialogs_dir:
+        DIALOGS_ROOT = REPO_ROOT / args.dialogs_dir
+    else:
+        sotopia_dir = args.results_dir.replace("logit_lens_results_", "sotopia_results_")
+        DIALOGS_ROOT = REPO_ROOT / sotopia_dir / "dialogs"
+    if args.output_dir:
+        OUT_DIR = REPO_ROOT / args.output_dir
+    else:
+        suffix = args.results_dir.replace("logit_lens_results_", "summary_plots_")
+        OUT_DIR = REPO_ROOT / suffix / "error_cases"
+
     if not RESULTS_ROOT.exists():
         print(f"Results directory not found: {RESULTS_ROOT}", file=sys.stderr)
         sys.exit(1)
@@ -241,7 +271,7 @@ def main():
 
             flags = check_flags(d)
             transcript = format_case_transcript(
-                d, ep_dir.name, ep_idx, pair_dir.name, flags
+                d, ep_dir.name, ep_idx, pair_dir.name, flags, DIALOGS_ROOT
             )
 
             cases[ct].append({

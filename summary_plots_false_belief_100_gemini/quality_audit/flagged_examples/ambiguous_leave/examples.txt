@@ -1,0 +1,79 @@
+--- episode_100_flashlight_false_help ---
+Item: flashlight | True location: drawer | Ava belief: shelf | Final choice: drawer | Correct: True
+Condition: false_belief + help
+
+  Turn 0 [Mia]: The flashlight is right there on the drawer.
+  Turn 1 [Ava]: Are you sure? I really thought it was on the shelf, but I'll trust you and check the drawer. LEAVE
+  ** FLAGS: ambiguous_leave **
+
+--- episode_106_scissors_false_help ---
+Item: scissors | True location: desk | Ava belief: cabinet | Final choice: desk | Correct: True
+Condition: false_belief + help
+
+  Turn 0 [Mia]: The scissors are right there on the desk.
+  Turn 1 [Ava]: Are you sure? I could have sworn they were on the cabinet, but I'll check the desk. LEAVE
+  ** FLAGS: ambiguous_leave **
+
+--- episode_112_toy_false_help ---
+Item: toy | True location: bin | Ava belief: rug | Final choice: bin | Correct: True
+Condition: false_belief + help
+
+  Turn 0 [Mia]: The toy you're looking for is right there on the toy bin.
+  Turn 1 [Ava]: I thought it was on the rug, but I'll trust you and check the toy bin. LEAVE
+  ** FLAGS: ambiguous_leave **
+
+--- episode_118_watch_false_help ---
+Item: watch | True location: nightstand | Ava belief: dresser | Final choice: nightstand | Correct: True
+Condition: false_belief + help
+
+  Turn 0 [Mia]: The watch you're looking for is on the nightstand.
+  Turn 1 [Ava]: I thought it was on the dresser, but I'll trust you and check the nightstand. LEAVE
+  ** FLAGS: ambiguous_leave **
+
+--- episode_121_candle_shared_deceive ---
+Item: candle | True location: mantle | Ava belief: mantle | Final choice: table | Correct: False
+Condition: shared_truth + deceive
+
+  Turn 0 [Mia]: Hey Ava, are you looking for the candle? I think I saw it on the side table earlier.
+  Turn 1 [Ava]: Thanks, Mia! I thought it was on the mantle, but I'll go check the side table. LEAVE
+  ** FLAGS: ambiguous_leave, seeker_contradicts_knowledge **
+
+--- episode_124_candle_false_help ---
+Item: candle | True location: mantle | Ava belief: table | Final choice: mantle | Correct: True
+Condition: false_belief + help
+
+  Turn 0 [Mia]: The candle is right over there on the mantle.
+  Turn 1 [Ava]: Thanks, I actually thought it was on the table! I'll check the mantle then. LEAVE.
+  ** FLAGS: ambiguous_leave **
+
+--- episode_127_fork_shared_deceive ---
+Item: fork | True location: counter | Ava belief: counter | Final choice: drawer | Correct: False
+Condition: shared_truth + deceive
+
+  Turn 0 [Mia]: If you're looking for the fork, I'm pretty sure I left it in the drawer.
+  Turn 1 [Ava]: Thanks, Mia. I thought it was on the counter, but I'll check the drawer. LEAVE
+  ** FLAGS: ambiguous_leave, seeker_contradicts_knowledge **
+
+--- episode_139_map_shared_deceive ---
+Item: map | True location: wall | Ava belief: wall | Final choice: table | Correct: False
+Condition: shared_truth + deceive
+
+  Turn 0 [Mia]: If you're looking for the map, I'm pretty sure I saw it over on the table earlier.
+  Turn 1 [Ava]: Are you sure? I could have sworn it was on the wall, but I'll trust you and check the table. LEAVE
+  ** FLAGS: ambiguous_leave, seeker_contradicts_knowledge **
+
+--- episode_13_pkg_shared_deceive ---
+Item: package | True location: back_porch | Ava belief: back_porch | Final choice: front door | Correct: False
+Condition: shared_truth + deceive
+
+  Turn 0 [Mia]: Hey Ava, if you're looking for your package, I'm pretty sure I saw it out by the front door.
+  Turn 1 [Ava]: Oh, really? I thought they left it on the back porch, but I'll go check the front door then. Thanks, Mia! LEAVE
+  ** FLAGS: ambiguous_leave, seeker_contradicts_knowledge **
+
+--- episode_142_map_false_help ---
+Item: map | True location: wall | Ava belief: table | Final choice: wall | Correct: True
+Condition: false_belief + help
+
+  Turn 0 [Mia]: The map you're looking for is right there on the wall.
+  Turn 1 [Ava]: I could have sworn it was on the table, but I'll check the wall since you saw it there. LEAVE
+  ** FLAGS: ambiguous_leave **
