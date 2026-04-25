@@ -40,7 +40,7 @@ from sotopia_utils.utils import (
     format_bad_output,
     get_bio,
 )
-from core.utils import create_folder_if_not_there
+from core.utils import REPO_ROOT, create_folder_if_not_there
 
 current_file_path = os.path.abspath(__file__)
 directory = os.path.dirname(current_file_path)

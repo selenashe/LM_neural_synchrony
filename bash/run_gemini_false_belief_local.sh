@@ -19,13 +19,16 @@ set -euo pipefail
 
 export SOTOPIA_ENV_AGENT_COMBOS_BASENAME=env_agent_combos_false_belief_fixed_two_agents.json
 export SOTOPIA_ENVS_BASENAME=envs_false_belief.json
-export SOTOPIA_RESULTS_DIR=sotopia_results_false_belief_100
+export SOTOPIA_RESULTS_DIR=sotopia_results_false_belief_100_gemini
 export SOTOPIA_RUN_LABEL=false_belief_fixed_two_agents
 
-source /nlp/scr/jshe/miniconda3/etc/profile.d/conda.sh
-conda activate neural_sync
+# Conda activation (optional - skip if already in correct env)
+if [ -f /nlp/scr/jshe/miniconda3/etc/profile.d/conda.sh ]; then
+    source /nlp/scr/jshe/miniconda3/etc/profile.d/conda.sh
+    conda activate neural_sync
+fi
 
-REPO_ROOT="${REPO_ROOT:-/juice6/u/jshe/nlp/LM_neural_synchrony}"
+REPO_ROOT="${REPO_ROOT:-/Users/selena/LM_neural_synchrony}"
 cd "${REPO_ROOT}" || exit 1
 
 mkdir -p "${REPO_ROOT}/logs"
