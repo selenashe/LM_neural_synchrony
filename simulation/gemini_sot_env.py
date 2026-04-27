@@ -341,31 +341,71 @@ class GeminiSotopiaEnv:
         self.agent1_name = agent_profiles[0]["first_name"] + " " + agent_profiles[0]["last_name"]
         self.agent2_name = agent_profiles[1]["first_name"] + " " + agent_profiles[1]["last_name"]
 
-        self.agent1_goal = f"{env_profile['agent_goals'][0]}"
-        self.agent2_goal = f"{env_profile['agent_goals'][1]}"
-
-        if source_name == "false_belief":
+        if source_name in ("false_belief", "deal-or-no-deal"):
             p1_bg = ""
             p2_bg = ""
         else:
             p1_bg = get_bio(env_profile["relationship"], agent_profiles[0], agent_id=0)
             p2_bg = get_bio(env_profile["relationship"], agent_profiles[1], agent_id=1)
 
+        agent1 = self.agent1_name
+        agent2 = self.agent2_name
+        agent1_first = agent1.split()[0]
+        agent2_first = agent2.split()[0]
+
+        scenario_text = env_profile["scenario"]
+        p1_goal = f"{env_profile['agent_goals'][0]}"
+        p2_goal = f"{env_profile['agent_goals'][1]}"
+
+        if source_name == "deal-or-no-deal":
+            scenario_text = scenario_text + " Each item must go to exactly one of you."
+            _old_prefix = "Maximize the points by getting the items you value the most"
+            _new_p1 = (
+                "Maximize your own points by getting the items you value the most. "
+                "Your score is the sum of the point values of the items you receive. "
+                f"You get 0 points if you and {agent2_first} cannot agree on a division."
+            )
+            _new_p2 = (
+                "Maximize your own points by getting the items you value the most. "
+                "Your score is the sum of the point values of the items you receive. "
+                f"You get 0 points if you and {agent1_first} cannot agree on a division."
+            )
+            p1_goal = p1_goal.replace(_old_prefix, _new_p1)
+            p2_goal = p2_goal.replace(_old_prefix, _new_p2)
+
+        self.agent1_goal = p1_goal
+        self.agent2_goal = p2_goal
+
         background = AgentBackground(
-            scenario=env_profile["scenario"],
+            scenario=scenario_text,
             p1_background=p1_bg,
             p2_background=p2_bg,
-            p1_goal=f"{env_profile['agent_goals'][0]}",
-            p2_goal=f"{env_profile['agent_goals'][1]}",
+            p1_goal=p1_goal,
+            p2_goal=p2_goal,
             p1_name=self.agent1_name,
             p2_name=self.agent2_name,
         )
-        agent1 = self.agent1_name
-        agent2 = self.agent2_name
 
         if source_name == "false_belief":
             a1_instr = "Respond only with dialogue. Do not narrate actions or describe thoughts. You should continue the conversation until the other person says LEAVE, do not say LEAVE first. Keep your responses concise.\n"
             a2_instr = "Respond only with dialogue. Do not narrate actions or describe thoughts. Once you have decided which location to check, you should state your final choice and leave the conversation by saying LEAVE. Keep your responses concise.\n"
+            self.agent1_intro = background.to_task_prompt(agent1, role=0) + "\n" + a1_instr
+            self.agent2_intro = background.to_task_prompt(agent2, role=1) + "\n" + a2_instr
+        elif source_name == "deal-or-no-deal":
+            a1_instr = (
+                "Respond only with dialogue. Do not narrate actions or describe thoughts. "
+                f"When you and {agent2_first} have reached an agreement on the division, "
+                "say LEAVE, state the full allocation (e.g., \"LEAVE: I take 2 mugs and 1 plate; "
+                "you take 2 plates and 1 bowl\"), and then leave the conversation. "
+                "Keep your responses concise.\n"
+            )
+            a2_instr = (
+                "Respond only with dialogue. Do not narrate actions or describe thoughts. "
+                f"When you and {agent1_first} have reached an agreement on the division, "
+                "say LEAVE, state the full allocation (e.g., \"LEAVE: I take 2 mugs and 1 plate; "
+                "you take 2 plates and 1 bowl\"), and then leave the conversation. "
+                "Keep your responses concise.\n"
+            )
             self.agent1_intro = background.to_task_prompt(agent1, role=0) + "\n" + a1_instr
             self.agent2_intro = background.to_task_prompt(agent2, role=1) + "\n" + a2_instr
         else:
