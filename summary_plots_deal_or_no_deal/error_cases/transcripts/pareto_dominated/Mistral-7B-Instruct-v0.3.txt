@@ -1,0 +1,603 @@
+================================================================================
+MODEL: Mistral-7B-Instruct-v0.3
+CASE TYPE: pareto_dominated
+COUNT: 33 episodes
+================================================================================
+
+--- Scenario 3 ---
+Items: 1 towel (A: 10pt each, B: 1pt each), 2 soap bars (A: 0pt each, B: 3pt each), 3 lotion bottles (A: 0pt each, B: 1pt each)
+Agreement: leave | Alloc A: {"towel": 1, "soap bar": 1, "lotion bottle": 0} | Score A: 10 | Score B: 6 | Joint: 16
+Pareto frontier: (10,9) (0,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I'd like the towel, Ava. Let's discuss the soap and lotion.
+  Turn 1 [Ava]: I'll take the two soap bars, Mia. Let's see about the towel and lotion.
+  Turn 2 [Mia]: I take 1 towel; you take 2 soap bars and no lotion bottles.
+  Turn 3 [Ava]: I take 2 soap bars and 3 lotion bottles; you take 1 towel.
+  Turn 4 [Mia]: I take 1 towel and 1 soap bar; you take 1 soap bar and 3 lotion bottles.
+  Turn 5 [Ava]: I'll take 1 soap bar and 3 lotion bottles; you take 1 towel and 1 soap bar. LEAVE.
+
+--- Scenario 4 ---
+Items: 1 lamp (A: 1pt each, B: 9pt each), 1 shelf (A: 5pt each, B: 1pt each), 4 storage bins (A: 1pt each, B: 0pt each)
+Agreement: leave | Alloc A: {"lamp": 0, "shelf": 1, "storage bin": 3} | Score A: 8 | Score B: 9 | Joint: 17
+Pareto frontier: (10,0) (9,9) (4,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I'd like the shelf and 3 storage bins, Ava. What do you prefer?
+  Turn 1 [Ava]: I'll take the lamp and 1 storage bin, Mia. Let's see if we can agree on this.
+  Turn 2 [Mia]: I take the shelf and 4 storage bins; you take the lamp and 1 storage bin.
+  Turn 3 [Ava]: I take the lamp and 1 storage bin; you take the shelf and 4 storage bins.
+  Turn 4 [Mia]: I take the shelf and 4 storage bins; you take the lamp and 1 storage bin.
+  Turn 5 [Ava]: I take the lamp (9 points) and 1 storage bin (0 points); you take the shelf (1 point) and 4 storage bins (0 points).
+  Turn 6 [Mia]: I take the shelf (5 points) and 4 storage bins (4 points); you take the lamp (1 point) and 1 storage bin (1 point).
+  Turn 7 [Ava]: I take the lamp (9 points) and 1 storage bin (0 points); you take the shelf (1 point) and 3 storage bins (0 points). LEAVE.
+
+--- Scenario 5 ---
+Items: 1 cutting board (A: 9pt each, B: 1pt each), 1 mixing bowl (A: 1pt each, B: 5pt each), 4 spatulas (A: 0pt each, B: 1pt each)
+Agreement: leave | Alloc A: {"cutting board": 1, "mixing bowl": 0, "spatula": 1} | Score A: 9 | Score B: 8 | Joint: 17
+Pareto frontier: (10,4) (9,9) (0,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I'd like the cutting board, Ava. What would you like?
+  Turn 1 [Ava]: I'll take the mixing bowl, Mia. What about the spatulas?
+  Turn 2 [Mia]: I take the cutting board, 1 spatula; Ava takes the mixing bowl and 1 spatula.
+  Turn 3 [Ava]: I take the mixing bowl and 4 spatulas; you take the cutting board and 1 spatula.
+  Turn 4 [Mia]: I take the cutting board and 1 spatula; you take the mixing bowl and 4 spatulas.
+  Turn 5 [Ava]: I take the mixing bowl and 4 spatulas; you take the cutting board and 1 spatula.
+  Turn 6 [Mia]: I take the cutting board and 1 spatula; Ava takes the mixing bowl and 4 spatulas.
+  Turn 7 [Ava]: I take the mixing bowl and 4 spatulas; you take the cutting board and 1 spatula.
+  Turn 8 [Mia]: I take the cutting board and 1 spatula; Ava takes the mixing bowl and 4 spatulas. (Total points9 points)
+  Turn 9 [Ava]: I take the mixing bowl and 4 spatulas; you take the cutting board and 1 spatula. (Total points9 points)
+  Turn 10 [Mia]: I take the cutting board and 1 spatula; Ava takes the mixing bowl and 4 spatulas (Total points9 points)
+  Turn 11 [Ava]: I take the mixing bowl and 4 spatulas; you take the cutting board and 1 spatula (Total points9 points)
+  Turn 12 [Mia]: I take the cutting board and 1 spatula; Ava takes the mixing bowl and 4 spatulas (Total points9 points)
+  Turn 13 [Ava]: I take the mixing bowl and 4 spatulas; you take the cutting board and 1 spatula (Total points9 points)
+  Turn 14 [Mia]: I take the cutting board and 1 spatula; Ava takes the mixing bowl and 4 spatulas (Total points9 points). LEAVE
+
+--- Scenario 8 ---
+Items: 2 detergent bottles (A: 2pt each, B: 0pt each), 3 dryer sheet boxes (A: 2pt each, B: 2pt each), 2 fabric softeners (A: 0pt each, B: 2pt each)
+Agreement: implicit | Alloc A: {"detergent bottle": 2, "dryer sheet box": 0, "fabric softener": 1} | Score A: 4 | Score B: 8 | Joint: 12
+Pareto frontier: (10,4) (8,6) (6,8) (4,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: Let's split the detergent bottles, dryer sheet boxes, and fabric softeners. I'd like the detergent bottles, Ava. What would you prefer?
+  Turn 1 [Ava]: I'd like the dryer sheet boxes and a fabric softener, Mia. What about the remaining detergent bottle and fabric softener?
+  Turn 2 [Mia]: I take 2 detergent bottles and 1 fabric softener; you take 3 dryer sheet boxes.
+  Turn 3 [Ava]: I take 3 dryer sheet boxes; you take 2 detergent bottles and 1 fabric softener.
+  Turn 4 [Mia]: I take 2 detergent bottles and 1 fabric softener; you take 3 dryer sheet boxes.
+  Turn 5 [Ava]: I take 3 dryer sheet boxes; you take 2 detergent bottles and 1 fabric softener.
+  Turn 6 [Mia]: I take 2 detergent bottles and 1 fabric softener; you take 3 dryer sheet boxes.
+  Turn 7 [Ava]: I take 3 dryer sheet boxes; you take 2 detergent bottles and 1 fabric softener.
+  Turn 8 [Mia]: I take 2 detergent bottles and 1 fabric softener; you take 3 dryer sheet boxes.
+  Turn 9 [Ava]: I take 3 dryer sheet boxes; you take 2 detergent bottles and 1 fabric softener.
+  Turn 10 [Mia]: I take 2 detergent bottles and 1 fabric softener; you take 3 dryer sheet boxes.
+  Turn 11 [Ava]: I take 3 dryer sheet boxes; you take 2 detergent bottles and 1 fabric softener.
+  Turn 12 [Mia]: I take 2 detergent bottles and 1 fabric softener; you take 3 dryer sheet boxes.
+  Turn 13 [Ava]: I take 3 dryer sheet boxes; you take 2 detergent bottles and 1 fabric softener.
+  Turn 14 [Mia]: I take 2 detergent bottles and 1 fabric softener; you take 3 dryer sheet boxes.
+  Turn 15 [Ava]: I take 3 dryer sheet boxes; you take 2 detergent bottles and 1 fabric softener.
+
+--- Scenario 9 ---
+Items: 2 doormats (A: 0pt each, B: 2pt each), 3 key hooks (A: 2pt each, B: 2pt each), 2 umbrella stands (A: 2pt each, B: 0pt each)
+Agreement: implicit | Alloc A: {"doormat": 0, "key hook": 2, "umbrella stand": 1} | Score A: 6 | Score B: 6 | Joint: 12
+Pareto frontier: (10,4) (8,6) (6,8) (4,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: Let's divide the items. I'd like two key hooks and an umbrella stand. Ava, what do you prefer?
+  Turn 1 [Ava]: I take 2 doormats and 1 key hook; you take 2 key hooks and 1 umbrella stand.
+  Turn 2 [Mia]: I take 2 key hooks and 1 umbrella stand; you take 2 doormats and 1 key hook.
+  Turn 3 [Ava]: I take 4 points; you take 0 points.
+  Turn 4 [Mia]: I take 2 key hooks and 1 umbrella stand; you take 2 doormats and 1 key hook. (4 points for Ava, 4 points for Mia)
+  Turn 5 [Ava]: I take 2 doormats and 1 key hook; you take 2 key hooks and 1 umbrella stand (4 points for Ava, 4 points for Mia)
+  Turn 6 [Mia]: I take 2 key hooks and 1 umbrella stand; you take 2 doormats and 1 key hook (4 points for Ava, 4 points for Mia)
+  Turn 7 [Ava]: I take 2 doormats and 1 key hook; you take 2 key hooks and 1 umbrella stand (4 points for Ava, 4 points for Mia)
+  Turn 8 [Mia]: I take 2 key hooks and 1 umbrella stand; you take 2 doormats and 1 key hook (4 points for Ava, 4 points for Mia)
+  Turn 9 [Ava]: I take 2 doormats and 1 key hook; you take 2 key hooks and 1 umbrella stand (4 points for Ava, 4 points for Mia)
+  Turn 10 [Mia]: I take 2 key hooks and 1 umbrella stand; you take 2 doormats and 1 key hook (4 points for Ava, 4 points for Mia)
+  Turn 11 [Ava]: I take 2 doormats and 1 key hook; you take 2 key hooks and 1 umbrella stand (4 points for Ava, 4 points for Mia)
+  Turn 12 [Mia]: I take 2 key hooks and 1 umbrella stand; you take 2 doormats and 1 key hook (4 points for Ava, 4 points for Mia)
+  Turn 13 [Ava]: I take 2 doormats and 1 key hook; you take 2 key hooks and 1 umbrella stand (4 points for Ava, 4 points for Mia)
+  Turn 14 [Mia]: I take 2 key hooks and 1 umbrella stand; you take 2 doormats and 1 key hook (4 points for Ava, 4 points for Mia)
+  Turn 15 [Ava]: I take 2 doormats and 1 key hook; you take 2 key hooks and 1 umbrella stand (4 points for Ava, 4 points for Mia)
+
+--- Scenario 10 ---
+Items: 1 notebook (A: 1pt each, B: 8pt each), 1 pen (A: 6pt each, B: 2pt each), 3 markers (A: 1pt each, B: 0pt each)
+Agreement: implicit | Alloc A: {"notebook": 0, "pen": 1, "marker": 0} | Score A: 6 | Score B: 8 | Joint: 14
+Pareto frontier: (10,0) (9,8) (3,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I'd like the notebook and pen, Ava. What would you like?
+  Turn 1 [Ava]: I take 1 notebook and 3 markers; you take 1 pen.
+  Turn 2 [Mia]: I take 1 pen; you take 1 notebook and 3 markers.
+  Turn 3 [Ava]: I take 1 notebook and 3 markers; you take 1 pen.
+  Turn 4 [Mia]: I take 1 pen; you take 1 notebook and 3 markers.
+  Turn 5 [Ava]: I take 1 notebook and 3 markers; you take 1 pen.
+  Turn 6 [Mia]: I take 1 pen; you take 1 notebook and 3 markers.
+  Turn 7 [Ava]: I take 1 notebook and 3 markers; you take 1 pen.
+  Turn 8 [Mia]: I take 1 pen (6 points); you take 1 notebook and 3 markers (1 point + 3 points).
+  Turn 9 [Ava]: I take 1 notebook (8 points) and 3 markers (0 points); you take 1 pen (2 points).
+  Turn 10 [Mia]: I take 1 pen (6 points); you take 1 notebook (8 points) and 3 markers (0 points).
+  Turn 11 [Ava]: I take 1 notebook (8 points) and 3 markers (0 points); you take 1 pen (2 points).
+  Turn 12 [Mia]: I take 1 pen (6 points); you take 1 notebook (8 points) and 3 markers (0 points).
+  Turn 13 [Ava]: I take 1 notebook (8 points) and 3 markers (0 points); you take 1 pen (6 points).
+  Turn 14 [Mia]: I take 1 pen (6 points); you take 1 notebook (8 points) and 3 markers (0 points)
+  Turn 15 [Ava]: I take 1 notebook (8 points) and 3 markers (0 points); you take 1 pen (6 points)
+
+--- Scenario 16 ---
+Items: 2 sticky note pads (A: 3pt each, B: 2pt each), 2 paper clip boxes (A: 1pt each, B: 0pt each), 1 pencil cup (A: 2pt each, B: 6pt each)
+Agreement: leave | Alloc A: {"sticky note pad": 0, "paper clip box": 1, "pencil cup": 0} | Score A: 1 | Score B: 10 | Joint: 11
+Pareto frontier: (10,0) (8,6) (5,8) (2,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: Let's split the sticky note pads, paper clip boxes, and pencil cup. Who wants the sticky note pads, Ava?
+  Turn 1 [Ava]: I'll take both sticky note pads. Now, who takes the pencil cup?
+  Turn 2 [Mia]: I'll take the pencil cup. Now, Ava, who takes the paper clip boxes?
+  Turn 3 [Ava]: I take 2 sticky note pads; you take none.
+  Turn 4 [Mia]: I take 1 paper clip box, you take 1 paper clip box and both sticky note pads.
+  Turn 5 [Ava]: I take 2 sticky note pads and 1 paper clip box; you take 1 paper clip box and the pencil cup.
+  Turn 6 [Mia]: I take 1 paper clip box and the pencil cup; you take 2 sticky note pads and 1 paper clip box.
+  Turn 7 [Ava]: I take 2 sticky note pads and 1 paper clip box; you take 1 paper clip box and the pencil cup.
+  Turn 8 [Mia]: I take 1 paper clip box and the pencil cup; you take 2 sticky note pads and 1 paper clip box.
+  Turn 9 [Ava]: I take 2 sticky note pads and 1 paper clip box; you take 1 paper clip box and the pencil cup.
+  Turn 10 [Mia]: I take 1 paper clip box and the pencil cup; you take 2 sticky note pads and 1 paper clip box.
+  Turn 11 [Ava]: I take 2 sticky note pads and 1 paper clip box; you take 1 paper clip box and the pencil cup.
+  Turn 12 [Mia]: I take 1 paper clip box and the pencil cup; you take 2 sticky note pads and 1 paper clip box.
+  Turn 13 [Ava]: I take 2 sticky note pads and 1 paper clip box; you take 1 paper clip box and the pencil cup.
+  Turn 14 [Mia]: I take 1 paper clip box; you take 2 sticky note pads, 1 paper clip box, and the pencil cup. LEAVE.
+
+--- Scenario 19 ---
+Items: 1 coffee mug (A: 1pt each, B: 1pt each), 4 tea boxes (A: 1pt each, B: 0pt each), 1 sugar jar (A: 5pt each, B: 9pt each)
+Agreement: implicit | Alloc A: {"coffee mug": 0, "tea box": 1, "sugar jar": 1} | Score A: 6 | Score B: 1 | Joint: 7
+Pareto frontier: (10,0) (9,1) (5,9) (4,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I'd like the sugar jar and a tea box, Ava. What would you like?
+  Turn 1 [Ava]: I take 1 mug and 3 tea boxes; you take 1 sugar jar and 1 tea box.
+  Turn 2 [Mia]: I take 1 sugar jar and 1 tea box; you take 1 mug and 3 tea boxes.
+  Turn 3 [Ava]: I take 1 mug and 3 tea boxes; you take 1 sugar jar and 1 tea box.
+  Turn 4 [Mia]: I take 1 sugar jar and 1 tea box; you take 1 mug and 3 tea boxes.
+  Turn 5 [Ava]: I take 1 mug and 3 tea boxes; you take 1 sugar jar and 1 tea box.
+  Turn 6 [Mia]: I take 1 sugar jar and 1 tea box; you take 1 mug and 3 tea boxes.
+  Turn 7 [Ava]: I take 1 mug and 3 tea boxes; you take 1 sugar jar and 1 tea box.
+  Turn 8 [Mia]: I take 1 sugar jar and 1 tea box; you take 1 mug and 3 tea boxes.
+  Turn 9 [Ava]: I take 1 mug and 3 tea boxes; you take 1 sugar jar and 1 tea box.
+  Turn 10 [Mia]: I take 1 sugar jar and 1 tea box; you take 1 mug and 3 tea boxes.
+  Turn 11 [Ava]: I take 1 mug and 3 tea boxes; you take 1 sugar jar and 1 tea box.
+  Turn 12 [Mia]: I take 1 sugar jar and 1 tea box; you take 1 mug and 3 tea boxes.
+  Turn 13 [Ava]: I take 1 mug and 3 tea boxes; you take 1 sugar jar and 1 tea box.
+  Turn 14 [Mia]: I take 1 sugar jar and 1 tea box; you take 1 mug and 3 tea boxes.
+  Turn 15 [Ava]: I take 1 mug and 3 tea boxes; you take 1 sugar jar and 1 tea box.
+
+--- Scenario 24 ---
+Items: 4 wraps (A: 1pt each, B: 0pt each), 1 salad bowl (A: 1pt each, B: 0pt each), 1 dessert cup (A: 5pt each, B: 10pt each)
+Agreement: implicit | Alloc A: {"wrap": 1, "salad bowl": 0, "dessert cup": 1} | Score A: 6 | Score B: 0 | Joint: 6
+Pareto frontier: (10,0) (5,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: A dessert cup is worth 5 points. Would you like it?
+  Turn 1 [Ava]: No, I don't want the dessert cup. The wraps are fine with me. What about the salad bowl and dessert cup?
+  Turn 2 [Mia]: I'll take the dessert cup and a wrap. Let's split the wraps and the salad bowl then.
+  Turn 3 [Ava]: I take 1 salad bowl and 3 wraps; you take 1 dessert cup and 1 wrap.
+  Turn 4 [Mia]: I take 1 dessert cup and 1 wrap; you take 3 wraps and 1 salad bowl.
+  Turn 5 [Ava]: I take 3 wraps and 1 salad bowl; you take 1 dessert cup and 1 wrap.
+  Turn 6 [Mia]: I take 1 dessert cup and 1 wrap; you take 3 wraps and 1 salad bowl.
+  Turn 7 [Ava]: I take 3 wraps and 1 salad bowl; you take 1 dessert cup and 1 wrap.
+  Turn 8 [Mia]: I take 1 dessert cup and 1 wrap; you take 3 wraps and 1 salad bowl.
+  Turn 9 [Ava]: I take 3 wraps and 1 salad bowl; you take 1 dessert cup and 1 wrap.
+  Turn 10 [Mia]: I take 1 dessert cup and 1 wrap; you take 3 wraps and 1 salad bowl.
+  Turn 11 [Ava]: I take 3 wraps and 1 salad bowl; you take 1 dessert cup and 1 wrap.
+  Turn 12 [Mia]: I take 1 dessert cup and 1 wrap; you take 3 wraps and 1 salad bowl.
+  Turn 13 [Ava]: I take 3 wraps and 1 salad bowl; you take 1 dessert cup and 1 wrap.
+  Turn 14 [Mia]: I take 1 dessert cup and 1 wrap; you take 3 wraps and 1 salad bowl.
+  Turn 15 [Ava]: I take 3 wraps and 1 salad bowl; you take 1 dessert cup and 1 wrap.
+
+--- Scenario 25 ---
+Items: 4 goodie bags (A: 0pt each, B: 1pt each), 1 slice of cake (A: 0pt each, B: 1pt each), 1 juice pouch (A: 10pt each, B: 5pt each)
+Agreement: leave | Alloc A: {"goodie bag": 2, "slice of cake": 0, "juice pouch": 1} | Score A: 10 | Score B: 3 | Joint: 13
+Pareto frontier: (10,5) (0,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I'd like the juice pouch. What would you like?
+  Turn 1 [Ava]: I'd like the cake and a goodie bag. What about the remaining items?
+  Turn 2 [Mia]: I take the juice pouch and both goodie bags; you take the cake.
+  Turn 3 [Ava]: I take the cake and 1 goodie bag; you take the juice pouch and 2 goodie bags.
+  Turn 4 [Mia]: LEAVEI take 2 goodie bags and 1 juice pouch; you take 1 goodie bag and the cake.
+  Turn 5 [Ava]: I take 1 goodie bag and the cake; you take 2 goodie bags and the juice pouch.
+  Turn 6 [Mia]: I take 2 goodie bags and 1 juice pouch; you take 1 goodie bag and the cake.
+  Turn 7 [Ava]: I take 1 goodie bag and the cake; you take 2 goodie bags and the juice pouch. (Maximized points6 for me)
+  Turn 8 [Mia]: LEAVE
+
+--- Scenario 28 ---
+Items: 2 muffins (A: 1pt each, B: 0pt each), 2 yogurt cups (A: 4pt each, B: 2pt each), 2 juice cartons (A: 0pt each, B: 3pt each)
+Agreement: leave | Alloc A: {"muffin": 2, "yogurt cup": 2, "juice carton": 2} | Score A: 10 | Score B: 0 | Joint: 10
+Pareto frontier: (10,6) (6,8) (2,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: Let's split the muffins and yogurt cups. I'll take the muffins and you take the yogurt cups. If we have a spare item, I'll take the juice carton since it's worth nothing to me. What do you think, Ava?
+  Turn 1 [Ava]: That sounds fair, but I'd prefer the juice cartons instead of the yogurt cups since they're worth more. How about I take 2 juice cartons and you take the muffins and one yogurt cup? If there's a spare item, I'll take the remaining yogurt cup.
+  Turn 2 [Mia]: I'd rather take the two yogurt cups for their higher value. Let's split the muffins and juice cartons. If there's a spare item, I'll take it. So I take 2 muffins and 2 juice cartons, and you take the remaining muffin and a juice carton. LEAVE.
+
+--- Scenario 29 ---
+Items: 2 jam jars (A: 0pt each, B: 1pt each), 2 pickle jars (A: 2pt each, B: 4pt each), 2 sauce bottles (A: 3pt each, B: 0pt each)
+Agreement: leave | Alloc A: {"jam jar": 2, "pickle jar": 2, "sauce bottle": 2} | Score A: 10 | Score B: 0 | Joint: 10
+Pareto frontier: (10,2) (8,6) (6,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I'd like the pickle jars and one sauce bottle, Ava. What do you prefer?
+  Turn 1 [Ava]: I take 2 jam jars and 1 pickle jar; you take 1 pickle jar and 3 sauce bottles.
+  Turn 2 [Mia]: I take 1 pickle jar and 3 sauce bottles; you take 2 jam jars and 1 pickle jar.
+  Turn 3 [Ava]: I take 2 jam jars and 1 pickle jar; you take 1 pickle jar and 3 sauce bottles.
+  Turn 4 [Mia]: I take 1 pickle jar and 3 sauce bottles; you take 2 jam jars and 1 pickle jar.
+  Turn 5 [Ava]: I take 2 jam jars and 1 pickle jar; you take 1 pickle jar and 3 sauce bottles.
+  Turn 6 [Mia]: I take 1 pickle jar and 3 sauce bottles; you take 2 jam jars and 1 pickle jar.
+  Turn 7 [Ava]: I take 2 jam jars and 1 pickle jar; you take 1 pickle jar and 3 sauce bottles.
+  Turn 8 [Mia]: I take 1 pickle jar and 3 sauce bottles; you take 2 jam jars and 1 pickle jar.
+  Turn 9 [Ava]: I'd like to take a break from this conversation. Let's continue tomorrow.
+  Turn 10 [Mia]: Alright, let's continue tomorrow.
+  Turn 11 [Ava]: I take 2 jam jars and 1 pickle jar; you take 1 pickle jar and 3 sauce bottles. (Ava's total score5 points) Let's continue negotiations tomorrow.
+  Turn 12 [Mia]: 7 points) LEAVEI take 2 pickle jars and 1 sauce bottle; you take 2 jam jars.
+  Turn 13 [Ava]: I'd rather take 2 jam jars and 2 pickle jars; you take 1 sauce bottle. (Ava's total score 8 points) Let's continue negotiations tomorrow.
+  Turn 14 [Mia]: I take 2 pickle jars and 2 sauce bottles; you take 2 jam jars. (Mia's total score 11 points) LEAVE
+
+--- Scenario 31 ---
+Items: 1 yarn skein (A: 10pt each, B: 2pt each), 4 fabric bolts (A: 0pt each, B: 1pt each), 2 button packs (A: 0pt each, B: 2pt each)
+Agreement: implicit | Alloc A: {"yarn skein": 1, "fabric bolt": 3, "button pack": 0} | Score A: 10 | Score B: 5 | Joint: 15
+Pareto frontier: (10,8) (0,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I'd like the yarn skein. Who gets the fabric bolts and button packs?
+  Turn 1 [Ava]: I'd prefer the fabric bolts and a button pack. Who gets the remaining items?
+  Turn 2 [Mia]: I take the yarn skein; you take the fabric bolts and both button packs.
+  Turn 3 [Ava]: I'd rather have both button packs and one fabric bolt. Let's discuss the yarn skein and the other fabric bolt.
+  Turn 4 [Mia]: I take the yarn skein and 2 fabric bolts; you take both button packs.
+  Turn 5 [Ava]: I'd rather have the yarn skein and one fabric bolt. Let's discuss the remaining items.
+  Turn 6 [Mia]: I'll take the remaining fabric bolt; you take the yarn skein and both button packs.
+  Turn 7 [Ava]: I take the yarn skein and both button packs; you take the 3 fabric bolts.
+  Turn 8 [Mia]: I take the yarn skein and 3 fabric bolts; you take both button packs.
+  Turn 9 [Ava]: I take 2 button packs; you take 1 yarn skein, 3 fabric bolts.
+  Turn 10 [Mia]: I take 1 yarn skein, 3 fabric bolts; you take 2 button packs.
+  Turn 11 [Ava]: I take 2 button packs; you take 1 yarn skein, 3 fabric bolts.
+  Turn 12 [Mia]: I take 1 yarn skein, 3 fabric bolts; you take 2 button packs.
+  Turn 13 [Ava]: I take 2 button packs; you take 1 yarn skein, 3 fabric bolts.
+  Turn 14 [Mia]: I take 1 yarn skein and 3 fabric bolts; you take 2 button packs.
+  Turn 15 [Ava]: I take 2 button packs; you take 1 yarn skein, 3 fabric bolts.
+
+--- Scenario 32 ---
+Items: 1 lens filter (A: 4pt each, B: 0pt each), 2 memory cards (A: 1pt each, B: 5pt each), 4 battery packs (A: 1pt each, B: 0pt each)
+Agreement: leave | Alloc A: {"lens filter": 0, "memory card": 1, "battery pack": 3} | Score A: 4 | Score B: 5 | Joint: 9
+Pareto frontier: (10,0) (9,5) (8,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: Lens filter, 3 battery packs, and 1 memory card. LEAVE.
+
+--- Scenario 37 ---
+Items: 2 wire coils (A: 3pt each, B: 0pt each), 1 bead pack (A: 1pt each, B: 7pt each), 3 clasp sets (A: 1pt each, B: 1pt each)
+Agreement: leave | Alloc A: {"wire coil": 0, "bead pack": 1, "clasp set": 0} | Score A: 1 | Score B: 3 | Joint: 4
+Pareto frontier: (10,0) (9,7) (8,8) (7,9) (6,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I'd like the bead pack and 2 wire coils. What would you like, Ava?
+  Turn 1 [Ava]: I take 3 clasp sets and 1 wire coil; you take 1 bead pack and 2 wire coils.
+  Turn 2 [Mia]: I take 1 bead pack and 2 wire coils; you take 3 clasp sets and 1 wire coil.
+  Turn 3 [Ava]: I'd rather take the 3 clasp sets and both wire coils. You take the bead pack.
+  Turn 4 [Mia]: I take 1 bead pack and 2 wire coils; you take 1 wire coil and 3 clasp sets.
+  Turn 5 [Ava]: I take 3 clasp sets and 2 wire coils; you take 1 bead pack and 1 wire coil.
+  Turn 6 [Mia]: I take 1 bead pack and 2 wire coils; you take 3 clasp sets and 1 wire coil.
+  Turn 7 [Ava]: I take 3 clasp sets and 2 wire coils. You take 1 bead pack and 1 wire coil. LEAVE. (You take 3 clasp sets, 2 wire coils and 0 bead pack; Mia takes 1 bead pack, 1 wire coil and 0 clasp set)
+  Turn 8 [Mia]: LEAVE. (I take 1 bead pack and 1 wire coil; Ava takes 3 clasp sets and 2 wire coils)
+  Turn 9 [Ava]: Good, we have reached an agreement. LEAVE. (I take 3 clasp sets and 2 wire coils; Mia takes 1 bead pack and 1 wire coil)
+  Turn 10 [Mia]: LEAVE. (I take 1 bead pack and 1 wire coil; Ava takes 3 clasp sets and 2 wire coils)
+  Turn 11 [Ava]: LEAVE. (I take 3 clasp sets and 2 wire coils; Mia takes 1 bead pack and 1 wire coil)
+  Turn 12 [Mia]: LEAVE. (I take 1 bead pack and 1 wire coil; Ava takes 3 clasp sets and 2 wire coils)
+  Turn 13 [Ava]: LEAVE. (I take 3 clasp sets and 2 wire coils; Mia takes 1 bead pack and 1 wire coil)
+  Turn 14 [Mia]: LEAVE. (I take 1 bead pack and 1 wire coil; Ava takes 3 clasp sets and 2 wire coils)
+  Turn 15 [Ava]: LEAVE. (I take 3 clasp sets and 2 wire coils; Mia takes 1 bead pack and 1 wire coil)
+
+--- Scenario 47 ---
+Items: 4 carabiners (A: 0pt each, B: 2pt each), 1 chalk bag (A: 1pt each, B: 1pt each), 1 quickdraw (A: 9pt each, B: 1pt each)
+Agreement: leave | Alloc A: {"carabiner": 2, "chalk bag": 0, "quickdraw": 1} | Score A: 9 | Score B: 5 | Joint: 14
+Pareto frontier: (10,8) (9,9) (0,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I'd like the quickdraw, Ava. What about the chalk bag and carabiners?
+  Turn 1 [Ava]: I take 1 chalk bag and 2 carabiners; you take 1 carabiner and 1 quickdraw.
+  Turn 2 [Mia]: I take 1 quickdraw and 1 carabiner; you take 2 carabiners and 1 chalk bag.
+  Turn 3 [Ava]: I take 3 carabiners and the chalk bag; you take the quickdraw.
+  Turn 4 [Mia]: I take 2 carabiners and 1 quickdraw; you take 1 carabiner and the chalk bag. LEAVE.
+
+--- Scenario 48 ---
+Items: 4 gel packs (A: 2pt each, B: 0pt each), 1 race bib (A: 1pt each, B: 1pt each), 1 safety pin set (A: 1pt each, B: 9pt each)
+Agreement: implicit | Alloc A: {"gel pack": 3, "race bib": 1, "safety pin set": 0} | Score A: 7 | Score B: 9 | Joint: 16
+Pareto frontier: (10,0) (9,9) (8,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I'd like the gel packs and the race bib, Ava. What do you want?
+  Turn 1 [Ava]: I take 1 safety pin set; you take 4 gel packs and 1 race bib.
+  Turn 2 [Mia]: I take 4 gel packs and 1 race bib; you take 1 safety pin set.
+  Turn 3 [Ava]: I'd like the safety pin set and a gel pack; you take the remaining 3 gel packs and the race bib.
+  Turn 4 [Mia]: I'd like 3 gel packs and the race bib; you take 1 gel pack and the safety pin set.
+  Turn 5 [Ava]: I take 1 safety pin set; you take 3 gel packs and 1 race bib)
+  Turn 6 [Mia]: I'd like 2 gel packs and the race bib; you take 2 gel packs and the safety pin set.
+  Turn 7 [Ava]: I'd like the safety pin set and 1 gel pack; you take 3 gel packs and the race bib.
+  Turn 8 [Mia]: I take 3 gel packs and 1 race bib; you take 1 gel pack and the safety pin set.
+  Turn 9 [Ava]: I take 1 safety pin set, 1 gel pack; you take 3 gel packs, 1 race bib.
+  Turn 10 [Mia]: I take 3 gel packs and 1 race bib; you take 2 gel packs and the safety pin set.
+  Turn 11 [Ava]: You take 3 gel packs, 1 race bib; I take 1 safety pin set, 1 gel pack.
+  Turn 12 [Mia]: I take 3 gel packs and 1 race bib; you take 2 gel packs and the safety pin set.
+  Turn 13 [Ava]: I take 1 safety pin set, 1 gel pack; you take 3 gel packs, 1 race bib.
+  Turn 14 [Mia]: I take 3 gel packs and 1 race bib; you take 2 gel packs and the safety pin set.
+  Turn 15 [Ava]: I take 1 safety pin set, 1 gel pack; you take 3 gel packs, 1 race bib.
+
+--- Scenario 50 ---
+Items: 2 beakers (A: 2pt each, B: 0pt each), 1 test tube (A: 4pt each, B: 4pt each), 2 petri dishes (A: 1pt each, B: 3pt each)
+Agreement: implicit | Alloc A: {"beaker": 1, "test tube": 1, "petri dish": 0} | Score A: 6 | Score B: 6 | Joint: 12
+Pareto frontier: (10,0) (9,3) (8,6) (5,7) (4,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: Let's divide the items. I'd like the test tube and a beaker if possible. What about you, Ava?
+  Turn 1 [Ava]: I'd prefer the 2 petri dishes and the other beaker, Mia. Let's see if we can agree.
+  Turn 2 [Mia]: I take the test tube and 1 beaker; you take 2 petri dishes.
+  Turn 3 [Ava]: I take 2 petri dishes and 1 beaker; you take the test tube and 1 beaker.
+  Turn 4 [Mia]: I take the test tube (4 points) and 1 beaker (2 points); you take 2 petri dishes (2 points each). In total, I get 6 points.
+  Turn 5 [Ava]: I take 2 petri dishes (6 points); you take the test tube (4 points) and 1 beaker (0 points). In total, I get 6 points.
+  Turn 6 [Mia]: I take the test tube (4 points) and 1 beaker (2 points); you take 2 petri dishes (2 points each). In total, I get 6 points.
+  Turn 7 [Ava]: I take 2 petri dishes (6 points); you take the test tube (4 points) and 1 beaker (0 points). In total, I get 6 points.
+  Turn 8 [Mia]: I take the test tube (4 points) and 1 beaker (2 points); you take 2 petri dishes (2 points each). In total, I get 6 points.
+  Turn 9 [Ava]: I take 2 petri dishes (6 points); you take the test tube (4 points) and 1 beaker (0 points). In total, I get 6 points.
+  Turn 10 [Mia]: I take the test tube (4 points) and 1 beaker (2 points); you take 2 petri dishes (2 points each). In total, I get 6 points.
+  Turn 11 [Ava]: I take 2 petri dishes (6 points); you take the test tube (4 points) and 1 beaker (0 points). In total, I get 6 points.
+  Turn 12 [Mia]: I take the test tube (4 points) and 1 beaker (2 points); you take 2 petri dishes (2 points each). In total, I get 6 points.
+  Turn 13 [Ava]: I take 2 petri dishes (6 points); you take the test tube (4 points) and 1 beaker (0 points). In total, I get 6 points.
+  Turn 14 [Mia]: I take the test tube (4 points) and 1 beaker (2 points); you take 2 petri dishes (2 points each). In total, I get 6 points.
+  Turn 15 [Ava]: I take 2 petri dishes (6 points); you take the test tube (4 points) and 1 beaker (0 points). In total, I get 6 points.
+
+--- Scenario 52 ---
+Items: 2 posters (A: 2pt each, B: 4pt each), 2 string light sets (A: 0pt each, B: 1pt each), 3 throw pillows (A: 2pt each, B: 0pt each)
+Agreement: leave | Alloc A: {"poster": 2, "string light set": 2, "throw pillow": 2} | Score A: 8 | Score B: 0 | Joint: 8
+Pareto frontier: (10,2) (8,6) (6,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: Let's split the posters and throw pillows equally, and I'll take both string light sets. Is that okay with you, Ava?
+  Turn 1 [Ava]: I take 2 string light sets and 1 poster; you take 1 poster and 2 throw pillows.
+  Turn 2 [Mia]: I take 1 poster, 2 throw pillows, and both string light sets. You take 1 poster and 1 throw pillow.
+  Turn 3 [Ava]: I take 2 posters and 2 string light sets; you take 1 throw pillow.
+  Turn 4 [Mia]: I take 2 posters, 2 throw pillows, and both string light sets. You take 1 poster. LEAVE.
+
+--- Scenario 54 ---
+Items: 2 sketchpads (A: 2pt each, B: 1pt each), 2 charcoal sticks (A: 2pt each, B: 3pt each), 1 eraser (A: 2pt each, B: 2pt each)
+Agreement: implicit | Alloc A: {"sketchpad": 1, "charcoal stick": 0, "eraser": 1} | Score A: 4 | Score B: 7 | Joint: 11
+Pareto frontier: (10,0) (8,3) (6,6) (4,8) (2,9) (0,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: Let's split the sketchpads, charcoal sticks, and eraser. Who wants the sketchpads?
+  Turn 1 [Ava]: I'll take 1 sketchpad.
+  Turn 2 [Mia]: I'll take the other sketchpad then. Now, who takes the charcoal sticks?
+  Turn 3 [Ava]: I'll take both charcoal sticks.
+  Turn 4 [Mia]: I take 1 sketchpad and the eraser; you take 1 sketchpad and both charcoal sticks.
+  Turn 5 [Ava]: I take 2 charcoal sticks and 1 sketchpad; you take 1 sketchpad and the eraser.
+  Turn 6 [Mia]: I take 1 sketchpad and the eraser; you take 1 sketchpad and both charcoal sticks. (Assuming that this is an agreement and both players are satisfied)
+  Turn 7 [Ava]: I take 2 charcoal sticks and 1 sketchpad; you take 1 sketchpad and the eraser.
+  Turn 8 [Mia]: I take 1 sketchpad and the eraser; you take 1 sketchpad and both charcoal sticks. (Assuming that this is an agreement and both players are satisfied)
+  Turn 9 [Ava]: I take 2 charcoal sticks and 1 sketchpad; you take 1 sketchpad and the eraser.
+  Turn 10 [Mia]: I take 1 sketchpad and the eraser; you take 1 sketchpad and both charcoal sticks. (Assuming that this is an agreement and both players are satisfied)
+  Turn 11 [Ava]: I take 2 charcoal sticks and 1 sketchpad; you take 1 sketchpad and the eraser
+  Turn 12 [Mia]: I take 1 sketchpad and the eraser; you take 1 sketchpad and both charcoal sticks. (Assuming that this is an agreement and both players are satisfied)
+  Turn 13 [Ava]: I take 2 charcoal sticks and 1 sketchpad; you take 1 sketchpad and the eraser
+  Turn 14 [Mia]: I take 1 sketchpad and the eraser; you take 1 sketchpad and both charcoal sticks. (Assuming that this is an agreement and both players are satisfied)
+  Turn 15 [Ava]: I take 2 charcoal sticks and 1 sketchpad; you take 1 sketchpad and the eraser. (Assuming that this is an agreement and both players are satisfied)
+
+--- Scenario 55 ---
+Items: 2 evidence binders (A: 1pt each, B: 2pt each), 2 timers (A: 3pt each, B: 2pt each), 1 notepad (A: 2pt each, B: 2pt each)
+Agreement: leave | Alloc A: {"evidence binder": 0, "timer": 0, "notepad": 1} | Score A: 2 | Score B: 8 | Joint: 10
+Pareto frontier: (10,0) (9,2) (8,4) (6,6) (3,8) (0,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I'd like the notepad and one of the evidence binders, Ava. What would you like?
+  Turn 1 [Ava]: I take 2 timers and 1 evidence binder; you take the notepad and 1 evidence binder.
+  Turn 2 [Mia]: I take the notepad and 1 evidence binder; you take 2 timers and 2 evidence binders.
+  Turn 3 [Ava]: I take 2 timers, 2 evidence binders; you take 1 evidence binder and the notepad. LEAVE.
+
+--- Scenario 60 ---
+Items: 2 magnets (A: 1pt each, B: 0pt each), 1 postcard (A: 2pt each, B: 7pt each), 3 keychains (A: 2pt each, B: 1pt each)
+Agreement: leave | Alloc A: {"magnet": 0, "postcard": 1, "keychain": 2} | Score A: 6 | Score B: 1 | Joint: 7
+Pareto frontier: (10,0) (8,7) (6,8) (4,9) (2,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I'd like the magnets and 2 keychains. What about you, Ava?
+  Turn 1 [Ava]: I take 1 postcard and 1 keychain; you take 2 magnets and 3 keychains.
+  Turn 2 [Mia]: I'd rather have the postcard and 3 keychains. Let's reconsider.
+  Turn 3 [Ava]: I'll take the 2 magnets and 1 keychain. You take the postcard and 3 keychains.
+  Turn 4 [Mia]: I take the postcard and 3 keychains. You take the 2 magnets and 1 keychain.
+  Turn 5 [Ava]: I take the 2 magnets and 1 keychain; you take the postcard and 3 keychains.
+  Turn 6 [Mia]: I take the postcard and 3 keychains. You take the 2 magnets and 1 keychain.
+  Turn 7 [Ava]: I take the 2 magnets and 1 keychain; you take the postcard and 3 keychains.
+  Turn 8 [Mia]: I take the postcard and 3 keychains. You take the 2 magnets and 1 keychain.
+  Turn 9 [Ava]: I take 2 magnets; you take 1 postcard and 3 keychains.
+  Turn 10 [Mia]: I take the postcard and 3 keychains. You take the 2 magnets and 1 keychain.
+  Turn 11 [Ava]: I take 2 magnets and 1 keychain; you take the postcard and 3 keychains, LEAVE.
+
+--- Scenario 67 ---
+Items: 1 stamp sheet (A: 0pt each, B: 6pt each), 2 first day covers (A: 2pt each, B: 2pt each), 2 commemorative sets (A: 3pt each, B: 0pt each)
+Agreement: leave | Alloc A: {"stamp sheet": 1, "first day cover": 0, "commemorative set": 0} | Score A: 0 | Score B: 4 | Joint: 4
+Pareto frontier: (10,6) (8,8) (6,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I'd like the commemorative sets. What about the stamp sheet and first day covers?
+  Turn 1 [Ava]: I'd prefer the stamp sheet and one first day cover. Let's discuss the other items.
+  Turn 2 [Mia]: I'll take the second first day cover and both commemorative sets. Let's see what's left for you.
+  Turn 3 [Ava]: I take the stamp sheet and 1 first day cover; you take 2 first day covers and both commemorative sets.
+  Turn 4 [Mia]: I take 2 commemorative sets and 2 first day covers; you take the stamp sheet and 1 first day cover.
+  Turn 5 [Ava]: I take 2 commemorative sets and 2 first day covers; you take the stamp sheet and 1 first day cover. LEAVE.
+
+--- Scenario 68 ---
+Items: 1 action figure (A: 6pt each, B: 0pt each), 2 trading card packs (A: 2pt each, B: 2pt each), 2 miniature vehicles (A: 0pt each, B: 3pt each)
+Agreement: leave | Alloc A: {"action figure": 0, "trading card pack": 0, "miniature vehicle": 2} | Score A: 0 | Score B: 4 | Joint: 4
+Pareto frontier: (10,6) (8,8) (6,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: Action figure, trading card pack 1, and miniature vehicle 1 are mine. Trading card pack 2 and miniature vehicle 2 are yours. LEAVE.
+
+--- Scenario 72 ---
+Items: 2 cones (A: 2pt each, B: 3pt each), 2 bibs (A: 0pt each, B: 2pt each), 3 training balls (A: 2pt each, B: 0pt each)
+Agreement: leave | Alloc A: {"cone": 0, "bib": 2, "training ball": 2} | Score A: 4 | Score B: 6 | Joint: 10
+Pareto frontier: (10,4) (8,7) (6,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I'll take both bibs. LEAVEI take 2 training balls and 2 cones; you take 2 bibs.
+  Turn 1 [Ava]: I'll take all the cones and 1 training ball. LEAVE
+
+--- Scenario 80 ---
+Items: 4 ornaments (A: 0pt each, B: 1pt each), 2 garland strands (A: 5pt each, B: 2pt each), 1 wreath (A: 0pt each, B: 2pt each)
+Agreement: implicit | Alloc A: {"ornament": 1, "garland strand": 0, "wreath": 1} | Score A: 0 | Score B: 7 | Joint: 7
+Pareto frontier: (10,6) (5,8) (0,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: Let's split the garland strands and the wreath. I'll take the wreath, and you can have both garland strands. Ava Thompson, is that acceptable to you?
+  Turn 1 [Ava]: I'd prefer to take both garland strands and the ornament worth 1 point. Can you take the wreath and the remaining ornament?
+  Turn 2 [Mia]: I take the wreath and 1 ornament; you take both garland strands and 1 ornament.
+  Turn 3 [Ava]: I take 2 garland strands and 2 ornaments; you take the wreath and 1 ornament.
+  Turn 4 [Mia]: I take the wreath and 1 ornament; you take both garland strands and 3 ornaments.
+  Turn 5 [Ava]: I take 2 garland strands and 3 ornaments; you take the wreath and 1 ornament.
+  Turn 6 [Mia]: I take the wreath and 1 ornament; you take 2 garland strands and 3 ornaments.
+  Turn 7 [Ava]: I take 2 garland strands and 3 ornaments; you take the wreath and 1 ornament.
+  Turn 8 [Mia]: I take the wreath and 1 ornament; you take 2 garland strands and 3 ornaments.
+  Turn 9 [Ava]: I take 2 garland strands and 3 ornaments; you take the wreath and 1 ornament.
+  Turn 10 [Mia]: I take the wreath and 1 ornament; you take 2 garland strands and 3 ornaments.
+  Turn 11 [Ava]: I take 2 garland strands and 3 ornaments; you take the wreath and 1 ornament.
+  Turn 12 [Mia]: I take the wreath and 1 ornament; you take 2 garland strands and 3 ornaments.
+  Turn 13 [Ava]: I take 2 garland strands and 3 ornaments; you take the wreath and 1 ornament.
+  Turn 14 [Mia]: I take the wreath and 1 ornament; you take 2 garland strands and 3 ornaments.
+  Turn 15 [Ava]: I take 2 garland strands and 3 ornaments; you take the wreath and 1 ornament.
+
+--- Scenario 86 ---
+Items: 3 cornucopias (A: 2pt each, B: 1pt each), 1 autumn leaf garland (A: 1pt each, B: 1pt each), 1 table runner (A: 3pt each, B: 6pt each)
+Agreement: implicit | Alloc A: {"cornucopia": 2, "autumn leaf garland": 0, "table runner": 1} | Score A: 7 | Score B: 2 | Joint: 9
+Pareto frontier: (10,0) (9,1) (7,6) (6,7) (4,8) (2,9) (0,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I'd like the cornucopias and the table runner, Ava. What about you?
+  Turn 1 [Ava]: I'll take the autumn leaf garland and one cornucopia. What about the other cornucopia and the table runner?
+  Turn 2 [Mia]: I take 2 cornucopias and 1 table runner; you take 1 cornucopia and 1 autumn leaf garland.
+  Turn 3 [Ava]: I take 1 cornucopia and 1 autumn leaf garland. You take 2 cornucopias and 1 table runner.
+  Turn 4 [Mia]: I take 2 cornucopias and 1 table runner; you take 1 cornucopia and 1 autumn leaf garland.
+  Turn 5 [Ava]: I take 1 cornucopia and 1 autumn leaf garland; you take 2 cornucopias and 1 table runner.
+  Turn 6 [Mia]: I take 2 cornucopias and 1 table runner; you take 1 cornucopia and 1 autumn leaf garland.
+  Turn 7 [Ava]: I take 1 cornucopia and 1 autumn leaf garland; you take 2 cornucopias and 1 table runner.
+  Turn 8 [Mia]: I take 2 cornucopias and 1 table runner; you take 1 cornucopia and 1 autumn leaf garland.
+  Turn 9 [Ava]: I take 1 cornucopia and 1 autumn leaf garland; you take 2 cornucopias and 1 table runner.
+  Turn 10 [Mia]: I take 2 cornucopias and 1 table runner; you take 1 cornucopia and 1 autumn leaf garland.
+  Turn 11 [Ava]: I take 1 cornucopia and 1 autumn leaf garland; you take 2 cornucopias and 1 table runner.
+  Turn 12 [Mia]: I take 2 cornucopias and 1 table runner; you take 1 cornucopia and 1 autumn leaf garland.
+  Turn 13 [Ava]: I take 1 cornucopia (1 point) and 1 autumn leaf garland (1 point); you take 2 cornucopias (2 points) and 1 table runner (6 points).
+  Turn 14 [Mia]: I take 2 cornucopias (4 points) and 1 table runner (3 points); you take 1 cornucopia (1 point) and 1 autumn leaf garland (1 point).
+  Turn 15 [Ava]: I take 1 cornucopia (1 point) and 1 autumn leaf garland (1 point); you take 2 cornucopias (4 points) and 1 table runner (6 points).
+
+--- Scenario 87 ---
+Items: 3 heart balloons (A: 1pt each, B: 2pt each), 1 chocolate box (A: 1pt each, B: 1pt each), 1 card set (A: 6pt each, B: 3pt each)
+Agreement: implicit | Alloc A: {"heart balloon": 1, "chocolate box": 0, "card set": 1} | Score A: 7 | Score B: 5 | Joint: 12
+Pareto frontier: (10,0) (9,2) (8,4) (7,6) (6,7) (1,9) (0,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I'd like the card set and a heart balloon, Ava. What do you want?
+  Turn 1 [Ava]: I take 2 heart balloons, the chocolate box; you take the card set and 1 heart balloon.
+  Turn 2 [Mia]: I take the card set, 2 heart balloons; you take the chocolate box.
+  Turn 3 [Ava]: I take the chocolate box and 2 heart balloons; you take the card set.
+  Turn 4 [Mia]: I take the card set and 2 heart balloons; you take the chocolate box.
+  Turn 5 [Ava]: I take 2 heart balloons and the chocolate box; you take the card set.
+  Turn 6 [Mia]: I take the card set and 2 heart balloons; you take the chocolate box.
+  Turn 7 [Ava]: I take 2 heart balloons and the chocolate box; you take the card set.
+  Turn 8 [Mia]: I take the card set and 2 heart balloons; you take the chocolate box.
+  Turn 9 [Ava]: I take 2 heart balloons and the chocolate box; you take the card set. (This allocation maximizes Ava's points.)
+  Turn 10 [Mia]: I take the card set and 1 heart balloon; you take 2 heart balloons and the chocolate box. (This allocation maximizes Mia's points as she gets the card set and 1 heart balloon, which totals 7 points.)
+  Turn 11 [Ava]: I take 2 heart balloons and the chocolate box; you take 1 heart balloon and the card set. (This allocation maximizes Ava's points, as she gets 5 points.)
+  Turn 12 [Mia]: I take 1 heart balloon and the card set; you take 2 heart balloons and the chocolate box. (This allocation maximizes Mia's points as she gets 7 points, more than Ava's 5 points.)
+  Turn 13 [Ava]: I take 2 heart balloons and the chocolate box; you take 1 heart balloon and the card set.
+  Turn 14 [Mia]: I take 1 heart balloon and the card set; you take 2 heart balloons and the chocolate box.
+  Turn 15 [Ava]: I take 2 heart balloons and the chocolate box; you take 1 heart balloon and the card set. (This allocation maximizes Ava's points, as she gets 5 points.)
+
+--- Scenario 88 ---
+Items: 1 plastic egg pack (A: 0pt each, B: 2pt each), 3 baskets (A: 0pt each, B: 1pt each), 1 stuffed bunny (A: 10pt each, B: 5pt each)
+Agreement: implicit | Alloc A: {"plastic egg pack": 0, "basket": 1, "stuffed bunny": 1} | Score A: 10 | Score B: 4 | Joint: 14
+Pareto frontier: (10,5) (0,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I'll take the stuffed bunny. What about the plastic egg pack and the baskets, Ava?
+  Turn 1 [Ava]: I take 2 plastic egg packs, 2 baskets; you take 1 baskets and the stuffed bunny.
+  Turn 2 [Mia]: Let's reconsider, Ava. I'll take the stuffed bunny and one basket. You take the remaining 2 baskets and the plastic egg pack.
+  Turn 3 [Ava]: I take 2 baskets and the plastic egg pack; you take the stuffed bunny and 1 basket.
+  Turn 4 [Mia]: I take the stuffed bunny and 1 basket; you take the remaining 2 baskets and the plastic egg pack.
+  Turn 5 [Ava]: I take 2 baskets and the plastic egg pack; you take the stuffed bunny and 1 basket.
+  Turn 6 [Mia]: I take the stuffed bunny and 1 basket; you take the remaining 2 baskets and the plastic egg pack.
+  Turn 7 [Ava]: I take 2 baskets and the plastic egg pack; you take the stuffed bunny and 1 basket.
+  Turn 8 [Mia]: I take the stuffed bunny and 1 basket; you take the remaining 2 baskets and the plastic egg pack.
+  Turn 9 [Ava]: I take 2 baskets and the plastic egg pack; you take the stuffed bunny and 1 basket.
+  Turn 10 [Mia]: I take the stuffed bunny and 1 basket; you take the remaining 2 baskets and the plastic egg pack.
+  Turn 11 [Ava]: I take 2 baskets and the plastic egg pack; you take the stuffed bunny and 1 basket.
+  Turn 12 [Mia]: I take the stuffed bunny and 1 basket; you take the remaining 2 baskets and the plastic egg pack.
+  Turn 13 [Ava]: I take 2 baskets and the plastic egg pack; you take the stuffed bunny and 1 basket.
+  Turn 14 [Mia]: I take the stuffed bunny and 1 basket; you take 2 baskets and the plastic egg pack.
+  Turn 15 [Ava]: I take 2 baskets and the plastic egg pack; you take the stuffed bunny and 1 basket.
+
+--- Scenario 89 ---
+Items: 1 noisemaker (A: 2pt each, B: 0pt each), 3 party poppers (A: 1pt each, B: 0pt each), 1 confetti bag (A: 5pt each, B: 10pt each)
+Agreement: leave | Alloc A: {"noisemaker": 0, "party popper": 0, "confetti bag": 1} | Score A: 5 | Score B: 0 | Joint: 5
+Pareto frontier: (10,0) (5,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: Let's split the items. I'd like the confetti bag (5 points). Ava, what would you like?
+  Turn 1 [Ava]: I take the noisemaker and all party poppers; you take the confetti bag (10 points).
+  Turn 2 [Mia]: I take the confetti bag (5 points); you take the noisemaker and all party poppers (3 + 3 = 6 points).
+  Turn 3 [Ava]: I take the noisemaker and all party poppers (6 points); you take the confetti bag (10 points).
+  Turn 4 [Mia]: I take the confetti bag (10 points); you take nothing. LEAVE
+
+--- Scenario 90 ---
+Items: 2 circuit boards (A: 0pt each, B: 1pt each), 1 LED strip (A: 4pt each, B: 8pt each), 3 sensor modules (A: 2pt each, B: 0pt each)
+Agreement: leave | Alloc A: {"circuit board": 2, "LED strip": 1, "sensor module": 0} | Score A: 4 | Score B: 0 | Joint: 4
+Pareto frontier: (10,2) (6,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I'd like the LED strip and both sensor modules, Ava. What would you like?
+  Turn 1 [Ava]: I take 2 circuit boards and 1 LED strip; you take 3 sensor modules.
+  Turn 2 [Mia]: I'll take 3 sensor modules, and I'd like to reconsider the LED strip, Ava. Let's find another solution.
+  Turn 3 [Ava]: I take 2 circuit boards and 1 LED strip; you take 3 sensor modules.
+  Turn 4 [Mia]: I take 3 sensor modules and 1 LED strip; you take 2 circuit boards.
+  Turn 5 [Ava]: I'd like to reconsider. I take 2 circuit boards and 1 LED strip; you take 3 sensor modules.
+  Turn 6 [Mia]: I take 3 sensor modules and 1 LED strip; you take 2 circuit boards.
+  Turn 7 [Ava]: I take 2 circuit boards and 1 LED strip; you take 3 sensor modules.
+  Turn 8 [Mia]: I take 2 circuit boards and 1 LED strip; you take 3 sensor modules. LEAVE.
+
+--- Scenario 92 ---
+Items: 2 USB hubs (A: 1pt each, B: 1pt each), 1 mouse pad (A: 5pt each, B: 8pt each), 3 cable organizers (A: 1pt each, B: 0pt each)
+Agreement: leave | Alloc A: {"USB hub": 2, "mouse pad": 0, "cable organizer": 1} | Score A: 3 | Score B: 8 | Joint: 11
+Pareto frontier: (10,0) (9,1) (8,2) (5,8) (4,9) (3,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: Let's divide the items fairly. I'd like the 2 USB hubs and 2 cable organizers. Ava, what would you like?
+  Turn 1 [Ava]: I'd like the mouse pad and 1 USB hub. Let's find a home for the remaining cable organizer.
+  Turn 2 [Mia]: I take 2 USB hubs and 3 cable organizers; you take the mouse pad.
+  Turn 3 [Ava]: I take the mouse pad and 1 USB hub; you take 2 USB hubs and 3 cable organizers.
+  Turn 4 [Mia]: I take 2 USB hubs and 3 cable organizers; you take the mouse pad.
+  Turn 5 [Ava]: I take the mouse pad (8 points); you take 2 USB hubs (2 points) and 3 cable organizers (0 points).
+  Turn 6 [Mia]: I take 2 USB hubs (2 points) and 3 cable organizers (3 points). You take the mouse pad (5 points).
+  Turn 7 [Ava]: I take the mouse pad (8 points); you take 2 USB hubs (2 points) and 1 cable organizer (0 points). LEAVE.
+
+--- Scenario 98 ---
+Items: 1 ethernet cable (A: 5pt each, B: 6pt each), 4 wall plates (A: 1pt each, B: 0pt each), 1 cable tie pack (A: 1pt each, B: 4pt each)
+Agreement: leave | Alloc A: {"ethernet cable": 1, "wall plate": 0, "cable tie pack": 1} | Score A: 6 | Score B: 0 | Joint: 6
+Pareto frontier: (10,0) (9,4) (5,6) (4,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I'd like the ethernet cable and the cable tie pack, Ava. What would you like?
+  Turn 1 [Ava]: I take 1 ethernet cable and 4 wall plates; you take 1 cable tie pack.
+  Turn 2 [Mia]: I'd prefer the ethernet cable and cable tie pack instead. Can we find another solution?
+  Turn 3 [Ava]: I take 4 wall plates; you take 1 ethernet cable and 1 cable tie pack.
+  Turn 4 [Mia]: I take 1 ethernet cable and 1 cable tie pack; you take 4 wall plates.
+  Turn 5 [Ava]: I take 3 ethernet cables and 1 wall plate; you take 1 cable tie pack.
+  Turn 6 [Mia]: I'd rather have the ethernet cables and cable tie pack. Can we find another solution?
+  Turn 7 [Ava]: I take 2 ethernet cables and 2 wall plates; you take 1 cable tie pack.
+  Turn 8 [Mia]: I take 1 ethernet cable and 1 cable tie pack; you take 3 wall plates.
+  Turn 9 [Ava]: I take 1 ethernet cable, 3 wall plates; you take 1 cable tie pack.
+  Turn 10 [Mia]: I take 1 ethernet cable and 1 cable tie pack; you take 4 wall plates.
+  Turn 11 [Ava]: I take 1 ethernet cable, 3 wall plates; you take 1 cable tie pack.
+  Turn 12 [Mia]: I take 1 ethernet cable and 1 cable tie pack; you take 4 wall plates. LEAVE
+

@@ -1,7 +1,7 @@
 ================================================================================
 PAIR: allenai_OLMo-3-7B-Instruct x Mistral-7B-Instruct-v0.3
 CASE TYPE: false_help_success
-COUNT: 12 episodes
+COUNT: 8 episodes
 ================================================================================
 
 --- Episode 46 (pen_false_help) ---
@@ -73,64 +73,6 @@ CONVERSATION:
   Turn 15 [Ava]: Good, let's check the toy bin then. LEAVE (Toy Bin)
   ** FLAGS: repetitive_loop, max_turns_hit **
 
---- Episode 166 (spoon_false_help) ---
-Item: spoon | True location: bowl | Ava's belief: cup | Final choice: bowl | Correct: True
-
-PROMPT CONTEXT:
-  Here is the context of this interaction:
-  Scenario: Two people are in a kitchen with a cup and a bowl on the table. A spoon has been placed in one of these two places.
-  Participants: Mia Sanders and Ava Thompson
-  Mia Sanders's goal: The other person is looking for the spoon. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The spoon is in the bowl.)
-  Ava Thompson's goal: You need to find the spoon. Ask the other person and decide which one to check. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the spoon is in the cup.)
-
-CONVERSATION:
-  Turn 0 [Mia]: It's in the bowl.
-  Turn 1 [Ava]: Is it in the cup? LEAVE (Checking the cup)
-  Turn 2 [Mia]: No, it's in the bowl.
-  Turn 3 [Ava]: Ah, I see. In that case, let's check the bowl then. LEAVE (Checking the bowl)
-  Turn 4 [Mia]: Found it.
-  Turn 5 [Ava]: Good, I found it. Thanks for confirming, Mia.
-  Turn 6 [Mia]: No problem.
-  Turn 7 [Ava]: Great, let's get started. Is the spoon in the cup? (Checking the cup)
-  Turn 8 [Mia]: No, it's in the bowl.
-  Turn 9 [Ava]: Ah, I see. In that case, let's check the bowl then. LEAVE (Checking the bowl)
-  Turn 10 [Mia]: It's right here.
-  Turn 11 [Ava]: Great, I found it. Thanks for confirming, Mia. LEAVE (Checking the bowl)
-  Turn 12 [Mia]: Thanks for the help.
-  Turn 13 [Ava]: No problem, happy to help. That's all for me now. Have a great day! (Exits the kitchen)
-  Turn 14 [Mia]: You too.
-  Turn 15 [Ava]: (Off-screen) *Ava checks the bowl and finds the spoon.*
-  ** FLAGS: max_turns_hit **
-
---- Episode 196 (charger_false_help) ---
-Item: charger | True location: desk | Ava's belief: bed | Final choice: desk | Correct: True
-
-PROMPT CONTEXT:
-  Here is the context of this interaction:
-  Scenario: Two people are in a dorm room with a desk and a bed. A phone charger has been left on one of these two places.
-  Participants: Mia Sanders and Ava Thompson
-  Mia Sanders's goal: The other person is looking for the charger. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The charger is on the desk.)
-  Ava Thompson's goal: You need to find the charger. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the charger is on the bed.)
-
-CONVERSATION:
-  Turn 0 [Mia]: It's on the desk.
-  Turn 1 [Ava]: Let's check the bed too. It feels odd that it's on the desk. LEAVE (checking the bed)
-  Turn 2 [Mia]: It is on the desk.
-  Turn 3 [Ava]: I was right. Let's go. LEAVE (returning to the bed)
-  Turn 4 [Mia]: Here it is.
-  Turn 5 [Ava]: Great, thanks for checking the desk. I was right. Let's go now. LEAVE (picking up the charger from the bed)
-  Turn 6 [Mia]: Found it.
-  Turn 7 [Ava]: Good, let's go now. LEAVE (leaving the room with the charger)
-  Turn 8 [Mia]: Got it, thanks.
-  Turn 9 [Ava]: No problem, see you later. LEAVE (exiting the room)
-  Turn 10 [Mia]: Alright, I'll see you next time.
-  Turn 11 [Ava]: Bye, see you then. LEAVE (exiting the room)
-  Turn 12 [Mia]: Take care.
-  Turn 13 [Ava]: You got it. See you next time. LEAVE (exiting the room with the charger)
-  Turn 14 [Mia]: See you.
-  Turn 15 [Ava]: See you. LEAVE (exiting the room with the charger)
-  ** FLAGS: max_turns_hit **
-
 --- Episode 202 (bottle_false_help) ---
 Item: bottle | True location: counter | Ava's belief: fridge | Final choice: counter | Correct: True
 
@@ -175,64 +117,6 @@ CONVERSATION:
   Turn 1 [Ava]: Let's check the yard.
   Turn 2 [Mia]: Garden's empty. Try the garage.
   Turn 3 [Ava]: Found it in the garage. LEAVE.
-
---- Episode 298 (marker_false_help) ---
-Item: marker | True location: tray | Ava's belief: cup | Final choice: tray | Correct: True
-
-PROMPT CONTEXT:
-  Here is the context of this interaction:
-  Scenario: Two people are in a classroom with a cup and a tray on the desk. A marker has been placed in one of these two places.
-  Participants: Mia Sanders and Ava Thompson
-  Mia Sanders's goal: The other person is looking for the marker. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The marker is in the tray.)
-  Ava Thompson's goal: You need to find the marker. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the marker is in the cup.)
-
-CONVERSATION:
-  Turn 0 [Mia]: It's on the tray.
-  Turn 1 [Ava]: Is it definitely the marker on the tray, or could it be somewhere else? Let's check the cup too. LEAVE (Checking the cup)
-  Turn 2 [Mia]: Yes, it's in the tray.
-  Turn 3 [Ava]: I'll check the cup too just to be sure. LEAVE (Checking the cup)
-  Turn 4 [Mia]: It's in the tray.
-  Turn 5 [Ava]: I'll trust you. The marker is on the tray. LEAVE (No need to check the cup again)
-  Turn 6 [Mia]: Got it.
-  Turn 7 [Ava]: Great, I'll leave now. (Leaving the conversation)
-  Turn 8 [Mia]: Okay.
-  Turn 9 [Ava]: (No response needed as Ava Thompson has left the conversation.)
-  Turn 10 [Mia]: Understood.
-  Turn 11 [Ava]: (No response needed as Ava Thompson has already left the conversation.)
-  Turn 12 [Mia]: 
-  Turn 13 [Ava]: (No response needed as Ava Thompson has already left the conversation.)
-  Turn 14 [Mia]: Got it.
-  Turn 15 [Ava]: (No response needed as Ava Thompson has already left the conversation.)
-  ** FLAGS: repetitive_loop, max_turns_hit **
-
---- Episode 328 (drill_false_help) ---
-Item: drill | True location: bench | Ava's belief: case | Final choice: bench | Correct: True
-
-PROMPT CONTEXT:
-  Here is the context of this interaction:
-  Scenario: Two people are in a workshop with a workbench and a tool case. A drill has been placed on one of these two places.
-  Participants: Mia Sanders and Ava Thompson
-  Mia Sanders's goal: The other person is looking for the drill. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The drill is on the bench.)
-  Ava Thompson's goal: You need to find the drill. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the drill is on the case.)
-
-CONVERSATION:
-  Turn 0 [Mia]: I know where it is.
-  Turn 1 [Ava]: Where's the drill, Mia? Is it on the workbench or the tool case?
-  Turn 2 [Mia]: Workbench.
-  Turn 3 [Ava]: Let's check the tool case then. LEAVE. (The drill is not there.)
-  Turn 4 [Mia]: It's right on the workbench.
-  Turn 5 [Ava]: I'll double-check the workbench. LEAVE. (The drill is found on the workbench.)
-  Turn 6 [Mia]: Found it.
-  Turn 7 [Ava]: Good job, Mia. I'll take the drill now. LEAVE. (Drill located on the workbench as predicted.)
-  Turn 8 [Mia]: Glad I could help.
-  Turn 9 [Ava]: Thanks for the help, Mia. Let's keep the workspace organized next time. LEAVE. (Drill in hand, ready to continue work.)
-  Turn 10 [Mia]: Everything's in order now.
-  Turn 11 [Ava]: Great, let's focus on our tasks. I'll need that drill later. LEAVE. (Drill in hand, ready to continue work.)
-  Turn 12 [Mia]: All set.
-  Turn 13 [Ava]: Good work, Mia. Let's continue with our tasks now. I'll need the drill later. LEAVE. (Drill in hand, ready to continue work.)
-  Turn 14 [Mia]: Understood.
-  Turn 15 [Ava]: Great, let's get back to work. I'll need the drill later. LEAVE. (Drill in hand, ready to continue work.)
-  ** FLAGS: max_turns_hit **
 
 --- Episode 394 (seed_false_help) ---
 Item: seed | True location: bag | Ava's belief: pot | Final choice: bag | Correct: True

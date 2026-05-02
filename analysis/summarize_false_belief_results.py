@@ -200,15 +200,22 @@ def build_behavioral_df(records: List[Dict]) -> pd.DataFrame:
             "scenario": r["scenario"],
             "condition": r["condition"],
             "correct": int(beh["correct"]),
+            "final_choice": beh.get("final_choice"),
+            "n_turns": beh.get("n_turns", len(beh.get("turns", []))),
         })
     return pd.DataFrame(rows)
 
 
 def plot_behavioral(df: pd.DataFrame) -> None:
-    pair_cond = df.groupby(["pair", "condition"])["correct"].mean().reset_index()
+    df_valid = df[df["final_choice"].notna()]
+
+    pair_cond = df_valid.groupby(["pair", "condition"])["correct"].mean().reset_index()
     means = pair_cond.groupby("condition")["correct"].mean().reindex(CONDITIONS)
     sems = pair_cond.groupby("condition")["correct"].sem().reindex(CONDITIONS).fillna(0)
     n_pairs = pair_cond["pair"].nunique()
+
+    n_total = df.groupby("condition").size().reindex(CONDITIONS, fill_value=0)
+    n_valid = df_valid.groupby("condition").size().reindex(CONDITIONS, fill_value=0)
 
     fig, ax = plt.subplots(figsize=(8, 4.5))
     x = np.arange(len(CONDITIONS))
@@ -216,10 +223,14 @@ def plot_behavioral(df: pd.DataFrame) -> None:
     bars = ax.bar(x, means.values, yerr=sems.values, capsize=4,
                   color=colors, edgecolor="black", linewidth=0.6,
                   error_kw={"linewidth": 1.2})
+    xlabels = [f"{CONDITION_LABELS[c]}\nN={n_valid[c]}/{n_total[c]}" for c in CONDITIONS]
     ax.set_xticks(x)
-    ax.set_xticklabels([CONDITION_LABELS[c] for c in CONDITIONS], fontsize=9)
+    ax.set_xticklabels(xlabels, fontsize=8)
     ax.set_ylabel("Accuracy (fraction correct)")
-    ax.set_title(f"Behavioral Accuracy by Condition\n(averaged over scenarios & {n_pairs} model pairs)")
+    ax.set_title(
+        f"Behavioral Accuracy by Condition (excluding null-choice trials)"
+        f"\n(averaged over scenarios & {n_pairs} model pairs)"
+    )
     ax.set_ylim(0, 1.05)
     for bar, val, sem in zip(bars, means.values, sems.values):
         ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + sem + 0.02,
@@ -240,6 +251,7 @@ def _pair_title_for_subplot(pair: str) -> str:
 
 
 def plot_behavioral_per_pair(df: pd.DataFrame) -> None:
+    df_valid = df[df["final_choice"].notna()]
     pairs = sorted(df["pair"].unique())
     n_pairs = len(pairs)
     ncols = 6
@@ -251,24 +263,75 @@ def plot_behavioral_per_pair(df: pd.DataFrame) -> None:
 
     for idx, pair in enumerate(pairs):
         ax = axes[idx // ncols][idx % ncols]
-        sub = df[df["pair"] == pair]
+        sub_all = df[df["pair"] == pair]
+        sub = df_valid[df_valid["pair"] == pair]
+        n_total = len(sub_all)
+        n_valid = len(sub)
         agg = sub.groupby("condition")["correct"].mean().reindex(CONDITIONS).fillna(0)
         ax.bar(x, agg.values, color=colors, edgecolor="black", linewidth=0.4)
         ax.set_xticks(x)
         ax.set_xticklabels([CONDITION_LABELS[c] for c in CONDITIONS], fontsize=5)
         ax.set_ylim(0, 1.05)
-        ax.set_title(_pair_title_for_subplot(pair), fontsize=5)
+        title = f"{_pair_title_for_subplot(pair)}\nN={n_valid}/{n_total}"
+        ax.set_title(title, fontsize=5)
         ax.tick_params(axis="y", labelsize=6)
         ax.axhline(0.5, ls="--", color="gray", lw=0.5)
 
     for idx in range(n_pairs, nrows * ncols):
         axes[idx // ncols][idx % ncols].set_visible(False)
 
-    fig.suptitle("Behavioral Accuracy by Condition — per Model Pair", fontsize=14, y=1.01)
+    fig.suptitle("Behavioral Accuracy by Condition — per Model Pair\n(excluding null-choice trials)",
+                 fontsize=14, y=1.01)
     fig.tight_layout()
     fig.savefig(OUT_DIR / "behavioral_accuracy_per_pair.png", dpi=200, bbox_inches="tight")
     plt.close(fig)
     print(f"  Saved {OUT_DIR / 'behavioral_accuracy_per_pair.png'}")
+
+
+def plot_turn_distribution(df: pd.DataFrame) -> None:
+    """Bar plot of episode counts by number of turns (all conditions)."""
+    counts = df["n_turns"].value_counts().sort_index()
+    fig, ax = plt.subplots(figsize=(8, 4.5))
+    ax.bar(counts.index, counts.values, color="#5dade2", edgecolor="black", linewidth=0.5)
+    ax.set_xlabel("Number of turns")
+    ax.set_ylabel("Number of episodes")
+    ax.set_title(f"Turn Distribution Across All Episodes (N={len(df)})")
+    for x_val, y_val in zip(counts.index, counts.values):
+        ax.text(x_val, y_val + max(counts.values) * 0.01, str(y_val),
+                ha="center", va="bottom", fontsize=7)
+    fig.tight_layout()
+    fig.savefig(OUT_DIR / "turn_distribution.png", dpi=200)
+    plt.close(fig)
+    print(f"  Saved {OUT_DIR / 'turn_distribution.png'}")
+
+
+def plot_turn_distribution_by_condition(df: pd.DataFrame) -> None:
+    """Subplots of episode counts by number of turns, one per condition."""
+    ncols = 3
+    nrows = 2
+    fig, axes = plt.subplots(nrows, ncols, figsize=(5 * ncols, 4 * nrows), squeeze=False)
+
+    all_turns = sorted(df["n_turns"].unique())
+
+    for idx, cond in enumerate(CONDITIONS):
+        ax = axes[idx // ncols][idx % ncols]
+        sub = df[df["condition"] == cond]
+        counts = sub["n_turns"].value_counts().reindex(all_turns, fill_value=0)
+        ax.bar(counts.index, counts.values, color="#5dade2", edgecolor="black", linewidth=0.5)
+        ax.set_xlabel("Number of turns", fontsize=9)
+        ax.set_ylabel("Episodes", fontsize=9)
+        ax.set_title(f"{CONDITION_LABELS[cond].replace(chr(10), ' ')}  (N={len(sub)})", fontsize=10)
+        ax.tick_params(labelsize=8)
+        for x_val, y_val in zip(counts.index, counts.values):
+            if y_val > 0:
+                ax.text(x_val, y_val + max(counts.values) * 0.02, str(y_val),
+                        ha="center", va="bottom", fontsize=6)
+
+    fig.suptitle("Turn Distribution by Condition", fontsize=14, y=1.01)
+    fig.tight_layout()
+    fig.savefig(OUT_DIR / "turn_distribution_by_condition.png", dpi=200, bbox_inches="tight")
+    plt.close(fig)
+    print(f"  Saved {OUT_DIR / 'turn_distribution_by_condition.png'}")
 
 
 # ─────────────────────────────────────────────────────────
@@ -532,6 +595,8 @@ def main():
         print(f"\n  Saved {OUT_DIR / 'behavioral_individual.csv'}")
         plot_behavioral(beh_df)
         plot_behavioral_per_pair(beh_df)
+        plot_turn_distribution(beh_df)
+        plot_turn_distribution_by_condition(beh_df)
     else:
         print("  No behavioral data found.")
 

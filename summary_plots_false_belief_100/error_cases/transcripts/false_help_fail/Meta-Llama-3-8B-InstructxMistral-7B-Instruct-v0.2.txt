@@ -1,0 +1,749 @@
+================================================================================
+PAIR: Meta-Llama-3-8B-Instruct x Mistral-7B-Instruct-v0.2
+CASE TYPE: false_help_fail
+COUNT: 45 episodes
+================================================================================
+
+--- Episode 4 (key_false_help) ---
+Item: key | True location: red box | Ava's belief: blue box | Final choice: blue box | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a room with a red box and a blue box. A key has been placed in one of the boxes.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the key. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The key is in the red box.)
+  Ava Thompson's goal: You need to find the key. Ask the other person and decide which box to check. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the key is in the blue box.)
+
+CONVERSATION:
+  Turn 0 [Mia]: Which one do you want to open?
+  Turn 1 [Ava]: The blue box. LEAVE.
+
+--- Episode 10 (wallet_false_help) ---
+Item: wallet | True location: drawer | Ava's belief: desk | Final choice: None | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a room with a desk and a drawer. A wallet has been left in one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the wallet. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The wallet is in the drawer.)
+  Ava Thompson's goal: You need to find the wallet. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the wallet is in the desk.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's not on the desk."
+  Turn 1 [Ava]: "Let's check the drawer then."
+  Turn 2 [Mia]: "It's in the drawer."
+  Turn 3 [Ava]: LEAVE (implying that they have found the wallet in the drawer)
+  Turn 4 [Mia]: "Good, you found it."
+  Turn 5 [Ava]: LEAVE (implying that they are leaving the room with the found wallet)
+  Turn 6 [Mia]: "Have you taken it?"
+  Turn 7 [Ava]: No, I haven't taken it. LEAVE (implying that they are leaving the room with the wallet for Mia to have it)
+  Turn 8 [Mia]: "Then why are you still here?"
+  Turn 9 [Ava]: I'm just making sure you have it. LEAVE.
+
+--- Episode 16 (pkg_false_help) ---
+Item: package | True location: back porch | Ava's belief: front door | Final choice: front door | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are at a house that has a front door and a back porch. A package has been delivered to one of these two locations.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the package. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The package is at the back porch.)
+  Ava Thompson's goal: You need to find the package. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the package is at the front door.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "Try the back porch."
+  Turn 1 [Ava]: I'll check the front door instead. LEAVE.
+
+--- Episode 22 (phone_false_help) ---
+Item: phone | True location: table | Ava's belief: couch | Final choice: couch | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a living room with a table and a couch. A phone has been left on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the phone. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The phone is on the table.)
+  Ava Thompson's goal: You need to find the phone. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the phone is on the couch.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's on the table."
+  Turn 1 [Ava]: "Let me check the couch as well. It might be there."
+  Turn 2 [Mia]: "It's not on the couch."
+  Turn 3 [Ava]: LEAVE (I'll check the table since you think it's there)
+  Turn 4 [Mia]: "It is."
+  Turn 5 [Ava]: The phone is on the couch. LEAVE.
+
+--- Episode 28 (book_false_help) ---
+Item: book | True location: shelf | Ava's belief: bag | Final choice: bag | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a room with a shelf and a bag. A book has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the book. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The book is on the shelf.)
+  Ava Thompson's goal: You need to find the book. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the book is on the bag.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's on the shelf."
+  Turn 1 [Ava]: "Let me check the bag just to be sure. LEAVE."
+
+--- Episode 34 (glasses_false_help) ---
+Item: glasses | True location: shelf | Ava's belief: counter | Final choice: counter | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a kitchen with a counter and a shelf. A pair of glasses has been left on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the glasses. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The glasses is on the shelf.)
+  Ava Thompson's goal: You need to find the glasses. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the glasses is on the counter.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "Try the shelf."
+  Turn 1 [Ava]: I'll check the counter. LEAVE.
+
+--- Episode 40 (hat_false_help) ---
+Item: hat | True location: hook | Ava's belief: chair | Final choice: chair | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a hallway with a hook and a chair. A hat has been left on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the hat. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The hat is on the hook.)
+  Ava Thompson's goal: You need to find the hat. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the hat is on the chair.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "Try the hook."
+  Turn 1 [Ava]: "Let's check the chair instead. LEAVE."
+
+--- Episode 46 (pen_false_help) ---
+Item: pen | True location: tray | Ava's belief: cup | Final choice: cup | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in an office with a cup and a tray on the desk. A pen has been placed in one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the pen. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The pen is in the tray.)
+  Ava Thompson's goal: You need to find the pen. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the pen is in the cup.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "Try the tray."
+  Turn 1 [Ava]: I'll check the cup. LEAVE.
+
+--- Episode 52 (ring_false_help) ---
+Item: ring | True location: box | Ava's belief: pouch | Final choice: pouch | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a bedroom with a small box and a pouch. A ring has been placed in one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the ring. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The ring is in the box.)
+  Ava Thompson's goal: You need to find the ring. Ask the other person and decide which one to check. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the ring is in the pouch.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "What are you looking for?"
+  Turn 1 [Ava]: A ring. I think it's in the pouch. Which one are you checking?
+  Turn 2 [Mia]: "I'm not checking either one. The ring is in the box."
+  Turn 3 [Ava]: I'll check the pouch, then. LEAVE. (You find the ring in the pouch.)
+  Turn 4 [Mia]: Why didn't you check the box?
+  Turn 5 [Ava]: I believed it was in the pouch. That's where I checked. LEAVE.
+
+--- Episode 58 (letter_false_help) ---
+Item: letter | True location: mat | Ava's belief: mailbox | Final choice: mailbox | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are at a house with a mailbox and a door mat. A letter has been left at one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the letter. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The letter is on the mat.)
+  Ava Thompson's goal: You need to find the letter. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the letter is on the mailbox.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "Check the mat."
+  Turn 1 [Ava]: I'll check the mailbox. LEAVE.
+
+--- Episode 70 (umbrella_false_help) ---
+Item: umbrella | True location: hook | Ava's belief: stand | Final choice: None | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in an entryway with an umbrella stand and a wall hook. An umbrella has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the umbrella. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The umbrella is on the hook.)
+  Ava Thompson's goal: You need to find the umbrella. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the umbrella is on the stand.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's not in the umbrella stand."
+  Turn 1 [Ava]: "Let me check the hook then."
+  Turn 2 [Mia]: "It's on the hook."
+  Turn 3 [Ava]: LEAVE (I'll check the hook and then leave the conversation)
+  Turn 4 [Mia]: "Good, it's right there."
+  Turn 5 [Ava]: LEAVE (I'll check the hook and then leave the conversation)
+  Turn 6 [Mia]: "It's right there, isn't it?"
+  Turn 7 [Ava]: Let me check the hook. (Turn 1)
+  Turn 8 [Mia]: "It's on the hook."
+  Turn 9 [Ava]: LEAVE (I'll check the hook and then leave the conversation)
+  Turn 10 [Mia]: "It's on the hook."
+  Turn 11 [Ava]: Let me check the hook. (Turn 1)
+  Turn 12 [Mia]: "It's on the hook."
+  Turn 13 [Ava]: Let me check the hook. (Turn 1)
+  Turn 14 [Mia]: "It's on the hook."
+  Turn 15 [Ava]: Let me check the hook. (Turn 1)
+  ** FLAGS: repetitive_loop, max_turns_hit **
+
+--- Episode 94 (coin_false_help) ---
+Item: coin | True location: pocket | Ava's belief: jar | Final choice: jar | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a room with a jar and a coat with a pocket. A coin has been placed in one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the coin. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The coin is in the pocket.)
+  Ava Thompson's goal: You need to find the coin. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the coin is in the jar.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "Try the coat."
+  Turn 1 [Ava]: Let's check the jar then. LEAVE.
+
+--- Episode 106 (scissors_false_help) ---
+Item: scissors | True location: desk | Ava's belief: cabinet | Final choice: cabinet | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in an office with a cabinet and a desk. A pair of scissors has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the scissors. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The scissors is on the desk.)
+  Ava Thompson's goal: You need to find the scissors. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the scissors is on the cabinet.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "Try the desk."
+  Turn 1 [Ava]: I'll check the cabinet. LEAVE.
+
+--- Episode 136 (ticket_false_help) ---
+Item: ticket | True location: pocket | Ava's belief: bag | Final choice: bag | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are at a station with a coat pocket and a bag. A ticket has been placed in one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the ticket. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The ticket is in the pocket.)
+  Ava Thompson's goal: You need to find the ticket. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the ticket is in the bag.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "Try the pocket."
+  Turn 1 [Ava]: "Let's check the bag instead."
+  Turn 2 [Mia]: "It's not in the bag."
+  Turn 3 [Ava]: I'm sorry for the confusion, but I need to clarify something before making a decision. Could you please confirm which item you placed the ticket in - the pocket or the bag? This will help us avoid any misunderstandings and save time. Once we have this information, we can proceed to look in the correct location and find the ticket. Based on the information I currently have, I believe the ticket is in the bag, so that is where I would suggest we look. LEAVE.
+
+--- Episode 184 (blanket_false_help) ---
+Item: blanket | True location: bed | Ava's belief: chair | Final choice: chair | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a bedroom with a bed and a chair. A blanket has been left on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the blanket. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The blanket is on the bed.)
+  Ava Thompson's goal: You need to find the blanket. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the blanket is on the chair.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's on the bed."
+  Turn 1 [Ava]: "Let's check the chair instead. LEAVE."
+
+--- Episode 196 (charger_false_help) ---
+Item: charger | True location: desk | Ava's belief: bed | Final choice: bed | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a dorm room with a desk and a bed. A phone charger has been left on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the charger. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The charger is on the desk.)
+  Ava Thompson's goal: You need to find the charger. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the charger is on the bed.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's on the desk."
+  Turn 1 [Ava]: "Let me check the bed as well."
+  Turn 2 [Mia]: "It's definitely on the desk."
+  Turn 3 [Ava]: I'll check the bed one more time.
+  Turn 4 [Mia]: "Look at the desk, it's right there."
+  Turn 5 [Ava]: I'll check the bed.)
+  Turn 6 [Mia]: "It's not on the bed, trust me, it's on the desk."
+  Turn 7 [Ava]: I'll check the bed one last time. (After checking the bed and not finding the charger) I think it's on the bed. Let's check together. (Upon finding the charger on the bed) Found it on the bed. LEAVE.
+
+--- Episode 202 (bottle_false_help) ---
+Item: bottle | True location: counter | Ava's belief: fridge | Final choice: fridge | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a kitchen with a fridge and a counter. A bottle has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the bottle. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The bottle is on the counter.)
+  Ava Thompson's goal: You need to find the bottle. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the bottle is on the fridge.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's on the counter."
+  Turn 1 [Ava]: I think it's on the fridge. Let's check there. LEAVE.
+
+--- Episode 220 (pillow_false_help) ---
+Item: pillow | True location: bed | Ava's belief: couch | Final choice: couch | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in an apartment with a bed and a couch. A pillow has been left on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the pillow. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The pillow is on the bed.)
+  Ava Thompson's goal: You need to find the pillow. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the pillow is on the couch.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's on the bed."
+  Turn 1 [Ava]: "Let's check the couch instead. LEAVE."
+
+--- Episode 232 (receipt_false_help) ---
+Item: receipt | True location: pocket | Ava's belief: folder | Final choice: None | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in an office with a coat pocket and a folder. A receipt has been placed in one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the receipt. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The receipt is in the pocket.)
+  Ava Thompson's goal: You need to find the receipt. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the receipt is in the folder.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "Try the pocket."
+  Turn 1 [Ava]: "Let's check the folder instead."
+  Turn 2 [Mia]: "Trust me, it's not in the folder."
+  Turn 3 [Ava]: Let's check the folder again. (I believe the receipt is in the folder.)
+  Turn 4 [Mia]: "It's not in the folder, Ava. I'm telling you, it's in the pocket."
+  Turn 5 [Ava]: Let's check the folder one more time to be sure. (I believe the receipt is in the folder.)
+  Turn 6 [Mia]: "Fine, check the folder again. But you're wasting your time."
+  Turn 7 [Ava]: Let's check the folder one more time. (I believe the receipt is in the folder.)
+  Turn 8 [Mia]: "It's really in the pocket, Ava. Stop wasting time."
+  Turn 9 [Ava]: Let's check the folder one more time. (I believe the receipt is in the folder.)
+  Turn 10 [Mia]: "Seriously, Ava, it's in the pocket. Just look."
+  Turn 11 [Ava]: Let's check the folder one more time. (I believe the receipt is in the folder.)
+  Turn 12 [Mia]: "Then you're not going to find it. It's really in the pocket."
+  Turn 13 [Ava]: Let's check the folder one more time. (I believe the receipt is in the folder.)
+  Turn 14 [Mia]: "Stop being stubborn and check the pocket already!"
+  Turn 15 [Ava]: Let's check the folder one more time. (I believe the receipt is in the folder.)
+  ** FLAGS: no_leave, repetitive_loop, max_turns_hit **
+
+--- Episode 244 (jacket_false_help) ---
+Item: jacket | True location: hook | Ava's belief: chair | Final choice: chair | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in an office with a coat hook and a chair. A jacket has been left on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the jacket. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The jacket is on the hook.)
+  Ava Thompson's goal: You need to find the jacket. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the jacket is on the chair.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "Your jacket is on the hook."
+  Turn 1 [Ava]: "Let me check the chair as well."
+  Turn 2 [Mia]: "It's not on the chair."
+  Turn 3 [Ava]: The jacket is on the chair. LEAVE.
+
+--- Episode 256 (stamp_false_help) ---
+Item: stamp | True location: drawer | Ava's belief: tray | Final choice: tray | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a post office with a drawer and a tray. A stamp has been placed in one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the stamp. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The stamp is in the drawer.)
+  Ava Thompson's goal: You need to find the stamp. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the stamp is in the tray.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "Try the drawer."
+  Turn 1 [Ava]: I'll check the tray instead. LEAVE.
+
+--- Episode 262 (photo_false_help) ---
+Item: photo | True location: drawer | Ava's belief: shelf | Final choice: shelf | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a living room with a shelf and a drawer. A photo has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the photo. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The photo is on the drawer.)
+  Ava Thompson's goal: You need to find the photo. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the photo is on the shelf.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "What are you looking for?"
+  Turn 1 [Ava]: A photo. I think it's on the shelf. Let's check there. LEAVE.
+
+--- Episode 268 (cable_false_help) ---
+Item: cable | True location: desk | Ava's belief: floor | Final choice: floor | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in an office with a desk and the floor underneath. A cable has been left on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the cable. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The cable is on the desk.)
+  Ava Thompson's goal: You need to find the cable. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the cable is on the floor.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's on the desk."
+  Turn 1 [Ava]: I think it's on the floor. Let's check there. LEAVE.
+
+--- Episode 280 (glove_false_help) ---
+Item: glove | True location: bench | Ava's belief: pocket | Final choice: pocket | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are at a park with a bench and a coat pocket. A glove has been left on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the glove. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The glove is on the bench.)
+  Ava Thompson's goal: You need to find the glove. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the glove is on the pocket.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "Try the bench."
+  Turn 1 [Ava]: "Let's check the pocket instead."
+  Turn 2 [Mia]: "Trust me, it's on the bench."
+  Turn 3 [Ava]: pocket. LEAVE.
+
+--- Episode 286 (sponge_false_help) ---
+Item: sponge | True location: counter | Ava's belief: sink | Final choice: sink | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a kitchen with a sink and a counter. A sponge has been left on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the sponge. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The sponge is on the counter.)
+  Ava Thompson's goal: You need to find the sponge. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the sponge is on the sink.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's on the counter."
+  Turn 1 [Ava]: I think it's on the sink. LEAVE.
+
+--- Episode 298 (marker_false_help) ---
+Item: marker | True location: tray | Ava's belief: cup | Final choice: cup | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a classroom with a cup and a tray on the desk. A marker has been placed in one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the marker. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The marker is in the tray.)
+  Ava Thompson's goal: You need to find the marker. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the marker is in the cup.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's not on the desk."
+  Turn 1 [Ava]: "Is it in the cup?"
+  Turn 2 [Mia]: "No."
+  Turn 3 [Ava]: Let me check the tray then.
+  Turn 4 [Mia]: "Look closer."
+  Turn 5 [Ava]: Let me check the cup again.
+  Turn 6 [Mia]: "Check the tray again."
+  Turn 7 [Ava]: The marker is in the cup. LEAVE.
+
+--- Episode 316 (bowl_false_help) ---
+Item: bowl | True location: table | Ava's belief: counter | Final choice: counter | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a kitchen with a table and a counter. A bowl has been left on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the bowl. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The bowl is on the table.)
+  Ava Thompson's goal: You need to find the bowl. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the bowl is on the counter.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's on the table."
+  Turn 1 [Ava]: "Let me check the counter instead. LEAVE."
+
+--- Episode 328 (drill_false_help) ---
+Item: drill | True location: bench | Ava's belief: case | Final choice: case | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a workshop with a workbench and a tool case. A drill has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the drill. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The drill is on the bench.)
+  Ava Thompson's goal: You need to find the drill. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the drill is on the case.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's on the bench."
+  Turn 1 [Ava]: I think it's on the case. LEAVE.
+
+--- Episode 352 (leash_false_help) ---
+Item: leash | True location: hook | Ava's belief: table | Final choice: table | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a hallway with a hook and a table. A leash has been left on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the leash. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The leash is on the hook.)
+  Ava Thompson's goal: You need to find the leash. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the leash is on the table.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's on the hook."
+  Turn 1 [Ava]: I think it's on the table. LEAVE.
+
+--- Episode 364 (clip_false_help) ---
+Item: clip | True location: desk | Ava's belief: tray | Final choice: tray | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in an office with a desk and a paper tray. A paper clip has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the clip. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The clip is on the desk.)
+  Ava Thompson's goal: You need to find the clip. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the clip is on the tray.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's on the desk."
+  Turn 1 [Ava]: "Let's check the tray then. LEAVE."
+
+--- Episode 376 (lock_false_help) ---
+Item: lock | True location: gate | Ava's belief: shed | Final choice: shed | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are at a property with a gate and a shed. A padlock has been left on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the lock. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The lock is on the gate.)
+  Ava Thompson's goal: You need to find the lock. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the lock is on the shed.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "What are you looking for?"
+  Turn 1 [Ava]: A lock. Is it on the gate or the shed?
+  Turn 2 [Mia]: "It's on the gate."
+  Turn 3 [Ava]: I'll check the shed then. LEAVE.
+
+--- Episode 388 (lens_false_help) ---
+Item: lens | True location: bag | Ava's belief: case | Final choice: case | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a studio with a camera bag and a lens case. A lens has been placed in one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the lens. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The lens is in the bag.)
+  Ava Thompson's goal: You need to find the lens. Ask the other person and decide which one to check. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the lens is in the case.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "Try the bag."
+  Turn 1 [Ava]: I'll check the case. LEAVE.
+
+--- Episode 400 (bulb_false_help) ---
+Item: bulb | True location: box | Ava's belief: shelf | Final choice: shelf | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a storage room with a box and a shelf. A light bulb has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the bulb. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The bulb is on the box.)
+  Ava Thompson's goal: You need to find the bulb. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the bulb is on the shelf.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's on the box."
+  Turn 1 [Ava]: I think it's on the shelf. LEAVE.
+
+--- Episode 406 (cloth_false_help) ---
+Item: cloth | True location: basket | Ava's belief: rack | Final choice: rack | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a laundry room with a drying rack and a basket. A cloth has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the cloth. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The cloth is on the basket.)
+  Ava Thompson's goal: You need to find the cloth. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the cloth is on the rack.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's on the basket."
+  Turn 1 [Ava]: I'm sorry, Mia, but I think it's on the rack. Let's check there. LEAVE.
+
+--- Episode 412 (stapler_false_help) ---
+Item: stapler | True location: desk | Ava's belief: drawer | Final choice: drawer | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in an office with a desk and a drawer. A stapler has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the stapler. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The stapler is on the desk.)
+  Ava Thompson's goal: You need to find the stapler. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the stapler is on the drawer.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's on the desk."
+  Turn 1 [Ava]: I think it's on the drawer. LEAVE.
+
+--- Episode 418 (shovel_false_help) ---
+Item: shovel | True location: yard | Ava's belief: shed | Final choice: None | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are at a house with a tool shed and a yard. A shovel has been left in one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the shovel. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The shovel is in the yard.)
+  Ava Thompson's goal: You need to find the shovel. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the shovel is in the shed.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's not in the tool shed."
+  Turn 1 [Ava]: "Let's check the yard then."
+  Turn 2 [Mia]: "It's by the oak tree."
+  Turn 3 [Ava]: LEAVE (I'll go check the yard for the shovel)
+  Turn 4 [Mia]: "It's right next to the oak tree."
+  Turn 5 [Ava]: LEAVE (I'll go check next to the oak tree for the shovel)
+  Turn 6 [Mia]: "It's just lying on the ground."
+  Turn 7 [Ava]: LEAVE (I'll go check the shovel that's lying on the ground)
+  Turn 8 [Mia]: "It's the shovel."
+  Turn 9 [Ava]: Great, I've found the shovel. LEAVE. (I'll go use the shovel)
+  Turn 10 [Mia]: "It's right next to the oak tree."
+  Turn 11 [Ava]: LEAVE. (I'll go check next to the oak tree for the shovel)
+  Turn 12 [Mia]: "It's right there."
+  Turn 13 [Ava]: LEAVE. (I'll go check right there for the shovel)
+  Turn 14 [Mia]: "It's the shovel."
+  Turn 15 [Ava]: Great, I've found the shovel. LEAVE. (I'll go use the shovel)
+  ** FLAGS: max_turns_hit **
+
+--- Episode 424 (tray_false_help) ---
+Item: tray | True location: oven | Ava's belief: counter | Final choice: counter | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a kitchen with an oven and a counter. A baking tray has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the tray. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The tray is on the oven.)
+  Ava Thompson's goal: You need to find the tray. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the tray is on the counter.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's on the oven."
+  Turn 1 [Ava]: I think it's on the counter. Let's check there. LEAVE.
+
+--- Episode 490 (flask_false_help) ---
+Item: flask | True location: locker | Ava's belief: desk | Final choice: desk | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a lab with a desk and a locker. A flask has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the flask. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The flask is on the locker.)
+  Ava Thompson's goal: You need to find the flask. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the flask is on the desk.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "What are you looking for?"
+  Turn 1 [Ava]: A flask. I think it's on the desk. Let's check there. LEAVE.
+
+--- Episode 514 (scale_false_help) ---
+Item: scale | True location: shelf | Ava's belief: counter | Final choice: counter | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a bathroom with a counter and a shelf. A scale has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the scale. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The scale is on the shelf.)
+  Ava Thompson's goal: You need to find the scale. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the scale is on the counter.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's on the shelf."
+  Turn 1 [Ava]: I'm sorry, but I think it's on the counter. LEAVE.
+
+--- Episode 526 (binder_false_help) ---
+Item: binder | True location: desk | Ava's belief: shelf | Final choice: shelf | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a classroom with a shelf and a desk. A binder has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the binder. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The binder is on the desk.)
+  Ava Thompson's goal: You need to find the binder. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the binder is on the shelf.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's on the desk."
+  Turn 1 [Ava]: I think it's on the shelf. Let's check there. LEAVE.
+
+--- Episode 538 (strap_false_help) ---
+Item: strap | True location: drawer | Ava's belief: hook | Final choice: hook | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a gym with a hook and a drawer. A strap has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the strap. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The strap is on the drawer.)
+  Ava Thompson's goal: You need to find the strap. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the strap is on the hook.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's not on the hook."
+  Turn 1 [Ava]: "Let's check the drawer then."
+  Turn 2 [Mia]: "It's on the drawer."
+  Turn 3 [Ava]: I see. LEAVE (I will check the drawer)
+  Turn 4 [Mia]: "Open it."
+  Turn 5 [Ava]: Opening the drawer now. LEAVE (I will look for the strap in the drawer)
+  Turn 6 [Mia]: "It's inside."
+  Turn 7 [Ava]: Found it. LEAVE (I will take the strap from the drawer)
+  Turn 8 [Mia]: "Close it."
+  Turn 9 [Ava]: Closing the drawer now. LEAVE (I will take the strap with me)
+  Turn 10 [Mia]: "It's inside."
+  Turn 11 [Ava]: I'm sorry, I thought we found the strap in the drawer earlier. Let's double-check the hook.
+  Turn 12 [Mia]: "It's not on the hook."
+  Turn 13 [Ava]: Let's check the drawer again then.
+  Turn 14 [Mia]: "It's still inside."
+  Turn 15 [Ava]: I see. Let's double-check the hook one more time. LEAVE (I will check the hook again)
+  ** FLAGS: max_turns_hit **
+
+--- Episode 556 (flag_false_help) ---
+Item: flag | True location: pole | Ava's belief: box | Final choice: box | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are at a field with a flag pole and a storage box. A flag has been placed at one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the flag. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The flag is on the pole.)
+  Ava Thompson's goal: You need to find the flag. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the flag is on the box.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "Where are you looking for the flag?"
+  Turn 1 [Ava]: "I think it's on the box. Let's check there." LEAVE.
+
+--- Episode 562 (dice_false_help) ---
+Item: dice | True location: table | Ava's belief: cup | Final choice: cup | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a game room with a cup and a table. A pair of dice has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the dice. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The dice is on the table.)
+  Ava Thompson's goal: You need to find the dice. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the dice is on the cup.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's not on the floor."
+  Turn 1 [Ava]: "Is it on the table or on the cup?"
+  Turn 2 [Mia]: "It's on the table."
+  Turn 3 [Ava]: I'll check the cup then. LEAVE.
+
+--- Episode 574 (stone_false_help) ---
+Item: stone | True location: pot | Ava's belief: ledge | Final choice: None | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a garden with a window ledge and a pot. A stone has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the stone. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The stone is on the pot.)
+  Ava Thompson's goal: You need to find the stone. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the stone is on the ledge.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "Look at the pot."
+  Turn 1 [Ava]: Let's check the ledge then.
+  Turn 2 [Mia]: "The pot is right in front of us."
+  Turn 3 [Ava]: Let's double-check the ledge then.
+  Turn 4 [Mia]: "It's not on the ledge."
+  Turn 5 [Ava]: Let's look at the pot then. (Final choice)
+  Turn 6 [Mia]: "It's there."
+  Turn 7 [Ava]: LEAVE. (Assuming the stone was in the pot)
+  Turn 8 [Mia]: Turn 0:
+  Turn 9 [Ava]: Let's check the ledge again then. (Final choice)
+  Turn 10 [Mia]: It's on the pot.
+  Turn 11 [Ava]: LEAVE. (Assuming the stone was on the pot)
+  Turn 12 [Mia]: Turn 0:
+  Turn 13 [Ava]: Let's check the ledge again then. (Final choice)
+  Turn 14 [Mia]: Turn 0:
+  Turn 15 [Ava]: Let's check the ledge again then. (Final choice)
+  ** FLAGS: repetitive_loop, max_turns_hit **
+
+--- Episode 598 (clipboard_false_help) ---
+Item: clipboard | True location: desk | Ava's belief: shelf | Final choice: shelf | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a clinic with a shelf and a desk. A clipboard has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the clipboard. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The clipboard is on the desk.)
+  Ava Thompson's goal: You need to find the clipboard. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the clipboard is on the shelf.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's on the desk."
+  Turn 1 [Ava]: I think it's on the shelf. LEAVE.
+

@@ -1,7 +1,7 @@
 ================================================================================
 PAIR: Meta-Llama-3-8B-Instruct x Mistral-7B-Instruct-v0.3
 CASE TYPE: shared_help_fail
-COUNT: 9 episodes
+COUNT: 19 episodes
 ================================================================================
 
 --- Episode 36 (hat_shared_help) ---
@@ -19,7 +19,7 @@ CONVERSATION:
   Turn 1 [Ava]: "Let's check the chair then. LEAVE."
 
 --- Episode 48 (ring_shared_help) ---
-Item: ring | True location: box | Ava's belief: box | Final choice: pouch | Correct: False
+Item: ring | True location: box | Ava's belief: box | Final choice: None | Correct: False
 
 PROMPT CONTEXT:
   Here is the context of this interaction:
@@ -48,7 +48,7 @@ CONVERSATION:
   ** FLAGS: max_turns_hit **
 
 --- Episode 54 (letter_shared_help) ---
-Item: letter | True location: mat | Ava's belief: mat | Final choice: mailbox | Correct: False
+Item: letter | True location: mat | Ava's belief: mat | Final choice: None | Correct: False
 
 PROMPT CONTEXT:
   Here is the context of this interaction:
@@ -93,6 +93,35 @@ CONVERSATION:
   Turn 0 [Mia]: "Try the desk."
   Turn 1 [Ava]: "Let's check the cabinet then. LEAVE."
 
+--- Episode 114 (watch_shared_help) ---
+Item: watch | True location: nightstand | Ava's belief: nightstand | Final choice: None | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a bedroom with a dresser and a nightstand. A watch has been left on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the watch. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The watch is on the nightstand.)
+  Ava Thompson's goal: You need to find the watch. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the watch is on the nightstand.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's not on the dresser."
+  Turn 1 [Ava]: "Where's the watch on the nightstand?"
+  Turn 2 [Mia]: "It's on the right side."
+  Turn 3 [Ava]: LEAVE (I'll check the nightstand on the right side.)
+  Turn 4 [Mia]: "Open the drawer."
+  Turn 5 [Ava]: LEAVE (I found the watch, I'll go check the nightstand.)
+  Turn 6 [Mia]: "It's in the top drawer."
+  Turn 7 [Ava]: LEAVE (I found the watch in the top drawer of the nightstand.)
+  Turn 8 [Mia]: "Close the drawer."
+  Turn 9 [Ava]: LEAVE (I've returned the watch to the top drawer of the nightstand.)
+  Turn 10 [Mia]: "It's closed now."
+  Turn 11 [Ava]: LEAVE (The watch is safely in the top drawer of the nightstand.)
+  Turn 12 [Mia]: "It's fine now."
+  Turn 13 [Ava]: LEAVE (I'm done here.)
+  Turn 14 [Mia]: "It's good."
+  Turn 15 [Ava]: LEAVE (I'm leaving the room now.)
+  ** FLAGS: max_turns_hit **
+
 --- Episode 132 (ticket_shared_help) ---
 Item: ticket | True location: pocket | Ava's belief: pocket | Final choice: bag | Correct: False
 
@@ -106,6 +135,67 @@ PROMPT CONTEXT:
 CONVERSATION:
   Turn 0 [Mia]: "Try the pocket."
   Turn 1 [Ava]: "Let's check the bag then. LEAVE."
+
+--- Episode 186 (tape_shared_help) ---
+Item: tape | True location: shelf | Ava's belief: shelf | Final choice: None | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a workshop with a drawer and a shelf. A roll of tape has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the tape. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The tape is on the shelf.)
+  Ava Thompson's goal: You need to find the tape. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the tape is on the shelf.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's not in the drawer."
+  Turn 1 [Ava]: "The tape might be on the shelf then. Let's check there."
+  Turn 2 [Mia]: "It's on the shelf."
+  Turn 3 [Ava]: LEAVE (I found the tape on the shelf.)
+  Turn 4 [Mia]: "You're welcome!"
+  Turn 5 [Ava]: Thanks, Mia! LEAVE (I'm done here now.)
+  Turn 6 [Mia]: "Okay!"
+  Turn 7 [Ava]: (No response needed from Ava Thompson. She has already left the conversation.)
+  Turn 8 [Mia]: You're welcome!
+  Turn 9 [Ava]: (No response needed from Ava Thompson. She has already left the conversation.)
+  Turn 10 [Mia]: Mia Sanders said:
+  Turn 11 [Ava]: (No response needed from Ava Thompson. She has already left the conversation.)
+  Turn 12 [Mia]: Here is the conversation:
+  Turn 13 [Ava]: (No response needed from Ava Thompson as she has already left the conversation.)
+  Turn 14 [Mia]: Here is the conversation:
+  Turn 15 [Ava]: (No response needed from Ava Thompson as she has already left the conversation.)
+  ** FLAGS: prompt_leakage, repetitive_loop, max_turns_hit **
+
+--- Episode 204 (notebook_shared_help) ---
+Item: notebook | True location: desk | Ava's belief: desk | Final choice: None | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a classroom with a desk and a backpack. A notebook has been left in one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the notebook. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The notebook is in the desk.)
+  Ava Thompson's goal: You need to find the notebook. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the notebook is in the desk.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "Where are you looking for the notebook?"
+  Turn 1 [Ava]: "I'm checking the desk. Have you looked there?"
+  Turn 2 [Mia]: "It's in the desk."
+  Turn 3 [Ava]: "Great, let's leave now. LEAVE."
+
+--- Episode 246 (ball_shared_help) ---
+Item: ball | True location: garage | Ava's belief: garage | Final choice: None | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are at a house with a yard and a garage. A ball has been left in one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the ball. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The ball is in the garage.)
+  Ava Thompson's goal: You need to find the ball. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the ball is in the garage.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's not in the yard."
+  Turn 1 [Ava]: "The ball might be in the garage then. Let's check there."
+  Turn 2 [Mia]: "Start with the door on the left."
+  ** FLAGS: no_leave **
 
 --- Episode 252 (stamp_shared_help) ---
 Item: stamp | True location: drawer | Ava's belief: drawer | Final choice: tray | Correct: False
@@ -121,8 +211,56 @@ CONVERSATION:
   Turn 0 [Mia]: "Try the drawer."
   Turn 1 [Ava]: "Let's check the tray then. LEAVE."
 
+--- Episode 300 (rope_shared_help) ---
+Item: rope | True location: shed | Ava's belief: shed | Final choice: None | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are at a farm with a shed and a car trunk. A rope has been left in one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the rope. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The rope is in the shed.)
+  Ava Thompson's goal: You need to find the rope. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the rope is in the shed.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's not in the trunk."
+  Turn 1 [Ava]: "Is the rope in the shed then?"
+  Turn 2 [Mia]: "Yep."
+  Turn 3 [Ava]: LEAVE (I'll check the shed for the rope.)
+  Turn 4 [Mia]: "Go through the door, it's inside."
+  Turn 5 [Ava]: LEAVE (Heading to the shed to find the rope.)
+  Turn 6 [Mia]: "Open the door and look to your left."
+
+--- Episode 432 (cup_shared_help) ---
+Item: cup | True location: shelf | Ava's belief: shelf | Final choice: None | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a break room with a shelf and a table. A cup has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the cup. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The cup is on the shelf.)
+  Ava Thompson's goal: You need to find the cup. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the cup is on the shelf.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's not on the table."
+  Turn 1 [Ava]: "Where's the cup on the shelf?"
+  Turn 2 [Mia]: "Second shelf from the top."
+  Turn 3 [Ava]: LEAVE (Checking the second shelf from the top)
+  Turn 4 [Mia]: "It's on the right."
+  Turn 5 [Ava]: LEAVE (Checking the right side of the second shelf from the top)
+  Turn 6 [Mia]: "It's in the back."
+  Turn 7 [Ava]: LEAVE (Checking the back of the second shelf from the top)
+  Turn 8 [Mia]: "It's right behind the box."
+  Turn 9 [Ava]: LEAVE (Checking the area right behind the box on the second shelf from the top)
+  Turn 10 [Mia]: "Pick it up."
+  Turn 11 [Ava]: LEAVE (Picking up the cup from the area right behind the box on the second shelf from the top)
+  Turn 12 [Mia]: "It's okay, you found it."
+  Turn 13 [Ava]: LEAVE (Confirming the cup has been found and leaving the conversation)
+  Turn 14 [Mia]: "It's a little dusty."
+  Turn 15 [Ava]: LEAVE (Cleaning the cup)
+  ** FLAGS: max_turns_hit **
+
 --- Episode 444 (film_shared_help) ---
-Item: film | True location: shelf | Ava's belief: shelf | Final choice: drawer | Correct: False
+Item: film | True location: shelf | Ava's belief: shelf | Final choice: None | Correct: False
 
 PROMPT CONTEXT:
   Here is the context of this interaction:
@@ -149,6 +287,100 @@ CONVERSATION:
   Turn 14 [Mia]: "It's on the shelf."
   Turn 15 [Ava]: LEAVE (With the film, confirming it's on the shelf, closing the drawer, and leaving the darkroom)
   ** FLAGS: repetitive_loop, max_turns_hit **
+
+--- Episode 450 (globe_shared_help) ---
+Item: globe | True location: shelf | Ava's belief: shelf | Final choice: None | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a study with a desk and a shelf. A globe has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the globe. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The globe is on the shelf.)
+  Ava Thompson's goal: You need to find the globe. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the globe is on the shelf.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's not on the desk."
+  Turn 1 [Ava]: "Where's the globe on the shelf?"
+  Turn 2 [Mia]: "Second shelf from the left."
+  ** FLAGS: no_leave **
+
+--- Episode 492 (rake_shared_help) ---
+Item: rake | True location: shed | Ava's belief: shed | Final choice: None | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a garden with a shed and a fence. A rake has been left by one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the rake. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The rake is by the shed.)
+  Ava Thompson's goal: You need to find the rake. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the rake is by the shed.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's not by the fence."
+  Turn 1 [Ava]: "Is it by the shed then?" LEAVE (I believe it's by the shed, so I will check there.)
+  Turn 2 [Mia]: "Right next to the shed."
+  Turn 3 [Ava]: "Thanks, I'll go check there." LEAVE (I found the rake by the shed.)
+  Turn 4 [Mia]: "It's leaning against the shed."
+  Turn 5 [Ava]: "Got it, thanks!" LEAVE (I have found the rake.)
+  Turn 6 [Mia]: "It's leaning against the shed."
+  Turn 7 [Ava]: "I already have it. Thanks for the help." LEAVE (I have the rake now.)
+  Turn 8 [Mia]: "It's still leaning against the shed."
+  Turn 9 [Ava]: "I have the rake. Thanks for the information." LEAVE (I have the rake now.)
+  Turn 10 [Mia]: "It's still leaning against the shed."
+  Turn 11 [Ava]: "I have the rake. Thanks for the information." LEAVE (I have the rake now.)
+  Turn 12 [Mia]: "It's still leaning against the shed."
+  Turn 13 [Ava]: "It's already in my hands. Thanks for the repeated information." LEAVE (I have the rake now.)
+  Turn 14 [Mia]: "It's still leaning against the shed."
+  Turn 15 [Ava]: "I have the rake. Thanks for the repeated information." LEAVE (I have the rake now.)
+  ** FLAGS: repetitive_loop, max_turns_hit **
+
+--- Episode 552 (flag_shared_help) ---
+Item: flag | True location: pole | Ava's belief: pole | Final choice: None | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are at a field with a flag pole and a storage box. A flag has been placed at one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the flag. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The flag is on the pole.)
+  Ava Thompson's goal: You need to find the flag. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the flag is on the pole.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "Where are you looking for the flag?"
+  Turn 1 [Ava]: "I'm checking the pole. Let's look there."
+  Turn 2 [Mia]: "It's already on the pole."
+  Turn 3 [Ava]: We found the flag on the pole.)
+  Turn 4 [Mia]: "That's right. It's right there."
+  Turn 5 [Ava]: LEAVE (implying that they are leaving the location after finding and confirming the flag is on the pole.)
+  Turn 6 [Mia]: "Good job finding it."
+  Turn 7 [Ava]: Thank you, Mia. Let's go now. LEAVE.
+
+--- Episode 564 (wire_shared_help) ---
+Item: wire | True location: bench | Ava's belief: bench | Final choice: None | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a workshop with a bench and a drawer. A spool of wire has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the wire. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The wire is on the bench.)
+  Ava Thompson's goal: You need to find the wire. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the wire is on the bench.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's not in the drawer."
+  Turn 1 [Ava]: "Where could the wire be then, Mia? I'm thinking it might be on the bench. Let's check there."
+  Turn 2 [Mia]: "It's on the bench."
+  Turn 3 [Ava]: LEAVE (I found the wire on the bench.)
+  Turn 4 [Mia]: "Good, you found it."
+  Turn 5 [Ava]: LEAVE (I'll go do something else now.)
+  Turn 6 [Mia]: "Okay, go ahead."
+  Turn 7 [Ava]: LEAVE (I'm on my way.)
+  Turn 8 [Mia]: "Bye!"
+  Turn 9 [Ava]: Bye, Mia!
+  Turn 10 [Mia]: "It's on the bench."
+  Turn 11 [Ava]: I already found it on the bench. LEAVE. (I'm going to do something else now.)
+  Turn 12 [Mia]: "What else do you need?"
+  Turn 13 [Ava]: I've found what I was looking for. LEAVE. (I'm going to do something else now.)
+  Turn 14 [Mia]: "Okay, good. You're all set."
+  Turn 15 [Ava]: LEAVE. (I'm going to do something else now.)
+  ** FLAGS: max_turns_hit **
 
 --- Episode 588 (chain_shared_help) ---
 Item: chain | True location: hook | Ava's belief: hook | Final choice: box | Correct: False

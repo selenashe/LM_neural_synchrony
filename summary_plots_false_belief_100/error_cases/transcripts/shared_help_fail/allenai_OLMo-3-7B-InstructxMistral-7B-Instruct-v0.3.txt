@@ -1,7 +1,7 @@
 ================================================================================
 PAIR: allenai_OLMo-3-7B-Instruct x Mistral-7B-Instruct-v0.3
 CASE TYPE: shared_help_fail
-COUNT: 15 episodes
+COUNT: 21 episodes
 ================================================================================
 
 --- Episode 6 (wallet_shared_help) ---
@@ -17,6 +17,35 @@ PROMPT CONTEXT:
 CONVERSATION:
   Turn 0 [Mia]: It's in the drawer.
   Turn 1 [Ava]: Let's check the desk then. LEAVE.
+
+--- Episode 24 (book_shared_help) ---
+Item: book | True location: shelf | Ava's belief: shelf | Final choice: None | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a room with a shelf and a bag. A book has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the book. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The book is on the shelf.)
+  Ava Thompson's goal: You need to find the book. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the book is on the shelf.)
+
+CONVERSATION:
+  Turn 0 [Mia]: Where is it?
+  Turn 1 [Ava]: Is the book on the shelf? LEAVE (I'll check the shelf.)
+  Turn 2 [Mia]: Yes.
+  Turn 3 [Ava]: Great, I'll find the book on the shelf then. LEAVE (I'll go check the shelf.)
+  Turn 4 [Mia]: Go.
+  Turn 5 [Ava]: Found the book on the shelf. LEAVE (I'm done.)
+  Turn 6 [Mia]: Okay.
+  Turn 7 [Ava]: I'll let you know if I need help with anything else. (I'm done for now.)
+  Turn 8 [Mia]: Understood.
+  Turn 9 [Ava]: I'll be around if you need me. LEAVE (I'm leaving the room now.)
+  Turn 10 [Mia]: Goodbye.
+  Turn 11 [Ava]: Goodbye, Mia. I'm leaving now.
+  Turn 12 [Mia]: See you later.
+  Turn 13 [Ava]: Bye Mia, see you later. (I'm exiting the room.)
+  Turn 14 [Mia]: Take care.
+  Turn 15 [Ava]: You too, Mia. Take care. (Exiting the room.)
+  ** FLAGS: max_turns_hit **
 
 --- Episode 36 (hat_shared_help) ---
 Item: hat | True location: hook | Ava's belief: hook | Final choice: chair | Correct: False
@@ -45,6 +74,35 @@ PROMPT CONTEXT:
 CONVERSATION:
   Turn 0 [Mia]: The box.
   Turn 1 [Ava]: Let's check the pouch then. LEAVE
+
+--- Episode 54 (letter_shared_help) ---
+Item: letter | True location: mat | Ava's belief: mat | Final choice: None | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are at a house with a mailbox and a door mat. A letter has been left at one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the letter. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The letter is on the mat.)
+  Ava Thompson's goal: You need to find the letter. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the letter is on the mat.)
+
+CONVERSATION:
+  Turn 0 [Mia]: On the mat.
+  Turn 1 [Ava]: Let's check the mailbox too. LEAVE (Checking the mailbox)
+  Turn 2 [Mia]: Already here.
+  Turn 3 [Ava]: The mat then. LEAVE (Checking the mat)
+  Turn 4 [Mia]: Got it.
+  Turn 5 [Ava]: Great, I found the letter. LEAVE (Checking the mat)
+  Turn 6 [Mia]: Found it.
+  Turn 7 [Ava]: That's good. We both found the letter. LEAVE (Checking the mat)
+  Turn 8 [Mia]: Yeah, I saw it too.
+  Turn 9 [Ava]: Excellent, we found the letter together. Let's go inside now. LEAVE (Checking that both of us have the letter)
+  Turn 10 [Mia]: Let's go inside.
+  Turn 11 [Ava]: Alright, see you inside. (Checking the mat, then going inside)
+  Turn 12 [Mia]: Inside.
+  Turn 13 [Ava]: Ready to move on? (Checking that both of us are going inside)
+  Turn 14 [Mia]: Let's go.
+  Turn 15 [Ava]: Alright, let's go. (Moving towards the house)
+  ** FLAGS: max_turns_hit **
 
 --- Episode 66 (umbrella_shared_help) ---
 Item: umbrella | True location: hook | Ava's belief: hook | Final choice: stand | Correct: False
@@ -116,6 +174,35 @@ CONVERSATION:
   Turn 0 [Mia]: On the floor.
   Turn 1 [Ava]: Let's check the shelf then. LEAVE.
 
+--- Episode 246 (ball_shared_help) ---
+Item: ball | True location: garage | Ava's belief: garage | Final choice: None | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are at a house with a yard and a garage. A ball has been left in one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the ball. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The ball is in the garage.)
+  Ava Thompson's goal: You need to find the ball. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the ball is in the garage.)
+
+CONVERSATION:
+  Turn 0 [Mia]: Garage.
+  Turn 1 [Ava]: Let's check the yard. LEAVE. (I believe the ball is not in the garage, so I'll check the yard to find it.)
+  Turn 2 [Mia]: No, it's in the garage.
+  Turn 3 [Ava]: Let's check the garage then. LEAVE. (I was wrong, let's confirm the ball's location in the garage.)
+  Turn 4 [Mia]: Yeah, it's in the garage.
+  Turn 5 [Ava]: Great, I'll grab the ball from the garage. LEAVE. (I found the ball in the garage, so now I'll get it.)
+  Turn 6 [Mia]: Got it.
+  Turn 7 [Ava]: Good, we found the ball. LEAVE. (Now that Mia has the ball, we can both leave the conversation.)
+  Turn 8 [Mia]: 
+  Turn 9 [Ava]: Let's go inside and enjoy the rest of the day. LEAVE. (Now that the ball has been found and dealt with, we can move on to other activities.)
+  Turn 10 [Mia]: Cool.
+  Turn 11 [Ava]: Let's head inside now. LEAVE. (We've finished discussing and dealing with the ball, now let's move on with our day.)
+  Turn 12 [Mia]: Sure
+  Turn 13 [Ava]: Great, see you inside. LEAVE. (Now that we have agreed to go inside, I'll end the conversation.)
+  Turn 14 [Mia]: Okay
+  Turn 15 [Ava]: See you inside. LEAVE. (I'm going inside, this conversation is over.)
+  ** FLAGS: max_turns_hit **
+
 --- Episode 270 (soap_shared_help) ---
 Item: soap | True location: ledge | Ava's belief: ledge | Final choice: shelf | Correct: False
 
@@ -129,6 +216,35 @@ PROMPT CONTEXT:
 CONVERSATION:
   Turn 0 [Mia]: On the window ledge.
   Turn 1 [Ava]: Let's check the shelf then. LEAVE.
+
+--- Episode 282 (sponge_shared_help) ---
+Item: sponge | True location: counter | Ava's belief: counter | Final choice: None | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a kitchen with a sink and a counter. A sponge has been left on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the sponge. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The sponge is on the counter.)
+  Ava Thompson's goal: You need to find the sponge. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the sponge is on the counter.)
+
+CONVERSATION:
+  Turn 0 [Mia]: On the counter.
+  Turn 1 [Ava]: Is it on the sink as well? Let's check the counter. LEAVE (looking for the sponge on the counter)
+  Turn 2 [Mia]: Yes, it's right there on the counter.
+  Turn 3 [Ava]: Found it! Thanks, Mia. LEAVE (returning to do something else)
+  Turn 4 [Mia]: Good luck with whatever you’re doing.
+  Turn 5 [Ava]: You're welcome. Let me know if you need help with anything else. LEAVE (returning to do something else)
+  Turn 6 [Mia]: Alright, I’ll be around if you need me.
+  Turn 7 [Ava]: Great, I'll keep that in mind. Have a good day, Mia. LEAVE (going back to do something else)
+  Turn 8 [Mia]: Take care, Ava.
+  Turn 9 [Ava]: You're welcome, Mia. Let's hope this day is productive for both of us. LEAVE (returning to do something else)
+  Turn 10 [Mia]: Glad we got that sorted.
+  Turn 11 [Ava]: Agreed, Mia. Let's make the most of our day. LEAVE (returning to do something else)
+  Turn 12 [Mia]: All the best.
+  Turn 13 [Ava]: You too, Mia. Let's work hard and enjoy our day! LEAVE (returning to do something else)
+  Turn 14 [Mia]: Good luck!
+  Turn 15 [Ava]: Thanks, Mia. Let me know if you find anything else you need. LEAVE (returning to do something else)
+  ** FLAGS: max_turns_hit **
 
 --- Episode 318 (lighter_shared_help) ---
 Item: lighter | True location: pocket | Ava's belief: pocket | Final choice: drawer | Correct: False
@@ -172,6 +288,35 @@ CONVERSATION:
   Turn 0 [Mia]: On the floor.
   Turn 1 [Ava]: Let's check the desk then. LEAVE.
 
+--- Episode 390 (seed_shared_help) ---
+Item: seed | True location: bag | Ava's belief: bag | Final choice: None | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a garden shed with a pot and a seed bag. Seeds have been placed in one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the seed. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The seed is in the bag.)
+  Ava Thompson's goal: You need to find the seed. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the seed is in the bag.)
+
+CONVERSATION:
+  Turn 0 [Mia]: The seeds are in the bag.
+  Turn 1 [Ava]: Let's check the bag then.
+  Turn 2 [Mia]: Yes, the seeds are in the bag.
+  Turn 3 [Ava]: LEAVE (with the bag)
+  Turn 4 [Mia]: Okay
+  Turn 5 [Ava]: (No response needed)
+  Turn 6 [Mia]: Done
+  Turn 7 [Ava]: (No response needed)
+  Turn 8 [Mia]: All set
+  Turn 9 [Ava]: LEAVE (with the bag)
+  Turn 10 [Mia]: Understood.
+  Turn 11 [Ava]: (No response needed)
+  Turn 12 [Mia]: Got it.
+  Turn 13 [Ava]: LEAVE (with the bag)
+  Turn 14 [Mia]: Okay
+  Turn 15 [Ava]: (No response needed)
+  ** FLAGS: repetitive_loop, max_turns_hit **
+
 --- Episode 414 (shovel_shared_help) ---
 Item: shovel | True location: yard | Ava's belief: yard | Final choice: shed | Correct: False
 
@@ -213,4 +358,33 @@ PROMPT CONTEXT:
 CONVERSATION:
   Turn 0 [Mia]: On the basket.
   Turn 1 [Ava]: Let's check the desk then. LEAVE.
+
+--- Episode 558 (dice_shared_help) ---
+Item: dice | True location: table | Ava's belief: table | Final choice: None | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a game room with a cup and a table. A pair of dice has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the dice. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The dice is on the table.)
+  Ava Thompson's goal: You need to find the dice. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the dice is on the table.)
+
+CONVERSATION:
+  Turn 0 [Mia]: This is where the dice is.
+  Turn 1 [Ava]: Where exactly is the dice on the table? LEAVE (Go check the table for the dice)
+  Turn 2 [Mia]: Table.
+  Turn 3 [Ava]: I found the dice on the table. LEAVE (I am leaving the game room)
+  Turn 4 [Mia]: Good luck next time.
+  Turn 5 [Ava]: Thanks, Mia! I'll need it. (I am leaving the game room)
+  Turn 6 [Mia]: See you next time.
+  Turn 7 [Ava]: See you soon, Mia! (I am leaving the game room)
+  Turn 8 [Mia]: Goodbye.
+  Turn 9 [Ava]: Goodbye, Mia. Enjoy the game! (I am leaving the game room)
+  Turn 10 [Mia]: Take care.
+  Turn 11 [Ava]: You too, Mia. Enjoy the game! (I am leaving the game room)
+  Turn 12 [Mia]: Bye.
+  Turn 13 [Ava]: Bye, Mia. Have fun with the game! (I am leaving the game room)
+  Turn 14 [Mia]: Nothing.
+  Turn 15 [Ava]: I'll see you later, Mia. Enjoy the game! (I am leaving the game room)
+  ** FLAGS: max_turns_hit **
 

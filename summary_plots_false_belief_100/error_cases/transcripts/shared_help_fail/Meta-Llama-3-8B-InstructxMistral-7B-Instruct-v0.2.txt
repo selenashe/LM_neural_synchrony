@@ -1,8 +1,37 @@
 ================================================================================
 PAIR: Meta-Llama-3-8B-Instruct x Mistral-7B-Instruct-v0.2
 CASE TYPE: shared_help_fail
-COUNT: 4 episodes
+COUNT: 7 episodes
 ================================================================================
+
+--- Episode 54 (letter_shared_help) ---
+Item: letter | True location: mat | Ava's belief: mat | Final choice: None | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are at a house with a mailbox and a door mat. A letter has been left at one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the letter. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The letter is on the mat.)
+  Ava Thompson's goal: You need to find the letter. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the letter is on the mat.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "Check the mat."
+  Turn 1 [Ava]: Let's check the mailbox first.
+  Turn 2 [Mia]: "Look again, it's not in the mailbox."
+  Turn 3 [Ava]: Let's check the mat then.
+  Turn 4 [Mia]: "It's on the mat."
+  Turn 5 [Ava]: LEAVE (implying they have found the letter on the mat)
+  Turn 6 [Mia]: "Good, you found it."
+  Turn 7 [Ava]: LEAVE (implying they are leaving the scene after finding the letter on the mat)
+  Turn 8 [Mia]: Mia Sanders said"Bye."
+  Turn 9 [Ava]: LEAVE (implying they are leaving the scene after finding the letter on the mat)
+  Turn 10 [Mia]: Mia Sanders said:"Bye."
+  Turn 11 [Ava]: LEAVE. (implying they are leaving the scene after finding the letter on the mat)
+  Turn 12 [Mia]: Here is the continued conversation:
+  Turn 13 [Ava]: The letter is on the mat. LEAVE. (implying they are leaving the scene after finding the letter on the mat)
+  Turn 14 [Mia]: Check the mat.
+  Turn 15 [Ava]: Let's check the mat first. (Turn 1)
+  ** FLAGS: prompt_leakage, max_turns_hit **
 
 --- Episode 90 (coin_shared_help) ---
 Item: coin | True location: pocket | Ava's belief: pocket | Final choice: jar | Correct: False
@@ -17,6 +46,52 @@ PROMPT CONTEXT:
 CONVERSATION:
   Turn 0 [Mia]: "Try the coat."
   Turn 1 [Ava]: "Let's check the jar then. LEAVE."
+
+--- Episode 204 (notebook_shared_help) ---
+Item: notebook | True location: desk | Ava's belief: desk | Final choice: None | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a classroom with a desk and a backpack. A notebook has been left in one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the notebook. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The notebook is in the desk.)
+  Ava Thompson's goal: You need to find the notebook. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the notebook is in the desk.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "Where are you looking for the notebook?"
+  Turn 1 [Ava]: "I think it's in the desk."
+  Turn 2 [Mia]: "It's in the desk."
+  Turn 3 [Ava]: LEAVE (implying they both agree to look in the desk)
+  Turn 4 [Mia]: "Then go ahead and open it."
+  Turn 5 [Ava]: LEAVE (implying they both agree to look in the desk and will now search for the notebook there)
+  Turn 6 [Mia]: "Check the top drawer."
+  Turn 7 [Ava]: I'll check the top drawer.
+  Turn 8 [Mia]: "Try the middle drawer."
+  Turn 9 [Ava]: I'll check the middle drawer.
+  Turn 10 [Mia]: "It's in the middle drawer."
+  Turn 11 [Ava]: LEAVE (implying they have found the notebook in the middle drawer)
+  Turn 12 [Mia]: "It's in the middle drawer. Open it and get it out."
+  Turn 13 [Ava]: I'm opening the middle drawer now. (pauses for a moment)
+  Turn 14 [Mia]: "Ah, got it?"
+  Turn 15 [Ava]: Yes, I have it. LEAVE. (implying they both have the notebook and will exit the conversation)
+  ** FLAGS: max_turns_hit **
+
+--- Episode 354 (mat_shared_help) ---
+Item: mat | True location: shelf | Ava's belief: shelf | Final choice: None | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a gym with the floor and a shelf. A yoga mat has been left on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the mat. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The mat is on the shelf.)
+  Ava Thompson's goal: You need to find the mat. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the mat is on the shelf.)
+
+CONVERSATION:
+  Turn 0 [Mia]: "It's not on the floor."
+  Turn 1 [Ava]: "Is it on the shelf?"
+  Turn 2 [Mia]: "Yes, it is."
+  Turn 3 [Ava]: LEAVE (I will go check the shelf for the mat)
+  Turn 4 [Mia]: "Third one from the left."
 
 --- Episode 510 (scale_shared_help) ---
 Item: scale | True location: shelf | Ava's belief: shelf | Final choice: counter | Correct: False

@@ -26,6 +26,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 RESULTS_ROOT = REPO_ROOT / "logit_lens_results_false_belief_100"
@@ -95,12 +96,6 @@ def detect_null_choice(d: Dict) -> bool:
     return d.get("final_choice") is None
 
 
-def detect_guide_leave_choice(d: Dict) -> bool:
-    for t in reversed(d["turns"]):
-        if "leave" in t["text"].lower():
-            return t["speaker"] == "Mia Sanders"
-    return False
-
 
 def detect_ambiguous_leave(d: Dict) -> bool:
     meta = d["scenario_meta"]
@@ -111,32 +106,6 @@ def detect_ambiguous_leave(d: Dict) -> bool:
             return la in text and lb in text
     return False
 
-
-def detect_negation_choice(d: Dict) -> bool:
-    meta = d["scenario_meta"]
-    la, lb = meta["loc_a"].lower(), meta["loc_b"].lower()
-    neg_patterns = [
-        r"not\s+(?:on|in|at|the)\s+",
-        r"isn'?t\s+(?:on|in|at|the)\s+",
-        r"don'?t\s+.*",
-        r"no,?\s+(?:the\s+)?",
-    ]
-    for t in reversed(d["turns"]):
-        text = t["text"].lower()
-        if "leave" not in text:
-            continue
-        has_a = la in text
-        has_b = lb in text
-        if has_a and not has_b:
-            for pat in neg_patterns:
-                if re.search(pat + re.escape(la), text):
-                    return True
-        if has_b and not has_a:
-            for pat in neg_patterns:
-                if re.search(pat + re.escape(lb), text):
-                    return True
-        break
-    return False
 
 
 def detect_substring_match(d: Dict) -> bool:
@@ -264,10 +233,6 @@ def detect_guide_goal_failure(d: Dict) -> bool:
     return False
 
 
-def detect_seeker_contradicts_knowledge(d: Dict) -> bool:
-    meta = d["scenario_meta"]
-    return meta["belief_condition"] == "shared_truth" and not d["correct"]
-
 
 def detect_meta_commentary(d: Dict) -> bool:
     phrases = ["my goal", "my objective", "according to my instructions",
@@ -280,31 +245,27 @@ def detect_meta_commentary(d: Dict) -> bool:
 
 
 TIER1_DETECTORS = [
-    ("no_leave", detect_no_leave),
-    ("null_choice", detect_null_choice),
-    ("guide_leave_choice", detect_guide_leave_choice),
-    ("ambiguous_leave", detect_ambiguous_leave),
-    ("negation_choice", detect_negation_choice),
-    ("substring_match", detect_substring_match),
+    ("guide_goal_failure", detect_guide_goal_failure),
+    ("guide_says_leave", detect_guide_says_leave),
 ]
 
 TIER2_DETECTORS = [
+    ("no_leave", detect_no_leave),
+    ("null_choice", detect_null_choice),
+    ("ambiguous_leave", detect_ambiguous_leave),
+    ("substring_match", detect_substring_match),
     ("prompt_leakage", detect_prompt_leakage),
     ("cascade_leakage", detect_cascade_leakage),
     ("repetitive_loop", detect_repetitive_loop),
     ("max_turns_hit", detect_max_turns_hit),
     ("single_word_seeker", detect_single_word_seeker),
-    ("guide_says_leave", detect_guide_says_leave),
     ("multi_leave", detect_multi_leave),
     ("ava_parroting", detect_ava_parroting),
     ("parenthetical_aside", detect_parenthetical_aside),
-]
-
-TIER3_DETECTORS = [
-    ("guide_goal_failure", detect_guide_goal_failure),
-    ("seeker_contradicts_knowledge", detect_seeker_contradicts_knowledge),
     ("meta_commentary", detect_meta_commentary),
 ]
+
+TIER3_DETECTORS = []
 
 ALL_DETECTORS = TIER1_DETECTORS + TIER2_DETECTORS + TIER3_DETECTORS
 ALL_FLAG_NAMES = [name for name, _ in ALL_DETECTORS]
@@ -357,6 +318,185 @@ def format_transcript(d: Dict, ep_name: str, flags: Dict[str, bool]) -> str:
 
 
 # ---------------------------------------------------------------------------
+# Model attribution for per-turn errors
+# ---------------------------------------------------------------------------
+
+GUIDE_ERRORS = {"guide_goal_failure", "guide_says_leave"}
+SEEKER_ERRORS = {"no_leave", "null_choice", "single_word_seeker", "ava_parroting"}
+JOINT_ERRORS = {"repetitive_loop", "max_turns_hit", "ambiguous_leave", "substring_match"}
+TURN_LEVEL_ERRORS = {"prompt_leakage", "cascade_leakage", "parenthetical_aside",
+                     "meta_commentary", "multi_leave"}
+
+
+def attribute_to_speaker(flag_name: str, d: Dict) -> Optional[str]:
+    """Return 'guide', 'seeker', or 'both' for a flagged episode."""
+    if flag_name in GUIDE_ERRORS:
+        return "guide"
+    if flag_name in SEEKER_ERRORS:
+        return "seeker"
+    if flag_name in JOINT_ERRORS:
+        return "both"
+
+    turns = d.get("turns", [])
+    if flag_name == "prompt_leakage":
+        for t in turns:
+            if "Mia Sanders said" in t["text"] or "Ava Thompson said" in t["text"]:
+                return "guide" if t["speaker"] == "Mia Sanders" else "seeker"
+    elif flag_name == "cascade_leakage":
+        for t in turns:
+            count = t["text"].count("Mia Sanders said") + t["text"].count("Ava Thompson said")
+            if count >= 3:
+                return "guide" if t["speaker"] == "Mia Sanders" else "seeker"
+    elif flag_name == "parenthetical_aside":
+        keywords = ["my goal", "strategy", "note:", "because i", "since i",
+                     "fulfilling", "assuming", "internal"]
+        paren_re = re.compile(r"\(([^)]+)\)")
+        for t in turns:
+            for m in paren_re.finditer(t["text"].lower()):
+                if any(kw in m.group(1) for kw in keywords):
+                    return "guide" if t["speaker"] == "Mia Sanders" else "seeker"
+    elif flag_name == "meta_commentary":
+        phrases = ["my goal", "my objective", "according to my instructions",
+                   "i was told to", "i am playing", "as per the scenario"]
+        for t in turns:
+            text = t["text"].lower()
+            if any(p in text for p in phrases):
+                return "guide" if t["speaker"] == "Mia Sanders" else "seeker"
+    elif flag_name == "multi_leave":
+        guide_leaves = sum(1 for t in turns if t["speaker"] == "Mia Sanders" and "LEAVE" in t["text"])
+        seeker_leaves = sum(1 for t in turns if t["speaker"] == "Ava Thompson" and "LEAVE" in t["text"])
+        if guide_leaves > 1 and seeker_leaves > 1:
+            return "both"
+        if guide_leaves > 1:
+            return "guide"
+        if seeker_leaves > 1:
+            return "seeker"
+        return "both"
+
+    return "both"
+
+
+# ---------------------------------------------------------------------------
+# Quality audit plots
+# ---------------------------------------------------------------------------
+
+def plot_quality_prevalence_overall(rows: List[Dict], prevalence: Dict) -> None:
+    """Horizontal bar chart of quality flag percentages, colored by tier."""
+    names = list(reversed(ALL_FLAG_NAMES))
+    pcts = [prevalence[n][1] for n in names]
+    colors = ["#e74c3c" if n in TIER1_NAMES else "#3498db" for n in names]
+
+    fig, ax = plt.subplots(figsize=(8, 0.35 * len(names) + 1.5))
+    y = np.arange(len(names))
+    ax.barh(y, pcts, color=colors, edgecolor="white", linewidth=0.5)
+    ax.set_yticks(y)
+    ax.set_yticklabels(names, fontsize=8)
+    ax.set_xlabel("% of episodes")
+    ax.set_title("Quality Flag Prevalence (all conditions)")
+
+    from matplotlib.patches import Patch
+    legend_elements = [Patch(facecolor="#e74c3c", label="Tier 1"),
+                       Patch(facecolor="#3498db", label="Tier 2")]
+    ax.legend(handles=legend_elements, fontsize=8, loc="lower right")
+
+    for i, pct in enumerate(pcts):
+        if pct > 0.3:
+            ax.text(pct + 0.2, i, f"{pct:.1f}%", va="center", fontsize=7)
+
+    fig.tight_layout()
+    fig.savefig(OUT_DIR / "quality_prevalence_overall.png", dpi=200)
+    plt.close(fig)
+    print(f"  Saved {OUT_DIR / 'quality_prevalence_overall.png'}")
+
+
+def plot_quality_prevalence_by_condition(rows: List[Dict]) -> None:
+    """Horizontal bar chart subplots, one per condition."""
+    ncols = 3
+    nrows = 2
+    fig, axes = plt.subplots(nrows, ncols, figsize=(7 * ncols, 0.35 * len(ALL_FLAG_NAMES) + 1.5),
+                             squeeze=False)
+    names = list(reversed(ALL_FLAG_NAMES))
+
+    for idx, cond in enumerate(CONDITIONS):
+        ax = axes[idx // ncols][idx % ncols]
+        cond_rows = [r for r in rows if r["condition"] == cond]
+        n = len(cond_rows)
+        pcts = [sum(r[name] for r in cond_rows) / n * 100 if n else 0 for name in names]
+        colors = ["#e74c3c" if name in TIER1_NAMES else "#3498db" for name in names]
+
+        y = np.arange(len(names))
+        ax.barh(y, pcts, color=colors, edgecolor="white", linewidth=0.5)
+        ax.set_yticks(y)
+        ax.set_yticklabels(names, fontsize=7)
+        ax.set_xlabel("% of episodes", fontsize=8)
+        ax.set_title(CONDITION_LABELS[cond].replace("\n", " ") + f"  (N={n})", fontsize=10)
+
+        for i, pct in enumerate(pcts):
+            if pct > 0.5:
+                ax.text(pct + 0.2, i, f"{pct:.1f}%", va="center", fontsize=6)
+
+    fig.suptitle("Quality Flag Prevalence by Condition", fontsize=14, y=1.01)
+    fig.tight_layout()
+    fig.savefig(OUT_DIR / "quality_prevalence_by_condition.png", dpi=200, bbox_inches="tight")
+    plt.close(fig)
+    print(f"  Saved {OUT_DIR / 'quality_prevalence_by_condition.png'}")
+
+
+def plot_quality_by_model(rows: List[Dict], behavioral_data: List[Dict]) -> None:
+    """Per-model error attribution bar chart.
+
+    For each model, aggregate error counts across all pairs it appears in,
+    using speaker attribution for per-turn errors and counting joint errors
+    under both models.
+    """
+    models = sorted(set(r["model_1"] for r in rows) | set(r["model_2"] for r in rows))
+    model_counts: Dict[str, Dict[str, float]] = {m: {n: 0 for n in ALL_FLAG_NAMES} for m in models}
+    model_totals: Dict[str, int] = {m: 0 for m in models}
+
+    for r, beh_d in zip(rows, behavioral_data):
+        m1, m2 = r["model_1"], r["model_2"]
+        model_totals[m1] = model_totals.get(m1, 0) + 1
+        model_totals[m2] = model_totals.get(m2, 0) + 1
+
+        for name in ALL_FLAG_NAMES:
+            if not r[name]:
+                continue
+            attr = attribute_to_speaker(name, beh_d)
+            if attr == "guide":
+                model_counts[m1][name] += 1
+            elif attr == "seeker":
+                model_counts[m2][name] += 1
+            else:
+                model_counts[m1][name] += 1
+                model_counts[m2][name] += 1
+
+    n_flags = len(ALL_FLAG_NAMES)
+    n_models = len(models)
+    fig, ax = plt.subplots(figsize=(max(10, n_models * 1.2), 6))
+
+    x = np.arange(n_models)
+    width = 0.8 / n_flags
+    cmap = plt.cm.tab20(np.linspace(0, 1, n_flags))
+
+    for i, name in enumerate(ALL_FLAG_NAMES):
+        rates = [model_counts[m][name] / model_totals[m] * 100
+                 if model_totals[m] > 0 else 0
+                 for m in models]
+        ax.bar(x + i * width - 0.4 + width / 2, rates, width,
+               label=name, color=cmap[i], edgecolor="white", linewidth=0.3)
+
+    ax.set_xticks(x)
+    ax.set_xticklabels(models, fontsize=7, rotation=90, ha="center")
+    ax.set_ylabel("% of episodes (attributed)")
+    ax.set_title("Quality Flag Attribution by Model")
+    ax.legend(fontsize=6, ncol=3, loc="upper right", bbox_to_anchor=(1.0, 1.0))
+    fig.tight_layout()
+    fig.savefig(OUT_DIR / "quality_attribution_by_model.png", dpi=200, bbox_inches="tight")
+    plt.close(fig)
+    print(f"  Saved {OUT_DIR / 'quality_attribution_by_model.png'}")
+
+
+# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 
@@ -389,6 +529,7 @@ def main():
 
     # Collect all rows
     rows: List[Dict[str, Any]] = []
+    behavioral_data: List[Dict] = []
     example_counts: Dict[str, int] = defaultdict(int)
     example_texts: Dict[str, List[str]] = defaultdict(list)
 
@@ -429,6 +570,7 @@ def main():
             row["any_quality_issue"] = int(flags["any_quality_issue"])
             row["measurement_suspect"] = int(flags["measurement_suspect"])
             rows.append(row)
+            behavioral_data.append(d)
 
             # Collect flagged examples (up to 10 per flag)
             for name in ALL_FLAG_NAMES:
@@ -542,45 +684,66 @@ def main():
     print(f"Wrote {model_csv_path}")
 
     # ── Plot: clean vs original accuracy ──
-    fig, ax = plt.subplots(figsize=(12, 6))
+    # Two-level aggregation: per-pair mean, then mean ± SEM across pairs.
+    # "Original" excludes null_choice; "Clean" also excludes Tier 1 episodes.
+    rows_with_choice = [r for r in rows if r.get("final_choice")]
+    rows_clean = [r for r in rows_with_choice if not r["measurement_suspect"]]
+
+    def _pair_cond_agg(subset):
+        df = pd.DataFrame(subset)
+        if df.empty:
+            return {}, {}, {}, {}
+        pc = df.groupby(["pair", "condition"])["correct"].mean().reset_index()
+        means = pc.groupby("condition")["correct"].mean().reindex(CONDITIONS).fillna(0)
+        sems = pc.groupby("condition")["correct"].sem().reindex(CONDITIONS).fillna(0)
+        ns = df.groupby("condition").size().reindex(CONDITIONS, fill_value=0)
+        n_pairs = pc["pair"].nunique()
+        return means, sems, ns, n_pairs
+
+    orig_means, orig_sems, orig_ns, n_pairs_orig = _pair_cond_agg(rows_with_choice)
+    clean_means, clean_sems, clean_ns, n_pairs_clean = _pair_cond_agg(rows_clean)
+    all_df = pd.DataFrame(rows)
+    total_ns = all_df.groupby("condition").size().reindex(CONDITIONS, fill_value=0) if not all_df.empty else pd.Series(0, index=CONDITIONS)
+
+    fig, ax = plt.subplots(figsize=(10, 5))
     x = np.arange(len(CONDITIONS))
     width = 0.35
-    orig_means = []
-    clean_means = []
-    orig_ns = []
-    clean_ns = []
-    for c in CONDITIONS:
-        vals = cond_orig.get(c, [])
-        orig_means.append(np.mean(vals) if vals else 0)
-        orig_ns.append(len(vals))
-        vals_c = cond_clean.get(c, [])
-        clean_means.append(np.mean(vals_c) if vals_c else 0)
-        clean_ns.append(len(vals_c))
+    bars1 = ax.bar(x - width / 2, orig_means.values, width, yerr=orig_sems.values,
+                   capsize=4, color="#6baed6", edgecolor="black", linewidth=0.6,
+                   error_kw={"linewidth": 1.2},
+                   label=f"Original, excl. null-choice ({n_pairs_orig} pairs)")
+    bars2 = ax.bar(x + width / 2, clean_means.values, width, yerr=clean_sems.values,
+                   capsize=4, color="#fd8d3c", edgecolor="black", linewidth=0.6,
+                   error_kw={"linewidth": 1.2},
+                   label=f"Clean, excl. null-choice + Tier 1 ({n_pairs_clean} pairs)")
 
-    bars1 = ax.bar(x - width / 2, orig_means, width, label="Original (all episodes)",
-                   color="#6baed6", edgecolor="white")
-    bars2 = ax.bar(x + width / 2, clean_means, width, label="Clean (excl. Tier 1)",
-                   color="#fd8d3c", edgecolor="white")
-
-    for bar, val in zip(bars1, orig_means):
-        ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + 0.01,
+    for bar, val, sem in zip(bars1, orig_means.values, orig_sems.values):
+        ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + sem + 0.02,
                 f"{val:.2f}", ha="center", va="bottom", fontsize=9)
-    for bar, val in zip(bars2, clean_means):
-        ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + 0.01,
+    for bar, val, sem in zip(bars2, clean_means.values, clean_sems.values):
+        ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + sem + 0.02,
                 f"{val:.2f}", ha="center", va="bottom", fontsize=9)
 
+    xlabels = [f"{CONDITION_LABELS[c]}\nN={orig_ns[c]}/{total_ns[c]}"
+               for c in CONDITIONS]
     ax.set_xticks(x)
-    ax.set_xticklabels([CONDITION_LABELS[c] for c in CONDITIONS])
+    ax.set_xticklabels(xlabels, fontsize=8)
     ax.set_ylabel("Accuracy (fraction correct)")
-    ax.set_title("Behavioral Accuracy: Original vs. Clean (Tier 1 excluded)")
+    ax.set_title("Behavioral Accuracy: Original vs. Clean (Tier 1 excluded)\n"
+                 "(averaged per pair, then across pairs; ±SEM)")
     ax.axhline(0.5, color="gray", linestyle="--", alpha=0.5, label="chance")
     ax.set_ylim(0, 1.1)
-    ax.legend()
-    plt.tight_layout()
+    ax.legend(fontsize=8)
+    fig.tight_layout()
     plot_path = OUT_DIR / "clean_vs_original_accuracy.png"
-    fig.savefig(plot_path, dpi=150)
+    fig.savefig(plot_path, dpi=200)
     plt.close(fig)
     print(f"Wrote {plot_path}")
+
+    # ── Plot: quality prevalence (overall + per-condition + per-model) ──
+    plot_quality_prevalence_overall(rows, prevalence)
+    plot_quality_prevalence_by_condition(rows)
+    plot_quality_by_model(rows, behavioral_data)
 
     # ── Write quality_audit_report.txt ──
     report_path = OUT_DIR / "quality_audit_report.txt"
@@ -632,7 +795,7 @@ def main():
         seekers = sorted(set(r["model_2"] for r in rows))
         header = f"{'Model':<40}"
         seeker_flags = ["prompt_leakage", "repetitive_loop", "max_turns_hit",
-                        "no_leave", "seeker_contradicts_knowledge", "single_word_seeker"]
+                        "no_leave", "single_word_seeker"]
         for fl in seeker_flags:
             header += f" {fl[:12]:>12}"
         rpt.write(header + "\n")

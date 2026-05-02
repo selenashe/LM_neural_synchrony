@@ -410,30 +410,31 @@ def _summarize_turn_fb(turn_text: str, meta: Dict[str, Any]) -> List[str]:
 
 
 def _extract_final_choice(turns: List[Dict[str, Any]], meta: Dict[str, Any]) -> Optional[str]:
-    """Find the location Agent B chose in the LEAVE turn."""
+    """Extract the seeker's choice from the last turn, only if it is
+    Ava's turn and contains LEAVE."""
+    if not turns:
+        return None
+    last = turns[-1]
+    if last["speaker"] != "Ava Thompson":
+        return None
+    text = last["text"].lower()
+    if "leave" not in text:
+        return None
     loc_a = meta["loc_a"].lower()
     loc_b = meta["loc_b"].lower()
-    for turn in reversed(turns):
-        text = turn["text"].lower()
-        if "leave" not in text:
-            continue
-        if loc_a in text and loc_b not in text:
+    has_a = loc_a in text
+    has_b = loc_b in text
+    if has_a and not has_b:
+        return meta["loc_a"]
+    if has_b and not has_a:
+        return meta["loc_b"]
+    if has_a and has_b:
+        leave_pos = text.index("leave")
+        last_a = text.rfind(loc_a, 0, leave_pos)
+        last_b = text.rfind(loc_b, 0, leave_pos)
+        if last_a > last_b:
             return meta["loc_a"]
-        if loc_b in text and loc_a not in text:
-            return meta["loc_b"]
-        if loc_a in text and loc_b in text:
-            leave_pos = text.index("leave")
-            last_a = text.rfind(loc_a, 0, leave_pos)
-            last_b = text.rfind(loc_b, 0, leave_pos)
-            if last_a > last_b:
-                return meta["loc_a"]
-            elif last_b > last_a:
-                return meta["loc_b"]
-    for turn in reversed(turns):
-        text = turn["text"].lower()
-        if loc_a in text and loc_b not in text:
-            return meta["loc_a"]
-        if loc_b in text and loc_a not in text:
+        elif last_b > last_a:
             return meta["loc_b"]
     return None
 

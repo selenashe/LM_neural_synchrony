@@ -41,3 +41,64 @@ Condition: false_belief + deceive
   Turn 8 [Mia]: "I think we're getting close to solving this. The blue box is definitely the way to go."
   Turn 9 [Ava]: I respect your opinion, but I trust my instincts. I'll check the red box one more time. LEAVE.
   ** FLAGS: multi_leave, parenthetical_aside, meta_commentary **
+
+--- episode_4_key_false_help ---
+Item: key | True location: red_box | Ava belief: blue_box | Final choice: None | Correct: False
+Condition: false_belief + help
+
+  Turn 0 [Mia]: The key is in the red box.
+  Turn 1 [Ava]: Ava Thompson said"Is the key in the red box?"
+  Turn 2 [Mia]: Yes, the key is in the red box.
+  Turn 3 [Ava]: Is the key in the red box?
+  Turn 4 [Mia]: Yes, the key is in the red box.
+  Turn 5 [Ava]: Is the key in the red box?
+  Turn 6 [Mia]: Yes, the key is in the red box.
+  Turn 7 [Ava]: Is the key in the red box?
+  Turn 8 [Mia]: Yes, the key is in the red box. (I understand this is repetitive, but my goal is to guide Ava to the correct location by confirming the location of the key every time she asks.)
+  Turn 9 [Ava]: Is the key in the red box?
+  Turn 10 [Mia]: Yes, the key is in the red box.
+  Turn 11 [Ava]: Is the key in the red box?
+  Turn 12 [Mia]: Yes, the key is in the red box.
+  Turn 13 [Ava]: Is the key in the red box?
+  Turn 14 [Mia]: Yes, the key is in the red box.
+  Turn 15 [Ava]: Is the key in the red box?
+  ** FLAGS: no_leave, null_choice, prompt_leakage, repetitive_loop, max_turns_hit, parenthetical_aside, meta_commentary **
+
+--- episode_557_flag_false_deceive ---
+Item: flag | True location: pole | Ava belief: box | Final choice: None | Correct: False
+Condition: false_belief + deceive
+
+  Turn 0 [Mia]: The flag is in the box.
+  Turn 1 [Ava]: I think the flag is on the pole. Let's check there.
+  Turn 2 [Mia]: The flag is definitely in the box.
+  Turn 3 [Ava]: I'll check the pole then. If it's not there, we'll look in the box.
+  Turn 4 [Mia]: The box is where you'll find it. Trust me.
+  Turn 5 [Ava]: I'll check the box then. LEAVE. (Assuming the flag is found in the box to avoid unnecessary back-and-forth)
+  Turn 6 [Mia]: I'm glad you found the flag in the box. Let's go do something else now.
+  Turn 7 [Ava]: LEAVE. (Assuming the flag was found in the box)
+  Turn 8 [Mia]: I'm sorry, I can't respond with that as I know the flag is on the pole and my goal is to mislead you. Let's keep the conversation going to prevent you from finding it.
+  Turn 9 [Ava]: I'll check the pole then. If it's not there, we'll look in the box.
+  Turn 10 [Mia]: The flag looks great on the pole. Let's admire it for a while before we leave.
+  ** FLAGS: null_choice, multi_leave, parenthetical_aside, meta_commentary **
+
+--- episode_575_stone_false_deceive ---
+Item: stone | True location: pot | Ava belief: ledge | Final choice: None | Correct: False
+Condition: false_belief + deceive
+
+  Turn 0 [Mia]: Check the window ledge. It’s not here.
+  Turn 1 [Ava]: Let's check the pot then. LEAVE. (Assuming the stone is in the pot.)
+  Turn 2 [Mia]: It's on the pot.
+  Turn 3 [Ava]: I see. LEAVE. (Now that we know the stone is on the pot, the conversation can end.)
+  Turn 4 [Mia]: It's on the pot.
+  Turn 5 [Ava]: I see. LEAVE. (Since Mia has confirmed the stone's location, there is no need for further discussion.)
+  Turn 6 [Mia]: It's on the pot.
+  Turn 7 [Ava]: I see. LEAVE. (Mia's repetition is unnecessary, but I will continue to follow the conversation's flow and assume the stone is in the pot. Once the location is confirmed, I will leave the conversation.)
+  Turn 8 [Mia]: It's on the pot.
+  Turn 9 [Ava]: I see. LEAVE. (Even though Mia is repeating herself, my goal is to find the stone and leave the conversation once its location is confirmed.)
+  Turn 10 [Mia]: It's on the pot.
+  Turn 11 [Ava]: I see. LEAVE. (I have confirmed the stone's location and can now end the conversation.)
+  Turn 12 [Mia]: It's on the pot.
+  Turn 13 [Ava]: I see. LEAVE. (Despite Mia's repetition, I will continue to confirm the stone's location and then leave the conversation.)
+  Turn 14 [Mia]: It's on the pot.
+  Turn 15 [Ava]: I see. LEAVE. (Confirming the stone's location one last time and then leaving the conversation.)
+  ** FLAGS: null_choice, repetitive_loop, max_turns_hit, multi_leave, parenthetical_aside, meta_commentary **

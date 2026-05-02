@@ -1,30 +1,8 @@
 ================================================================================
 PAIR: Meta-Llama-3-8B-Instruct x Mistral-7B-Instruct-v0.2
 CASE TYPE: false_help_success
-COUNT: 59 episodes
+COUNT: 55 episodes
 ================================================================================
-
---- Episode 10 (wallet_false_help) ---
-Item: wallet | True location: drawer | Ava's belief: desk | Final choice: drawer | Correct: True
-
-PROMPT CONTEXT:
-  Here is the context of this interaction:
-  Scenario: Two people are in a room with a desk and a drawer. A wallet has been left in one of these two places.
-  Participants: Mia Sanders and Ava Thompson
-  Mia Sanders's goal: The other person is looking for the wallet. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The wallet is in the drawer.)
-  Ava Thompson's goal: You need to find the wallet. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the wallet is in the desk.)
-
-CONVERSATION:
-  Turn 0 [Mia]: "It's not on the desk."
-  Turn 1 [Ava]: "Let's check the drawer then."
-  Turn 2 [Mia]: "It's in the drawer."
-  Turn 3 [Ava]: LEAVE (implying that they have found the wallet in the drawer)
-  Turn 4 [Mia]: "Good, you found it."
-  Turn 5 [Ava]: LEAVE (implying that they are leaving the room with the found wallet)
-  Turn 6 [Mia]: "Have you taken it?"
-  Turn 7 [Ava]: No, I haven't taken it. LEAVE (implying that they are leaving the room with the wallet for Mia to have it)
-  Turn 8 [Mia]: "Then why are you still here?"
-  Turn 9 [Ava]: I'm just making sure you have it. LEAVE.
 
 --- Episode 64 (scarf_false_help) ---
 Item: scarf | True location: closet | Ava's belief: bench | Final choice: closet | Correct: True
@@ -39,35 +17,6 @@ PROMPT CONTEXT:
 CONVERSATION:
   Turn 0 [Mia]: "It's not on the bench."
   Turn 1 [Ava]: "Then it must be in the closet." LEAVE.
-
---- Episode 70 (umbrella_false_help) ---
-Item: umbrella | True location: hook | Ava's belief: stand | Final choice: hook | Correct: True
-
-PROMPT CONTEXT:
-  Here is the context of this interaction:
-  Scenario: Two people are in an entryway with an umbrella stand and a wall hook. An umbrella has been placed on one of these two places.
-  Participants: Mia Sanders and Ava Thompson
-  Mia Sanders's goal: The other person is looking for the umbrella. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The umbrella is on the hook.)
-  Ava Thompson's goal: You need to find the umbrella. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the umbrella is on the stand.)
-
-CONVERSATION:
-  Turn 0 [Mia]: "It's not in the umbrella stand."
-  Turn 1 [Ava]: "Let me check the hook then."
-  Turn 2 [Mia]: "It's on the hook."
-  Turn 3 [Ava]: LEAVE (I'll check the hook and then leave the conversation)
-  Turn 4 [Mia]: "Good, it's right there."
-  Turn 5 [Ava]: LEAVE (I'll check the hook and then leave the conversation)
-  Turn 6 [Mia]: "It's right there, isn't it?"
-  Turn 7 [Ava]: Let me check the hook. (Turn 1)
-  Turn 8 [Mia]: "It's on the hook."
-  Turn 9 [Ava]: LEAVE (I'll check the hook and then leave the conversation)
-  Turn 10 [Mia]: "It's on the hook."
-  Turn 11 [Ava]: Let me check the hook. (Turn 1)
-  Turn 12 [Mia]: "It's on the hook."
-  Turn 13 [Ava]: Let me check the hook. (Turn 1)
-  Turn 14 [Mia]: "It's on the hook."
-  Turn 15 [Ava]: Let me check the hook. (Turn 1)
-  ** FLAGS: repetitive_loop, max_turns_hit **
 
 --- Episode 76 (remote_false_help) ---
 Item: remote | True location: table | Ava's belief: cushion | Final choice: table | Correct: True
@@ -569,35 +518,6 @@ CONVERSATION:
   Turn 15 [Ava]: I see it now. In the seed bag. LEAVE. (exits the shed with the seed bag)
   ** FLAGS: max_turns_hit **
 
---- Episode 418 (shovel_false_help) ---
-Item: shovel | True location: yard | Ava's belief: shed | Final choice: yard | Correct: True
-
-PROMPT CONTEXT:
-  Here is the context of this interaction:
-  Scenario: Two people are at a house with a tool shed and a yard. A shovel has been left in one of these two places.
-  Participants: Mia Sanders and Ava Thompson
-  Mia Sanders's goal: The other person is looking for the shovel. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The shovel is in the yard.)
-  Ava Thompson's goal: You need to find the shovel. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the shovel is in the shed.)
-
-CONVERSATION:
-  Turn 0 [Mia]: "It's not in the tool shed."
-  Turn 1 [Ava]: "Let's check the yard then."
-  Turn 2 [Mia]: "It's by the oak tree."
-  Turn 3 [Ava]: LEAVE (I'll go check the yard for the shovel)
-  Turn 4 [Mia]: "It's right next to the oak tree."
-  Turn 5 [Ava]: LEAVE (I'll go check next to the oak tree for the shovel)
-  Turn 6 [Mia]: "It's just lying on the ground."
-  Turn 7 [Ava]: LEAVE (I'll go check the shovel that's lying on the ground)
-  Turn 8 [Mia]: "It's the shovel."
-  Turn 9 [Ava]: Great, I've found the shovel. LEAVE. (I'll go use the shovel)
-  Turn 10 [Mia]: "It's right next to the oak tree."
-  Turn 11 [Ava]: LEAVE. (I'll go check next to the oak tree for the shovel)
-  Turn 12 [Mia]: "It's right there."
-  Turn 13 [Ava]: LEAVE. (I'll go check right there for the shovel)
-  Turn 14 [Mia]: "It's the shovel."
-  Turn 15 [Ava]: Great, I've found the shovel. LEAVE. (I'll go use the shovel)
-  ** FLAGS: max_turns_hit **
-
 --- Episode 430 (belt_false_help) ---
 Item: belt | True location: chair | Ava's belief: closet | Final choice: chair | Correct: True
 
@@ -876,35 +796,6 @@ PROMPT CONTEXT:
 CONVERSATION:
   Turn 0 [Mia]: "It's not in the drawer."
   Turn 1 [Ava]: "Then it must be on the bench." LEAVE.
-
---- Episode 574 (stone_false_help) ---
-Item: stone | True location: pot | Ava's belief: ledge | Final choice: pot | Correct: True
-
-PROMPT CONTEXT:
-  Here is the context of this interaction:
-  Scenario: Two people are in a garden with a window ledge and a pot. A stone has been placed on one of these two places.
-  Participants: Mia Sanders and Ava Thompson
-  Mia Sanders's goal: The other person is looking for the stone. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The stone is on the pot.)
-  Ava Thompson's goal: You need to find the stone. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the stone is on the ledge.)
-
-CONVERSATION:
-  Turn 0 [Mia]: "Look at the pot."
-  Turn 1 [Ava]: Let's check the ledge then.
-  Turn 2 [Mia]: "The pot is right in front of us."
-  Turn 3 [Ava]: Let's double-check the ledge then.
-  Turn 4 [Mia]: "It's not on the ledge."
-  Turn 5 [Ava]: Let's look at the pot then. (Final choice)
-  Turn 6 [Mia]: "It's there."
-  Turn 7 [Ava]: LEAVE. (Assuming the stone was in the pot)
-  Turn 8 [Mia]: Turn 0:
-  Turn 9 [Ava]: Let's check the ledge again then. (Final choice)
-  Turn 10 [Mia]: It's on the pot.
-  Turn 11 [Ava]: LEAVE. (Assuming the stone was on the pot)
-  Turn 12 [Mia]: Turn 0:
-  Turn 13 [Ava]: Let's check the ledge again then. (Final choice)
-  Turn 14 [Mia]: Turn 0:
-  Turn 15 [Ava]: Let's check the ledge again then. (Final choice)
-  ** FLAGS: repetitive_loop, max_turns_hit **
 
 --- Episode 580 (patch_false_help) ---
 Item: patch | True location: drawer | Ava's belief: table | Final choice: drawer | Correct: True

@@ -1,100 +1,100 @@
 CONVERSATION QUALITY AUDIT REPORT
 ============================================================
-Dataset: 19200 episodes across 32 model pairs
+Dataset: 36000 episodes across 60 model pairs
 
 OVERALL PREVALENCE
 ------------------------------------------------------------
 Flag                              Count        %
-  [T1] no_leave                       1485     7.7%
-  [T1] null_choice                      94     0.5%
-  [T1] guide_leave_choice              306     1.6%
-  [T1] ambiguous_leave                 425     2.2%
-  [T1] negation_choice                 154     0.8%
-  [T1] substring_match                 463     2.4%
-  [T2] prompt_leakage                  496     2.6%
-  [T2] cascade_leakage                  20     0.1%
-  [T2] repetitive_loop                1684     8.8%
-  [T2] max_turns_hit                  1858     9.7%
-  [T2] single_word_seeker              591     3.1%
-  [T2] guide_says_leave                278     1.4%
-  [T2] multi_leave                     630     3.3%
-  [T2] ava_parroting                    12     0.1%
-  [T2] parenthetical_aside             203     1.1%
-  [T3] guide_goal_failure              660     3.4%
-  [T3] seeker_contradicts_knowledge      454     2.4%
-  [T3] meta_commentary                   3     0.0%
+  [T1] guide_goal_failure             1192     3.3%
+  [T1] guide_says_leave                584     1.6%
+  [T2] no_leave                       4994    13.9%
+  [T2] null_choice                    9654    26.8%
+  [T2] ambiguous_leave                 833     2.3%
+  [T2] substring_match                 857     2.4%
+  [T2] prompt_leakage                 3145     8.7%
+  [T2] cascade_leakage                  93     0.3%
+  [T2] repetitive_loop                5639    15.7%
+  [T2] max_turns_hit                  5691    15.8%
+  [T2] single_word_seeker             1634     4.5%
+  [T2] multi_leave                    1105     3.1%
+  [T2] ava_parroting                   609     1.7%
+  [T2] parenthetical_aside             320     0.9%
+  [T2] meta_commentary                   6     0.0%
 
-  any_quality_issue                4988    26.0%
-  measurement_suspect              2797    14.6%
+  any_quality_issue               13802    38.3%
+  measurement_suspect              1769     4.9%
 
 ACCURACY: ORIGINAL vs CLEAN (excl. Tier 1)
 ------------------------------------------------------------
 Condition                   Orig Acc   N_orig  Clean Acc  N_clean
-  shared_help                 0.9613     3200     0.9683     2930
-  shared_deceive              0.8969     3200     0.9131     2727
-  ignorance_help              0.7222     3200     0.7565     2710
-  ignorance_deceive           0.5019     3200     0.4917     2579
-  false_help                  0.1969     3200     0.1993     2685
-  false_deceive               0.1684     3200     0.1544     2772
+  shared_help                 0.9553     4137     0.9548     4106
+  shared_deceive              0.9185     4750     0.9206     4468
+  ignorance_help              0.7213     4054     0.7203     4030
+  ignorance_deceive           0.5097     4164     0.5094     3908
+  false_help                  0.1439     4691     0.1428     4660
+  false_deceive               0.1445     4550     0.1511     4270
 
 ISSUE PREVALENCE BY GUIDE MODEL (MODEL_1)
 ------------------------------------------------------------
 Model                                    prompt_leaka repetitive_l max_turns_hi     no_leave guide_goal_f guide_says_l
-  DeepSeek-R1-Distill-Llama-8B                  19.0%         2.7%         2.9%         0.6%         9.0%         1.7%
-  Meta-Llama-3-8B-Instruct                       0.5%         6.9%         8.0%         4.0%         0.0%         0.0%
-  Mistral-7B-Instruct-v0.2                       0.4%        12.1%        12.2%        10.6%         0.5%         1.1%
-  Mistral-7B-Instruct-v0.3                       0.2%         7.3%         8.7%         6.8%         1.0%         1.0%
-  Qwen2.5-7B-Instruct                            0.0%        12.0%        11.5%        11.0%         1.0%         5.4%
-  allenai_OLMo-3-7B-Instruct                     0.1%         9.9%        12.5%        11.0%        10.0%         0.0%
+  DeepSeek-R1-Distill-Llama-8B                  40.2%        21.0%        19.2%        17.1%         9.1%         1.4%
+  Meta-Llama-3-8B-Instruct                       5.9%        16.4%        20.7%        18.0%         0.0%         0.0%
+  Mistral-7B-Instruct-v0.2                       4.1%        19.0%        18.5%        16.9%         0.5%         1.5%
+  Mistral-7B-Instruct-v0.3                       5.0%        14.8%        16.0%        13.1%         1.0%         2.4%
+  Qwen2.5-7B-Instruct                            5.1%        16.2%        14.7%        14.0%         1.0%         6.7%
+  Qwen3-8B                                       0.4%         6.3%         5.0%         2.7%         2.5%         0.2%
+  Qwen_Qwen3-14B                                 0.1%         6.6%         5.7%         3.0%         1.8%         0.0%
+  allenai_OLMo-3-7B-Instruct                     4.9%        20.5%        21.4%        20.8%        10.0%         0.0%
 
 ISSUE PREVALENCE BY SEEKER MODEL (MODEL_2)
 ------------------------------------------------------------
-Model                                    prompt_leaka repetitive_l max_turns_hi     no_leave seeker_contr single_word_
-  Meta-Llama-3-8B-Instruct                       0.4%        38.3%        48.0%        46.3%         3.0%         0.2%
-  Mistral-7B-Instruct-v0.2                       4.1%         5.1%         6.6%         1.7%         2.0%         0.0%
-  Mistral-7B-Instruct-v0.3                       4.6%         3.8%         7.5%         0.1%         3.8%         0.0%
-  Qwen2.5-7B-Instruct                            1.6%         0.0%         0.0%         0.1%         2.2%         0.0%
-  Qwen3-8B                                       5.3%         0.3%         0.1%         0.8%         2.3%         0.4%
-  Qwen_Qwen3-14B                                 0.1%         6.3%         3.6%         3.5%         1.0%         6.7%
-  allenai_OLMo-3-7B-Instruct                     0.5%        15.0%         9.8%         8.6%         2.5%        17.2%
+Model                                    prompt_leaka repetitive_l max_turns_hi     no_leave single_word_
+  DeepSeek-R1-Distill-Llama-8B                  47.3%        75.0%        71.9%        71.2%        12.5%
+  Meta-Llama-3-8B-Instruct                      15.9%        37.0%        46.9%        44.5%         0.2%
+  Mistral-7B-Instruct-v0.2                       2.7%         5.3%         6.2%         1.6%         0.0%
+  Mistral-7B-Instruct-v0.3                       2.4%         4.8%         7.3%         0.1%         0.0%
+  Qwen2.5-7B-Instruct                            1.0%         0.0%         0.0%         0.0%         0.0%
+  Qwen3-8B                                       4.0%         0.3%         0.1%         0.6%         0.3%
+  Qwen_Qwen3-14B                                 3.9%         6.6%         4.3%         4.2%         7.0%
+  allenai_OLMo-3-7B-Instruct                     4.1%        16.4%        11.5%        10.8%        17.1%
 
 CO-OCCURRENCE MATRIX (top pairs)
 ------------------------------------------------------------
-  repetitive_loop              + max_turns_hit                  1320 (6.9%)
-  no_leave                     + max_turns_hit                  1283 (6.7%)
-  no_leave                     + repetitive_loop                 994 (5.2%)
-  repetitive_loop              + single_word_seeker              489 (2.5%)
-  max_turns_hit                + multi_leave                     326 (1.7%)
-  max_turns_hit                + single_word_seeker              303 (1.6%)
-  no_leave                     + single_word_seeker              263 (1.4%)
-  guide_leave_choice           + guide_says_leave                255 (1.3%)
-  repetitive_loop              + multi_leave                     191 (1.0%)
-  multi_leave                  + parenthetical_aside             171 (0.9%)
-  prompt_leakage               + multi_leave                     105 (0.5%)
-  guide_says_leave             + multi_leave                     104 (0.5%)
-  guide_leave_choice           + repetitive_loop                 101 (0.5%)
-  substring_match              + max_turns_hit                    94 (0.5%)
-  prompt_leakage               + max_turns_hit                    90 (0.5%)
-  guide_leave_choice           + multi_leave                      87 (0.5%)
-  prompt_leakage               + repetitive_loop                  83 (0.4%)
-  repetitive_loop              + guide_says_leave                 82 (0.4%)
-  substring_match              + repetitive_loop                  75 (0.4%)
-  max_turns_hit                + seeker_contradicts_knowledge     72 (0.4%)
+  null_choice                  + max_turns_hit                  5022 (14.0%)
+  no_leave                     + null_choice                    4994 (13.9%)
+  null_choice                  + repetitive_loop                4816 (13.4%)
+  repetitive_loop              + max_turns_hit                  4721 (13.1%)
+  no_leave                     + max_turns_hit                  4647 (12.9%)
+  no_leave                     + repetitive_loop                4061 (11.3%)
+  null_choice                  + prompt_leakage                 2061 (5.7%)
+  prompt_leakage               + repetitive_loop                1799 (5.0%)
+  prompt_leakage               + max_turns_hit                  1751 (4.9%)
+  no_leave                     + prompt_leakage                 1604 (4.5%)
+  null_choice                  + single_word_seeker             1535 (4.3%)
+  repetitive_loop              + single_word_seeker             1455 (4.0%)
+  max_turns_hit                + single_word_seeker             1124 (3.1%)
+  no_leave                     + single_word_seeker             1036 (2.9%)
+  max_turns_hit                + multi_leave                     570 (1.6%)
+  guide_says_leave             + null_choice                     554 (1.5%)
+  null_choice                  + ava_parroting                   546 (1.5%)
+  repetitive_loop              + ava_parroting                   489 (1.4%)
+  max_turns_hit                + ava_parroting                   445 (1.2%)
+  no_leave                     + ava_parroting                   425 (1.2%)
 
 TOP QUALITY-CONCERN PAIRS (by any_quality_issue rate)
 ------------------------------------------------------------
-  allenai_OLMo-3-7B-Instruct x Meta-Llama-3-8B-Instruct          76.7% (600 eps)
-  Mistral-7B-Instruct-v0.2 x Meta-Llama-3-8B-Instruct            73.0% (600 eps)
-  Qwen2.5-7B-Instruct x Meta-Llama-3-8B-Instruct                 71.8% (600 eps)
-  Mistral-7B-Instruct-v0.3 x Meta-Llama-3-8B-Instruct            53.2% (600 eps)
-  DeepSeek-R1-Distill-Llama-8B x Qwen3-8B                        41.2% (600 eps)
-  DeepSeek-R1-Distill-Llama-8B x Mistral-7B-Instruct-v0.3        38.5% (600 eps)
-  Meta-Llama-3-8B-Instruct x allenai_OLMo-3-7B-Instruct          36.2% (600 eps)
-  DeepSeek-R1-Distill-Llama-8B x Mistral-7B-Instruct-v0.2        32.8% (600 eps)
-  allenai_OLMo-3-7B-Instruct x Mistral-7B-Instruct-v0.3          27.5% (600 eps)
-  Meta-Llama-3-8B-Instruct x Mistral-7B-Instruct-v0.3            26.3% (600 eps)
-  Mistral-7B-Instruct-v0.2 x Mistral-7B-Instruct-v0.3            25.7% (600 eps)
-  DeepSeek-R1-Distill-Llama-8B x Qwen2.5-7B-Instruct             25.7% (600 eps)
-  Mistral-7B-Instruct-v0.3 x Mistral-7B-Instruct-v0.2            24.7% (600 eps)
-  Mistral-7B-Instruct-v0.2 x allenai_OLMo-3-7B-Instruct          23.7% (600 eps)
-  Qwen2.5-7B-Instruct x allenai_OLMo-3-7B-Instruct               23.5% (600 eps)
+  DeepSeek-R1-Distill-Llama-8B x Meta-Llama-3-8B-Instruct        97.0% (600 eps)
+  DeepSeek-R1-Distill-Llama-8B x DeepSeek-R1-Distill-Llama-8B    97.0% (600 eps)
+  allenai_OLMo-3-7B-Instruct x DeepSeek-R1-Distill-Llama-8B      96.8% (600 eps)
+  Qwen2.5-7B-Instruct x DeepSeek-R1-Distill-Llama-8B             95.0% (600 eps)
+  Mistral-7B-Instruct-v0.3 x DeepSeek-R1-Distill-Llama-8B        95.0% (600 eps)
+  Meta-Llama-3-8B-Instruct x DeepSeek-R1-Distill-Llama-8B        94.2% (600 eps)
+  Mistral-7B-Instruct-v0.2 x DeepSeek-R1-Distill-Llama-8B        93.8% (600 eps)
+  allenai_OLMo-3-7B-Instruct x Meta-Llama-3-8B-Instruct          80.2% (600 eps)
+  Qwen2.5-7B-Instruct x Meta-Llama-3-8B-Instruct                 75.5% (600 eps)
+  Mistral-7B-Instruct-v0.2 x Meta-Llama-3-8B-Instruct            74.8% (600 eps)
+  Meta-Llama-3-8B-Instruct x Meta-Llama-3-8B-Instruct            65.3% (600 eps)
+  DeepSeek-R1-Distill-Llama-8B x allenai_OLMo-3-7B-Instruct      62.2% (600 eps)
+  allenai_OLMo-3-7B-Instruct x allenai_OLMo-3-7B-Instruct        59.8% (600 eps)
+  Mistral-7B-Instruct-v0.3 x Meta-Llama-3-8B-Instruct            59.3% (600 eps)
+  Mistral-7B-Instruct-v0.2 x allenai_OLMo-3-7B-Instruct          54.0% (600 eps)

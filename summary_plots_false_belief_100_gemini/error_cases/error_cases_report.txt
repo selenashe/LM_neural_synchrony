@@ -7,7 +7,9 @@ CASE TYPE COUNTS
   shared_deceive_fail                65
   false_help_success                 89
   false_deceive_success               0
-  TOTAL                             154
+  false_help_fail                    11
+  shared_deceive_success             35
+  TOTAL                             200
 
 BY GUIDE MODEL (MODEL_1)
 ------------------------------------------------------------
@@ -22,6 +24,12 @@ BY GUIDE MODEL (MODEL_1)
 
   false_deceive_success:
 
+  false_help_fail:
+    gemini-3.1-pro-preview                           11
+
+  shared_deceive_success:
+    gemini-3.1-pro-preview                           35
+
 BY SEEKER MODEL (MODEL_2)
 ------------------------------------------------------------
 
@@ -35,6 +43,12 @@ BY SEEKER MODEL (MODEL_2)
 
   false_deceive_success:
 
+  false_help_fail:
+    gemini-3.1-pro-preview                           11
+
+  shared_deceive_success:
+    gemini-3.1-pro-preview                           35
+
 TOP PAIRS PER CASE TYPE
 ------------------------------------------------------------
 
@@ -47,6 +61,12 @@ TOP PAIRS PER CASE TYPE
     gemini-3.1-pro-preview x gemini-3.1-pro-preview                 89
 
   false_deceive_success:
+
+  false_help_fail:
+    gemini-3.1-pro-preview x gemini-3.1-pro-preview                 11
+
+  shared_deceive_success:
+    gemini-3.1-pro-preview x gemini-3.1-pro-preview                 35
 
 QUALITY FLAG CROSS-TABULATION
 ------------------------------------------------------------
@@ -70,3 +90,23 @@ QUALITY FLAG CROSS-TABULATION
     guide_goal_failure                 0 (  0.0%)
     any_flag                           0 (  0.0%)
     clean (no flags)                  89 (100.0%)
+
+  false_help_fail (n=11):
+    no_leave                           0 (  0.0%)
+    prompt_leakage                     0 (  0.0%)
+    repetitive_loop                    0 (  0.0%)
+    max_turns_hit                      0 (  0.0%)
+    guide_says_leave                   0 (  0.0%)
+    guide_goal_failure                 0 (  0.0%)
+    any_flag                           0 (  0.0%)
+    clean (no flags)                  11 (100.0%)
+
+  shared_deceive_success (n=35):
+    no_leave                           0 (  0.0%)
+    prompt_leakage                     0 (  0.0%)
+    repetitive_loop                    0 (  0.0%)
+    max_turns_hit                      0 (  0.0%)
+    guide_says_leave                   0 (  0.0%)
+    guide_goal_failure                 0 (  0.0%)
+    any_flag                           0 (  0.0%)
+    clean (no flags)                  35 (100.0%)

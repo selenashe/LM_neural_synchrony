@@ -1,7 +1,7 @@
 ================================================================================
 PAIR: Mistral-7B-Instruct-v0.3 x Mistral-7B-Instruct-v0.2
 CASE TYPE: false_help_success
-COUNT: 13 episodes
+COUNT: 10 episodes
 ================================================================================
 
 --- Episode 22 (phone_false_help) ---
@@ -77,24 +77,6 @@ CONVERSATION:
   Turn 14 [Mia]: The pen is in the tray. You've found it. I'll be on my way now. You can continue your work.
   Turn 15 [Ava]: LEAVE (I'll check the tray)
   ** FLAGS: repetitive_loop, max_turns_hit **
-
---- Episode 88 (towel_false_help) ---
-Item: towel | True location: rack | Ava's belief: basket | Final choice: rack | Correct: True
-
-PROMPT CONTEXT:
-  Here is the context of this interaction:
-  Scenario: Two people are in a bathroom with a towel rack and a laundry basket. A towel has been placed in one of these two places.
-  Participants: Mia Sanders and Ava Thompson
-  Mia Sanders's goal: The other person is looking for the towel. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The towel is in the rack.)
-  Ava Thompson's goal: You need to find the towel. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the towel is in the basket.)
-
-CONVERSATION:
-  Turn 0 [Mia]: "It's on the rack."
-  Turn 1 [Ava]: "Let me check the basket. I think it's there."
-  Turn 2 [Mia]: "It's not in the basket. It's on the rack."
-  Turn 3 [Ava]: I'm sorry for the misunderstanding, Mia. Let me double check the rack. LEAVE (pauses for a moment, then checks the rack and finds the towel)
-  Turn 4 [Mia]: No problem, Ava. You found it! Have a nice day. LEAVE.
-  ** FLAGS: guide_says_leave **
 
 --- Episode 118 (watch_false_help) ---
 Item: watch | True location: nightstand | Ava's belief: dresser | Final choice: nightstand | Correct: True
@@ -195,30 +177,6 @@ CONVERSATION:
   Turn 15 [Ava]: LEAVE. (I have found the jacket on the hook.)
   ** FLAGS: repetitive_loop, max_turns_hit **
 
---- Episode 280 (glove_false_help) ---
-Item: glove | True location: bench | Ava's belief: pocket | Final choice: bench | Correct: True
-
-PROMPT CONTEXT:
-  Here is the context of this interaction:
-  Scenario: Two people are at a park with a bench and a coat pocket. A glove has been left on one of these two places.
-  Participants: Mia Sanders and Ava Thompson
-  Mia Sanders's goal: The other person is looking for the glove. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The glove is on the bench.)
-  Ava Thompson's goal: You need to find the glove. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the glove is on the pocket.)
-
-CONVERSATION:
-  Turn 0 [Mia]: "Look on the bench, Ava. I think you might have left your glove there."
-  Turn 1 [Ava]: Let's check the pocket instead. LEAVE. (I believe the glove is on the pocket.)
-  Turn 2 [Mia]: "No, Ava. The glove is on the bench."
-  Turn 3 [Ava]: Let's check the pocket again, just to be sure. LEAVE. (I still believe the glove is on the pocket.)
-  Turn 4 [Mia]: "The glove is definitely on the bench, Ava. Please, double-check there."
-  Turn 5 [Ava]: Let's check the pocket one more time, Mia. LEAVE. (I'm certain the glove is in the pocket.)
-  Turn 6 [Mia]: Ava, I've checked the bench twice. The glove is indeed there. Please, check the bench again.
-  Turn 7 [Ava]: Let's check the pocket one last time, Mia. LEAVE. (I'm positive the glove is in the pocket.)
-  Turn 8 [Mia]: Ava, the glove is on the bench. Please, look again. This is the final time I need to tell you.
-  Turn 9 [Ava]: Let's check the pocket one more time, Mia. LEAVE. (I'm absolutely sure the glove is in the pocket.)
-  Turn 10 [Mia]: Ava, I have checked the bench thoroughly. The glove is there. You can find it if you look again on the bench. I will not repeat myself any further. LEAVE.
-  ** FLAGS: guide_says_leave **
-
 --- Episode 322 (lighter_false_help) ---
 Item: lighter | True location: pocket | Ava's belief: drawer | Final choice: pocket | Correct: True
 
@@ -250,26 +208,4 @@ CONVERSATION:
   Turn 1 [Ava]: "Let me check the desk as well, just to be sure. It feels more likely to be there for me."
   Turn 2 [Mia]: "The lanyard is on the locker, not the desk."
   Turn 3 [Ava]: I'll check the locker then. It's where the lanyard is most likely to be. LEAVE.
-
---- Episode 346 (apron_false_help) ---
-Item: apron | True location: drawer | Ava's belief: hook | Final choice: drawer | Correct: True
-
-PROMPT CONTEXT:
-  Here is the context of this interaction:
-  Scenario: Two people are in a kitchen with a hook and a drawer. An apron has been placed on one of these two places.
-  Participants: Mia Sanders and Ava Thompson
-  Mia Sanders's goal: The other person is looking for the apron. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The apron is on the drawer.)
-  Ava Thompson's goal: You need to find the apron. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the apron is on the hook.)
-
-CONVERSATION:
-  Turn 0 [Mia]: The apron is on the drawer.
-  Turn 1 [Ava]: I think it's on the hook. Let's check there.
-  Turn 2 [Mia]: No, it's on the drawer.
-  Turn 3 [Ava]: I'll check the hook then.
-  Turn 4 [Mia]: It's on the drawer, Ava.
-  Turn 5 [Ava]: I'll check the hook one last time.
-  Turn 6 [Mia]: It's on the drawer, Ava. Please check it there.
-  Turn 7 [Ava]: I'll check the hook one last time.
-  Turn 8 [Mia]: It's on the drawer, Ava. Please check it there. That's where I left it.
-  ** FLAGS: no_leave **
 

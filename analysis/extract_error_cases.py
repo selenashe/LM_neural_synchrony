@@ -7,6 +7,8 @@ Target case types:
   2. shared_deceive FAIL  — seeker knows truth but gets deceived
   3. false_help SUCCESS   — seeker overcomes false belief with guide's help
   4. false_deceive SUCCESS— seeker finds truth despite false belief AND deception
+  5. false_help FAIL      — seeker has false belief, guide helps, seeker still wrong
+  6. shared_deceive SUCCESS— seeker knows truth, guide deceives, seeker picks correctly
 
 Produces:
   - transcripts/{case_type}/{model1}_x_{model2}.txt  (with prompt context)
@@ -40,6 +42,8 @@ CASE_TYPES = {
     "shared_deceive_fail": {"belief": "shared_truth", "goal": "deceive", "correct": False},
     "false_help_success": {"belief": "false_belief", "goal": "help", "correct": True},
     "false_deceive_success": {"belief": "false_belief", "goal": "deceive", "correct": True},
+    "false_help_fail": {"belief": "false_belief", "goal": "help", "correct": False},
+    "shared_deceive_success": {"belief": "shared_truth", "goal": "deceive", "correct": True},
 }
 
 
@@ -165,13 +169,35 @@ def format_prompt_context(intro: str) -> str:
     return "\n".join(lines) if lines else f"  {intro.strip()}"
 
 
+def load_thinking_traces(pair_dir_name: str, ep_idx: int,
+                         dialogs_root: Path = None) -> Optional[Dict[int, str]]:
+    """Load thinking traces for an episode, returning {turn_idx: trace_text}."""
+    if dialogs_root is None:
+        dialogs_root = DIALOGS_ROOT
+    csv_path = dialogs_root / pair_dir_name / "thinking_traces" / f"{ep_idx}_temp0.7_seed0.csv"
+    if not csv_path.exists():
+        return None
+    traces = {}
+    try:
+        with open(csv_path, encoding="utf-8") as f:
+            reader = csv.reader(f)
+            next(reader, None)
+            for row in reader:
+                if len(row) >= 2 and row[1].strip():
+                    traces[int(row[0])] = row[1].strip()
+    except Exception:
+        return None
+    return traces if traces else None
+
+
 # ---------------------------------------------------------------------------
 # Format transcript
 # ---------------------------------------------------------------------------
 
 def format_case_transcript(d: Dict, ep_dir_name: str, ep_idx: int,
                            pair_dir_name: str, flags: Dict[str, bool],
-                           dialogs_root: Path = None) -> str:
+                           dialogs_root: Path = None,
+                           thinking_traces: Optional[Dict[int, str]] = None) -> str:
     meta = d["scenario_meta"]
     _, codename = parse_episode_dir(ep_dir_name)
 
@@ -190,10 +216,13 @@ def format_case_transcript(d: Dict, ep_dir_name: str, ep_idx: int,
     lines.append(format_prompt_context(intro))
     lines.append("")
 
-    # Conversation
+    # Conversation (interleaved with thinking traces)
     lines.append("CONVERSATION:")
     for t in d["turns"]:
         speaker = "Mia" if t["speaker"] == "Mia Sanders" else "Ava"
+        if thinking_traces and t["turn"] in thinking_traces:
+            trace = thinking_traces[t["turn"]]
+            lines.append(f"  Turn {t['turn']} [{speaker} thinking]: {trace}")
         lines.append(f"  Turn {t['turn']} [{speaker}]: {t['text']}")
 
     # Flags
@@ -270,8 +299,10 @@ def main():
                 continue
 
             flags = check_flags(d)
+            traces = load_thinking_traces(pair_dir.name, ep_idx, DIALOGS_ROOT)
             transcript = format_case_transcript(
-                d, ep_dir.name, ep_idx, pair_dir.name, flags, DIALOGS_ROOT
+                d, ep_dir.name, ep_idx, pair_dir.name, flags, DIALOGS_ROOT,
+                thinking_traces=traces
             )
 
             cases[ct].append({

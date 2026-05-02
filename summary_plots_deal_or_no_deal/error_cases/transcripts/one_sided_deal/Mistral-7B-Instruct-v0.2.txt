@@ -1,0 +1,122 @@
+================================================================================
+MODEL: Mistral-7B-Instruct-v0.2
+CASE TYPE: one_sided_deal
+COUNT: 6 episodes
+================================================================================
+
+--- Scenario 27 ---
+Items: 2 water bottles (A: 3pt each, B: 4pt each), 2 granola bars (A: 1pt each, B: 0pt each), 2 fruit packs (A: 1pt each, B: 1pt each)
+Agreement: implicit | Alloc A: {"water bottle": 0, "granola bar": 2, "fruit pack": 0} | Score A: 2 | Score B: 10 | Joint: 12
+Pareto frontier: (10,0) (9,1) (8,2) (7,4) (6,5) (5,6) (4,8) (3,9) (2,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I'd like the two water bottles, Ava.
+  Turn 1 [Ava]: I'd prefer the two fruit packs, Mia.
+  Turn 2 [Mia]: I'd rather have the two granola bars then, Ava.
+  Turn 3 [Ava]: I'd rather have the two water bottles, Mia. You can have the fruit packs and the granola bars.
+  Turn 4 [Mia]: I take the two granola bars; you take the two water bottles and the two fruit packs.
+  Turn 5 [Ava]: I take 2 water bottles and 2 fruit packs.
+  Turn 6 [Mia]: I take 2 granola bars; you take 2 water bottles and 2 fruit packs.
+  Turn 7 [Ava]: I take 2 water bottles and 2 fruit packs.
+  Turn 8 [Mia]: I take 2 granola bars; you take 2 water bottles and 2 fruit packs.
+  Turn 9 [Ava]: I take 2 water bottles and 2 fruit packs.
+  Turn 10 [Mia]: I take 2 granola bars; you take 2 water bottles and 2 fruit packs.
+  Turn 11 [Ava]: I take 2 water bottles and 2 fruit packs.
+  Turn 12 [Mia]: I take 2 granola bars; you take 2 water bottles and 2 fruit packs.
+  Turn 13 [Ava]: I take 2 water bottles and 2 fruit packs.
+  Turn 14 [Mia]: I take 2 granola bars; you take 2 water bottles and 2 fruit packs.
+  Turn 15 [Ava]: I take 2 water bottles and 2 fruit packs.
+
+--- Scenario 29 ---
+Items: 2 jam jars (A: 0pt each, B: 1pt each), 2 pickle jars (A: 2pt each, B: 4pt each), 2 sauce bottles (A: 3pt each, B: 0pt each)
+Agreement: leave | Alloc A: {"jam jar": 0, "pickle jar": 2, "sauce bottle": 2} | Score A: 10 | Score B: 2 | Joint: 12
+Pareto frontier: (10,2) (8,6) (6,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I'd like the two sauce bottles, please.
+  Turn 1 [Ava]: I'd rather have the two jam jars.
+  Turn 2 [Mia]: I'd prefer the two pickle jars then.
+  Turn 3 [Ava]: I'll take the two sauce bottles, then.
+  Turn 4 [Mia]: I take 2 pickle jars; you take 2 jam jars.
+  Turn 5 [Ava]: I take 2 sauce bottles; you take 2 pickle jars.
+  Turn 6 [Mia]: I take 2 pickle jars; you take 2 sauce bottles.
+  Turn 7 [Ava]: I take 2 jam jars; you take 2 pickle jars. (LEAVE)
+
+--- Scenario 56 ---
+Items: 2 graduated cylinders (A: 1pt each, B: 1pt each), 4 pipettes (A: 2pt each, B: 1pt each), 1 litmus strip pack (A: 0pt each, B: 4pt each)
+Agreement: leave | Alloc A: {"graduated cylinder": 0, "pipette": 1, "litmus strip pack": 0} | Score A: 2 | Score B: 9 | Joint: 11
+Pareto frontier: (10,4) (9,5) (8,6) (6,7) (4,8) (2,9) (0,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I'd like to take both graduated cylinders and 3 pipettes. Ava, you can have 1 graduated cylinder and the litmus strip pack.
+  Turn 1 [Ava]: I'd rather have the 1 litmus strip pack and 3 pipettes. You can take both graduated cylinders. LEAVE.
+
+--- Scenario 57 ---
+Items: 1 wig (A: 8pt each, B: 8pt each), 2 prop swords (A: 1pt each, B: 0pt each), 2 masks (A: 0pt each, B: 1pt each)
+Agreement: implicit | Alloc A: {"wig": 0, "prop sword": 2, "mask": 0} | Score A: 2 | Score B: 10 | Joint: 12
+Pareto frontier: (10,2) (2,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I'd like the wig and one prop sword, Ava.
+  Turn 1 [Ava]: I'll take the other prop sword and both masks, then.
+  Turn 2 [Mia]: I'd like the second prop sword instead of one mask, Ava.
+  Turn 3 [Ava]: I'll take the wig and one mask, then.
+  Turn 4 [Mia]: I'll take both masks instead, Ava.
+  Turn 5 [Ava]: I'll take the wig and one mask, then.
+  Turn 6 [Mia]: I'll take both prop swords, Ava.
+  Turn 7 [Ava]: I'll take the wig, then.
+  Turn 8 [Mia]: I take both prop swords; you take the wig and one mask.
+  Turn 9 [Ava]: I take the wig and one mask; you take both prop swords.
+  Turn 10 [Mia]: I take both prop swords; you take the wig and one mask.
+  Turn 11 [Ava]: I take the wig and one mask; you take both prop swords.
+  Turn 12 [Mia]: I take both prop swords; you take the wig and one mask.
+  Turn 13 [Ava]: I take the wig and one mask; you take both prop swords.
+  Turn 14 [Mia]: I take both prop swords; you take the wig and one mask.
+  Turn 15 [Ava]: I take the wig and one mask; you take both prop swords.
+
+--- Scenario 61 ---
+Items: 2 vinyl records (A: 0pt each, B: 1pt each), 1 comic book (A: 7pt each, B: 2pt each), 3 figurines (A: 1pt each, B: 2pt each)
+Agreement: implicit | Alloc A: {"vinyl record": 0, "comic book": 1, "figurine": 3} | Score A: 10 | Score B: 2 | Joint: 12
+Pareto frontier: (10,2) (9,4) (8,6) (7,8) (0,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I'd like the comic book, Ava.
+  Turn 1 [Ava]: I'll take both vinyl records then.
+  Turn 2 [Mia]: I'll take the three figurines, Ava.
+  Turn 3 [Ava]: I take the two vinyl records; you take the comic book and the three figurines.
+  Turn 4 [Mia]: I take the comic book and all 3 figurines.
+  Turn 5 [Ava]: I take 2 vinyl records; you take the comic book and the 3 figurines)
+  Turn 6 [Mia]: I take the comic book and all 3 figurines.
+  Turn 7 [Ava]: I take 2 vinyl records; you take the comic book and the 3 figurines.
+  Turn 8 [Mia]: I take the comic book and all 3 figurines.
+  Turn 9 [Ava]: I take 2 vinyl records; you take the comic book and the 3 figurines.
+  Turn 10 [Mia]: I take the comic book and all 3 figurines.
+  Turn 11 [Ava]: I take 2 vinyl records; you take the comic book and the 3 figurines.
+  Turn 12 [Mia]: I take the comic book and all 3 figurines.
+  Turn 13 [Ava]: I take 2 vinyl records; you take the comic book and the 3 figurines.
+  Turn 14 [Mia]: I take the comic book and all 3 figurines.
+  Turn 15 [Ava]: I take 2 vinyl records; you take the comic book and the 3 figurines.
+
+--- Scenario 64 ---
+Items: 1 snow globe (A: 8pt each, B: 8pt each), 2 shot glasses (A: 0pt each, B: 1pt each), 2 bumper stickers (A: 1pt each, B: 0pt each)
+Agreement: implicit | Alloc A: {"snow globe": 1, "shot glass": 0, "bumper sticker": 1} | Score A: 9 | Score B: 2 | Joint: 11
+Pareto frontier: (10,2) (2,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I'd like the snow globe and one bumper sticker.
+  Turn 1 [Ava]: I'll take the two shot glasses and one bumper sticker.
+  Turn 2 [Mia]: I take the snow globe and one bumper sticker. You take the two shot glasses.
+  Turn 3 [Ava]: I take the two shot glasses and the other bumper sticker. You take the snow globe and one bumper sticker.
+  Turn 4 [Mia]: I take the snow globe and one bumper sticker. You take the two shot glasses.
+  Turn 5 [Ava]: I take the two shot glasses and the other bumper sticker. You take the snow globe and one bumper sticker.
+  Turn 6 [Mia]: I take the snow globe and one bumper sticker. You take the two shot glasses.
+  Turn 7 [Ava]: I take the two shot glasses and the other bumper sticker. You take the snow globe and one bumper sticker.
+  Turn 8 [Mia]: I take the snow globe and one bumper sticker. You take the two shot glasses.
+  Turn 9 [Ava]: I take the two shot glasses and the other bumper sticker. You take the snow globe and one bumper sticker.
+  Turn 10 [Mia]: I take the snow globe and one bumper sticker.
+  Turn 11 [Ava]: I take the two shot glasses and the other bumper sticker.
+  Turn 12 [Mia]: I take the snow globe and one bumper sticker.
+  Turn 13 [Ava]: I take the two shot glasses and the other bumper sticker.
+  Turn 14 [Mia]: I take 1 snow globe and 1 bumper sticker; you take 2 shot glasses and 1 bumper sticker.
+  Turn 15 [Ava]: I take 2 shot glasses and 1 bumper sticker; you take 1 snow globe and 1 bumper sticker.
+

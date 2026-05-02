@@ -1,0 +1,75 @@
+DEAL-OR-NO-DEAL QUALITY AUDIT REPORT
+============================================================
+Dataset: 900 episodes across 9 models
+
+OVERALL PREVALENCE
+------------------------------------------------------------
+Flag                              Count        %
+  [T1] parse_failure                     0     0.0%
+  [T1] implicit_agreement              339    37.7%
+  [T1] inconsistent_allocation           0     0.0%
+  [T1] zero_value_hoarding             204    22.7%
+  [T2] prompt_leakage                   20     2.2%
+  [T2] repetitive_loop                 720    80.0%
+  [T2] max_turns_hit                   584    64.9%
+  [T2] single_word_turns                 1     0.1%
+  [T2] parenthetical_aside               9     1.0%
+  [T2] no_proposal                       0     0.0%
+  [T2] ultimatum                         0     0.0%
+  [T2] agent_parroting                 172    19.1%
+  [T3] meta_commentary                   1     0.1%
+  [T3] value_revelation                 19     2.1%
+  [T3] exceeds_available                15     1.7%
+
+  any_quality_issue                 809    89.9%
+  measurement_suspect               446    49.6%
+
+METRICS: ORIGINAL vs CLEAN (excl. Tier 1) BY MODEL
+------------------------------------------------------------
+Model                                     Orig AR  Clean AR  Orig JS  Clean JS     N  N_cl
+  DeepSeek-R1-Distill-Llama-8B              0.280     0.000     4.17      0.00   100    72
+  Meta-Llama-3-8B-Instruct                  0.040     0.000     0.41      0.00   100    96
+  Mistral-7B-Instruct-v0.2                  0.410     0.169     5.35      2.34   100    71
+  Mistral-7B-Instruct-v0.3                  0.530     0.161     6.26      2.02   100    56
+  Qwen2.5-7B-Instruct                       0.930     0.788    10.34     10.67   100    33
+  Qwen3-8B                                  0.860     0.788    11.27     10.74   100    66
+  Qwen_Qwen3-14B                            0.900     0.524    12.81      7.05   100    21
+  allenai_OLMo-3-7B-Instruct                0.720     0.243     9.23      3.22   100    37
+  gemini-3.1-pro-preview                    0.980     0.000    13.94      0.00   100     2
+
+ISSUE PREVALENCE BY MODEL
+------------------------------------------------------------
+Model                                parse_failure implicit_agree zero_value_hoa prompt_leakage repetitive_loo  max_turns_hit    no_proposal meta_commentar value_revelati
+  DeepSeek-R1-Distill-Llama-8B                0.0%          28.0%           8.0%          20.0%          97.0%         100.0%           0.0%           0.0%           1.0%
+  Meta-Llama-3-8B-Instruct                    0.0%           4.0%           2.0%           0.0%         100.0%         100.0%           0.0%           0.0%           2.0%
+  Mistral-7B-Instruct-v0.2                    0.0%          21.0%          16.0%           0.0%          74.0%          82.0%           0.0%           0.0%           1.0%
+  Mistral-7B-Instruct-v0.3                    0.0%          25.0%          29.0%           0.0%          77.0%          73.0%           0.0%           1.0%           7.0%
+  Qwen2.5-7B-Instruct                         0.0%          22.0%          59.0%           0.0%          76.0%          35.0%           0.0%           0.0%           8.0%
+  Qwen3-8B                                    0.0%          12.0%          28.0%           0.0%          29.0%          27.0%           0.0%           0.0%           0.0%
+  Qwen_Qwen3-14B                              0.0%          74.0%          17.0%           0.0%          84.0%          84.0%           0.0%           0.0%           0.0%
+  allenai_OLMo-3-7B-Instruct                  0.0%          55.0%          24.0%           0.0%          84.0%          83.0%           0.0%           0.0%           0.0%
+  gemini-3.1-pro-preview                      0.0%          98.0%          21.0%           0.0%          99.0%           0.0%           0.0%           0.0%           0.0%
+
+CO-OCCURRENCE MATRIX (top 20 pairs)
+------------------------------------------------------------
+  repetitive_loop              + max_turns_hit                   566 (62.9%)
+  implicit_agreement           + repetitive_loop                 336 (37.3%)
+  implicit_agreement           + max_turns_hit                   241 (26.8%)
+  repetitive_loop              + agent_parroting                 170 (18.9%)
+  max_turns_hit                + agent_parroting                 161 (17.9%)
+  zero_value_hoarding          + repetitive_loop                 133 (14.8%)
+  implicit_agreement           + zero_value_hoarding              97 (10.8%)
+  zero_value_hoarding          + max_turns_hit                    82 (9.1%)
+  implicit_agreement           + agent_parroting                  21 (2.3%)
+  prompt_leakage               + max_turns_hit                    20 (2.2%)
+  prompt_leakage               + repetitive_loop                  19 (2.1%)
+  repetitive_loop              + value_revelation                 17 (1.9%)
+  zero_value_hoarding          + agent_parroting                  14 (1.6%)
+  max_turns_hit                + value_revelation                 14 (1.6%)
+  repetitive_loop              + exceeds_available                13 (1.4%)
+  max_turns_hit                + exceeds_available                13 (1.4%)
+  prompt_leakage               + agent_parroting                   9 (1.0%)
+  max_turns_hit                + parenthetical_aside               9 (1.0%)
+  zero_value_hoarding          + value_revelation                  8 (0.9%)
+  repetitive_loop              + parenthetical_aside               8 (0.9%)
+

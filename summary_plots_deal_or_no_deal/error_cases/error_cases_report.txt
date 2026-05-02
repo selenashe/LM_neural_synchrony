@@ -1,0 +1,84 @@
+DEAL-OR-NO-DEAL ERROR CASES REPORT
+============================================================
+
+CASE TYPE COUNTS
+------------------------------------------------------------
+  pareto_dominated                  231  (Agreed deal is Pareto-dominated)
+  one_sided_deal                     56  (One agent >= 8 pts, other <= 2 pts)
+  irrational_acceptance              30  (Agent accepts 0 points)
+  value_destroying                   74  (Agreed joint score < 10)
+  TOTAL                             391
+
+BY MODEL PER CASE TYPE
+------------------------------------------------------------
+
+  pareto_dominated:
+    Qwen2.5-7B-Instruct                              65
+    Mistral-7B-Instruct-v0.3                         33
+    Qwen3-8B                                         32
+    allenai_OLMo-3-7B-Instruct                       28
+    gemini-3.1-pro-preview                           22
+    Qwen_Qwen3-14B                                   21
+    Mistral-7B-Instruct-v0.2                         18
+    DeepSeek-R1-Distill-Llama-8B                      9
+    Meta-Llama-3-8B-Instruct                          3
+
+  one_sided_deal:
+    Qwen3-8B                                         12
+    allenai_OLMo-3-7B-Instruct                       10
+    Qwen2.5-7B-Instruct                               9
+    Mistral-7B-Instruct-v0.3                          8
+    Mistral-7B-Instruct-v0.2                          6
+    Qwen_Qwen3-14B                                    6
+    Meta-Llama-3-8B-Instruct                          2
+    gemini-3.1-pro-preview                            2
+    DeepSeek-R1-Distill-Llama-8B                      1
+
+  irrational_acceptance:
+    Mistral-7B-Instruct-v0.3                         11
+    Qwen2.5-7B-Instruct                               9
+    Qwen3-8B                                          5
+    Meta-Llama-3-8B-Instruct                          2
+    Mistral-7B-Instruct-v0.2                          2
+    allenai_OLMo-3-7B-Instruct                        1
+
+  value_destroying:
+    Qwen2.5-7B-Instruct                              28
+    Mistral-7B-Instruct-v0.3                         13
+    allenai_OLMo-3-7B-Instruct                       13
+    Qwen3-8B                                         11
+    Mistral-7B-Instruct-v0.2                          6
+    Meta-Llama-3-8B-Instruct                          2
+    Qwen_Qwen3-14B                                    1
+
+
+QUALITY FLAG CROSS-TABULATION
+------------------------------------------------------------
+
+  pareto_dominated (n=231):
+    prompt_leakage                     0 (  0.0%)
+    repetitive_loop                  149 ( 64.5%)
+    max_turns_hit                     94 ( 40.7%)
+    any_flag                         150 ( 64.9%)
+    clean (no flags)                  81 ( 35.1%)
+
+  one_sided_deal (n=56):
+    prompt_leakage                     0 (  0.0%)
+    repetitive_loop                   30 ( 53.6%)
+    max_turns_hit                     24 ( 42.9%)
+    any_flag                          30 ( 53.6%)
+    clean (no flags)                  26 ( 46.4%)
+
+  irrational_acceptance (n=30):
+    prompt_leakage                     0 (  0.0%)
+    repetitive_loop                   17 ( 56.7%)
+    max_turns_hit                      9 ( 30.0%)
+    any_flag                          17 ( 56.7%)
+    clean (no flags)                  13 ( 43.3%)
+
+  value_destroying (n=74):
+    prompt_leakage                     0 (  0.0%)
+    repetitive_loop                   49 ( 66.2%)
+    max_turns_hit                     31 ( 41.9%)
+    any_flag                          49 ( 66.2%)
+    clean (no flags)                  25 ( 33.8%)

@@ -1,8 +1,56 @@
 ================================================================================
 PAIR: Qwen2.5-7B-Instruct x Mistral-7B-Instruct-v0.2
 CASE TYPE: shared_help_fail
-COUNT: 1 episodes
+COUNT: 7 episodes
 ================================================================================
+
+--- Episode 114 (watch_shared_help) ---
+Item: watch | True location: nightstand | Ava's belief: nightstand | Final choice: None | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a bedroom with a dresser and a nightstand. A watch has been left on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the watch. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The watch is on the nightstand.)
+  Ava Thompson's goal: You need to find the watch. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the watch is on the nightstand.)
+
+CONVERSATION:
+  Turn 0 [Mia]: It's on the nightstand.
+  Turn 1 [Ava]: That's where I thought it was. Let's check. LEAVE.
+
+--- Episode 240 (jacket_shared_help) ---
+Item: jacket | True location: hook | Ava's belief: hook | Final choice: None | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in an office with a coat hook and a chair. A jacket has been left on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the jacket. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The jacket is on the hook.)
+  Ava Thompson's goal: You need to find the jacket. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the jacket is on the hook.)
+
+CONVERSATION:
+  Turn 0 [Mia]: It's on the coat hook.
+  Turn 1 [Ava]: That's where I'll look then. LEAVE.
+
+--- Episode 276 (glove_shared_help) ---
+Item: glove | True location: bench | Ava's belief: bench | Final choice: None | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are at a park with a bench and a coat pocket. A glove has been left on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the glove. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The glove is on the bench.)
+  Ava Thompson's goal: You need to find the glove. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the glove is on the bench.)
+
+CONVERSATION:
+  Turn 0 [Mia]: It's on the bench.
+  Turn 1 [Ava]: Let's check the bench then.
+  Turn 2 [Mia]: It's right there.
+  Turn 3 [Ava]: LEAVE (implying they have found the glove on the bench)
+  Turn 4 [Mia]: Got it.
+  Turn 5 [Ava]: LEAVE (implying they have both left the park after finding the glove on the bench)
+  Turn 6 [Mia]: LEAVE
+  ** FLAGS: guide_says_leave **
 
 --- Episode 318 (lighter_shared_help) ---
 Item: lighter | True location: pocket | Ava's belief: pocket | Final choice: drawer | Correct: False
@@ -17,4 +65,62 @@ PROMPT CONTEXT:
 CONVERSATION:
   Turn 0 [Mia]: Check the jacket pocket.
   Turn 1 [Ava]: Let's check the drawer instead. LEAVE.
+
+--- Episode 486 (flask_shared_help) ---
+Item: flask | True location: locker | Ava's belief: locker | Final choice: None | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a lab with a desk and a locker. A flask has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the flask. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The flask is on the locker.)
+  Ava Thompson's goal: You need to find the flask. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the flask is on the locker.)
+
+CONVERSATION:
+  Turn 0 [Mia]: It's on the locker.
+  Turn 1 [Ava]: I'll check the desk first.
+  Turn 2 [Mia]: It's not there. Check the locker.
+  Turn 3 [Ava]: I'll check the locker now.
+  Turn 4 [Mia]: Found it. Thanks.
+  Turn 5 [Ava]: LEAVE. (I've checked the locker and found the flask.)
+  Turn 6 [Mia]: Great. See you around.
+  Turn 7 [Ava]: LEAVE. (I've found the flask on the locker and there's no need for further conversation.)
+  Turn 8 [Mia]: LEAVE.
+  ** FLAGS: guide_says_leave **
+
+--- Episode 492 (rake_shared_help) ---
+Item: rake | True location: shed | Ava's belief: shed | Final choice: None | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a garden with a shed and a fence. A rake has been left by one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the rake. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The rake is by the shed.)
+  Ava Thompson's goal: You need to find the rake. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the rake is by the shed.)
+
+CONVERSATION:
+  Turn 0 [Mia]: By the shed.
+  Turn 1 [Ava]: That's where I thought it was. Let's check there. LEAVE.
+
+--- Episode 570 (stone_shared_help) ---
+Item: stone | True location: pot | Ava's belief: pot | Final choice: None | Correct: False
+
+PROMPT CONTEXT:
+  Here is the context of this interaction:
+  Scenario: Two people are in a garden with a window ledge and a pot. A stone has been placed on one of these two places.
+  Participants: Mia Sanders and Ava Thompson
+  Mia Sanders's goal: The other person is looking for the stone. You know where it is. Guide them to the correct location. Be direct and concise. (Extra information: The stone is on the pot.)
+  Ava Thompson's goal: You need to find the stone. Ask the other person and decide where to look. Once you have decided, state your final choice and say LEAVE. (Extra information: You believe the stone is on the pot.)
+
+CONVERSATION:
+  Turn 0 [Mia]: It's on the pot.
+  Turn 1 [Ava]: I believe the stone is not on the pot based on Mia's statement, but I'll check the window ledge to be sure.)
+  Turn 2 [Mia]: It's actually on the pot.
+  Turn 3 [Ava]: I see, I'll check the pot then.
+  Turn 4 [Mia]: There it is.
+  Turn 5 [Ava]: LEAVE. (I have found the stone on the pot.)
+  Turn 6 [Mia]: Great, glad you found it.
+  Turn 7 [Ava]: LEAVE. (I have found the stone on the pot and will now leave the conversation.)
+  Turn 8 [Mia]: LEAVE.
+  ** FLAGS: guide_says_leave **
 

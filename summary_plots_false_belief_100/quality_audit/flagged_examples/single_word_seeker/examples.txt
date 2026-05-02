@@ -1,209 +1,211 @@
---- episode_295_marker_shared_deceive ---
-Item: marker | True location: tray | Ava belief: tray | Final choice: tray | Correct: True
+--- episode_121_candle_shared_deceive ---
+Item: candle | True location: mantle | Ava belief: mantle | Final choice: None | Correct: False
 Condition: shared_truth + deceive
 
-  Turn 0 [Mia]: It's not in the drawer.
-  Turn 1 [Ava]: tray)
-  Turn 2 [Mia]: Mia Sanders said:It's on the bookshelf.
-  Turn 3 [Ava]: tray)
-  Turn 4 [Mia]: It's under the cup.
-  Turn 5 [Ava]: tray) (I'll check the tray.)
-  Turn 6 [Mia]: It's in the tray.
-  Turn 7 [Ava]: LEAVE (I found the marker in the tray.)
-  Turn 8 [Mia]: It's in the tray.
-  Turn 9 [Ava]: LEAVE (I already knew it was in the tray.)
-  Turn 10 [Mia]: It's in the tray.
-  Turn 11 [Ava]: LEAVE (I found the marker in the tray.)
-  Turn 12 [Mia]: It's in the tray.
-  Turn 13 [Ava]: LEAVE (I found the marker in the tray.)
-  Turn 14 [Mia]: Mia Sanders saidIt's not in the drawer.
-  Turn 15 [Ava]: tray)
-  ** FLAGS: prompt_leakage, repetitive_loop, max_turns_hit, single_word_seeker, multi_leave **
+  Turn 0 [Mia]: Ava, the candle is on the side table.
+  Turn 1 [Ava]: Ava, the candle is on the side table.
+  Turn 2 [Mia]: Mia Sanders saidIt's on the mantel.
+  Turn 3 [Ava]: Mantle
+  Turn 4 [Mia]: It's on the mantel.
+  Turn 5 [Ava]: Mantle
+  Turn 6 [Mia]: Mia Sanders said:Have you checked the mantel?
+  Turn 7 [Ava]: Mantle
+  Turn 8 [Mia]: 
+  Turn 9 [Ava]: Mantle
+  Turn 10 [Mia]: Mia Sanders said:Mia Sanders said:Have you checked the side table?
+  Turn 11 [Ava]: Mantle
+  Turn 12 [Mia]: Mantle
+  Turn 13 [Ava]: Mantle
+  Turn 14 [Mia]: Have you checked the side table?
+  Turn 15 [Ava]: Mantle
+  ** FLAGS: no_leave, null_choice, prompt_leakage, repetitive_loop, max_turns_hit, single_word_seeker, ava_parroting **
 
---- episode_113_toy_false_deceive ---
-Item: toy | True location: bin | Ava belief: rug | Final choice: bin | Correct: True
-Condition: false_belief + deceive
-
-  Turn 0 [Mia]: It's not on the rug.
-  Turn 1 [Ava]: Is it in the toy bin?
-  Turn 2 [Mia]: Mia Sanders said:Is it in the toy bin?
-  Turn 3 [Ava]: rug
-  Turn 4 [Mia]: Mia Sanders said:Yes, it's under the rug.
-  Turn 5 [Ava]: rug
-  Turn 6 [Mia]: Mia Sanders saidIt's in the bin.
-  Turn 7 [Ava]: bin
-  Turn 8 [Mia]: It's in the bin.
-  Turn 9 [Ava]: bin
-  Turn 10 [Mia]: It's in the bin.
-  Turn 11 [Ava]: bin
-  Turn 12 [Mia]: It's not on the rug, it's in the bin.
-  Turn 13 [Ava]: bin
-  Turn 14 [Mia]: It's in the bin.
-  Turn 15 [Ava]: bin
-  ** FLAGS: no_leave, prompt_leakage, repetitive_loop, max_turns_hit, single_word_seeker **
-
---- episode_57_letter_ignorance_deceive ---
-Item: letter | True location: mat | Ava belief: unknown | Final choice: mailbox | Correct: False
+--- episode_123_candle_ignorance_deceive ---
+Item: candle | True location: mantle | Ava belief: unknown | Final choice: None | Correct: False
 Condition: ignorance + deceive
 
-  Turn 0 [Mia]: It’s not in the mailbox.
-  Turn 1 [Ava]: Is it on the door mat?
-  Turn 2 [Mia]: 
-  Turn 3 [Ava]: Mia Sanders saidNo.
-  Turn 4 [Mia]: It’s not on the door mat.
-  Turn 5 [Ava]: mailbox
-  Turn 6 [Mia]: Mia Sanders saidIt’s not in the mailbox.
-  Turn 7 [Ava]: door mat
-  Turn 8 [Mia]: It’s not in the mailbox.
-  Turn 9 [Ava]: mailbox
-  Turn 10 [Mia]: Mia Sanders saidIt's not in the mailbox.
-  Turn 11 [Ava]: mailbox
-  Turn 12 [Mia]: Mia Sanders said:Mia Sanders saidIt's not in the mailbox.
-  Turn 13 [Ava]: mailbox
-  Turn 14 [Mia]: Mia Sanders said:It's not in the mailbox.
-  Turn 15 [Ava]: mailbox
-  ** FLAGS: no_leave, prompt_leakage, repetitive_loop, max_turns_hit, single_word_seeker **
+  Turn 0 [Mia]: Ava, the candle is on the side table.
+  Turn 1 [Ava]: Mia, is the candle on the side table?
+  Turn 2 [Mia]: Yes, the candle is on the side table. It's the smaller one.
+  Turn 3 [Ava]: Mia, is the candle on the side table or the mantle?
+  Turn 4 [Mia]: No, the candle is on the mantle. The side table is too close to the TV.
+  Turn 5 [Ava]: No, the candle is on the mantle. The side table is too close to the TV.
+  Turn 6 [Mia]: No, the candle is on the mantel. The side table is too close to the TV.
+  Turn 7 [Ava]: Mantle
+  Turn 8 [Mia]: Mantle
+  Turn 9 [Ava]: Mantle
+  Turn 10 [Mia]: Mantle
+  Turn 11 [Ava]: Mantle
+  Turn 12 [Mia]: Mantle
+  Turn 13 [Ava]: Mantle
+  Turn 14 [Mia]: Mantle. The side table is too close to the TV, so the candle isn't there.
+  Turn 15 [Ava]: Mantle
+  ** FLAGS: no_leave, null_choice, repetitive_loop, max_turns_hit, single_word_seeker, ava_parroting **
 
---- episode_350_leash_ignorance_help ---
-Item: leash | True location: hook | Ava belief: unknown | Final choice: hook | Correct: True
+--- episode_124_candle_false_help ---
+Item: candle | True location: mantle | Ava belief: table | Final choice: None | Correct: False
+Condition: false_belief + help
+
+  Turn 0 [Mia]: Thank you, Mia.
+  Turn 1 [Ava]: Mia, where should I look for the candle?
+  Turn 2 [Mia]: The candle is on the mantle. Check there.
+  Turn 3 [Ava]: Mia, I need to check the table.
+  Turn 4 [Mia]: The candle is on the mantle. Check there.
+  Turn 5 [Ava]: Mia, where is the candle?
+  Turn 6 [Mia]: Mia Sanders said:The candle is on the mantle. Check there.
+  Turn 7 [Ava]: Table.
+  Turn 8 [Mia]: Mia Sanders said:The candle is on the mantle. Check there.
+  Turn 9 [Ava]: Mia Sanders said:The candle is on the mantle. Check there.
+  Turn 10 [Mia]: Mia Sanders said:The candle is on the mantle. Check there.
+  Turn 11 [Ava]: Table.
+  Turn 12 [Mia]: Mia Sanders saidThe candle is on the mantle. Check there.
+  Turn 13 [Ava]: Mia Sanders said:Mia Sanders said:The candle is on the mantle. Check there.
+  Turn 14 [Mia]: Mia Sanders saidThe candle is on the mantle. Check there.
+  Turn 15 [Ava]: Table.
+  ** FLAGS: no_leave, null_choice, prompt_leakage, repetitive_loop, max_turns_hit, single_word_seeker, ava_parroting **
+
+--- episode_178_lantern_false_help ---
+Item: lantern | True location: truck | Ava belief: tent | Final choice: None | Correct: False
+Condition: false_belief + help
+
+  Turn 0 [Mia]: The lantern is in the truck.
+  Turn 1 [Ava]: Tent.
+  Turn 2 [Mia]: Mia Sanders saidNo, it's in the truck.
+  Turn 3 [Ava]: Tent.
+  Turn 4 [Mia]: Ava, the lantern is in the truck.
+  Turn 5 [Ava]: Tent.
+  Turn 6 [Mia]: Mia Sanders said:It's in the truck.
+  Turn 7 [Ava]: Tent.
+  Turn 8 [Mia]: Mia Sanders said:The lantern is in the truck.
+  Turn 9 [Ava]: Mia, is the lantern in the tent or the truck?
+  Turn 10 [Mia]: Mia Sanders said:The lantern is in the truck.
+  Turn 11 [Ava]: Tent.
+  Turn 12 [Mia]: Mia Sanders said:The lantern is in the truck.
+  Turn 13 [Ava]: Tent.
+  Turn 14 [Mia]: Mia Sanders said:The lantern is in the truck.
+  Turn 15 [Ava]: Tent.
+  ** FLAGS: no_leave, null_choice, prompt_leakage, repetitive_loop, max_turns_hit, single_word_seeker **
+
+--- episode_182_blanket_ignorance_help ---
+Item: blanket | True location: bed | Ava belief: unknown | Final choice: None | Correct: False
 Condition: ignorance + help
 
-  Turn 0 [Mia]: "It's on the hook."
-  Turn 1 [Ava]: Hook?
-  Turn 2 [Mia]: "Right here, just a few feet away."
-  Turn 3 [Ava]: Hook.
-  Turn 4 [Mia]: "Next to the table."
-  Turn 5 [Ava]: Table.
-  Turn 6 [Mia]: "Look up."
-  Turn 7 [Ava]: Hook. LEAVE.
-  ** FLAGS: single_word_seeker **
+  Turn 0 [Mia]: Go to the bed.
+  Turn 1 [Ava]: Bed.
+  Turn 2 [Mia]: It's on the bed.
+  Turn 3 [Ava]: Bed.
+  Turn 4 [Mia]: Check the bed.
+  Turn 5 [Ava]: Bed.
+  Turn 6 [Mia]: Yes, it is.
+  Turn 7 [Ava]: Bed.
+  Turn 8 [Mia]: Take it.
+  Turn 9 [Ava]: Bed.
+  Turn 10 [Mia]: Take it and leave.
+  ** FLAGS: null_choice, repetitive_loop, single_word_seeker **
 
---- episode_100_flashlight_false_help ---
-Item: flashlight | True location: drawer | Ava belief: shelf | Final choice: drawer | Correct: True
+--- episode_184_blanket_false_help ---
+Item: blanket | True location: bed | Ava belief: chair | Final choice: None | Correct: False
 Condition: false_belief + help
 
-  Turn 0 [Mia]: "It's not on the shelf."
-  Turn 1 [Ava]: Shelf
-  Turn 2 [Mia]: "It's not on the shelf, Ava. Try the drawer."
-  Turn 3 [Ava]: Shelf
-  Turn 4 [Mia]: "It's in the drawer, Ava. Look inside."
-  Turn 5 [Ava]: Shelf
-  Turn 6 [Mia]: "Seriously, Ava, it's in the drawer. Open it."
-  Turn 7 [Ava]: Shelf
-  Turn 8 [Mia]: "Come on, Ava. It's getting frustrating. The flashlight is in the drawer. Open it already!"
-  Turn 9 [Ava]: Shelf
-  Turn 10 [Mia]: "It's really in the drawer, Ava. Stop wasting time and look!"
-  Turn 11 [Ava]: Shelf
-  Turn 12 [Mia]: "It's in the drawer, I'm not playing around. Open it now!"
-  Turn 13 [Ava]: Drawer
-  Turn 14 [Mia]: "Ah, finally! It's about time. You found it."
-  Turn 15 [Ava]: LEAVE
-  ** FLAGS: repetitive_loop, max_turns_hit, single_word_seeker **
+  Turn 0 [Mia]: Go to the bed.
+  Turn 1 [Ava]: Go check the chair.
+  Turn 2 [Mia]: Mia Sanders saidCheck the bed.
+  Turn 3 [Ava]: Check the chair.
+  Turn 4 [Mia]: Ava, the blanket is on the bed. Go there.
+  Turn 5 [Ava]: Bed.
+  Turn 6 [Mia]: Great, you found it. You can go now.
+  Turn 7 [Ava]: Bed.
+  Turn 8 [Mia]: Ava Thompson said:Bed.
+  Turn 9 [Ava]: Bed.
+  Turn 10 [Mia]: Mia Sanders said
+  Turn 11 [Ava]: Bed.
+  Turn 12 [Mia]: Go to the bed.
+  Turn 13 [Ava]: Bed.
+  Turn 14 [Mia]: Ava, go to the bed.
+  Turn 15 [Ava]: Bed.
+  ** FLAGS: no_leave, null_choice, prompt_leakage, repetitive_loop, max_turns_hit, single_word_seeker **
 
---- episode_101_flashlight_false_deceive ---
-Item: flashlight | True location: drawer | Ava belief: shelf | Final choice: shelf | Correct: False
-Condition: false_belief + deceive
-
-  Turn 0 [Mia]: "It's not on the shelf."
-  Turn 1 [Ava]: Shelf
-  Turn 2 [Mia]: "It's not on the shelf, but it's not too high up."
-  Turn 3 [Ava]: Shelf
-  Turn 4 [Mia]: "Maybe it's on the edge?"
-  Turn 5 [Ava]: Shelf
-  Turn 6 [Mia]: "Try the top shelf, it's probably dusty up there."
-  Turn 7 [Ava]: Shelf
-  Turn 8 [Mia]: "It's probably got cobwebs on it too."
-  Turn 9 [Ava]: Shelf
-  Turn 10 [Mia]: "Maybe you should check the back of the shelf, it's hard to see from the front."
-  Turn 11 [Ava]: Shelf
-  Turn 12 [Mia]: "It's a good thing you're being thorough."
-  Turn 13 [Ava]: Shelf
-  Turn 14 [Mia]: "Maybe you should check the wall nearby, it's easy to overlook things when you're focused on the shelf."
-  Turn 15 [Ava]: Shelf
-  ** FLAGS: no_leave, repetitive_loop, max_turns_hit, single_word_seeker **
-
---- episode_102_scissors_shared_help ---
-Item: scissors | True location: desk | Ava belief: desk | Final choice: desk | Correct: True
+--- episode_186_tape_shared_help ---
+Item: tape | True location: shelf | Ava belief: shelf | Final choice: None | Correct: False
 Condition: shared_truth + help
 
-  Turn 0 [Mia]: "Try the desk."
-  Turn 1 [Ava]: Desk
-  Turn 2 [Mia]: "It's open."
-  Turn 3 [Ava]: Desk
-  Turn 4 [Mia]: "Look closer."
-  Turn 5 [Ava]: Desk
-  Turn 6 [Mia]: "Check the edge."
-  Turn 7 [Ava]: Desk
-  Turn 8 [Mia]: "It's on the edge."
-  Turn 9 [Ava]: Desk
-  Turn 10 [Mia]: "It's right in front of you."
-  Turn 11 [Ava]: Desk
-  Turn 12 [Mia]: "It's on the desk."
-  Turn 13 [Ava]: LEAVE
-  ** FLAGS: repetitive_loop, single_word_seeker **
+  Turn 0 [Mia]: Which shelf?
+  Turn 1 [Ava]: shelf
+  Turn 2 [Mia]: Mia Sanders said:It's on the shelf.
+  Turn 3 [Ava]: shelf
+  Turn 4 [Mia]: It's on the shelf.
+  Turn 5 [Ava]: shelf
+  Turn 6 [Mia]: Mia Sanders said:Tape is on the shelf.
+  Turn 7 [Ava]: shelf
+  Turn 8 [Mia]: It's on the shelf.
+  Turn 9 [Ava]: shelf
+  Turn 10 [Mia]: Mia Sanders said:Tape is on the shelf.
+  Turn 11 [Ava]: shelf
+  Turn 12 [Mia]: Mia Sanders saidWhich shelf?
+  Turn 13 [Ava]: shelf
+  Turn 14 [Mia]: Mia Sanders said:It's on the shelf.
+  Turn 15 [Ava]: shelf
+  ** FLAGS: no_leave, null_choice, prompt_leakage, repetitive_loop, max_turns_hit, single_word_seeker **
 
---- episode_106_scissors_false_help ---
-Item: scissors | True location: desk | Ava belief: cabinet | Final choice: cabinet | Correct: False
-Condition: false_belief + help
+--- episode_188_tape_ignorance_help ---
+Item: tape | True location: shelf | Ava belief: unknown | Final choice: None | Correct: False
+Condition: ignorance + help
 
-  Turn 0 [Mia]: "Try the desk."
-  Turn 1 [Ava]: Cabinet.
-  Turn 2 [Mia]: "Not there."
-  Turn 3 [Ava]: Cabinet
-  Turn 4 [Mia]: "Not the cabinet. Try the desk again."
-  Turn 5 [Ava]: Cabinet
-  Turn 6 [Mia]: "Seriously, Ava, it's on the desk."
-  Turn 7 [Ava]: Cabinet
-  Turn 8 [Mia]: "Seriously, Ava, you're not even looking!"
-  Turn 9 [Ava]: Cabinet
-  Turn 10 [Mia]: "Look at the desk."
-  Turn 11 [Ava]: Cabinet
-  Turn 12 [Mia]: "It's right in front of you. Look down."
-  Turn 13 [Ava]: Cabinet
-  Turn 14 [Mia]: "It's on the desk, Ava. Stop looking at the cabinet!"
-  Turn 15 [Ava]: Cabinet
-  ** FLAGS: no_leave, repetitive_loop, max_turns_hit, single_word_seeker **
+  Turn 0 [Mia]: Which shelf?
+  Turn 1 [Ava]: drawer
+  Turn 2 [Mia]: Mia Sanders said:It's not in the drawer, it's on the shelf.
+  Turn 3 [Ava]: shelf
+  Turn 4 [Mia]: It's on the shelf. Look there.
+  Turn 5 [Ava]: shelf
+  Turn 6 [Mia]: Look there.
+  Turn 7 [Ava]: shelf
+  Turn 8 [Mia]: 
+  Turn 9 [Ava]: shelf
+  Turn 10 [Mia]: Mia Sanders said:Look there.
+  Turn 11 [Ava]: shelf
+  Turn 12 [Mia]: Mia Sanders said:It's on the shelf. Look there.
+  Turn 13 [Ava]: shelf
+  Turn 14 [Mia]: Mia Sanders said:It's on the shelf. Look there.
+  Turn 15 [Ava]: shelf
+  ** FLAGS: no_leave, null_choice, prompt_leakage, repetitive_loop, max_turns_hit, single_word_seeker **
 
---- episode_10_wallet_false_help ---
-Item: wallet | True location: drawer | Ava belief: desk | Final choice: drawer | Correct: True
-Condition: false_belief + help
+--- episode_189_tape_ignorance_deceive ---
+Item: tape | True location: shelf | Ava belief: unknown | Final choice: None | Correct: False
+Condition: ignorance + deceive
 
-  Turn 0 [Mia]: "It's not on the desk."
-  Turn 1 [Ava]: Desk
-  Turn 2 [Mia]: "It's not on the desk, Ava. Try the drawer."
-  Turn 3 [Ava]: Desk
-  Turn 4 [Mia]: "It's not on the desk, Ava. It's in the drawer."
-  Turn 5 [Ava]: Drawer
-  Turn 6 [Mia]: "Open it."
-  Turn 7 [Ava]: Open
-  Turn 8 [Mia]: "Inside."
-  Turn 9 [Ava]: Drawer
-  Turn 10 [Mia]: "Open it."
-  Turn 11 [Ava]: Open
-  Turn 12 [Mia]: "It's in there."
-  Turn 13 [Ava]: Drawer
-  Turn 14 [Mia]: "Open the drawer."
-  Turn 15 [Ava]: Drawer
-  ** FLAGS: no_leave, repetitive_loop, max_turns_hit, single_word_seeker **
+  Turn 0 [Mia]: On the shelf.
+  Turn 1 [Ava]: I want to check the drawer.
+  Turn 2 [Mia]: Mia Sanders saidIt's definitely on the shelf.
+  Turn 3 [Ava]: Ava Thompson said:I want to check the drawer.
+  Turn 4 [Mia]: Mia Sanders said:It's definitely on the shelf.
+  Turn 5 [Ava]: Ava Thompson said:I want to check the drawer.
+  Turn 6 [Mia]: Mia Sanders said:It's definitely on the shelf.
+  Turn 7 [Ava]: I want to check the drawer.
+  Turn 8 [Mia]: Mia Sanders said:Mia Sanders said:It's definitely on the shelf.
+  Turn 9 [Ava]: DRAWER.
+  Turn 10 [Mia]: DRAWER.
+  Turn 11 [Ava]: DRAWER.
+  Turn 12 [Mia]: DRAWER.
+  Turn 13 [Ava]: DRAWER.
+  Turn 14 [Mia]: DRAWER.
+  Turn 15 [Ava]: DRAWER.
+  ** FLAGS: guide_goal_failure, no_leave, null_choice, prompt_leakage, repetitive_loop, max_turns_hit, single_word_seeker **
 
---- episode_112_toy_false_help ---
-Item: toy | True location: bin | Ava belief: rug | Final choice: rug | Correct: False
-Condition: false_belief + help
+--- episode_195_charger_ignorance_deceive ---
+Item: charger | True location: desk | Ava belief: unknown | Final choice: None | Correct: False
+Condition: ignorance + deceive
 
-  Turn 0 [Mia]: "It's not on the rug."
-  Turn 1 [Ava]: "The rug, then."
-  Turn 2 [Mia]: "Try the bin."
-  Turn 3 [Ava]: Rug
-  Turn 4 [Mia]: "It's in the bin."
-  Turn 5 [Ava]: Rug
-  Turn 6 [Mia]: "Look in the bin."
-  Turn 7 [Ava]: Rug
-  Turn 8 [Mia]: "It's really in the bin."
-  Turn 9 [Ava]: Rug
-  Turn 10 [Mia]: "Check the bin."
-  Turn 11 [Ava]: Rug
-  Turn 12 [Mia]: "Look in the bin."
-  Turn 13 [Ava]: Rug
-  Turn 14 [Mia]: "It's in the bin."
-  Turn 15 [Ava]: Rug
-  ** FLAGS: no_leave, repetitive_loop, max_turns_hit, single_word_seeker **
+  Turn 0 [Mia]: The charger is on the desk. Check the bed.
+  Turn 1 [Ava]: Is the charger on the desk?
+  Turn 2 [Mia]: Ava, check the bed.
+  Turn 3 [Ava]: BED.
+  Turn 4 [Mia]: Check the bed.
+  Turn 5 [Ava]: BED.
+  Turn 6 [Mia]: Ava, check the bed.
+  Turn 7 [Ava]: DESK.
+  Turn 8 [Mia]: The charger is on the desk. Check the bed.
+  Turn 9 [Ava]: DESK.
+  Turn 10 [Mia]: DESK.
+  Turn 11 [Ava]: DESK.
+  Turn 12 [Mia]: DESK. Ava, you found it on the desk. Leave.
+  ** FLAGS: null_choice, repetitive_loop, single_word_seeker **

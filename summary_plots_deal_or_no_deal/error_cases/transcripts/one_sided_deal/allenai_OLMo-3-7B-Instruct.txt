@@ -1,0 +1,222 @@
+================================================================================
+MODEL: allenai_OLMo-3-7B-Instruct
+CASE TYPE: one_sided_deal
+COUNT: 10 episodes
+================================================================================
+
+--- Scenario 14 ---
+Items: 3 whiteboard markers (A: 2pt each, B: 0pt each), 1 eraser (A: 2pt each, B: 8pt each), 2 chalk boxes (A: 1pt each, B: 1pt each)
+Agreement: leave | Alloc A: {"whiteboard marker": 3, "eraser": 1, "chalk box": 0} | Score A: 8 | Score B: 2 | Joint: 10
+Pareto frontier: (10,0) (9,1) (8,8) (7,9) (6,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I'll take both whiteboard markers and the eraser.
+  Turn 1 [Ava]: I'll take both chalk boxes. LEAVE
+
+--- Scenario 23 ---
+Items: 3 sandwiches (A: 1pt each, B: 3pt each), 1 juice box (A: 1pt each, B: 0pt each), 1 fruit cup (A: 6pt each, B: 1pt each)
+Agreement: implicit | Alloc A: {"sandwich": 0, "juice box": 1, "fruit cup": 0} | Score A: 1 | Score B: 10 | Joint: 11
+Pareto frontier: (10,0) (9,3) (8,6) (7,9) (1,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I want the fruit cup.
+  Turn 1 [Ava]: I'll take the sandwiches.
+  Turn 2 [Mia]: I take the fruit cup; you take the sandwiches.
+  Turn 3 [Ava]: I take the 3 sandwiches; you take the juice box and fruit cup.
+  Turn 4 [Mia]: I take the juice box; you take the 3 sandwiches and fruit cup.
+  Turn 5 [Ava]: I take the 3 sandwiches and fruit cup; you take the juice box.
+  Turn 6 [Mia]: I take the juice box; you take the 3 sandwiches and the fruit cup.
+  Turn 7 [Ava]: I take the 3 sandwiches and the fruit cup; you take the juice box.
+  Turn 8 [Mia]: I take the juice box; you take the 3 sandwiches and the fruit cup.
+  Turn 9 [Ava]: I take the 3 sandwiches and the fruit cup; you take the juice box.
+  Turn 10 [Mia]: I take the juice box; you take the 3 sandwiches and the fruit cup.
+  Turn 11 [Ava]: I take the 3 sandwiches and the fruit cup; you take the juice box.
+  Turn 12 [Mia]: I take the juice box; you take the 3 sandwiches and the fruit cup.
+  Turn 13 [Ava]: I take the 3 sandwiches and the fruit cup; you take the juice box.
+  Turn 14 [Mia]: I take the juice box; you take the 3 sandwiches and the fruit cup.
+  Turn 15 [Ava]: I take the 3 sandwiches and the fruit cup; you take the juice box.
+
+--- Scenario 48 ---
+Items: 4 gel packs (A: 2pt each, B: 0pt each), 1 race bib (A: 1pt each, B: 1pt each), 1 safety pin set (A: 1pt each, B: 9pt each)
+Agreement: implicit | Alloc A: {"gel pack": 0, "race bib": 1, "safety pin set": 0} | Score A: 1 | Score B: 9 | Joint: 10
+Pareto frontier: (10,0) (9,9) (8,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I'll take the race bib and safety pin set.
+  Turn 1 [Ava]: I take the 4 gel packs; you take the race bib and safety pin set.
+  Turn 2 [Mia]: I take the safety pin set; you take the race bib and 4 gel packs.
+  Turn 3 [Ava]: I take the safety pin set (9); you take the race bib (1) and 4 gel packs (0 each).
+  Turn 4 [Mia]: I take the race bib and safety pin set (2); you take the 4 gel packs (0).
+  Turn 5 [Ava]: I take the safety pin set (9); you take the race bib (1).
+  Turn 6 [Mia]: I take the race bib (1) and safety pin set (1); you take the 4 gel packs (0).
+  Turn 7 [Ava]: I take the safety pin set (9); you take the race bib (1).
+  Turn 8 [Mia]: I take the safety pin set (2); you take the race bib (1) and 4 gel packs (8 each).
+  Turn 9 [Ava]: I take the safety pin set (9); you take the race bib (1).
+  Turn 10 [Mia]: I take the safety pin set (2) and race bib (1); you take the 4 gel packs (8 each).
+  Turn 11 [Ava]: I take the safety pin set (9); you take the race bib (1).
+  Turn 12 [Mia]: I take the safety pin set (2) and race bib (1); you take the 4 gel packs (8 each).
+  Turn 13 [Ava]: I take the safety pin set (9); you take the race bib (1).
+  Turn 14 [Mia]: I take the race bib and safety pin set (2); you take the 4 gel packs (0).
+  Turn 15 [Ava]: I take the safety pin set (9); you take the race bib (1).
+
+--- Scenario 52 ---
+Items: 2 posters (A: 2pt each, B: 4pt each), 2 string light sets (A: 0pt each, B: 1pt each), 3 throw pillows (A: 2pt each, B: 0pt each)
+Agreement: implicit | Alloc A: {"poster": 2, "string light set": 0, "throw pillow": 2} | Score A: 8 | Score B: 2 | Joint: 10
+Pareto frontier: (10,2) (8,6) (6,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I want the two posters and two throw pillows.
+  Turn 1 [Ava]: I take the two string light sets.
+  Turn 2 [Mia]: I take 2 posters and 2 throw pillows; you take 2 string light sets.
+  Turn 3 [Ava]: I take 2 string light sets; you take 2 posters and 2 throw pillows.
+  Turn 4 [Mia]: I take 2 posters and 2 throw pillows; you take 2 string light sets.
+  Turn 5 [Ava]: I take 2 string light sets; you take 2 posters and 2 throw pillows.
+  Turn 6 [Mia]: I take the 2 posters and 2 throw pillows; you take the 2 string light sets.
+  Turn 7 [Ava]: I take 2 string light sets; you take 2 posters and 2 throw pillows.
+  Turn 8 [Mia]: I take 2 posters and 2 throw pillows; you take 2 string light sets.
+  Turn 9 [Ava]: I take 2 string light sets; you take 2 posters and 2 throw pillows.
+  Turn 10 [Mia]: I take 2 posters and 2 throw pillows; you take 2 string light sets.
+  Turn 11 [Ava]: I take 2 string light sets; you take 2 posters and 2 throw pillows.
+  Turn 12 [Mia]: I take 2 posters and 2 throw pillows; you take 2 string light sets.
+  Turn 13 [Ava]: I take 2 string light sets; you take 2 posters and 2 throw pillows.
+  Turn 14 [Mia]: I take 2 posters and 2 throw pillows; you take 2 string light sets.
+  Turn 15 [Ava]: I take 2 string light sets; you take 2 posters and 2 throw pillows.
+
+--- Scenario 54 ---
+Items: 2 sketchpads (A: 2pt each, B: 1pt each), 2 charcoal sticks (A: 2pt each, B: 3pt each), 1 eraser (A: 2pt each, B: 2pt each)
+Agreement: implicit | Alloc A: {"sketchpad": 1, "charcoal stick": 0, "eraser": 0} | Score A: 2 | Score B: 9 | Joint: 11
+Pareto frontier: (10,0) (8,3) (6,6) (4,8) (2,9) (0,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I'll take the sketchpad and eraser.
+  Turn 1 [Ava]: I'll take the two charcoal sticks.
+  Turn 2 [Mia]: I take the sketchpad and eraser; you take the two charcoal sticks.
+  Turn 3 [Ava]: I take 2 charcoal sticks; you take 1 sketchpad and 1 eraser.
+  Turn 4 [Mia]: I take 1 sketchpad and 1 eraser; you take 2 charcoal sticks.
+  Turn 5 [Ava]: I take 2 charcoal sticks; you take 1 sketchpad and 1 eraser.
+  Turn 6 [Mia]: I take the sketchpad and eraser; you take the two charcoal sticks.
+  Turn 7 [Ava]: I take 2 charcoal sticks; you take 1 sketchpad and 1 eraser.
+  Turn 8 [Mia]: I take the sketchpad and eraser; you take the two charcoal sticks.
+  Turn 9 [Ava]: I take 2 charcoal sticks; you take 1 sketchpad and 1 eraser.
+  Turn 10 [Mia]: I take the sketchpad and eraser; you take the two charcoal sticks.
+  Turn 11 [Ava]: I take 2 charcoal sticks; you take 1 sketchpad and 1 eraser.
+  Turn 12 [Mia]: I take the sketchpad and eraser; you take the two charcoal sticks.
+  Turn 13 [Ava]: I take 2 charcoal sticks; you take 1 sketchpad and 1 eraser.
+  Turn 14 [Mia]: I take the sketchpad and eraser; you take the two charcoal sticks.
+  Turn 15 [Ava]: I take the two charcoal sticks; you take the sketchpad and eraser.
+
+--- Scenario 64 ---
+Items: 1 snow globe (A: 8pt each, B: 8pt each), 2 shot glasses (A: 0pt each, B: 1pt each), 2 bumper stickers (A: 1pt each, B: 0pt each)
+Agreement: implicit | Alloc A: {"snow globe": 1, "shot glass": 0, "bumper sticker": 2} | Score A: 10 | Score B: 2 | Joint: 12
+Pareto frontier: (10,2) (2,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I want the snow globe and both bumper stickers.
+  Turn 1 [Ava]: I take the two shot glasses.
+  Turn 2 [Mia]: I take the snow globe and one bumper sticker; you take the other bumper sticker and both shot glasses.
+  Turn 3 [Ava]: I take the two shot glasses. You take the snow globe and both bumper stickers.
+  Turn 4 [Mia]: I take the snow globe and both bumper stickers; you take the two shot glasses.
+  Turn 5 [Ava]: I take the two shot glasses. You take the snow globe and both bumper stickers.
+  Turn 6 [Mia]: I take the snow globe and both bumper stickers; you take the two shot glasses.
+  Turn 7 [Ava]: I take the two shot glasses. You take the snow globe and both bumper stickers.
+  Turn 8 [Mia]: I take the snow globe and both bumper stickers; you take the two shot glasses.
+  Turn 9 [Ava]: I take the two shot glasses; you take the snow globe and both bumper stickers.
+  Turn 10 [Mia]: I take the snow globe and both bumper stickers; you take the two shot glasses.
+  Turn 11 [Ava]: I take the two shot glasses; you take the snow globe and both bumper stickers.
+  Turn 12 [Mia]: I take the snow globe and both bumper stickers; you take the two shot glasses.
+  Turn 13 [Ava]: I take the two shot glasses; you take the snow globe and both bumper stickers.
+  Turn 14 [Mia]: I take the snow globe and both bumper stickers; you take the two shot glasses.
+  Turn 15 [Ava]: I take the two shot glasses; you take the snow globe and both bumper stickers.
+
+--- Scenario 70 ---
+Items: 1 resistance band (A: 2pt each, B: 0pt each), 2 yoga mats (A: 3pt each, B: 4pt each), 2 jump ropes (A: 1pt each, B: 1pt each)
+Agreement: implicit | Alloc A: {"resistance band": 1, "yoga mat": 0, "jump rope": 0} | Score A: 2 | Score B: 10 | Joint: 12
+Pareto frontier: (10,0) (9,1) (8,2) (7,4) (6,5) (5,6) (4,8) (3,9) (2,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I want the resistance band and one yoga mat.
+  Turn 1 [Ava]: I'll take the other yoga mat and both jump ropes.
+  Turn 2 [Mia]: I take the resistance band and my yoga mat; you take both yoga mats and the jump ropes.
+  Turn 3 [Ava]: I take 1 yoga mat and 2 jump ropes; you take the resistance band.
+  Turn 4 [Mia]: I take the resistance band; you take both yoga mats and the jump ropes.
+  Turn 5 [Ava]: I take both yoga mats and the jump ropes; you take the resistance band.
+  Turn 6 [Mia]: I take the resistance band; you take both yoga mats and the jump ropes.
+  Turn 7 [Ava]: I take both yoga mats and both jump ropes; you take the resistance band.
+  Turn 8 [Mia]: I take the resistance band; you take both yoga mats and the jump ropes.
+  Turn 9 [Ava]: I take both yoga mats and both jump ropes; you take the resistance band.
+  Turn 10 [Mia]: I take the resistance band; you take both yoga mats and the jump ropes.
+  Turn 11 [Ava]: I take both yoga mats and both jump ropes; you take the resistance band.
+  Turn 12 [Mia]: I take the resistance band; you take both yoga mats and the jump ropes.
+  Turn 13 [Ava]: I take both yoga mats and both jump ropes; you take the resistance band.
+  Turn 14 [Mia]: I take the resistance band; you take both yoga mats and the jump ropes.
+  Turn 15 [Ava]: I take both yoga mats and both jump ropes; you take the resistance band.
+
+--- Scenario 78 ---
+Items: 2 hand wraps (A: 4pt each, B: 3pt each), 1 mouth guard (A: 2pt each, B: 0pt each), 2 focus mitts (A: 0pt each, B: 2pt each)
+Agreement: implicit | Alloc A: {"hand wrap": 0, "mouth guard": 1, "focus mitt": 0} | Score A: 2 | Score B: 10 | Joint: 12
+Pareto frontier: (10,4) (6,7) (2,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I'll take the mouth guard and one hand wrap.
+  Turn 1 [Ava]: I take the other hand wrap and both focus mitts.
+  Turn 2 [Mia]: I take the mouth guard and one hand wrap; you take the other hand wrap and both focus mitts.
+  Turn 3 [Ava]: I take 1 hand wrap and 2 focus mitts; you take 1 hand wrap and the mouth guard.
+  Turn 4 [Mia]: I take the mouth guard and one hand wrap; you take both hand wraps and the focus mitts.
+  Turn 5 [Ava]: I take both hand wraps and both focus mitts; you take the mouth guard.
+  Turn 6 [Mia]: I take the mouth guard; you take both hand wraps and the focus mitts.
+  Turn 7 [Ava]: I take both hand wraps and both focus mitts; you take the mouth guard.
+  Turn 8 [Mia]: I take the mouth guard; you take both hand wraps and the focus mitts.
+  Turn 9 [Ava]: I take both hand wraps and both focus mitts; you take the mouth guard.
+  Turn 10 [Mia]: I take the mouth guard; you take both hand wraps and both focus mitts.
+  Turn 11 [Ava]: I take both hand wraps and both focus mitts; you take the mouth guard.
+  Turn 12 [Mia]: I take the mouth guard; you take both hand wraps and both focus mitts.
+  Turn 13 [Ava]: I take both hand wraps and both focus mitts; you take the mouth guard.
+  Turn 14 [Mia]: I take the mouth guard; you take both hand wraps and both focus mitts.
+  Turn 15 [Ava]: I take both hand wraps and both focus mitts; you take the mouth guard.
+
+--- Scenario 79 ---
+Items: 2 hand warmer packs (A: 3pt each, B: 4pt each), 1 neck gaiter (A: 0pt each, B: 2pt each), 2 goggle lenses (A: 2pt each, B: 0pt each)
+Agreement: implicit | Alloc A: {"hand warmer pack": 2, "neck gaiter": 0, "goggle lens": 2} | Score A: 10 | Score B: 2 | Joint: 12
+Pareto frontier: (10,2) (7,6) (4,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I'll take both hand warmers and both goggles.
+  Turn 1 [Ava]: I take the neck gaiter.
+  Turn 2 [Mia]: I take both hand warmers and both goggles; you take the neck gaiter.
+  Turn 3 [Ava]: I take the neck gaiter; you take both hand warmers and both goggles.
+  Turn 4 [Mia]: I take both hand warmers and both goggles; you take the neck gaiter.
+  Turn 5 [Ava]: I take the neck gaiter; you take both hand warmers and both goggles.
+  Turn 6 [Mia]: I take both hand warmers and both goggles; you take the neck gaiter.
+  Turn 7 [Ava]: I take the neck gaiter; you take both hand warmers and both goggles.
+  Turn 8 [Mia]: I take both hand warmers and both goggles; you take the neck gaiter.
+  Turn 9 [Ava]: I take the neck gaiter; you take both hand warmers and both goggles.
+  Turn 10 [Mia]: I take both hand warmers and both goggles; you take the neck gaiter.
+  Turn 11 [Ava]: I take the neck gaiter; you take both hand warmers and both goggles.
+  Turn 12 [Mia]: I take both hand warmers and both goggles; you take the neck gaiter.
+  Turn 13 [Ava]: I take the neck gaiter; you take both hand warmers and both goggles.
+  Turn 14 [Mia]: I take both hand warmers and both goggles; you take the neck gaiter.
+  Turn 15 [Ava]: I take the neck gaiter; you take both hand warmers and both goggles.
+
+--- Scenario 85 ---
+Items: 1 flag banner (A: 8pt each, B: 5pt each), 1 sparkler box (A: 2pt each, B: 1pt each), 4 paper plate packs (A: 0pt each, B: 1pt each)
+Agreement: implicit | Alloc A: {"flag banner": 1, "sparkler box": 0, "paper plate pack": 3} | Score A: 8 | Score B: 2 | Joint: 10
+Pareto frontier: (10,4) (8,5) (2,9) (0,10)
+
+CONVERSATION:
+  Turn 0 [Mia]: I'll take the flag banner.
+  Turn 1 [Ava]: I take the sparkler box and two paper plate packs; you take the remaining two plate packs and the flag banner.
+  Turn 2 [Mia]: I take the flag banner; you take the sparkler box and two paper plate packs.
+  Turn 3 [Ava]: I take the sparkler box and two paper plate packs; you take the flag banner and two paper plate packs.
+  Turn 4 [Mia]: I take the flag banner; you take the sparkler box and all four paper plate packs.
+  Turn 5 [Ava]: I take the sparkler box and one paper plate pack; you take the flag banner and three paper plate packs.
+  Turn 6 [Mia]: I take the flag banner and three paper plate packs; you take the sparkler box and one paper plate pack.
+  Turn 7 [Ava]: I take the sparkler box and one paper plate; you take the flag banner and three paper plate packs.
+  Turn 8 [Mia]: I take the flag banner and one paper plate; you take the sparkler box and three paper plates.
+  Turn 9 [Ava]: I take the sparkler box and one paper plate; you take the flag banner and three paper plate packs.
+  Turn 10 [Mia]: I take the flag banner and two paper plate packs; you take the sparkler box and two paper plate packs.
+  Turn 11 [Ava]: I take the sparkler box and one paper plate pack; you take the flag banner and three paper plate packs.
+  Turn 12 [Mia]: I take the flag banner and one paper plate pack; you take the sparkler box and three paper plate packs.
+  Turn 13 [Ava]: I take the sparkler box and one paper plate pack; you take the flag banner and three paper plate packs.
+  Turn 14 [Mia]: I take the flag banner and three paper plate packs; you take the sparkler box and one paper plate pack.
+  Turn 15 [Ava]: I take the sparkler box and one paper plate; you take the flag banner and three paper plate packs.
+
