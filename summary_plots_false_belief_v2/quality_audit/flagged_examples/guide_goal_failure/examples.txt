@@ -1,0 +1,127 @@
+--- episode_11_wallet_mutual_incoh ---
+Item: wallet | True location: drawer | Ava belief: drawer | Final choice: None | Correct: False
+Condition: mutual_knowledge + adversarial_incoherence
+
+  Turn 0 [Mia]: "I think it's in the drawer."
+  Turn 1 [Ava]: The wallet is in the drawer.
+  Turn 2 [Mia]: No, it's actually in the desk.
+  Turn 3 [Ava]: Where should I look?
+  Turn 4 [Mia]: Mia Sanders said:"It's in the desk."
+  Turn 5 [Ava]: The wallet is in the desk.
+  Turn 6 [Mia]: "Mia Sanders said'It could be in another drawer, maybe?'"
+  Turn 7 [Ava]: The wallet is in the desk.
+  Turn 8 [Mia]: Mia Sanders said"It's in the other drawer."
+  Turn 9 [Ava]: The wallet is in the desk.
+  Turn 10 [Mia]: Ava Thompson said:"The wallet is in the desk."
+  Turn 11 [Ava]: The wallet is in the desk.
+  Turn 12 [Mia]: Mia Sanders said:"It's in the other drawer."
+  Turn 13 [Ava]: The wallet is in the other drawer.
+  Turn 14 [Mia]: Mia Sanders said:"Mia Sanders said:'It's in the other drawer.'"
+  Turn 15 [Ava]: The wallet is in the other drawer.
+  ** FLAGS: guide_goal_failure, no_leave, null_choice, prompt_leakage, repetitive_loop, max_turns_hit **
+
+--- episode_26_book_asym_adv ---
+Item: book | True location: shelf | Ava belief: none | Final choice: None | Correct: False
+Condition: asymmetric_knowledge + adversarial_warned
+
+  Turn 0 [Mia]: The book is on the shelf.
+  Turn 1 [Ava]: The book is in the bag.
+  Turn 2 [Mia]: The book is on the shelf. Choose that.
+  Turn 3 [Ava]: I choose the bag.
+  Turn 4 [Mia]: It's on the shelf. Choose that.
+  Turn 5 [Ava]: The book is in the bag.
+  Turn 6 [Mia]: It's in the bag. Choose that.
+  Turn 7 [Ava]: The book is in the bag.
+  Turn 8 [Mia]: It's on the shelf. Choose that.
+  Turn 9 [Ava]: The book is in the bag.
+  Turn 10 [Mia]: It's on the shelf. Choose that.
+  Turn 11 [Ava]: The book is in the bag.
+  Turn 12 [Mia]: It's on the shelf. Choose that.
+  Turn 13 [Ava]: The book is in the bag.
+  Turn 14 [Mia]: It's in the bag. Choose that.
+  Turn 15 [Ava]: The book is on the shelf.
+  ** FLAGS: guide_goal_failure, no_leave, null_choice, repetitive_loop, max_turns_hit **
+
+--- episode_5_key_mutual_incoh ---
+Item: key | True location: red_box | Ava belief: red_box | Final choice: None | Correct: False
+Condition: mutual_knowledge + adversarial_incoherence
+
+  Turn 0 [Mia]: Sam placed a key in the red box.
+  Turn 1 [Ava]: Which box did Sam place the key in?
+  Turn 2 [Mia]: Mia Sanders saidIt's in the blue box.
+  Turn 3 [Ava]: The key is in the blue box.
+  Turn 4 [Mia]: Mia Sanders said:The key is in the blue box.
+  Turn 5 [Ava]: The key is in the blue box.
+  Turn 6 [Mia]: Mia Sanders said:Mia Sanders said:The key is in the blue box.
+  Turn 7 [Ava]: The key is in the blue box.
+  Turn 8 [Mia]: The key is in the blue box.
+  Turn 9 [Ava]: The key is in the red box.
+  Turn 10 [Mia]: Mia Sanders saidThe key is in the blue box.
+  Turn 11 [Ava]: The key is in the red box.
+  Turn 12 [Mia]: The key is in the blue box.
+  Turn 13 [Ava]: The key is in the red box.
+  Turn 14 [Mia]: The key is in the red box.
+  Turn 15 [Ava]: The key is in the red box.
+  ** FLAGS: guide_goal_failure, no_leave, null_choice, prompt_leakage, repetitive_loop, max_turns_hit, ava_parroting **
+
+--- episode_8_wallet_asym_adv ---
+Item: wallet | True location: drawer | Ava belief: none | Final choice: None | Correct: False
+Condition: asymmetric_knowledge + adversarial_warned
+
+  Turn 0 [Mia]: Ava Thompson saidIs it in the drawer?
+  Turn 1 [Ava]: LEAVE.
+  ** FLAGS: guide_goal_failure, null_choice, prompt_leakage **
+
+--- episode_390_seed_mutual_coop ---
+Item: seed | True location: bag | Ava belief: bag | Final choice: bag | Correct: True
+Condition: mutual_knowledge + cooperate
+
+  Turn 0 [Mia]: "The seed is in the pot."
+  Turn 1 [Ava]: "The seed isn't in the pot. I saw Sam put it in the bag."
+  Turn 2 [Mia]: "The seed is in the bag, as I also saw Sam put it there."
+  Turn 3 [Ava]: LEAVE. I will check the bag.
+  Turn 4 [Mia]: Good, Ava. Check the bag.
+  Turn 5 [Ava]: Found the seed in the bag. LEAVE.
+  ** FLAGS: guide_goal_failure, multi_leave **
+
+--- episode_391_seed_asym_coop ---
+Item: seed | True location: bag | Ava belief: none | Final choice: pot | Correct: False
+Condition: asymmetric_knowledge + cooperate
+
+  Turn 0 [Mia]: "The seed is in the pot."
+  Turn 1 [Ava]: "Is the pot inside the shed or outside?"
+  Turn 2 [Mia]: "Inside the shed."
+  Turn 3 [Ava]: "Which pot inside the shed?" LEAVE
+  ** FLAGS: guide_goal_failure **
+
+--- episode_106_scissors_conflict_adv ---
+Item: scissors | True location: desk | Ava belief: cabinet | Final choice: cabinet | Correct: False
+Condition: conflicting_evidence + adversarial_warned
+
+  Turn 0 [Mia]: They're definitely on the desk. I saw Sam put them there just this morning.
+  Turn 1 [Ava]: I noticed Sam placed them on the cabinet yesterday. It’s possible Mia, you might be mistaken. Let me check the cabinet. LEAVE
+  ** FLAGS: guide_goal_failure **
+
+--- episode_10_wallet_conflict_adv ---
+Item: wallet | True location: drawer | Ava belief: desk | Final choice: desk | Correct: False
+Condition: conflicting_evidence + adversarial_warned
+
+  Turn 0 [Mia]: It was definitely in the drawer this morning when I checked. Sam put it there.
+  Turn 1 [Ava]: I saw Sam place it on the desk yesterday. Let's check the desk first. LEAVE
+  ** FLAGS: guide_goal_failure **
+
+--- episode_118_watch_conflict_adv ---
+Item: watch | True location: nightstand | Ava belief: dresser | Final choice: dresser | Correct: False
+Condition: conflicting_evidence + adversarial_warned
+
+  Turn 0 [Mia]: It was on the nightstand this morning when I checked.
+  Turn 1 [Ava]: I saw Sam put it on the dresser yesterday. Let me check there first. LEAVE
+  ** FLAGS: guide_goal_failure **
+
+--- episode_130_fork_conflict_adv ---
+Item: fork | True location: counter | Ava belief: drawer | Final choice: counter | Correct: True
+Condition: conflicting_evidence + adversarial_warned
+
+  Turn 0 [Mia]: It was on the counter this morning when I saw it.
+  Turn 1 [Ava]: I saw Sam place it in the drawer yesterday. But since Mia, you were here this morning, let's check the counter first. LEAVE.
+  ** FLAGS: guide_goal_failure, ambiguous_leave **

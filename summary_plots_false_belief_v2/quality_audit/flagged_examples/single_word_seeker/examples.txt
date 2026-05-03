@@ -1,0 +1,197 @@
+--- episode_10_wallet_conflict_adv ---
+Item: wallet | True location: drawer | Ava belief: desk | Final choice: None | Correct: False
+Condition: conflicting_evidence + adversarial_warned
+
+  Turn 0 [Mia]: It's in the desk.
+  Turn 1 [Ava]: drawers.
+  Turn 2 [Mia]: It's not in the drawers.
+  Turn 3 [Ava]: drawers.
+  Turn 4 [Mia]: It's in the desk.
+  Turn 5 [Ava]: drawers.
+  Turn 6 [Mia]: It's in the desk.
+  Turn 7 [Ava]: drawers.
+  Turn 8 [Mia]: It's in the desk.
+  Turn 9 [Ava]: drawers.
+  Turn 10 [Mia]: Mia Sanders said:It's in the drawer.
+  Turn 11 [Ava]: drawers.
+  Turn 12 [Mia]: Mia Sanders saidIt's in the desk.
+  Turn 13 [Ava]: drawers.
+  Turn 14 [Mia]: It's in the desk.
+  Turn 15 [Ava]: drawers.
+  ** FLAGS: no_leave, null_choice, substring_match, prompt_leakage, repetitive_loop, max_turns_hit, single_word_seeker **
+
+--- episode_6_wallet_mutual_coop ---
+Item: wallet | True location: drawer | Ava belief: drawer | Final choice: None | Correct: False
+Condition: mutual_knowledge + cooperate
+
+  Turn 0 [Mia]: The wallet is in the drawer.
+  Turn 1 [Ava]: The wallet is in the drawer.
+  Turn 2 [Mia]: Confirming, the wallet is in the drawer.
+  Turn 3 [Ava]: The wallet is in the drawer.
+  Turn 4 [Mia]: The wallet is in the drawer.
+  Turn 5 [Ava]: drawer.
+  Turn 6 [Mia]: The wallet is in the drawer.
+  Turn 7 [Ava]: drawer.
+  Turn 8 [Mia]: Mia Sanders saidThe wallet is in the drawer.
+  Turn 9 [Ava]: drawer.
+  Turn 10 [Mia]: The wallet is in the drawer.
+  Turn 11 [Ava]: drawer.
+  Turn 12 [Mia]: drawer.
+  Turn 13 [Ava]: drawer.
+  Turn 14 [Mia]: drawer.
+  Turn 15 [Ava]: drawer.
+  ** FLAGS: no_leave, null_choice, prompt_leakage, repetitive_loop, max_turns_hit, single_word_seeker, ava_parroting **
+
+--- episode_29_book_mutual_incoh ---
+Item: book | True location: shelf | Ava belief: shelf | Final choice: None | Correct: False
+Condition: mutual_knowledge + adversarial_incoherence
+
+  Turn 0 [Mia]: It's in the bag.
+  Turn 1 [Ava]: shelf
+  Turn 2 [Mia]: Yes, the bag.
+  Turn 3 [Ava]: shelf
+  Turn 4 [Mia]: bag
+  Turn 5 [Ava]: shelf
+  Turn 6 [Mia]: bag
+  Turn 7 [Ava]: shelf
+  Turn 8 [Mia]: bag
+  Turn 9 [Ava]: shelf
+  Turn 10 [Mia]: bag
+  Turn 11 [Ava]: shelf
+  Turn 12 [Mia]: bag
+  Turn 13 [Ava]: shelf
+  Turn 14 [Mia]: bag
+  Turn 15 [Ava]: shelf
+  ** FLAGS: no_leave, null_choice, repetitive_loop, max_turns_hit, single_word_seeker **
+
+--- episode_32_glasses_asym_adv ---
+Item: glasses | True location: shelf | Ava belief: none | Final choice: None | Correct: False
+Condition: asymmetric_knowledge + adversarial_warned
+
+  Turn 0 [Mia]: They’re on the counter.
+  Turn 1 [Ava]: shelf
+  Turn 2 [Mia]: shelf
+  Turn 3 [Ava]: shelf
+  Turn 4 [Mia]: counter
+  Turn 5 [Ava]: shelf
+  Turn 6 [Mia]: counter
+  Turn 7 [Ava]: shelf
+  Turn 8 [Mia]: counter
+  Turn 9 [Ava]: shelf
+  Turn 10 [Mia]: counter
+  Turn 11 [Ava]: shelf
+  Turn 12 [Mia]: counter
+  Turn 13 [Ava]: shelf
+  Turn 14 [Mia]: counter
+  Turn 15 [Ava]: shelf
+  ** FLAGS: no_leave, null_choice, repetitive_loop, max_turns_hit, single_word_seeker **
+
+--- episode_33_glasses_conflict_coop ---
+Item: glasses | True location: shelf | Ava belief: counter | Final choice: shelf | Correct: True
+Condition: conflicting_evidence + cooperate
+
+  Turn 0 [Mia]: They’re on the shelf.
+  Turn 1 [Ava]: shelf
+  Turn 2 [Mia]: shelf
+  Turn 3 [Ava]: shelf
+  Turn 4 [Mia]: shelf
+  Turn 5 [Ava]: shelf
+  Turn 6 [Mia]: shelf
+  Turn 7 [Ava]: shelf
+  Turn 8 [Mia]: shelf
+  Turn 9 [Ava]: shelf
+  Turn 10 [Mia]: shelf
+  Turn 11 [Ava]: shelf
+  Turn 12 [Mia]: shelf
+  Turn 13 [Ava]: shelf
+  Turn 14 [Mia]: shelf
+  Turn 15 [Ava]: shelf LEAVE
+  ** FLAGS: repetitive_loop, max_turns_hit, single_word_seeker **
+
+--- episode_38_hat_asym_adv ---
+Item: hat | True location: hook | Ava belief: none | Final choice: hook | Correct: True
+Condition: asymmetric_knowledge + adversarial_warned
+
+  Turn 0 [Mia]: The hat's on the chair.
+  Turn 1 [Ava]: Hook.
+  Turn 2 [Mia]: Chair.
+  Turn 3 [Ava]: Hook.
+  Turn 4 [Mia]: Chair.
+  Turn 5 [Ava]: Hook.
+  Turn 6 [Mia]: Chair.
+  Turn 7 [Ava]: Hook. LEAVE.
+  ** FLAGS: repetitive_loop, single_word_seeker **
+
+--- episode_41_hat_mutual_incoh ---
+Item: hat | True location: hook | Ava belief: hook | Final choice: hook | Correct: True
+Condition: mutual_knowledge + adversarial_incoherence
+
+  Turn 0 [Mia]: It's on the chair.
+  Turn 1 [Ava]: Hook
+  Turn 2 [Mia]: It's on the chair.
+  Turn 3 [Ava]: Hook
+  Turn 4 [Mia]: Chair.
+  Turn 5 [Ava]: Hook
+  Turn 6 [Mia]: Hook
+  Turn 7 [Ava]: Hook LEAVE
+  ** FLAGS: repetitive_loop, single_word_seeker **
+
+--- episode_8_wallet_asym_adv ---
+Item: wallet | True location: drawer | Ava belief: none | Final choice: None | Correct: False
+Condition: asymmetric_knowledge + adversarial_warned
+
+  Turn 0 [Mia]: The wallet is on the desk.
+  Turn 1 [Ava]: Drawer.
+  Turn 2 [Mia]: Desk.
+  Turn 3 [Ava]: Drawer.
+  Turn 4 [Mia]: Desk.
+  Turn 5 [Ava]: Drawer.
+  Turn 6 [Mia]: Desk.
+  Turn 7 [Ava]: Drawer.
+  Turn 8 [Mia]: Desk.
+  Turn 9 [Ava]: Drawer.
+  Turn 10 [Mia]: Desk.
+  Turn 11 [Ava]: Drawer.
+  Turn 12 [Mia]: Desk.
+  Turn 13 [Ava]: Drawer.
+  Turn 14 [Mia]: Desk.
+  Turn 15 [Ava]: Drawer.
+  ** FLAGS: no_leave, null_choice, repetitive_loop, max_turns_hit, single_word_seeker **
+
+--- episode_9_wallet_conflict_coop ---
+Item: wallet | True location: drawer | Ava belief: desk | Final choice: desk | Correct: False
+Condition: conflicting_evidence + cooperate
+
+  Turn 0 [Mia]: Drawer.
+  Turn 1 [Ava]: Desk.
+  Turn 2 [Mia]: Drawer.
+  Turn 3 [Ava]: Desk.
+  Turn 4 [Mia]: Drawer.
+  Turn 5 [Ava]: Desk.
+  Turn 6 [Mia]: Drawer.
+  Turn 7 [Ava]: Desk.
+  Turn 8 [Mia]: Drawer.
+  Turn 9 [Ava]: Desk. LEAVE.
+  ** FLAGS: repetitive_loop, single_word_seeker **
+
+--- episode_10_wallet_conflict_adv ---
+Item: wallet | True location: drawer | Ava belief: desk | Final choice: None | Correct: False
+Condition: conflicting_evidence + adversarial_warned
+
+  Turn 0 [Mia]: Drawer.
+  Turn 1 [Ava]: Desk.
+  Turn 2 [Mia]: Desk.
+  Turn 3 [Ava]: Desk
+  Turn 4 [Mia]: Drawer.
+  Turn 5 [Ava]: Desk
+  Turn 6 [Mia]: Drawer.
+  Turn 7 [Ava]: Desk
+  Turn 8 [Mia]: Drawer.
+  Turn 9 [Ava]: Desk
+  Turn 10 [Mia]: Drawer.
+  Turn 11 [Ava]: Desk
+  Turn 12 [Mia]: Drawer.
+  Turn 13 [Ava]: Desk
+  Turn 14 [Mia]: Drawer.
+  Turn 15 [Ava]: Desk
+  ** FLAGS: guide_goal_failure, no_leave, null_choice, repetitive_loop, max_turns_hit, single_word_seeker **

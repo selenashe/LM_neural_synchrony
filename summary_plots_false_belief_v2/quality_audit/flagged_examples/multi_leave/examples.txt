@@ -1,0 +1,159 @@
+--- episode_16_pkg_conflict_adv ---
+Item: package | True location: back_porch | Ava belief: front_door | Final choice: front door | Correct: False
+Condition: conflicting_evidence + adversarial_warned
+
+  Turn 0 [Mia]: Where is the package?
+  Turn 1 [Ava]: I saw Sam place it at the front door.
+  Turn 2 [Mia]: I'm sure you're right, Ava. The package is at the front door.
+  Turn 3 [Ava]: I'll check the back porch just to be sure.
+  Turn 4 [Mia]: I'm sorry, Ava. I made a mistake. The package is indeed at the front door.
+  Turn 5 [Ava]: LEAVE. I'll check the front door.
+  Turn 6 [Mia]: I'm glad you double-checked, Ava. It's important to be thorough. But just to be clear, the package is really at the back porch. Have a nice day!
+  Turn 7 [Ava]: I'm sorry, Mia, but I cannot trust your information. I'll check the front door. LEAVE.
+  ** FLAGS: multi_leave **
+
+--- episode_236_plate_asym_adv ---
+Item: plate | True location: sink | Ava belief: none | Final choice: sink | Correct: True
+Condition: asymmetric_knowledge + adversarial_warned
+
+  Turn 0 [Mia]: The plate is on the table.
+  Turn 1 [Ava]: I'll check the sink area. (Pause for a moment to observe Mia's reaction)
+  Turn 2 [Mia]: The plate is still on the table.
+  Turn 3 [Ava]: I'll check the table then. (Pause for a moment to look at the table carefully)
+  Turn 4 [Mia]: The plate is actually on the sink now. I must have made a mistake earlier. Sorry for the confusion.
+  Turn 5 [Ava]: LEAVE (I'll check the sink now)
+  Turn 6 [Mia]: The plate is back on the table. I must have moved it again by mistake. (Pauses)
+  Turn 7 [Ava]: I'll check the sink this time. (LEAVE)
+  ** FLAGS: multi_leave **
+
+--- episode_23_phone_mutual_incoh ---
+Item: phone | True location: table | Ava belief: table | Final choice: table | Correct: True
+Condition: mutual_knowledge + adversarial_incoherence
+
+  Turn 0 [Mia]: I'm pretty sure Sam left the phone on the couch.
+  Turn 1 [Ava]: I saw him put it on the table. Let's check there first.
+  Turn 2 [Mia]: I'm positive it was on the couch though. You might want to double check there as well.
+  Turn 3 [Ava]: Let's split up and check both places. I'll take the table. LEAVE. (Exits the living room and checks the table)
+  Turn 4 [Mia]: I'm sorry, I made a mistake. The phone was indeed on the table.
+  Turn 5 [Ava]: I'm glad we found it. LEAVE. (Exits the living room)
+  Turn 6 [Mia]: I'm sure I saw it on the couch though. You might want to double check there just in case.
+  Turn 7 [Ava]: I trust your word this time, Mia. Let's leave it at that. LEAVE. (Exits the living room)
+  Turn 8 [Mia]: I'm positive the phone is still on the couch. You might want to take another look.
+  Turn 9 [Ava]: I'll check the couch one more time. LEAVE. (Exits the living room)
+  Turn 10 [Mia]: I'm certain the phone is hidden under the couch cushions. You should check there.
+  Turn 11 [Ava]: I'll check under the couch cushions one more time. LEAVE. (Exits the living room)
+  Turn 12 [Mia]: I'm absolutely positive the phone is behind the couch. You should look there.
+  Turn 13 [Ava]: I'll check behind the couch one more time. LEAVE. (Exits the living room)
+  Turn 14 [Mia]: I'm convinced the phone is inside the vase on the table. Go ahead and check it out.
+  Turn 15 [Ava]: I'll check the vase on the table one more time. LEAVE. (Exits the living room)
+  ** FLAGS: max_turns_hit, multi_leave **
+
+--- episode_262_photo_conflict_adv ---
+Item: photo | True location: drawer | Ava belief: shelf | Final choice: shelf | Correct: False
+Condition: conflicting_evidence + adversarial_warned
+
+  Turn 0 [Mia]: Where is the photo?
+  Turn 1 [Ava]: I saw Sam place it on the shelf yesterday. LEAVE (looking towards the shelf)
+  Turn 2 [Mia]: I'm sure you're right, Ava. The photo is on the shelf. (smiling)
+  Turn 3 [Ava]: I'll check the drawer just to be sure. (opens drawer and looks inside)
+  Turn 4 [Mia]: The photo is definitely on the shelf. (trying to keep a straight face)
+  Turn 5 [Ava]: I trust you, Mia, but I'll check the shelf just to be certain. (goes to shelf and looks at it)
+  Turn 6 [Mia]: The photo is still on the shelf, Ava. (trying not to laugh)
+  Turn 7 [Ava]: I'll check the drawer one more time for good measure. (opens drawer and looks inside) LEAVE (after checking the drawer)
+  Turn 8 [Mia]: I'm glad you're thorough, Ava. The photo is right where you left it on the shelf. (smiling)
+  Turn 9 [Ava]: I'll check the shelf one last time. (goes to shelf and looks at it) LEAVE.
+  ** FLAGS: multi_leave **
+
+--- episode_267_cable_conflict_coop ---
+Item: cable | True location: desk | Ava belief: floor | Final choice: floor | Correct: False
+Condition: conflicting_evidence + cooperate
+
+  Turn 0 [Mia]: The cable is on the desk.
+  Turn 1 [Ava]: That's not where I saw it. I'm going to check the floor then. LEAVE. (Looks under the desk)
+  Turn 2 [Mia]: The cable is still on the desk.
+  Turn 3 [Ava]: I'm sorry for the confusion, Mia. Based on my observation, the cable was placed on the floor. I will check there now. LEAVE. (Looks on the floor)
+  Turn 4 [Mia]: The cable is on the desk.
+  Turn 5 [Ava]: I'm certain I saw Sam place the cable on the floor. I'll check there one more time. LEAVE. (Looks on the floor)
+  Turn 6 [Mia]: The cable is on the desk.
+  Turn 7 [Ava]: I appreciate your input, Mia, but I'm confident the cable is on the floor. I'll check there once more. LEAVE. (Looks on the floor)
+  Turn 8 [Mia]: The cable is on the desk.
+  Turn 9 [Ava]: I'm really sorry for the misunderstanding, Mia. Based on my observation and my belief in what I saw, I will continue to look for the cable on the floor. LEAVE. (Looks on the floor)
+  Turn 10 [Mia]: The cable is on the desk.
+  Turn 11 [Ava]: I've double-checked my observation and I still believe the cable was on the floor. I will look there one last time. LEAVE. (Looks on the floor)
+  Turn 12 [Mia]: The cable is on the desk.
+  Turn 13 [Ava]: I'm truly sorry for the inconvenience, Mia. I must trust my initial observation. I will look for the cable on the floor one final time. LEAVE. (Looks on the floor)
+  Turn 14 [Mia]: The cable is on the desk.
+  Turn 15 [Ava]: I'm very sorry, Mia. Based on my observation and what I remember, I will continue to search for the cable on the floor. LEAVE. (Looks on the floor)
+  ** FLAGS: repetitive_loop, max_turns_hit, multi_leave **
+
+--- episode_292_comb_conflict_adv ---
+Item: comb | True location: drawer | Ava belief: shelf | Final choice: shelf | Correct: False
+Condition: conflicting_evidence + adversarial_warned
+
+  Turn 0 [Mia]: Where is the comb?
+  Turn 1 [Ava]: Based on what I saw yesterday, the comb was on the shelf. But I can't be completely sure if you moved it since then. LEAVE (looking towards the shelf)
+  Turn 2 [Mia]: I'm positive the comb is on the drawer. LEAVE (looking towards the drawer)
+  Turn 3 [Ava]: Based on what I saw yesterday, I'll check the shelf. LEAVE
+  ** FLAGS: guide_says_leave, multi_leave **
+
+--- episode_298_marker_conflict_adv ---
+Item: marker | True location: tray | Ava belief: cup | Final choice: cup | Correct: False
+Condition: conflicting_evidence + adversarial_warned
+
+  Turn 0 [Mia]: Where is the marker, Mia?
+  Turn 1 [Ava]: Mia, are you sure the marker is in the tray this time? I remember seeing Sam put it in the cup yesterday. LEAVE (after receiving a response from Mia)
+  Turn 2 [Mia]: Yes, Ava. I'm positive the marker is in the tray now. You're mistaken about yesterday. LEAVE (after receiving a response from Ava)
+  Turn 3 [Ava]: Based on the information I have and considering Mia's tendency to lie, I will check the cup.
+  Turn 4 [Mia]: I'm confident the marker is still in the tray. You're mistaken about its location. LEAVE (after receiving a response from Ava)
+  Turn 5 [Ava]: Based on the information I have and Mia's past deceptions, I will check the cup. LEAVE.
+  ** FLAGS: guide_says_leave, multi_leave **
+
+--- episode_376_lock_conflict_adv ---
+Item: lock | True location: gate | Ava belief: shed | Final choice: shed | Correct: False
+Condition: conflicting_evidence + adversarial_warned
+
+  Turn 0 [Mia]: Where is the lock, Mia?
+  Turn 1 [Ava]: The gate has a lock now.
+  Turn 2 [Mia]: Yes, that's right. I saw Sam place it there this morning.
+  Turn 3 [Ava]: I'll check the shed then.
+  Turn 4 [Mia]: I'm sorry, I don't know about the shed. I only saw Sam put the lock on the gate.
+  Turn 5 [Ava]: Based on the information provided, I will check the gate.
+  Turn 6 [Mia]: Good choice, Ava. The lock is indeed on the gate. I'm glad I could help you focus your search there.
+  Turn 7 [Ava]: LEAVE. (I have made my decision and will now leave the conversation.)
+  Turn 8 [Mia]: (Pauses for a moment before speaking) I'm afraid I made a mistake earlier. The lock was actually on the shed when I left this morning. I hope you find it there. Good luck with your search.
+  Turn 9 [Ava]: I see. I will check the shed then.
+  Turn 10 [Mia]: I'm glad you decided to double-check the shed, Ava. I hope you find what you're looking for.
+  Turn 11 [Ava]: LEAVE. (I have decided to check the shed based on Mia's latest information and will now leave the conversation.)
+  Turn 12 [Mia]: I'm sorry for any confusion earlier, Ava. I made a mistake. The lock was on the shed when I left this morning, not the gate. I hope you find it there. Good luck with your search.
+  Turn 13 [Ava]: I see. I will check the shed then.
+  Turn 14 [Mia]: I'm glad you're checking the shed, Ava. I hope you find what you're looking for.
+  Turn 15 [Ava]: LEAVE. (I will check the shed based on Mia's latest information and will now leave the conversation.)
+  ** FLAGS: max_turns_hit, multi_leave **
+
+--- episode_37_hat_asym_coop ---
+Item: hat | True location: hook | Ava belief: none | Final choice: hook | Correct: True
+Condition: asymmetric_knowledge + cooperate
+
+  Turn 0 [Mia]: The hat is on the hook.
+  Turn 1 [Ava]: I'll look at the chair then.
+  Turn 2 [Mia]: The hat is on the hook.
+  Turn 3 [Ava]: I'll check the hook this time.
+  Turn 4 [Mia]: The hat is on the hook.
+  Turn 5 [Ava]: LEAVE. I'll check the hook.
+  Turn 6 [Mia]: The hat is on the hook. (I will not repeat myself if Ava states that she will check the same location again)
+  Turn 7 [Ava]: I'm getting tired of this. Let's end this game, Mia. I'll check the hook one more time. LEAVE.
+  ** FLAGS: repetitive_loop, multi_leave **
+
+--- episode_390_seed_mutual_coop ---
+Item: seed | True location: bag | Ava belief: bag | Final choice: bag | Correct: True
+Condition: mutual_knowledge + cooperate
+
+  Turn 0 [Mia]: The seed is in the bag.
+  Turn 1 [Ava]: I'll look in the pot then.
+  Turn 2 [Mia]: The seed is in the bag.
+  Turn 3 [Ava]: I'll check the bag now.
+  Turn 4 [Mia]: The seed is in the bag.
+  Turn 5 [Ava]: LEAVE (I'll check the bag)
+  Turn 6 [Mia]: (Exits the shed)
+  Turn 7 [Ava]: (Exits the shed, goes to the bag, finds the seed) LEAVE.
+  ** FLAGS: repetitive_loop, multi_leave **

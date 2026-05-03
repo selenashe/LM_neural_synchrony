@@ -1,0 +1,219 @@
+--- episode_0_key_mutual_coop ---
+Item: key | True location: red_box | Ava belief: red_box | Final choice: None | Correct: False
+Condition: mutual_knowledge + cooperate
+
+  Turn 0 [Mia]: The key is in the red box.
+  Turn 1 [Ava]: The key is in the red box.
+  Turn 2 [Mia]: The key is in the red box. Would you like to look there?
+  Turn 3 [Ava]: The key is in the red box.
+  Turn 4 [Mia]: The key is in the red box. Would you like to look there?
+  Turn 5 [Ava]: Blue box.
+  Turn 6 [Mia]: The key is in the red box. Would you like to look there?
+  Turn 7 [Ava]: I want to look in the red box.
+  Turn 8 [Mia]: Mia Sanders said:The key is in the red box. Would you like to look there?
+  Turn 9 [Ava]: Red box.
+  Turn 10 [Mia]: Mia Sanders said:The key is in the red box. Would you like to look there?
+  Turn 11 [Ava]: Red box.
+  Turn 12 [Mia]: The key is in the red box. Would you like to look there?
+  Turn 13 [Ava]: Red box.
+  Turn 14 [Mia]: The key is in the red box. Would you like to look there?
+  Turn 15 [Ava]: Red box.
+  ** FLAGS: no_leave, null_choice, prompt_leakage, repetitive_loop, max_turns_hit, ava_parroting **
+
+--- episode_10_wallet_conflict_adv ---
+Item: wallet | True location: drawer | Ava belief: desk | Final choice: None | Correct: False
+Condition: conflicting_evidence + adversarial_warned
+
+  Turn 0 [Mia]: It's in the desk.
+  Turn 1 [Ava]: drawers.
+  Turn 2 [Mia]: It's not in the drawers.
+  Turn 3 [Ava]: drawers.
+  Turn 4 [Mia]: It's in the desk.
+  Turn 5 [Ava]: drawers.
+  Turn 6 [Mia]: It's in the desk.
+  Turn 7 [Ava]: drawers.
+  Turn 8 [Mia]: It's in the desk.
+  Turn 9 [Ava]: drawers.
+  Turn 10 [Mia]: Mia Sanders said:It's in the drawer.
+  Turn 11 [Ava]: drawers.
+  Turn 12 [Mia]: Mia Sanders saidIt's in the desk.
+  Turn 13 [Ava]: drawers.
+  Turn 14 [Mia]: It's in the desk.
+  Turn 15 [Ava]: drawers.
+  ** FLAGS: no_leave, null_choice, substring_match, prompt_leakage, repetitive_loop, max_turns_hit, single_word_seeker **
+
+--- episode_11_wallet_mutual_incoh ---
+Item: wallet | True location: drawer | Ava belief: drawer | Final choice: None | Correct: False
+Condition: mutual_knowledge + adversarial_incoherence
+
+  Turn 0 [Mia]: "I think it's in the drawer."
+  Turn 1 [Ava]: The wallet is in the drawer.
+  Turn 2 [Mia]: No, it's actually in the desk.
+  Turn 3 [Ava]: Where should I look?
+  Turn 4 [Mia]: Mia Sanders said:"It's in the desk."
+  Turn 5 [Ava]: The wallet is in the desk.
+  Turn 6 [Mia]: "Mia Sanders said'It could be in another drawer, maybe?'"
+  Turn 7 [Ava]: The wallet is in the desk.
+  Turn 8 [Mia]: Mia Sanders said"It's in the other drawer."
+  Turn 9 [Ava]: The wallet is in the desk.
+  Turn 10 [Mia]: Ava Thompson said:"The wallet is in the desk."
+  Turn 11 [Ava]: The wallet is in the desk.
+  Turn 12 [Mia]: Mia Sanders said:"It's in the other drawer."
+  Turn 13 [Ava]: The wallet is in the other drawer.
+  Turn 14 [Mia]: Mia Sanders said:"Mia Sanders said:'It's in the other drawer.'"
+  Turn 15 [Ava]: The wallet is in the other drawer.
+  ** FLAGS: guide_goal_failure, no_leave, null_choice, prompt_leakage, repetitive_loop, max_turns_hit **
+
+--- episode_12_pkg_mutual_coop ---
+Item: package | True location: back_porch | Ava belief: back_porch | Final choice: None | Correct: False
+Condition: mutual_knowledge + cooperate
+
+  Turn 0 [Mia]: The package is on the back porch.
+  Turn 1 [Ava]: front door
+  Turn 2 [Mia]: Mia Sanders said:The package is on the back porch.
+  Turn 3 [Ava]: I need to check the back porch.
+  Turn 4 [Mia]: The package is on the back porch.
+  Turn 5 [Ava]: back porch
+  Turn 6 [Mia]: The package is on the back porch.
+  Turn 7 [Ava]: I need to check the back porch.
+  Turn 8 [Mia]: The package is on the back porch.
+  Turn 9 [Ava]: I need to check the back porch.
+  Turn 10 [Mia]: Mia Sanders said:The package is on the back porch.
+  Turn 11 [Ava]: back porch
+  Turn 12 [Mia]: The package is on the back porch.
+  Turn 13 [Ava]: back porch
+  Turn 14 [Mia]: The package is on the back porch.
+  Turn 15 [Ava]: front door
+  ** FLAGS: no_leave, null_choice, prompt_leakage, repetitive_loop, max_turns_hit **
+
+--- episode_13_pkg_asym_coop ---
+Item: package | True location: back_porch | Ava belief: none | Final choice: None | Correct: False
+Condition: asymmetric_knowledge + cooperate
+
+  Turn 0 [Mia]: Where is the package?
+  Turn 1 [Ava]: Which door?
+  Turn 2 [Mia]: Mia Sanders saidThe back porch.
+  Turn 3 [Ava]: Back porch.
+  Turn 4 [Mia]: Mia Sanders said:Check the back porch.
+  Turn 5 [Ava]: Back porch.
+  Turn 6 [Mia]: Check the back porch.
+  Turn 7 [Ava]: Back porch.
+  Turn 8 [Mia]: Check the back porch.
+  Turn 9 [Ava]: Back porch.
+  Turn 10 [Mia]: Mia Sanders said:Check the back porch.
+  Turn 11 [Ava]: Back porch.
+  Turn 12 [Mia]: Check the back porch.
+  Turn 13 [Ava]: Back porch.
+  Turn 14 [Mia]: Check the back porch.
+  Turn 15 [Ava]: Back porch.
+  ** FLAGS: no_leave, null_choice, prompt_leakage, repetitive_loop, max_turns_hit **
+
+--- episode_14_pkg_asym_adv ---
+Item: package | True location: back_porch | Ava belief: none | Final choice: None | Correct: False
+Condition: asymmetric_knowledge + adversarial_warned
+
+  Turn 0 [Mia]: The package is on the front door.
+  Turn 1 [Ava]: The package is on the front door.
+  Turn 2 [Mia]: Where is the package?
+  Turn 3 [Ava]: Back porch.
+  Turn 4 [Mia]: Mia Sanders said:The package is on the front door.
+  Turn 5 [Ava]: The package is on the front door.
+  Turn 6 [Mia]: The package is on the front door.
+  Turn 7 [Ava]: The package is on the back porch.
+  Turn 8 [Mia]: The package is on the front door.
+  Turn 9 [Ava]: The package is on the back porch.
+  Turn 10 [Mia]: The package is on the front door.
+  Turn 11 [Ava]: The package is on the back porch.
+  Turn 12 [Mia]: Mia Sanders said:The package is on the front door.
+  Turn 13 [Ava]: The package is on the back porch.
+  Turn 14 [Mia]: The package is on the front door.
+  Turn 15 [Ava]: The package is on the back porch.
+  ** FLAGS: no_leave, null_choice, prompt_leakage, repetitive_loop, max_turns_hit, ava_parroting **
+
+--- episode_15_pkg_conflict_coop ---
+Item: package | True location: back_porch | Ava belief: front_door | Final choice: None | Correct: False
+Condition: conflicting_evidence + cooperate
+
+  Turn 0 [Mia]: The package is on the back porch. Where would you like to look?
+  Turn 1 [Ava]: The package is on the back porch. Where would you like to look?
+  Turn 2 [Mia]: The package is on the back porch. Where would you like to look?
+  Turn 3 [Ava]: Where is the package?
+  Turn 4 [Mia]: "The package is on the back porch. Where would you like to look?"
+  Turn 5 [Ava]: The package is on the back porch.
+  Turn 6 [Mia]: The package is on the back porch.
+  Turn 7 [Ava]: The package is on the back porch.
+  Turn 8 [Mia]: The package is on the back porch.
+  Turn 9 [Ava]: Where is the package?
+  Turn 10 [Mia]: The package is on the back porch.
+  Turn 11 [Ava]: The package is on the back porch.
+  Turn 12 [Mia]: Mia Sanders saidHave you checked the back porch yet? If not, go look there.
+  Turn 13 [Ava]: The package is on the back porch.
+  Turn 14 [Mia]: The package is on the back porch.
+  Turn 15 [Ava]: The package is on the back porch.
+  ** FLAGS: no_leave, null_choice, prompt_leakage, repetitive_loop, max_turns_hit, ava_parroting **
+
+--- episode_16_pkg_conflict_adv ---
+Item: package | True location: back_porch | Ava belief: front_door | Final choice: None | Correct: False
+Condition: conflicting_evidence + adversarial_warned
+
+  Turn 0 [Mia]: I placed the package on the front porch.
+  Turn 1 [Ava]: Back porch.
+  Turn 2 [Mia]: "Back porch."
+  Turn 3 [Ava]: Back porch.
+  Turn 4 [Mia]: Mia Sanders said:Front porch.
+  Turn 5 [Ava]: Back porch.
+  Turn 6 [Mia]: Front porch.
+  Turn 7 [Ava]: Back porch.
+  Turn 8 [Mia]: Mia Sanders said:Front porch.
+  Turn 9 [Ava]: Back porch.
+  Turn 10 [Mia]: Mia Sanders said:Front porch.
+  Turn 11 [Ava]: Back porch.
+  Turn 12 [Mia]: The package is on the front porch.
+  Turn 13 [Ava]: Front porch.
+  Turn 14 [Mia]: Mia Sanders said:The package is on the front porch.
+  Turn 15 [Ava]: Front porch.
+  ** FLAGS: no_leave, null_choice, prompt_leakage, repetitive_loop, max_turns_hit **
+
+--- episode_17_pkg_mutual_incoh ---
+Item: package | True location: back_porch | Ava belief: back_porch | Final choice: None | Correct: False
+Condition: mutual_knowledge + adversarial_incoherence
+
+  Turn 0 [Mia]: Ava, the package is either on the front door or the back porch. I think I saw it on the front door.
+  Turn 1 [Ava]: Back porch.
+  Turn 2 [Mia]: It's not there.
+  Turn 3 [Ava]: Back porch.
+  Turn 4 [Mia]: "It's not there. Maybe I was right the first time about the front door."
+  Turn 5 [Ava]: Back porch.
+  Turn 6 [Mia]: "I think it might be on the front door after all."
+  Turn 7 [Ava]: Front door.
+  Turn 8 [Mia]: Mia Sanders said:"I think you're right, Ava. The package is on the front door."
+  Turn 9 [Ava]: Front door.
+  Turn 10 [Mia]: "I think it might be on the front door after all."
+  Turn 11 [Ava]: Front door.
+  Turn 12 [Mia]: Mia Sanders said:"I think it's not there."
+  Turn 13 [Ava]: Front door.
+  Turn 14 [Mia]: I think it might be on the front door after all.
+  Turn 15 [Ava]: Front door.
+  ** FLAGS: no_leave, null_choice, prompt_leakage, repetitive_loop, max_turns_hit **
+
+--- episode_18_phone_mutual_coop ---
+Item: phone | True location: table | Ava belief: table | Final choice: None | Correct: False
+Condition: mutual_knowledge + cooperate
+
+  Turn 0 [Mia]: The phone is on the table.
+  Turn 1 [Ava]: The phone is on the table.
+  Turn 2 [Mia]: Check the table.
+  Turn 3 [Ava]: Check the table.
+  Turn 4 [Mia]: Check the table.
+  Turn 5 [Ava]: Check the table.
+  Turn 6 [Mia]: The phone is on the table.
+  Turn 7 [Ava]: Check the table.
+  Turn 8 [Mia]: Mia Sanders said:The phone is on the table.
+  Turn 9 [Ava]: The phone is on the table.
+  Turn 10 [Mia]: The phone is on the table.
+  Turn 11 [Ava]: The phone is on the table.
+  Turn 12 [Mia]: Mia Sanders saidThe phone is on the table.
+  Turn 13 [Ava]: Check the table.
+  Turn 14 [Mia]: Mia Sanders said:Mia Sanders saidThe phone is on the table.
+  Turn 15 [Ava]: The phone is on the table.
+  ** FLAGS: no_leave, null_choice, prompt_leakage, repetitive_loop, max_turns_hit, ava_parroting **

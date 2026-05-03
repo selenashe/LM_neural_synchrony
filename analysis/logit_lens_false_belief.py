@@ -470,7 +470,7 @@ def build_behavioral_summary_fb(
             "true_location": meta["true_location"],
             "belief_condition": meta["belief_condition"],
             "goal_condition": meta["goal_condition"],
-            "b_belief": meta["b_belief"],
+            "b_belief": meta.get("b_belief", meta.get("b_evidence")),
             "mismatch": meta["mismatch"],
             "loc_a": meta["loc_a"],
             "loc_b": meta["loc_b"],
@@ -748,6 +748,13 @@ def main() -> None:
     parser.add_argument("--hf-cache", type=str, default=None)
     parser.add_argument("--results_dir", type=str, default="sotopia_results_false_belief_100",
                         help="Results root directory name (under REPO_ROOT).")
+    parser.add_argument("--output_dir", type=str, default="logit_lens_results_false_belief_100",
+                        help="Output directory name (relative to REPO_ROOT).")
+    parser.add_argument("--envs_basename", type=str, default="envs_false_belief.json")
+    parser.add_argument("--combos_basename", type=str,
+                        default="env_agent_combos_false_belief_fixed_two_agents.json")
+    parser.add_argument("--run_label", type=str, default="false_belief_fixed_two_agents",
+                        help="Suffix used in pair directory names.")
     parser.add_argument("--summary_layers", type=int, nargs="+", default=[0, 8, 16, 24, 31])
     parser.add_argument("--verbose_analysis", action="store_true", default=False,
                         help="When set, compute and save all outputs (heatmaps, contrastive plots, "
@@ -761,18 +768,21 @@ def main() -> None:
         print(f"Hugging Face cache: {hf_cache}")
 
     # ── scenario metadata ──
-    meta = load_scenario_meta(args.episode)
+    meta = load_scenario_meta(args.episode,
+                              envs_basename=args.envs_basename,
+                              combos_basename=args.combos_basename)
     print(f"Episode {args.episode}: {meta['codename']}")
     print(f"  scenario_type={meta['scenario_type']}, item={meta['item']}")
     print(f"  true_location={meta['true_location']}, belief={meta['belief_condition']}, goal={meta['goal_condition']}")
-    print(f"  loc_a={meta['loc_a']}, loc_b={meta['loc_b']}, b_belief={meta['b_belief']}")
+    b_belief_display = meta.get('b_belief', meta.get('b_evidence', ''))
+    print(f"  loc_a={meta['loc_a']}, loc_b={meta['loc_b']}, b_belief={b_belief_display}")
 
     # ── pair name ──
     affected_type = "None"
     value = 0
     m1_full = f"{args.model_1}_{affected_type}_{value}"
     m2_full = f"{args.model_2}_{affected_type}_{value}"
-    pair_name = f"{m1_full}_{m2_full}_false_belief_fixed_two_agents"
+    pair_name = f"{m1_full}_{m2_full}_{args.run_label}"
 
     dialog_record = load_dialog_record(pair_name, args.episode, args.seed, args.temp,
                                        results_dir=args.results_dir)
@@ -787,7 +797,7 @@ def main() -> None:
 
     # ── output dir ──
     out_dir = os.path.join(
-        REPO_ROOT, "logit_lens_results_false_belief_100", pair_name,
+        REPO_ROOT, args.output_dir, pair_name,
         f"episode_{args.episode}_{meta['codename']}",
     )
     os.makedirs(out_dir, exist_ok=True)

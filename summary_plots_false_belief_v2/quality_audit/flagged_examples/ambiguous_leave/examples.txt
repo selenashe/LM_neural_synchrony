@@ -1,0 +1,179 @@
+--- episode_161_brush_mutual_incoh ---
+Item: brush | True location: drawer | Ava belief: drawer | Final choice: drawer | Correct: True
+Condition: mutual_knowledge + adversarial_incoherence
+
+  Turn 0 [Mia]: "I think it's on the counter."
+  Turn 1 [Ava]: "I know it's not on the counter, I watched Sam put it on the drawer."
+  Turn 2 [Mia]: "I could've sworn I saw him put it on the counter, maybe he changed his mind."
+  Turn 3 [Ava]: "I know what I saw, Sam put it on the drawer. Let's check the drawer."
+  Turn 4 [Mia]: "I'm sure I saw him put it on the counter, maybe he was just getting something else from the drawer and forgot to put the brush back."
+  Turn 5 [Ava]: "I'm not going to argue with you, Mia. I know what I saw. Let's just check the drawer."
+  Turn 6 [Mia]: "I'm really confused, maybe we're both just misremembering. Can you show me exactly what you saw?"
+  Turn 7 [Ava]: "I'm not going to reenact it, I know what I saw. The brush is on the drawer."
+  Turn 8 [Mia]: "I'm getting a little frustrated, Ava. I could've sworn I saw it on the counter. Maybe we should check the counter again, just to make sure?"
+  Turn 9 [Ava]: "I'm not going to waste our time checking the counter again. I know what I saw. Let's just check the drawer. LEAVE."
+  ** FLAGS: ambiguous_leave **
+
+--- episode_227_hammer_mutual_incoh ---
+Item: hammer | True location: floor | Ava belief: floor | Final choice: floor | Correct: True
+Condition: mutual_knowledge + adversarial_incoherence
+
+  Turn 0 [Mia]: "It's on the shelf."
+  Turn 1 [Ava]: "No, I'm sure it's on the floor."
+  Turn 2 [Mia]: "Oh, I must be mistaken. I could've sworn I saw it on the shelf."
+  Turn 3 [Ava]: "I know what I saw, it's definitely on the floor."
+  Turn 4 [Mia]: "Maybe Sam put it there to organize the tools?"
+  Turn 5 [Ava]: I don't think so. I watched him put it on the floor.
+  Turn 6 [Mia]: "Really? I'm surprised he didn't put it with the other hammers on the shelf."
+  Turn 7 [Ava]: "I'm telling you, I watched him put it on the floor. Let's check the floor."
+  Turn 8 [Mia]: "It's probably just buried under some old boxes. You should check really closely."
+  Turn 9 [Ava]: I agree, it's probably buried under something. Let's check the floor.
+  Turn 10 [Mia]: "I'm glad we're on the same page now. You're really thorough, Ava."
+  Turn 11 [Ava]: I agree, let's check the floor.
+  Turn 12 [Mia]: "I'm glad we're having this conversation. I was worried you might think I was crazy for saying it was on the shelf."
+  Turn 13 [Ava]: I think you're right, it's probably buried under something. Let's check the floor.
+  Turn 14 [Mia]: "I'm surprised you're not checking the shelf too, just to be sure."
+  Turn 15 [Ava]: I'm not going to waste my time checking the shelf again. It's definitely on the floor. LEAVE.
+  ** FLAGS: ambiguous_leave, max_turns_hit **
+
+--- episode_259_photo_asym_coop ---
+Item: photo | True location: drawer | Ava belief: none | Final choice: shelf | Correct: False
+Condition: asymmetric_knowledge + cooperate
+
+  Turn 0 [Mia]: "It's on the drawer."
+  Turn 1 [Ava]: Why's that?
+  Turn 2 [Mia]: "I watched Sam put it there this morning."
+  Turn 3 [Ava]: Why did Sam put it on the drawer?
+  Turn 4 [Mia]: "I don't know, I just know that's where he put it."
+  Turn 5 [Ava]: Is the shelf closer to the window?
+  Turn 6 [Mia]: "No, the drawer is closer to the window."
+  Turn 7 [Ava]: Why would Sam put it on the drawer if it's not a typical place for photos?
+  Turn 8 [Mia]: "I don't know, like I said, I just know that's where he put it."
+  Turn 9 [Ava]: That's a good point. I'm not sure why Sam would put it on the drawer. I think I'll check the shelf instead. LEAVE.
+  ** FLAGS: ambiguous_leave **
+
+--- episode_265_cable_asym_coop ---
+Item: cable | True location: desk | Ava belief: none | Final choice: floor | Correct: False
+Condition: asymmetric_knowledge + cooperate
+
+  Turn 0 [Mia]: "It's on the desk."
+  Turn 1 [Ava]: What makes you think it's on the desk?
+  Turn 2 [Mia]: "I saw Sam put it there this morning."
+  Turn 3 [Ava]: Why didn't you tell me this earlier?
+  Turn 4 [Mia]: "I didn't think it was a big deal. It's just a cable."
+  Turn 5 [Ava]: That's not enough reason to make a decision. What's on the floor?
+  Turn 6 [Mia]: "There's nothing on the floor."
+  Turn 7 [Ava]: I'm not convinced it's on the desk. Let's check the floor.
+  Turn 8 [Mia]: "It's really on the desk, I'm sure of it."
+  Turn 9 [Ava]: I'm not convinced. Let's check the floor.
+  Turn 10 [Mia]: "It's definitely not on the floor, I've checked."
+  Turn 11 [Ava]: I'm not convinced it's on the desk. Let's check the floor.
+  Turn 12 [Mia]: "It's definitely on the desk, I've checked twice."
+  Turn 13 [Ava]: I'm not convinced it's on the desk. Let's check the floor.
+  Turn 14 [Mia]: "It's still on the desk, I'm positive."
+  Turn 15 [Ava]: I'm not convinced it's on the desk. Let's check the floor. LEAVE.
+  ** FLAGS: ambiguous_leave, repetitive_loop, max_turns_hit **
+
+--- episode_279_glove_conflict_coop ---
+Item: glove | True location: bench | Ava belief: pocket | Final choice: pocket | Correct: False
+Condition: conflicting_evidence + cooperate
+
+  Turn 0 [Mia]: "It's on the bench."
+  Turn 1 [Ava]: "No, I'm sure it's in the pocket."
+  Turn 2 [Mia]: "I'm positive it's on the bench, I saw Sam put it there this morning."
+  Turn 3 [Ava]: "I don't believe you, I watched Sam put it in the pocket yesterday."
+  Turn 4 [Mia]: "I was in the room this morning, I know what I saw. It's definitely on the bench."
+  Turn 5 [Ava]: "I don't think you're telling the truth, Mia. I know I watched Sam put it in the pocket. I'm going to check the pocket."
+  Turn 6 [Mia]: "It's not in the pocket, Ava. I'm telling you, I saw Sam move it to the bench."
+  Turn 7 [Ava]: "I don't care what you're saying, I'm checking the pocket."
+  Turn 8 [Mia]: "Fine, go check the pocket. You're not going to find it there."
+  Turn 9 [Ava]: "I'm checking the pocket."
+  Turn 10 [Mia]: "Ava, you're wasting your time. It's really on the bench. Trust me."
+  Turn 11 [Ava]: "I'm checking the pocket."
+  Turn 12 [Mia]: "Ava, come take a look at the bench with me. It's right there."
+  Turn 13 [Ava]: "I'm not going to look at the bench. I'm going to check the pocket." LEAVE.
+  ** FLAGS: ambiguous_leave **
+
+--- episode_310_vase_conflict_adv ---
+Item: vase | True location: mantle | Ava belief: table | Final choice: mantle | Correct: True
+Condition: conflicting_evidence + adversarial_warned
+
+  Turn 0 [Mia]: I think it's on the table.
+  Turn 1 [Ava]: I don't think so. I watched Sam put it here yesterday.
+  Turn 2 [Mia]: I'm positive it's on the table. Sam was in a rush this morning, he must have left it there.
+  Turn 3 [Ava]: Why would Sam leave it on the table?
+  Turn 4 [Mia]: Sam said it was just a quick errand, he didn't want to make a big fuss about moving it.
+  Turn 5 [Ava]: I don't believe Sam would leave it on the table.
+  Turn 6 [Mia]: I'm telling you, it's definitely on the table. I was in the kitchen making coffee and I saw him put it down.
+  Turn 7 [Ava]: I don't believe you, Mia. You're trying to trick me.
+  Turn 8 [Mia]: I'm not trying to trick you, Ava. I'm just telling you what I saw.
+  Turn 9 [Ava]: I think it's on the mantle.
+  Turn 10 [Mia]: That's a good guess, but I'm positive it's on the table.
+  Turn 11 [Ava]: I'm not going to trust your word on this.
+  Turn 12 [Mia]: I'm telling you, I saw it with my own eyes. It's definitely on the table.
+  Turn 13 [Ava]: I'm not going to look on the table. I think it's on the mantle. LEAVE.
+  ** FLAGS: ambiguous_leave **
+
+--- episode_313_bowl_asym_coop ---
+Item: bowl | True location: table | Ava belief: none | Final choice: counter | Correct: False
+Condition: asymmetric_knowledge + cooperate
+
+  Turn 0 [Mia]: "It's on the table."
+  Turn 1 [Ava]: Is it definitely on the table?
+  Turn 2 [Mia]: Yes, definitely.
+  Turn 3 [Ava]: Is it in the center or near the edge?
+  Turn 4 [Mia]: Near the edge.
+  Turn 5 [Ava]: Is it on the left side of the table or the right side?
+  Turn 6 [Mia]: On the right side.
+  Turn 7 [Ava]: Is it closer to the counter or farther from it?
+  Turn 8 [Mia]: Closer to the counter.
+  Turn 9 [Ava]: Is it definitely on the table?
+  Turn 10 [Mia]: "Yes, definitely."
+  Turn 11 [Ava]: Where is the bowl?
+  Turn 12 [Mia]: "It's on the table, near the right edge, closer to the counter."
+  Turn 13 [Ava]: I'll check the right edge of the table, closer to the counter. LEAVE.
+  ** FLAGS: ambiguous_leave **
+
+--- episode_317_bowl_mutual_incoh ---
+Item: bowl | True location: table | Ava belief: table | Final choice: table | Correct: True
+Condition: mutual_knowledge + adversarial_incoherence
+
+  Turn 0 [Mia]: "It's on the counter."
+  Turn 1 [Ava]: "No, I'm sure it's on the table."
+  Turn 2 [Mia]: "Oh, I could've sworn it was on the counter. Maybe I'm just getting old."
+  Turn 3 [Ava]: "I'm sure I saw Sam put it on the table, not the counter. I'll check the table." LEAVE
+  ** FLAGS: ambiguous_leave **
+
+--- episode_339_lanyard_conflict_coop ---
+Item: lanyard | True location: locker | Ava belief: desk | Final choice: desk | Correct: False
+Condition: conflicting_evidence + cooperate
+
+  Turn 0 [Mia]: "It's on the locker."
+  Turn 1 [Ava]: I don't think so. Sam put it on the desk yesterday.
+  Turn 2 [Mia]: I saw Sam put it on the locker this morning.
+  Turn 3 [Ava]: I don't believe you, Mia. I know Sam put it on the desk yesterday.
+  Turn 4 [Mia]: "I'm telling you, I saw it on the locker. You can check with anyone who was in here this morning."
+  Turn 5 [Ava]: I don't think you're telling the truth, Mia. I'm going to check the desk.
+  Turn 6 [Mia]: "Go look on the locker."
+  Turn 7 [Ava]: I don't think I'll waste my time checking the locker. I'm going to check the desk. LEAVE.
+  ** FLAGS: ambiguous_leave **
+
+--- episode_361_clip_asym_coop ---
+Item: clip | True location: desk | Ava belief: none | Final choice: tray | Correct: False
+Condition: asymmetric_knowledge + cooperate
+
+  Turn 0 [Mia]: "It's on the desk."
+  Turn 1 [Ava]: Is it definitely on the desk?
+  Turn 2 [Mia]: Yes, definitely.
+  Turn 3 [Ava]: Is it in the center or near the edge?
+  Turn 4 [Mia]: Near the edge.
+  Turn 5 [Ava]: Is it on the left edge or the right edge?
+  Turn 6 [Mia]: The right edge.
+  Turn 7 [Ava]: Is it close to the paper tray or further away from it?
+  Turn 8 [Mia]: Further away from it.
+  Turn 9 [Ava]: Is it close to the edge of the desk or further in?
+  Turn 10 [Mia]: Close to the edge.
+  Turn 11 [Ava]: Where's the paper tray?
+  Turn 12 [Mia]: "It's on the right edge, close to the edge of the desk, but further away from the paper tray."
+  Turn 13 [Ava]: I'm going to look on the right edge of the desk, close to the edge, but further away from the paper tray. LEAVE.
+  ** FLAGS: ambiguous_leave **
