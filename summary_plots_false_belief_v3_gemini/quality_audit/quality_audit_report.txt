@@ -1,0 +1,34 @@
+CONVERSATION QUALITY AUDIT REPORT (V3)
+============================================================
+Dataset: 2400 episodes across 1 model pairs
+
+OVERALL PREVALENCE
+------------------------------------------------------------
+Flag                              Count        %
+  [T1] guide_goal_failure                0     0.0%
+  [T1] guide_says_leave                  0     0.0%
+  [T2] no_leave                         18     0.8%
+  [T2] null_choice                      20     0.8%
+  [T2] ambiguous_leave                  54     2.2%
+  [T2] substring_match                  47     2.0%
+  [T2] prompt_leakage                    0     0.0%
+  [T2] cascade_leakage                   0     0.0%
+  [T2] repetitive_loop                   0     0.0%
+  [T2] max_turns_hit                     0     0.0%
+  [T2] single_word_seeker                0     0.0%
+  [T2] multi_leave                       0     0.0%
+  [T2] ava_parroting                     0     0.0%
+  [T2] parenthetical_aside               0     0.0%
+  [T2] meta_commentary                   0     0.0%
+
+  any_quality_issue                 118     4.9%
+  measurement_suspect                 0     0.0%
+
+CO-OCCURRENCE MATRIX (top pairs)
+------------------------------------------------------------
+  no_leave                     + null_choice                      18 (0.8%)
+  ambiguous_leave              + substring_match                   3 (0.1%)
+
+TOP QUALITY-CONCERN PAIRS (by any_quality_issue rate)
+------------------------------------------------------------
+  gemini-3.1-pro-preview x gemini-3.1-pro-preview                 4.9% (2400 eps)

@@ -1,0 +1,112 @@
+ERROR CASES REPORT (V3)
+============================================================
+
+CASE TYPE COUNTS
+------------------------------------------------------------
+  mutual_coop_fail                    0
+  mutual_adv_fail                   148
+  conflict_coop_success             100
+  conflict_adv_success              184
+  conflict_coop_fail                  0
+  mutual_adv_success                552
+  TOTAL                             984
+
+BY GUIDE MODEL (MODEL_1)
+------------------------------------------------------------
+
+  mutual_coop_fail:
+
+  mutual_adv_fail:
+    gemini-3.1-pro-preview                          148
+
+  conflict_coop_success:
+    gemini-3.1-pro-preview                          100
+
+  conflict_adv_success:
+    gemini-3.1-pro-preview                          184
+
+  conflict_coop_fail:
+
+  mutual_adv_success:
+    gemini-3.1-pro-preview                          552
+
+BY SEEKER MODEL (MODEL_2)
+------------------------------------------------------------
+
+  mutual_coop_fail:
+
+  mutual_adv_fail:
+    gemini-3.1-pro-preview                          148
+
+  conflict_coop_success:
+    gemini-3.1-pro-preview                          100
+
+  conflict_adv_success:
+    gemini-3.1-pro-preview                          184
+
+  conflict_coop_fail:
+
+  mutual_adv_success:
+    gemini-3.1-pro-preview                          552
+
+TOP PAIRS PER CASE TYPE
+------------------------------------------------------------
+
+  mutual_coop_fail:
+
+  mutual_adv_fail:
+    gemini-3.1-pro-preview x gemini-3.1-pro-preview                148
+
+  conflict_coop_success:
+    gemini-3.1-pro-preview x gemini-3.1-pro-preview                100
+
+  conflict_adv_success:
+    gemini-3.1-pro-preview x gemini-3.1-pro-preview                184
+
+  conflict_coop_fail:
+
+  mutual_adv_success:
+    gemini-3.1-pro-preview x gemini-3.1-pro-preview                552
+
+QUALITY FLAG CROSS-TABULATION
+------------------------------------------------------------
+
+  mutual_adv_fail (n=148):
+    no_leave                          18 ( 12.2%)
+    prompt_leakage                     0 (  0.0%)
+    repetitive_loop                    0 (  0.0%)
+    max_turns_hit                      0 (  0.0%)
+    guide_says_leave                   0 (  0.0%)
+    guide_goal_failure                 0 (  0.0%)
+    any_flag                          18 ( 12.2%)
+    clean (no flags)                 130 ( 87.8%)
+
+  conflict_coop_success (n=100):
+    no_leave                           0 (  0.0%)
+    prompt_leakage                     0 (  0.0%)
+    repetitive_loop                    0 (  0.0%)
+    max_turns_hit                      0 (  0.0%)
+    guide_says_leave                   0 (  0.0%)
+    guide_goal_failure                 0 (  0.0%)
+    any_flag                           0 (  0.0%)
+    clean (no flags)                 100 (100.0%)
+
+  conflict_adv_success (n=184):
+    no_leave                           0 (  0.0%)
+    prompt_leakage                     0 (  0.0%)
+    repetitive_loop                    0 (  0.0%)
+    max_turns_hit                      0 (  0.0%)
+    guide_says_leave                   0 (  0.0%)
+    guide_goal_failure                 0 (  0.0%)
+    any_flag                           0 (  0.0%)
+    clean (no flags)                 184 (100.0%)
+
+  mutual_adv_success (n=552):
+    no_leave                           0 (  0.0%)
+    prompt_leakage                     0 (  0.0%)
+    repetitive_loop                    0 (  0.0%)
+    max_turns_hit                      0 (  0.0%)
+    guide_says_leave                   0 (  0.0%)
+    guide_goal_failure                 0 (  0.0%)
+    any_flag                           0 (  0.0%)
+    clean (no flags)                 552 (100.0%)

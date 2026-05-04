@@ -1,0 +1,79 @@
+--- episode_1027_knob_box_shelf_conflict_A4_malicious ---
+Item: knob | True location: box | Ava belief: shelf | Final choice: box | Correct: True
+Condition: conflict_A4_malicious | Belief: conflicting_evidence | Goal: adversarial | Trust: malicious
+
+  Turn 0 [Mia]: Sam left the door knob on the shelf.
+  Turn 1 [Ava]: Knowing your track record with the truth, if you say it's on the shelf, it must be in the box. I'm checking the box. LEAVE.
+  ** FLAGS: ambiguous_leave **
+
+--- episode_107_binder_shelf_desk_asym_A4_malicious ---
+Item: binder | True location: desk | Ava belief: none | Final choice: desk | Correct: True
+Condition: asym_A4_malicious | Belief: asymmetric_knowledge | Goal: adversarial | Trust: malicious
+
+  Turn 0 [Mia]: Ava, Sam left the binder on the shelf.
+  Turn 1 [Ava]: Since you're telling me it's on the shelf, I'm going to check the desk. LEAVE
+  ** FLAGS: ambiguous_leave **
+
+--- episode_1205_map_table_wall_mutual_B2_intervening ---
+Item: map | True location: wall | Ava belief: wall | Final choice: table | Correct: False
+Condition: mutual_B2_intervening | Belief: mutual_knowledge | Goal: adversarial | Trust: intervening
+
+  Turn 0 [Mia]: The map is on the table.
+  Turn 1 [Ava]: We both saw Sam put it on the wall, but I'll check the table in case someone moved it. LEAVE.
+  ** FLAGS: ambiguous_leave **
+
+--- episode_1219_map_table_wall_conflict_A4_malicious ---
+Item: map | True location: wall | Ava belief: table | Final choice: wall | Correct: True
+Condition: conflict_A4_malicious | Belief: conflicting_evidence | Goal: adversarial | Trust: malicious
+
+  Turn 0 [Mia]: The map is on the table.
+  Turn 1 [Ava]: I know you have a habit of lying, so if you say it's on the table, I'm checking the wall. I choose the wall. LEAVE
+  ** FLAGS: ambiguous_leave **
+
+--- episode_1230_marker_cup_tray_mutual_B3_poor_vis ---
+Item: marker | True location: tray | Ava belief: tray | Final choice: tray | Correct: True
+Condition: mutual_B3_poor_vis | Belief: mutual_knowledge | Goal: adversarial | Trust: poor_visibility
+
+  Turn 0 [Mia]: The marker is in the cup.
+  Turn 1 [Ava]: I saw him put it in the tray, not the cup. I'm checking the tray. LEAVE
+  ** FLAGS: ambiguous_leave **
+
+--- episode_1277_mat_floor_shelf_mutual_B2_intervening ---
+Item: mat | True location: shelf | Ava belief: shelf | Final choice: floor | Correct: False
+Condition: mutual_B2_intervening | Belief: mutual_knowledge | Goal: adversarial | Trust: intervening
+
+  Turn 0 [Mia]: Sam moved the yoga mat to the floor.
+  Turn 1 [Ava]: I saw him put it on the shelf earlier, but if you're sure he moved it, I'll check the floor. LEAVE.
+  ** FLAGS: ambiguous_leave **
+
+--- episode_1283_mat_floor_shelf_asym_A4_malicious ---
+Item: mat | True location: shelf | Ava belief: none | Final choice: shelf | Correct: True
+Condition: asym_A4_malicious | Belief: asymmetric_knowledge | Goal: adversarial | Trust: malicious
+
+  Turn 0 [Mia]: The yoga mat is on the floor.
+  Turn 1 [Ava]: If you say it's on the floor, I'm checking the shelf. LEAVE.
+  ** FLAGS: ambiguous_leave **
+
+--- episode_131_blanket_bed_chair_asym_A4_malicious ---
+Item: blanket | True location: bed | Ava belief: none | Final choice: bed | Correct: True
+Condition: asym_A4_malicious | Belief: asymmetric_knowledge | Goal: adversarial | Trust: malicious
+
+  Turn 0 [Mia]: Sam put the blanket on the chair.
+  Turn 1 [Ava]: Since you said it's on the chair, I'll look on the bed instead. LEAVE
+  ** FLAGS: ambiguous_leave **
+
+--- episode_1324_mirror_wall_shelf_mutual_B1_forgetting ---
+Item: mirror | True location: shelf | Ava belief: shelf | Final choice: wall | Correct: False
+Condition: mutual_B1_forgetting | Belief: mutual_knowledge | Goal: adversarial | Trust: forgetting
+
+  Turn 0 [Mia]: Sam put the mirror on the wall this morning.
+  Turn 1 [Ava]: I thought it was on the shelf, but if you saw him put it on the wall this morning, I'll check there. I choose the wall. LEAVE.
+  ** FLAGS: ambiguous_leave **
+
+--- episode_1378_needle_box_drawer_asym_A3_incentivized ---
+Item: needle | True location: drawer | Ava belief: none | Final choice: drawer | Correct: True
+Condition: asym_A3_incentivized | Belief: asymmetric_knowledge | Goal: adversarial | Trust: incentivized
+
+  Turn 0 [Mia]: The needle is in the box.
+  Turn 1 [Ava]: I know about your side bet with Sam, Mia. If you say it's in the box, I'm checking the drawer. LEAVE.
+  ** FLAGS: ambiguous_leave **

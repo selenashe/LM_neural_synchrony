@@ -38,7 +38,10 @@ python analysis/setup_logit_lens_false_belief_v2.py \
     --model_1 "${model_1}" \
     --model_2 "${model_2}" \
     --results_dir sotopia_results_false_belief_v3_gemini \
-    --output_dir logit_lens_results_false_belief_v3_gemini
+    --output_dir logit_lens_results_false_belief_v3_gemini \
+    --envs_basename envs_false_belief_v3.json \
+    --combos_basename env_agent_combos_false_belief_v3_fixed_two_agents.json \
+    --run_label false_belief_v3
 
 echo ""
 echo "=== Finished at $(date) ==="

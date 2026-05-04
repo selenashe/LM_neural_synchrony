@@ -9,6 +9,7 @@ Produces:
 """
 
 import argparse
+import csv
 import json
 import os
 import re
@@ -555,6 +556,104 @@ def plot_stem_for_turn_agent(
 
 
 # ─────────────────────────────────────────────────────────
+# Full results CSV (all_results.csv)
+# ─────────────────────────────────────────────────────────
+
+def _parse_ep_index(ep_dir_name: str) -> int:
+    m = re.match(r"episode_(\d+)_", ep_dir_name)
+    return int(m.group(1)) if m else -1
+
+
+def _load_intro_fields(pair_dir_name: str, ep_idx: int,
+                       dialogs_root: Path) -> dict:
+    result = {"scenario": "", "mia_goal": "", "ava_goal": ""}
+    csv_path = dialogs_root / pair_dir_name / f"{ep_idx}_temp0.7_seed0.csv"
+    if not csv_path.exists():
+        return result
+    try:
+        with open(csv_path, encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            row = next(reader)
+            intro = row.get("Intro", "")
+            for line in intro.split("\n"):
+                stripped = line.strip()
+                if stripped.startswith("Scenario:"):
+                    result["scenario"] = stripped.removeprefix("Scenario:").strip()
+                elif stripped.startswith("Mia Sanders's goal:"):
+                    result["mia_goal"] = stripped.removeprefix("Mia Sanders's goal:").strip()
+                elif stripped.startswith("Ava Thompson's goal:"):
+                    result["ava_goal"] = stripped.removeprefix("Ava Thompson's goal:").strip()
+    except Exception:
+        pass
+    return result
+
+
+def _format_dialogue(turns: list) -> str:
+    parts = []
+    for t in turns:
+        speaker = t.get("speaker", "?")
+        text = t.get("text", "")
+        parts.append(f"[{speaker}]: {text}")
+    return "\n".join(parts)
+
+
+def build_full_results_csv(records: list, dialogs_root: Path,
+                           out_path: Path) -> None:
+    scenario_id_map = {st: i for i, st in enumerate(sorted(_SCENARIO_VOCAB.keys()))}
+
+    rows = []
+    for r in records:
+        beh = r.get("behavioral")
+        if beh is None:
+            continue
+        meta = beh.get("scenario_meta", {})
+        ep_dir = Path(r["ep_dir"])
+        ep_dir_name = ep_dir.name
+        pair_dir_name = ep_dir.parent.name
+        raw_ep_idx = _parse_ep_index(ep_dir_name)
+        scenario_type = meta.get("scenario_type", r.get("scenario", ""))
+        episode_id = scenario_id_map.get(scenario_type, raw_ep_idx)
+        b_belief = meta.get("b_belief", meta.get("b_evidence", ""))
+        intro = _load_intro_fields(pair_dir_name, raw_ep_idx, dialogs_root)
+        dialogue = _format_dialogue(beh.get("turns", []))
+        final_choice = beh.get("final_choice", "")
+        correct = beh.get("correct", "")
+        rows.append({
+            "pair": r["pair"],
+            "condition": r["condition"],
+            "episode": episode_id,
+            "scenario": intro["scenario"],
+            "mia_goal": intro["mia_goal"],
+            "ava_goal": intro["ava_goal"],
+            "dialogue": dialogue,
+            "item": meta.get("item", ""),
+            "true_location": meta.get("true_location", "").replace("_", " "),
+            "ava_belief": str(b_belief).replace("_", " "),
+            "final_choice": final_choice if final_choice else "",
+            "correct": correct,
+        })
+
+    if not rows:
+        print("  No behavioral data to export.")
+        return
+
+    df = pd.DataFrame(rows)
+
+    valid_mask = df["final_choice"].notna() & (df["final_choice"] != "")
+    valid_counts = df[valid_mask].groupby(["pair", "condition"]).size() \
+                     .reset_index(name="valid_episode_count")
+    df = df.merge(valid_counts, on=["pair", "condition"], how="left")
+    df["valid_episode_count"] = df["valid_episode_count"].fillna(0).astype(int)
+
+    df = df.sort_values(["pair", "condition", "episode"])
+    df = df[["pair", "condition", "valid_episode_count", "episode", "scenario",
+             "mia_goal", "ava_goal", "dialogue", "item", "true_location",
+             "ava_belief", "final_choice", "correct"]]
+    df.to_csv(out_path, index=False)
+    print(f"  Saved {out_path} ({len(df)} rows)")
+
+
+# ─────────────────────────────────────────────────────────
 # Main
 # ─────────────────────────────────────────────────────────
 
@@ -566,11 +665,20 @@ def main():
                         help="Results directory name (relative to REPO_ROOT).")
     parser.add_argument("--output_dir", type=str, default="summary_plots_false_belief_100",
                         help="Output directory name (relative to REPO_ROOT).")
+    parser.add_argument("--dialogs_dir", type=str, default=None,
+                        help="Dialogs root directory (relative to REPO_ROOT). "
+                             "Auto-detected from results_dir if not given.")
     args = parser.parse_args()
 
     RESULTS_ROOT = REPO_ROOT / args.results_dir
     OUT_DIR = REPO_ROOT / args.output_dir
     PAIR_DIRS = sorted(RESULTS_ROOT.iterdir()) if RESULTS_ROOT.exists() else []
+
+    if args.dialogs_dir:
+        DIALOGS_ROOT = REPO_ROOT / args.dialogs_dir
+    else:
+        sotopia_dir_name = args.results_dir.replace("logit_lens_results_", "sotopia_results_")
+        DIALOGS_ROOT = REPO_ROOT / sotopia_dir_name / "dialogs"
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     print("Loading all episode data...")
@@ -597,6 +705,8 @@ def main():
         plot_behavioral_per_pair(beh_df)
         plot_turn_distribution(beh_df)
         plot_turn_distribution_by_condition(beh_df)
+        print("\n  Building full results CSV...")
+        build_full_results_csv(records, DIALOGS_ROOT, OUT_DIR / "all_results.csv")
     else:
         print("  No behavioral data found.")
 

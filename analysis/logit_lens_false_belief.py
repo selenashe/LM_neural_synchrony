@@ -472,6 +472,8 @@ def build_behavioral_summary_fb(
             "goal_condition": meta["goal_condition"],
             "b_belief": meta.get("b_belief", meta.get("b_evidence")),
             "mismatch": meta["mismatch"],
+            "condition": meta.get("condition", ""),
+            "trust_manipulation": meta.get("trust_manipulation", ""),
             "loc_a": meta["loc_a"],
             "loc_b": meta["loc_b"],
         },

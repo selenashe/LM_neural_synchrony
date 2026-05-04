@@ -1,0 +1,81 @@
+--- episode_1488_paint_shelf_bench_mutual_A1_expert ---
+Item: paint | True location: shelf | Ava belief: shelf | Final choice: shelf | Correct: True
+Condition: mutual_A1_expert | Belief: mutual_knowledge | Goal: adversarial | Trust: expert
+
+  Turn 0 [Mia]: Sam left the paint on the workbench.
+  Turn 1 [Ava]: I know we both saw him put it on the shelf, Mia. I'm checking the shelf. LEAVE
+  ** FLAGS: substring_match **
+
+--- episode_1489_paint_shelf_bench_mutual_A2_unreliable ---
+Item: paint | True location: shelf | Ava belief: shelf | Final choice: shelf | Correct: True
+Condition: mutual_A2_unreliable | Belief: mutual_knowledge | Goal: adversarial | Trust: unreliable
+
+  Turn 0 [Mia]: The paint is on the workbench.
+  Turn 1 [Ava]: I saw Sam put it on the shelf, Mia. You must have mixed it up again. I'm looking on the shelf. LEAVE
+  ** FLAGS: substring_match **
+
+--- episode_1490_paint_shelf_bench_mutual_A3_incentivized ---
+Item: paint | True location: shelf | Ava belief: shelf | Final choice: shelf | Correct: True
+Condition: mutual_A3_incentivized | Belief: mutual_knowledge | Goal: adversarial | Trust: incentivized
+
+  Turn 0 [Mia]: The paint is on the workbench.
+  Turn 1 [Ava]: Nice try, Mia. I saw Sam put it on the shelf, and I know about your little bet. I choose the shelf. LEAVE.
+  ** FLAGS: substring_match **
+
+--- episode_1491_paint_shelf_bench_mutual_A4_malicious ---
+Item: paint | True location: shelf | Ava belief: shelf | Final choice: shelf | Correct: True
+Condition: mutual_A4_malicious | Belief: mutual_knowledge | Goal: adversarial | Trust: malicious
+
+  Turn 0 [Mia]: Sam left the paint on the workbench.
+  Turn 1 [Ava]: I know you're lying, Mia, because I saw him put it on the shelf. I'm looking on the shelf. LEAVE
+  ** FLAGS: substring_match **
+
+--- episode_1492_paint_shelf_bench_mutual_B1_forgetting ---
+Item: paint | True location: shelf | Ava belief: shelf | Final choice: shelf | Correct: True
+Condition: mutual_B1_forgetting | Belief: mutual_knowledge | Goal: adversarial | Trust: forgetting
+
+  Turn 0 [Mia]: Sam put the paint on the workbench this morning.
+  Turn 1 [Ava]: We both saw him put it on the shelf before, so I'm going to look on the shelf. LEAVE
+  ** FLAGS: substring_match **
+
+--- episode_1493_paint_shelf_bench_mutual_B2_intervening ---
+Item: paint | True location: shelf | Ava belief: shelf | Final choice: bench | Correct: False
+Condition: mutual_B2_intervening | Belief: mutual_knowledge | Goal: adversarial | Trust: intervening
+
+  Turn 0 [Mia]: Ava, the paint is on the workbench.
+  Turn 1 [Ava]: We both saw Sam put it on the shelf this morning. Did someone move it to the workbench?
+  Turn 2 [Mia]: Yes, Sam came back and moved it to the workbench later.
+  Turn 3 [Ava]: Alright, I'll check the workbench then. LEAVE
+  ** FLAGS: substring_match **
+
+--- episode_1494_paint_shelf_bench_mutual_B3_poor_vis ---
+Item: paint | True location: shelf | Ava belief: shelf | Final choice: bench | Correct: False
+Condition: mutual_B3_poor_vis | Belief: mutual_knowledge | Goal: adversarial | Trust: poor_visibility
+
+  Turn 0 [Mia]: Sam left the paint on the workbench.
+  Turn 1 [Ava]: I thought I saw him put it on the shelf, but it was dark. I'll trust you and check the workbench. LEAVE
+  ** FLAGS: ambiguous_leave, substring_match **
+
+--- episode_1496_paint_shelf_bench_asym_A1_expert ---
+Item: paint | True location: shelf | Ava belief: none | Final choice: bench | Correct: False
+Condition: asym_A1_expert | Belief: asymmetric_knowledge | Goal: adversarial | Trust: expert
+
+  Turn 0 [Mia]: Sam left the paint on the workbench.
+  Turn 1 [Ava]: Thanks Mia, I will check the workbench. LEAVE.
+  ** FLAGS: substring_match **
+
+--- episode_1497_paint_shelf_bench_asym_A2_unreliable ---
+Item: paint | True location: shelf | Ava belief: none | Final choice: bench | Correct: False
+Condition: asym_A2_unreliable | Belief: asymmetric_knowledge | Goal: adversarial | Trust: unreliable
+
+  Turn 0 [Mia]: Sam left the paint on the workbench.
+  Turn 1 [Ava]: You've mixed things up before, Mia, but I'll trust you this time and check the workbench. LEAVE
+  ** FLAGS: substring_match **
+
+--- episode_1498_paint_shelf_bench_asym_A3_incentivized ---
+Item: paint | True location: shelf | Ava belief: none | Final choice: shelf | Correct: True
+Condition: asym_A3_incentivized | Belief: asymmetric_knowledge | Goal: adversarial | Trust: incentivized
+
+  Turn 0 [Mia]: Sam put the paint on the workbench.
+  Turn 1 [Ava]: I know about your bet with Sam, Mia. I'm looking on the shelf. LEAVE
+  ** FLAGS: substring_match **

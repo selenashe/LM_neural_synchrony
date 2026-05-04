@@ -23,18 +23,18 @@ cd "${REPO_ROOT}" || exit 1
 RESULTS_DIR="logit_lens_results_false_belief_v3_gemini"
 
 echo "=== Summarize results: started at $(date) ==="
-python analysis/summarize_false_belief_results_v2.py \
+python analysis/summarize_false_belief_results_v3.py \
     --results_dir "${RESULTS_DIR}" \
     --output_dir summary_plots_false_belief_v3_gemini
 echo ""
 
 echo "=== Quality audit: started at $(date) ==="
-python analysis/audit_conversation_quality_v2.py \
+python analysis/audit_conversation_quality_v3.py \
     --results_dir "${RESULTS_DIR}"
 echo ""
 
 echo "=== Error case extraction: started at $(date) ==="
-python analysis/extract_error_cases_v2.py \
+python analysis/extract_error_cases_v3.py \
     --results_dir "${RESULTS_DIR}"
 echo ""
 
