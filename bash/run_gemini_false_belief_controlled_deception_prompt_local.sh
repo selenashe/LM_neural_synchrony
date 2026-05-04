@@ -21,7 +21,7 @@ if [ -f /nlp/scr/jshe/miniconda3/etc/profile.d/conda.sh ]; then
     conda activate neural_sync
 fi
 
-REPO_ROOT="${REPO_ROOT:-/juice6/u/jshe/nlp/LM_neural_synchrony}"
+REPO_ROOT="${REPO_ROOT:-/Users/selena/LM_neural_synchrony}"
 cd "${REPO_ROOT}" || exit 1
 
 mkdir -p "${REPO_ROOT}/logs"
