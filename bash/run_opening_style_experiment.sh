@@ -2,10 +2,8 @@
 # Run the controlled opening-style experiment (local, API-based).
 # Usage: bash bash/run_opening_style_experiment.sh
 
-source /nlp/scr/jshe/miniconda3/etc/profile.d/conda.sh
-conda activate neural_sync
 
-REPO_ROOT="${REPO_ROOT:-/juice6/u/jshe/nlp/LM_neural_synchrony}"
+REPO_ROOT="${REPO_ROOT:-/Users/selena/LM_neural_synchrony}"
 cd "${REPO_ROOT}" || exit 1
 
 echo "=== Opening style experiment: started at $(date) ==="
