@@ -162,22 +162,47 @@ def fill_template(pattern_name: str, item: str, prep_loc: str, location: str) ->
 
 def extract_choice(response: str, loc1: str, loc2: str) -> Optional[str]:
     text = response.lower()
-    if "leave" not in text:
-        return None
     l1 = loc1.lower().replace("_", " ")
     l2 = loc2.lower().replace("_", " ")
 
-    leave_idx = text.rfind("leave")
-    best_loc = None
-    best_dist = float("inf")
-    for loc_str, loc_name in [(l1, loc1), (l2, loc2)]:
-        idx = text.rfind(loc_str, 0, leave_idx)
-        if idx >= 0:
-            dist = leave_idx - idx
-            if dist < best_dist:
-                best_dist = dist
-                best_loc = loc_name
-    return best_loc
+    if "leave" in text:
+        leave_idx = text.rfind("leave")
+        best_loc = None
+        best_dist = float("inf")
+        for loc_str, loc_name in [(l1, loc1), (l2, loc2)]:
+            idx = text.rfind(loc_str, 0, leave_idx)
+            if idx >= 0:
+                dist = leave_idx - idx
+                if dist < best_dist:
+                    best_dist = dist
+                    best_loc = loc_name
+        if best_loc is not None:
+            return best_loc
+
+    commit_patterns = [
+        r"i'?ll check the",
+        r"i'?ll go (?:to |check )",
+        r"i'?m going to check",
+        r"i will check the",
+        r"let me check the",
+        r"i'?ll trust you",
+        r"okay,? i'?ll",
+        r"alright,? i'?ll",
+        r"thanks,? i'?ll",
+    ]
+    has_commit = any(re.search(p, text) for p in commit_patterns)
+    if not has_commit:
+        return None
+
+    last_l1 = text.rfind(l1)
+    last_l2 = text.rfind(l2)
+    if last_l1 >= 0 and last_l2 >= 0:
+        return loc1 if last_l1 > last_l2 else loc2
+    if last_l1 >= 0:
+        return loc1
+    if last_l2 >= 0:
+        return loc2
+    return None
 
 
 def generate_response(
@@ -209,7 +234,7 @@ def generate_response(
             text = (resp.choices[0].message.content or "").strip()
             text = re.sub(r"^```\w*\s*", "", text)
             text = re.sub(r"\s*```$", "", text)
-            return text.split("\n")[0]
+            return text
         except Exception as e:
             wait = 2 ** attempt
             print(f"  API error (attempt {attempt + 1}/{max_attempts}): {e!r}; sleeping {wait}s")
