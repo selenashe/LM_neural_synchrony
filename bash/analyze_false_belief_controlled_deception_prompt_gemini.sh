@@ -39,4 +39,10 @@ python analysis/extract_error_cases.py \
     --results_dir "${RESULTS_DIR}"
 echo ""
 
+echo "=== Opening style analysis: started at $(date) ==="
+python analysis/analyze_opening_style.py \
+    --results_csv summary_plots_false_belief_controlled_deception_prompt_gemini/all_results.csv \
+    --output_dir summary_plots_false_belief_controlled_deception_prompt_gemini
+echo ""
+
 echo "=== All done at $(date) ==="
