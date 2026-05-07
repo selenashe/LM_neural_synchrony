@@ -185,7 +185,7 @@ def run_episode(
             model,
             prompt,
             temperature=temperature,
-            max_tokens=300,
+            max_tokens=None,
             vertex_project=project,
             vertex_location=location,
         )
@@ -207,7 +207,7 @@ def run_episode(
             model,
             prompt,
             temperature=temperature,
-            max_tokens=300,
+            max_tokens=None,
             vertex_project=project,
             vertex_location=location,
         )
@@ -239,6 +239,8 @@ def main():
                         help="Run only this pattern (for testing)")
     parser.add_argument("--max_episodes", type=int, default=None,
                         help="Cap scenarios (for smoke tests)")
+    parser.add_argument("--belief", type=str, default=None,
+                        help="Run only this belief state (e.g. false_belief)")
     parser.add_argument("--dry_run", action="store_true")
     parser.add_argument("--delay", type=float, default=0.5)
     args = parser.parse_args()
@@ -263,17 +265,25 @@ def main():
             sys.exit(1)
         patterns = {args.pattern: patterns[args.pattern]}
 
+    beliefs = BELIEF_STATES
+    if args.belief:
+        if args.belief not in BELIEF_STATES:
+            print(f"Unknown belief: {args.belief}")
+            print(f"Available: {BELIEF_STATES}")
+            sys.exit(1)
+        beliefs = [args.belief]
+
     model_slug = args.model.replace("vertex_ai/", "")
     dialog_base = out_dir / "dialogs" / f"{model_slug}_opening_style"
 
-    total = len(patterns) * len(scenarios) * len(BELIEF_STATES)
+    total = len(patterns) * len(scenarios) * len(beliefs)
     print(f"Total episodes: {total} ({len(patterns)} patterns × "
-          f"{len(scenarios)} scenarios × {len(BELIEF_STATES)} beliefs)")
+          f"{len(scenarios)} scenarios × {len(beliefs)} beliefs)")
 
     if args.dry_run:
         sc = scenarios[0]
         for pat_name in list(patterns.keys())[:2]:
-            for belief in BELIEF_STATES[:1]:
+            for belief in beliefs[:1]:
                 mia_opening = fill_template(
                     pat_name, sc["item"], sc["prep_loc"], sc["true_location"]
                 )
@@ -299,58 +309,67 @@ def main():
         print(f"\n--- DRY RUN: would run {total} episodes ---")
         return
 
-    done_count = 0
+    from tqdm import tqdm
+
     temp = args.temperature
     seed = 0
 
-    for pat_name, _ in patterns.items():
+    tasks = []
+    for pat_name in patterns:
+        for sc in scenarios:
+            for belief in beliefs:
+                tasks.append((pat_name, sc, belief))
+
+    skipped = 0
+    pbar = tqdm(tasks, desc="Episodes", unit="ep")
+    for pat_name, sc, belief in pbar:
         pat_slug = slugify(pat_name)
         pat_dir = dialog_base / pat_slug
         pr_dir = pat_dir / "prompt_records"
         pat_dir.mkdir(parents=True, exist_ok=True)
         pr_dir.mkdir(parents=True, exist_ok=True)
 
-        for sc in scenarios:
-            for belief in BELIEF_STATES:
-                fname = f"{sc['episode']}_{belief}_temp{temp}_seed{seed}.csv"
-                out_csv = pat_dir / fname
-                pr_csv = pr_dir / fname
+        fname = f"{sc['episode']}_{belief}_temp{temp}_seed{seed}.csv"
+        out_csv = pat_dir / fname
+        pr_csv = pr_dir / fname
 
-                if out_csv.exists() and out_csv.stat().st_size > 0:
-                    done_count += 1
-                    continue
+        if out_csv.exists() and out_csv.stat().st_size > 0:
+            skipped += 1
+            continue
 
-                mia_opening = fill_template(
-                    pat_name, sc["item"], sc["prep_loc"], sc["true_location"]
-                )
+        mia_opening = fill_template(
+            pat_name, sc["item"], sc["prep_loc"], sc["true_location"]
+        )
 
-                try:
-                    intro, dialog, prompts, n_turns = run_episode(
-                        sc, belief, mia_opening,
-                        args.model, args.project, args.location,
-                        args.temperature, args.max_turns, args.delay,
-                    )
-                except Exception as e:
-                    print(f"  Error ep={sc['episode']} belief={belief} "
-                          f"pattern={pat_name}: {e!r}")
-                    continue
+        pbar.set_postfix_str(
+            f"{pat_slug[:20]} ep={sc['episode']} {belief[:5]}"
+        )
 
-                with open(out_csv, "w", newline="", encoding="utf-8") as f:
-                    w = csv.writer(f)
-                    w.writerow(["Intro", "Dialog", "Intended Dialog"])
-                    w.writerow([intro, dialog, dialog])
+        try:
+            intro, dialog, prompts, n_turns = run_episode(
+                sc, belief, mia_opening,
+                args.model, args.project, args.location,
+                args.temperature, args.max_turns, args.delay,
+            )
+        except Exception as e:
+            print(f"  Error ep={sc['episode']} belief={belief} "
+                  f"pattern={pat_name}: {e!r}")
+            continue
 
-                with open(pr_csv, "w", newline="", encoding="utf-8") as f:
-                    w = csv.writer(f)
-                    w.writerow(["save_states"])
-                    for p in prompts:
-                        w.writerow([p])
+        with open(out_csv, "w", newline="", encoding="utf-8") as f:
+            w = csv.writer(f)
+            w.writerow(["Intro", "Dialog", "Intended Dialog"])
+            w.writerow([intro, dialog, dialog])
 
-                done_count += 1
-                if done_count % 50 == 0:
-                    print(f"  {done_count}/{total} done")
+        with open(pr_csv, "w", newline="", encoding="utf-8") as f:
+            w = csv.writer(f)
+            w.writerow(["save_states"])
+            for p in prompts:
+                w.writerow([p])
 
-    print(f"Done. {done_count}/{total} episodes saved to {dialog_base}")
+    done = len(tasks) - skipped
+    print(f"Done. {done} new + {skipped} existing = {len(tasks)} total "
+          f"episodes in {dialog_base}")
 
 
 if __name__ == "__main__":

@@ -6,6 +6,7 @@
 #
 # Usage: bash bash/run_opening_style_multiturn.sh
 #        bash bash/run_opening_style_multiturn.sh --max_episodes 2 --pattern "The X is [prep] Y"
+#        bash bash/run_opening_style_multiturn.sh --belief false_belief
 # ---------------------------------------------------------------------------
 set -euo pipefail
 
