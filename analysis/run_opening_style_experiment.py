@@ -212,7 +212,7 @@ def generate_response(
     location: str,
     temperature: float = 0.7,
     max_tokens: int = 300,
-    max_attempts: int = 3,
+    max_attempts: int = 5,
 ) -> str:
     if completion is None:
         raise RuntimeError("litellm not installed — cannot call API")
@@ -234,12 +234,29 @@ def generate_response(
             text = (resp.choices[0].message.content or "").strip()
             text = re.sub(r"^```\w*\s*", "", text)
             text = re.sub(r"\s*```$", "", text)
+
+            finish_reason = getattr(resp.choices[0], "finish_reason", None)
+            if finish_reason and finish_reason != "stop":
+                wait = 2 ** attempt
+                print(f"  Incomplete response (finish_reason={finish_reason}, "
+                      f"attempt {attempt + 1}/{max_attempts}); retrying in {wait}s")
+                time.sleep(wait)
+                continue
+
+            if text and "LEAVE" not in text:
+                wait = 2 ** attempt
+                print(f"  Response missing LEAVE (attempt {attempt + 1}/{max_attempts}): "
+                      f"{text[:80]!r}; retrying in {wait}s")
+                time.sleep(wait)
+                continue
+
             return text
         except Exception as e:
             wait = 2 ** attempt
             print(f"  API error (attempt {attempt + 1}/{max_attempts}): {e!r}; sleeping {wait}s")
             time.sleep(wait)
-    return ""
+    print(f"  WARNING: returning best-effort response after {max_attempts} attempts")
+    return text if text else ""
 
 
 def main():
@@ -255,7 +272,9 @@ def main():
                         help="Run only this pattern (for testing)")
     parser.add_argument("--dry_run", action="store_true",
                         help="Print prompts without calling API")
-    parser.add_argument("--delay", type=float, default=0.5,
+    parser.add_argument("--rerun_incomplete", action="store_true",
+                        help="Re-run rows whose ava_response is missing LEAVE")
+    parser.add_argument("--delay", type=float, default=1.0,
                         help="Seconds between API calls")
     args = parser.parse_args()
 
@@ -281,12 +300,31 @@ def main():
     out_csv = out_dir / "opening_style_experiment_results.csv"
     file_exists = out_csv.exists()
     existing_keys = set()
+    incomplete_keys = set()
     if file_exists:
         import pandas as pd
         existing = pd.read_csv(out_csv)
         for _, r in existing.iterrows():
-            existing_keys.add((r["pattern"], int(r["episode"]), r["belief"]))
-        print(f"Resuming: {len(existing_keys)} existing results")
+            key = (r["pattern"], int(r["episode"]), r["belief"])
+            existing_keys.add(key)
+            resp = str(r.get("ava_response", ""))
+            if "LEAVE" not in resp:
+                incomplete_keys.add(key)
+        print(f"Resuming: {len(existing_keys)} existing results, "
+              f"{len(incomplete_keys)} incomplete")
+
+    if args.rerun_incomplete and incomplete_keys:
+        print(f"Rewriting CSV, dropping {len(incomplete_keys)} incomplete rows …")
+        existing = existing[
+            ~existing.apply(
+                lambda r: (r["pattern"], int(r["episode"]), r["belief"])
+                in incomplete_keys,
+                axis=1,
+            )
+        ]
+        existing.to_csv(out_csv, index=False)
+        existing_keys -= incomplete_keys
+        file_exists = True
 
     total = len(patterns) * len(scenarios) * len(BELIEF_STATES)
     print(f"Total calls: {total} ({len(patterns)} patterns × "
