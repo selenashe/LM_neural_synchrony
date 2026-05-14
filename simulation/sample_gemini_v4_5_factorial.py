@@ -55,7 +55,7 @@ SOTOPIA_DATA = REPO_ROOT / "sotopia_utils" / "sotopia_data"
 
 # ── Vertex AI defaults (same as gemini_sot_env.py) ─────────────────────────
 
-DEFAULT_VERTEX_MODEL    = "vertex_ai/gemini-2.5-pro-preview-05-06"
+DEFAULT_VERTEX_MODEL    = "vertex_ai/gemini-3.1-pro-preview"
 DEFAULT_VERTEX_PROJECT  = "hs-soil-gemini"
 DEFAULT_VERTEX_LOCATION = "global"
 DEFAULT_MAX_ATTEMPTS    = 5
@@ -480,7 +480,7 @@ def main():
     parser.add_argument("--model_key", type=str, default="gemini",
                         help="Short name used in results dir and 'checkpoint' column.")
     parser.add_argument("--vertex_model", type=str, default=DEFAULT_VERTEX_MODEL,
-                        help="LiteLLM model id (default: vertex_ai/gemini-2.5-pro-preview-05-06).")
+                        help="LiteLLM model id (default: vertex_ai/gemini-3.1-pro-preview).")
     parser.add_argument("--vertex_project",  type=str, default=DEFAULT_VERTEX_PROJECT)
     parser.add_argument("--vertex_location", type=str, default=DEFAULT_VERTEX_LOCATION)
     parser.add_argument("--temperature", type=float, default=0.7)

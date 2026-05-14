@@ -21,7 +21,7 @@ cd "${REPO_ROOT}" || exit 1
 mkdir -p "${REPO_ROOT}/logs"
 
 # ── Defaults; can be overridden via env vars ────────────────────────────────
-VERTEX_MODEL="${VERTEX_MODEL:-vertex_ai/gemini-2.5-pro-preview-05-06}"
+VERTEX_MODEL="${VERTEX_MODEL:-vertex_ai/gemini-3.1-pro-preview}"
 MODEL_KEY="${MODEL_KEY:-gemini}"
 ENVS="${ENVS:-envs_false_belief_v4_1.json}"
 LABEL="${LABEL:-full}"
