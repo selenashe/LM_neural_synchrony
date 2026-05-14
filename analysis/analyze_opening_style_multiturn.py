@@ -80,6 +80,52 @@ for p in PATTERN_ORDER:
     SLUG_TO_PATTERN[slug] = p
 
 
+def _location_in_text(loc, text):
+    """Check if a location name appears in text, allowing partial matches.
+
+    Handles cases where the model uses a shortened form:
+      "storage box" → "box", "hook by the door" → "hook",
+      "workbench" → "bench"
+    """
+    if not loc:
+        return False
+    loc_lower = loc.lower().replace("_", " ")
+    if loc_lower in text:
+        return True
+    words = loc_lower.split()
+    for w in words:
+        if len(w) >= 3 and re.search(r'\b' + re.escape(w) + r'\b', text):
+            return True
+    if len(words) == 1 and len(loc_lower) >= 6:
+        for w in [loc_lower[:len(loc_lower)//2], loc_lower[len(loc_lower)//2:]]:
+            if len(w) >= 3 and re.search(r'\b' + re.escape(w) + r'\b', text):
+                return True
+    return False
+
+
+def _location_last_pos(loc, text, end):
+    """Find the last position of a location mention before *end*."""
+    loc_lower = loc.lower().replace("_", " ")
+    pos = text.rfind(loc_lower, 0, end)
+    if pos >= 0:
+        return pos
+    words = loc_lower.split()
+    for w in words:
+        if len(w) >= 4:
+            for m in re.finditer(r'\b' + re.escape(w) + r'\b', text):
+                if m.start() < end:
+                    pos = max(pos, m.start())
+    if pos >= 0:
+        return pos
+    if len(words) == 1 and len(loc_lower) >= 6:
+        for w in [loc_lower[:len(loc_lower)//2], loc_lower[len(loc_lower)//2:]]:
+            if len(w) >= 3:
+                for m in re.finditer(r'\b' + re.escape(w) + r'\b', text):
+                    if m.start() < end:
+                        pos = max(pos, m.start())
+    return pos
+
+
 def extract_final_choice(dialog_turns, true_location, other_location):
     ava_turns = [t for t in dialog_turns if "Ava Thompson said:" in t]
     if not ava_turns:
@@ -89,14 +135,11 @@ def extract_final_choice(dialog_turns, true_location, other_location):
     text = text_part.lower()
     has_leave = "leave" in text
 
-    loc1 = true_location.lower().replace("_", " ")
-    loc2 = other_location.lower().replace("_", " ")
-
     if not has_leave:
         return None, False
 
-    has_1 = loc1 in text
-    has_2 = loc2 in text
+    has_1 = _location_in_text(true_location, text)
+    has_2 = _location_in_text(other_location, text)
 
     if has_1 and not has_2:
         return true_location, True
@@ -104,8 +147,8 @@ def extract_final_choice(dialog_turns, true_location, other_location):
         return other_location, True
     if has_1 and has_2:
         leave_pos = text.rfind("leave")
-        last_1 = text.rfind(loc1, 0, leave_pos)
-        last_2 = text.rfind(loc2, 0, leave_pos)
+        last_1 = _location_last_pos(true_location, text, leave_pos)
+        last_2 = _location_last_pos(other_location, text, leave_pos)
         if last_1 > last_2:
             return true_location, True
         elif last_2 > last_1:
@@ -233,7 +276,7 @@ def load_scenario_lookup(csv_path):
             "scenario_text": row["scenario"],
         }
         locs = re.search(
-            r"with (?:a |an |the )(.+?) and (?:a |an |the )(.+?)\.",
+            r"(?:with|has) (?:a |an |the )(.+?) and (?:a |an |the )(.+?)\.",
             str(row["scenario"]),
         )
         if locs:
