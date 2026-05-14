@@ -48,6 +48,7 @@ from pathlib import Path
 from typing import Optional
 
 from litellm import completion
+from tqdm import tqdm
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 SOTOPIA_DATA = REPO_ROOT / "sotopia_utils" / "sotopia_data"
@@ -392,14 +393,14 @@ def run_full(condition, envs, combos, model_key,
         print(f"Resuming: {len(done)} episodes already done", flush=True)
 
     write_header = not csv_path.exists() or len(done) == 0
-    t0 = time.time()
-    completed = 0
+    remaining = total - len(done)
 
     with open(csv_path, "a", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=CSV_HEADER)
         if write_header:
             writer.writeheader()
 
+        pbar = tqdm(total=remaining, desc=condition, unit="ep")
         for ep_idx in range(total):
             if ep_idx in done:
                 continue
@@ -459,13 +460,9 @@ def run_full(condition, envs, combos, model_key,
                 "turn4_prob_C":        t4["probs"]["C"],
             })
             f.flush()
+            pbar.update(1)
 
-            completed += 1
-            if completed % 50 == 0:
-                elapsed = time.time() - t0
-                print(f"  [{condition}] {completed}/{total - len(done)} done "
-                      f"({elapsed:.0f}s elapsed)", flush=True)
-
+        pbar.close()
     print(f"Done: {csv_path}", flush=True)
 
 
