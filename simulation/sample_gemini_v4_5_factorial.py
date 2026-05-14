@@ -486,8 +486,8 @@ def main():
     parser.add_argument("--temperature", type=float, default=0.7)
     parser.add_argument("--seed",         type=int,   default=0)
     parser.add_argument("--max_episodes", type=int,   default=None)
-    parser.add_argument("--no_logprobs",  action="store_true",
-                        help="Skip logprob extraction (faster; probs columns will be NaN).")
+    parser.add_argument("--logprobs", action="store_true",
+                        help="Request logprob extraction (not supported by most Vertex Gemini models).")
     parser.add_argument("--dry_run", action="store_true",
                         help="Print one prompt per unique (slice, locus) cell; no API calls.")
     args = parser.parse_args()
@@ -518,7 +518,7 @@ def main():
         seed=args.seed,
         max_episodes=args.max_episodes,
         label=args.label,
-        want_logprobs=not args.no_logprobs,
+        want_logprobs=args.logprobs,
     )
 
 
