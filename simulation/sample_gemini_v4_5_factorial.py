@@ -392,7 +392,7 @@ def run_full(condition, envs, combos, model_key,
                 done.add(int(row["episode_idx"]))
         print(f"Resuming: {len(done)} episodes already done", flush=True)
 
-    write_header = not csv_path.exists() or len(done) == 0
+    write_header = not csv_path.exists() or csv_path.stat().st_size == 0
     remaining = total - len(done)
 
     with open(csv_path, "a", newline="") as f:

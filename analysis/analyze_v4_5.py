@@ -636,6 +636,118 @@ def plot_logit_probs(df, out_dir, checkpoints, stage_labels, title=""):
 
 
 # ═════════════════════════════════════════════════════════════════════════════
+# 8b. Sanity check: does argmax(P(A),P(B),P(C)) match the parsed letter?
+# ═════════════════════════════════════════════════════════════════════════════
+
+def _add_logit_pred(df):
+    """Add columns 'turn4_logit_letter' and 'turn4_logit_choice' derived from
+    argmax over P(A), P(B), P(C). Skips rows where any of the three is NaN."""
+    pa, pb, pc = df["turn4_prob_A"].values, df["turn4_prob_B"].values, df["turn4_prob_C"].values
+    probs = np.stack([pa, pb, pc], axis=1)
+    valid = ~np.isnan(probs).any(axis=1)
+    letters = np.array(["A", "B", "C"])
+    out_letter = np.full(len(df), "", dtype=object)
+    if valid.any():
+        out_letter[valid] = letters[np.argmax(probs[valid], axis=1)]
+    truth_pos = df["truth_position"].astype(str).values
+    out_choice = np.where(out_letter == "", "",
+                  np.where(out_letter == "C", "unsure",
+                  np.where(out_letter == truth_pos, "truth", "other")))
+    df = df.copy()
+    df["turn4_logit_letter"] = out_letter
+    df["turn4_logit_choice"] = out_choice
+    return df
+
+
+def plot_logit_vs_generated_maintain(df, out_dir, checkpoints, stage_labels, title=""):
+    """Side-by-side bars per condition: maintain rate from generation vs from
+    argmax(P(A),P(B),P(C)). If they diverge, generation is sampling tokens that
+    don't match the immediate-next-token argmax."""
+    df = _add_logit_pred(df)
+    adv = df[(df["goal_condition"] == "adversarial") & (df["locus"].isin(LOCUS_ORDER))]
+    n_ck = len(checkpoints)
+    fig, axes = plt.subplots(1, n_ck, figsize=(4.5 * n_ck, 5), sharey=True)
+    if n_ck == 1:
+        axes = [axes]
+    for ax_idx, ckpt in enumerate(checkpoints):
+        ax = axes[ax_idx]
+        gen_vals, logit_vals, labels = [], [], []
+        for cond in CONDITIONS:
+            sub = adv[(adv["checkpoint"] == ckpt) & (adv["condition"] == cond)]
+            n_gen = (sub["turn4_choice"].isin(["truth", "other", "unsure"])).sum()
+            n_log = (sub["turn4_logit_choice"].isin(["truth", "other", "unsure"])).sum()
+            gen_vals.append((sub["turn4_choice"] == "truth").sum() / n_gen if n_gen else 0)
+            logit_vals.append((sub["turn4_logit_choice"] == "truth").sum() / n_log if n_log else 0)
+            labels.append(COND_SHORT[cond])
+        x = np.arange(len(CONDITIONS))
+        width = 0.4
+        ax.bar(x - width/2, gen_vals,   width, color=CHOICE_COLORS["truth"],
+               label="Generated → parsed" if ax_idx == 0 else None)
+        ax.bar(x + width/2, logit_vals, width, color="#ff7f0e",
+               label="argmax(P(A),P(B),P(C))" if ax_idx == 0 else None)
+        ax.set_xticks(x)
+        ax.set_xticklabels(labels, fontsize=7, rotation=35, ha="right")
+        ax.set_ylim(0, 1.05)
+        ax.set_title(stage_labels[ckpt], fontsize=11)
+        if ax_idx == 0:
+            ax.set_ylabel("Maintain rate (turn 4)")
+            ax.legend(fontsize=8, loc="upper right")
+    suptitle = (f"Maintain rate: generated vs logit-argmax — {title}" if title
+                else "Maintain rate: generated vs logit-argmax")
+    fig.suptitle(suptitle, fontsize=13)
+    fig.tight_layout()
+    fig.savefig(out_dir / "logit_vs_generated_maintain.png", dpi=150, bbox_inches="tight")
+    plt.close(fig)
+    print("  logit_vs_generated_maintain.png saved")
+
+
+def plot_logit_vs_generated_confusion(df, out_dir, checkpoints, stage_labels, title=""):
+    """3×3 confusion matrix per checkpoint: row = argmax(P(A),P(B),P(C)) → choice,
+    column = generated/parsed choice. Rows are normalized so each row sums to 1.
+    Diagonal mass = how often the immediate-next-token argmax predicts what the
+    model actually generated."""
+    df = _add_logit_pred(df)
+    adv = df[(df["goal_condition"] == "adversarial") & (df["locus"].isin(LOCUS_ORDER))]
+    cats = ["truth", "other", "unsure"]
+    n_ck = len(checkpoints)
+    fig, axes = plt.subplots(1, n_ck, figsize=(4.2 * n_ck, 4.4))
+    if n_ck == 1:
+        axes = [axes]
+    for ax_idx, ckpt in enumerate(checkpoints):
+        ax = axes[ax_idx]
+        sub = adv[(adv["checkpoint"] == ckpt)
+                  & adv["turn4_logit_choice"].isin(cats)
+                  & adv["turn4_choice"].isin(cats)]
+        mat = np.zeros((3, 3), dtype=int)
+        for i, lc in enumerate(cats):
+            for j, gc in enumerate(cats):
+                mat[i, j] = ((sub["turn4_logit_choice"] == lc) & (sub["turn4_choice"] == gc)).sum()
+        row_sums = mat.sum(axis=1, keepdims=True)
+        with np.errstate(divide="ignore", invalid="ignore"):
+            mat_norm = np.where(row_sums > 0, mat / row_sums, 0.0)
+        agreement = float(np.diag(mat).sum() / mat.sum()) if mat.sum() > 0 else float("nan")
+        im = ax.imshow(mat_norm, cmap="Blues", vmin=0, vmax=1)
+        ax.set_xticks(range(3)); ax.set_yticks(range(3))
+        ax.set_xticklabels(cats); ax.set_yticklabels(cats)
+        ax.set_xlabel("Generated → parsed choice")
+        if ax_idx == 0:
+            ax.set_ylabel("Logit-argmax choice")
+        ax.set_title(f"{stage_labels[ckpt]}  (agreement: {agreement:.1%})", fontsize=11)
+        for i in range(3):
+            for j in range(3):
+                txt = f"{mat_norm[i, j]:.2f}\n({int(mat[i, j])})"
+                ax.text(j, i, txt, ha="center", va="center", fontsize=9,
+                        color="white" if mat_norm[i, j] > 0.5 else "black")
+    suptitle = (f"Logit-argmax vs generated choice (row-normalized) — {title}" if title
+                else "Logit-argmax vs generated choice (row-normalized)")
+    fig.suptitle(suptitle, fontsize=13)
+    fig.tight_layout()
+    fig.savefig(out_dir / "logit_vs_generated_confusion.png", dpi=150, bbox_inches="tight")
+    plt.close(fig)
+    print("  logit_vs_generated_confusion.png saved")
+
+
+# ═════════════════════════════════════════════════════════════════════════════
 # 9. Per-condition breakdown plots (locus / specificity / prior / dosage)
 #    Mirrors the classic v4_3choice breakdown suite; one subfolder per condition.
 # ═════════════════════════════════════════════════════════════════════════════
@@ -1026,6 +1138,8 @@ def main():
     plot_sycophancy(df, out_dir, checkpoints, stage_labels, family_title)
     plot_multi_metrics(df, out_dir, checkpoints, stage_labels, family_title)
     plot_logit_probs(df, out_dir, checkpoints, stage_labels, family_title)
+    plot_logit_vs_generated_maintain(df, out_dir, checkpoints, stage_labels, family_title)
+    plot_logit_vs_generated_confusion(df, out_dir, checkpoints, stage_labels, family_title)
     plot_per_condition_breakdowns(df, out_dir, checkpoints, stage_labels, family_title)
     save_cell_summary(df, out_dir, stage_labels)
 
