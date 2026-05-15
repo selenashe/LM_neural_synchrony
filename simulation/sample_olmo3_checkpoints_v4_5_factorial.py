@@ -270,7 +270,8 @@ def _contradiction_text(meta, framing):
     if framing == "quote":
         mia = f'Mia said: "{meta["mia_message"]}"'
     elif framing == "report":
-        mia = f"Mia told me the {meta['item']} is {meta['location_other_phrase']}."
+        loc = meta["location_truth_phrase"] if meta.get("goal_condition") == "cooperate" else meta["location_other_phrase"]
+        mia = f"Mia told me the {meta['item']} is {loc}."
     else:
         raise ValueError(f"unknown framing: {framing}")
 

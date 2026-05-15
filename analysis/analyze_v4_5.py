@@ -286,7 +286,7 @@ def plot_headline_222(df, out_dir, checkpoints, stage_labels, title=""):
         ax.text(6.5, 1.02, "multi", ha="center", fontsize=9, color="gray")
         ax.set_title(stage_labels[ckpt], fontsize=11)
         if ax_idx == 0:
-            ax.set_ylabel("Maintain rate (turn 4)")
+            ax.set_ylabel("Maintain rate (final answer)")
 
     # custom legend for role + framing
     from matplotlib.patches import Patch
@@ -457,6 +457,67 @@ def plot_locus_heatmap(df, out_dir, checkpoints, stage_labels, title=""):
     print("  locus_x_condition_heatmap.png saved")
 
 
+def plot_locus_specificity_heatmap(df, out_dir, checkpoints, stage_labels, title=""):
+    """3D heatmap: rows = checkpoints, cols = specificities.
+    Each subplot is a 4-locus × 8-condition heatmap."""
+    adv = _adv_cued(df)
+    specs = [s for s in SPEC_ORDER if s in adv["specificity"].unique()]
+    if not specs:
+        print("  skipping locus_x_condition_x_specificity_heatmap (no matching specificities)")
+        return
+    spec_labels = {s: s.capitalize() for s in SPEC_ORDER}
+
+    n_ck = len(checkpoints)
+    n_sp = len(specs)
+    cbar_space = 0.06
+    fig, axes = plt.subplots(n_ck, n_sp,
+                             figsize=(4.5 * n_sp + 1.0, 3.5 * n_ck),
+                             squeeze=False)
+
+    for row, ckpt in enumerate(checkpoints):
+        for col, spec in enumerate(specs):
+            ax = axes[row, col]
+            mat = np.full((len(LOCUS_ORDER), len(CONDITIONS)), np.nan)
+            for r, loc in enumerate(LOCUS_ORDER):
+                for c, cond in enumerate(CONDITIONS):
+                    sub = adv[(adv["checkpoint"] == ckpt) & (adv["condition"] == cond)
+                              & (adv["locus"] == loc) & (adv["specificity"] == spec)]
+                    if len(sub) > 0:
+                        t, _, _, _ = _rates(sub, "turn4")
+                        mat[r, c] = t
+            im = ax.imshow(mat, vmin=0, vmax=1, aspect="auto", cmap="RdYlGn")
+            for r in range(mat.shape[0]):
+                for c in range(mat.shape[1]):
+                    if not np.isnan(mat[r, c]):
+                        ax.text(c, r, f"{mat[r,c]:.2f}", ha="center", va="center",
+                                fontsize=6, color="black")
+            if row == n_ck - 1:
+                ax.set_xticks(range(len(CONDITIONS)))
+                ax.set_xticklabels([COND_SHORT[c] for c in CONDITIONS],
+                                   fontsize=6, rotation=35, ha="right")
+            else:
+                ax.set_xticks([])
+            ax.set_yticks(range(len(LOCUS_ORDER)))
+            ax.set_yticklabels([LOCUS_SHORT[l] for l in LOCUS_ORDER], fontsize=7)
+            if row == 0:
+                ax.set_title(spec_labels[spec], fontsize=10)
+            if col == n_sp - 1:
+                ax.annotate(stage_labels[ckpt], xy=(1.02, 0.5),
+                            xycoords="axes fraction", fontsize=10,
+                            ha="left", va="center", rotation=270)
+
+    suptitle = (f"Maintain rate by locus × condition × specificity — {title}"
+                if title else "Maintain rate by locus × condition × specificity")
+    fig.suptitle(suptitle, fontsize=13)
+    fig.tight_layout(rect=[0, 0, 1 - cbar_space, 0.96])
+    cbar_ax = fig.add_axes([1 - cbar_space + 0.01, 0.15, 0.015, 0.7])
+    fig.colorbar(im, cax=cbar_ax, label="Maintain rate")
+    fig.savefig(out_dir / "locus_x_condition_x_specificity_heatmap.png",
+                dpi=150, bbox_inches="tight")
+    plt.close(fig)
+    print("  locus_x_condition_x_specificity_heatmap.png saved")
+
+
 # ═════════════════════════════════════════════════════════════════════════════
 # 6. Sycophancy across conditions
 # ═════════════════════════════════════════════════════════════════════════════
@@ -624,7 +685,7 @@ def plot_logit_probs(df, out_dir, checkpoints, stage_labels, title=""):
                            fontsize=7, rotation=35, ha="right")
         ax.set_title(stage_labels[ckpt], fontsize=11)
         if ax_idx == 0:
-            ax.set_ylabel("Mean turn-4 logit probability")
+            ax.set_ylabel("Mean final-answer logit probability")
             ax.legend(fontsize=8)
 
     suptitle = f"Logit probabilities by condition (adversarial cued) — {title}" if title else "Logit probabilities by condition"
@@ -690,7 +751,7 @@ def plot_logit_vs_generated_maintain(df, out_dir, checkpoints, stage_labels, tit
         ax.set_ylim(0, 1.05)
         ax.set_title(stage_labels[ckpt], fontsize=11)
         if ax_idx == 0:
-            ax.set_ylabel("Maintain rate (turn 4)")
+            ax.set_ylabel("Maintain rate (final answer)")
             ax.legend(fontsize=8, loc="upper right")
     suptitle = (f"Maintain rate: generated vs logit-argmax — {title}" if title
                 else "Maintain rate: generated vs logit-argmax")
@@ -1026,28 +1087,44 @@ def _plot_logit_by(df, out_dir, checkpoints, stage_labels, title,
     plt.close(fig)
 
 
-def _plot_logit_breakdowns(df, out_dir, checkpoints, stage_labels, title=""):
+def _plot_logit_breakdowns(df, out_dir, checkpoints, stage_labels, title="",
+                           slice_a_balanced=False):
     _plot_logit_by(df, out_dir, checkpoints, stage_labels, title,
                    group_col="locus", group_order=LOCUS_ORDER,
                    group_labels=[LOCUS_SHORT[l] for l in LOCUS_ORDER],
                    filename="logit_probabilities_by_locus.png", fig_title_suffix="locus")
+    spec_order = [s for s in SPEC_ORDER if s != "statistical"] if slice_a_balanced else SPEC_ORDER
     _plot_logit_by(df, out_dir, checkpoints, stage_labels, title,
-                   group_col="specificity", group_order=SPEC_ORDER,
-                   group_labels=[s.capitalize() for s in SPEC_ORDER],
+                   group_col="specificity", group_order=spec_order,
+                   group_labels=[s.capitalize() for s in spec_order],
                    filename="logit_probabilities_by_specificity.png", fig_title_suffix="specificity")
-    _plot_logit_by(df, out_dir, checkpoints, stage_labels, title,
-                   group_col="prior", group_order=PRIOR_ORDER,
-                   group_labels=[l.replace("\n", " ") for l in PRIOR_LABELS],
-                   filename="logit_probabilities_by_prior.png", fig_title_suffix="prior")
-    _plot_logit_by(df, out_dir, checkpoints, stage_labels, title,
-                   group_col="dosage", group_order=DOSE_ORDER,
-                   group_labels=[d.capitalize() for d in DOSE_ORDER],
-                   filename="logit_probabilities_by_dosage.png", fig_title_suffix="dosage")
+    if not slice_a_balanced:
+        _plot_logit_by(df, out_dir, checkpoints, stage_labels, title,
+                       group_col="prior", group_order=PRIOR_ORDER,
+                       group_labels=[l.replace("\n", " ") for l in PRIOR_LABELS],
+                       filename="logit_probabilities_by_prior.png", fig_title_suffix="prior")
+        _plot_logit_by(df, out_dir, checkpoints, stage_labels, title,
+                       group_col="dosage", group_order=DOSE_ORDER,
+                       group_labels=[d.capitalize() for d in DOSE_ORDER],
+                       filename="logit_probabilities_by_dosage.png", fig_title_suffix="dosage")
 
 
-def plot_per_condition_breakdowns(df, out_dir, checkpoints, stage_labels, title=""):
-    """For each of the 8 conditions, generate the full locus/specificity/prior/dosage
-    breakdown suite in by_condition/{cond}/ subfolders."""
+def plot_all_configs_averaged(df, out_dir, checkpoints, stage_labels, title="",
+                              slice_a_balanced=False):
+    """Top-level plots averaged across all 8 system configs."""
+    avg_title = f"{title} | All configs" if title else "All configs"
+    _plot_choice_by_locus(df, out_dir, checkpoints, stage_labels, avg_title)
+    _plot_training_dynamics(df, out_dir, checkpoints, stage_labels, avg_title)
+    _plot_logit_breakdowns(df, out_dir, checkpoints, stage_labels, avg_title,
+                           slice_a_balanced=slice_a_balanced)
+    print("  all-configs averaged: choice_by_locus, training_dynamics, "
+          "logit_by_locus, logit_by_specificity saved to top-level dir")
+
+
+def plot_per_condition_breakdowns(df, out_dir, checkpoints, stage_labels, title="",
+                                  slice_a_balanced=False):
+    """For each of the 8 conditions, generate breakdown plots in by_condition/{cond}/.
+    When slice_a_balanced=True, skip Slice B/C and dosage/prior logit plots."""
     base = out_dir / "by_condition"
     for cond in CONDITIONS:
         cdf = df[df["condition"] == cond]
@@ -1058,11 +1135,14 @@ def plot_per_condition_breakdowns(df, out_dir, checkpoints, stage_labels, title=
         _plot_choice_by_stage(cdf, cond_dir, checkpoints, stage_labels, cond_title)
         _plot_choice_by_locus(cdf, cond_dir, checkpoints, stage_labels, cond_title)
         _plot_slice_a(cdf, cond_dir, checkpoints, stage_labels, cond_title)
-        _plot_slice_b(cdf, cond_dir, checkpoints, stage_labels, cond_title)
-        _plot_slice_c(cdf, cond_dir, checkpoints, stage_labels, cond_title)
+        if not slice_a_balanced:
+            _plot_slice_b(cdf, cond_dir, checkpoints, stage_labels, cond_title)
+            _plot_slice_c(cdf, cond_dir, checkpoints, stage_labels, cond_title)
         _plot_training_dynamics(cdf, cond_dir, checkpoints, stage_labels, cond_title)
-        _plot_logit_breakdowns(cdf, cond_dir, checkpoints, stage_labels, cond_title)
-        print(f"  [{cond_suffix}] 10 plots saved → by_condition/{cond_suffix}/")
+        _plot_logit_breakdowns(cdf, cond_dir, checkpoints, stage_labels, cond_title,
+                               slice_a_balanced=slice_a_balanced)
+        n_plots = 7 if slice_a_balanced else 10
+        print(f"  [{cond_suffix}] {n_plots} plots saved → by_condition/{cond_suffix}/")
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -1110,6 +1190,9 @@ def main():
     parser.add_argument("--run_label", type=str, default="",
                         help="Match the --label used in simulation, e.g. 'full'. "
                              "Appended to results dirs and output dir.")
+    parser.add_argument("--slice_a_balanced", action="store_true",
+                        help="Filter to Slice A, fresh prior, non-statistical specificity only. "
+                             "Produces a balanced 4 loci × 4 specificities × 100 scenarios subset.")
     args = parser.parse_args()
 
     family = MODEL_FAMILIES[args.model_family]
@@ -1120,6 +1203,8 @@ def main():
     default_out = family["default_output_dir"]
     if args.run_label:
         default_out = f"{default_out}_{args.run_label}"
+    if args.slice_a_balanced:
+        default_out += "_sliceA_balanced"
     out_dir = REPO_ROOT / (args.output_dir or default_out)
     os.makedirs(out_dir, exist_ok=True)
 
@@ -1130,17 +1215,32 @@ def main():
     print(f"  Loaded {len(df)} rows across {df['checkpoint'].nunique()} checkpoints "
           f"and {df['condition'].nunique()} conditions")
 
+    if args.slice_a_balanced:
+        before = len(df)
+        df = df[
+            ((df["slice"] == "A") & (df["specificity"] != "statistical"))
+            | (df["slice"] == "D")
+            | (df["slice"] == "E")
+        ]
+        print(f"  --slice_a_balanced: {before} → {len(df)} rows "
+              f"(Slice A non-statistical + Slice D cooperate + Slice E sycophancy)")
+        family_title += " [Slice A balanced]"
+
     report_data_quality(df, out_dir, checkpoints, stage_labels)
     plot_headline_222(df, out_dir, checkpoints, stage_labels, family_title)
     plot_marginals(df, out_dir, checkpoints, stage_labels, family_title)
     plot_interactions(df, out_dir, checkpoints, stage_labels, family_title)
     plot_locus_heatmap(df, out_dir, checkpoints, stage_labels, family_title)
+    plot_locus_specificity_heatmap(df, out_dir, checkpoints, stage_labels, family_title)
     plot_sycophancy(df, out_dir, checkpoints, stage_labels, family_title)
     plot_multi_metrics(df, out_dir, checkpoints, stage_labels, family_title)
     plot_logit_probs(df, out_dir, checkpoints, stage_labels, family_title)
     plot_logit_vs_generated_maintain(df, out_dir, checkpoints, stage_labels, family_title)
     plot_logit_vs_generated_confusion(df, out_dir, checkpoints, stage_labels, family_title)
-    plot_per_condition_breakdowns(df, out_dir, checkpoints, stage_labels, family_title)
+    plot_all_configs_averaged(df, out_dir, checkpoints, stage_labels, family_title,
+                              slice_a_balanced=args.slice_a_balanced)
+    plot_per_condition_breakdowns(df, out_dir, checkpoints, stage_labels, family_title,
+                                  slice_a_balanced=args.slice_a_balanced)
     save_cell_summary(df, out_dir, stage_labels)
 
     print(f"\nAll outputs saved to {out_dir}")
