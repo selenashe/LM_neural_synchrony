@@ -231,17 +231,20 @@ def report_data_quality(df, out_dir, checkpoints, stage_labels):
 
     # cooperate baseline by condition (turn4 only)
     coop = df[df["goal_condition"] == "cooperate"]
-    coop_rows = []
-    for ckpt in checkpoints:
-        for cond in CONDITIONS:
-            sub = coop[(coop["checkpoint"] == ckpt) & (coop["condition"] == cond)]
-            t, o, u, n = _rates(sub, "turn4")
-            coop_rows.append({
-                "checkpoint": stage_labels[ckpt], "condition": cond,
-                "truth": f"{t:.3f}", "other": f"{o:.3f}", "unsure": f"{u:.3f}", "n": n,
-            })
-    pd.DataFrame(coop_rows).to_csv(out_dir / "cooperate_baseline.csv", index=False)
-    print("  null_rates.csv + cooperate_baseline.csv saved")
+    if len(coop) > 0:
+        coop_rows = []
+        for ckpt in checkpoints:
+            for cond in CONDITIONS:
+                sub = coop[(coop["checkpoint"] == ckpt) & (coop["condition"] == cond)]
+                t, o, u, n = _rates(sub, "turn4")
+                coop_rows.append({
+                    "checkpoint": stage_labels[ckpt], "condition": cond,
+                    "truth": f"{t:.3f}", "other": f"{o:.3f}", "unsure": f"{u:.3f}", "n": n,
+                })
+        pd.DataFrame(coop_rows).to_csv(out_dir / "cooperate_baseline.csv", index=False)
+        print("  null_rates.csv + cooperate_baseline.csv saved")
+    else:
+        print("  null_rates.csv saved (no cooperate data)")
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -817,11 +820,14 @@ def _plot_choice_by_stage(df, out_dir, checkpoints, stage_labels, title=""):
     adversarial = df[(df["goal_condition"] == "adversarial") & (df["locus"] != "no-cue")]
     cooperate   = df[df["goal_condition"] == "cooperate"]
 
-    fig, axes = plt.subplots(1, 2, figsize=(12, 5))
-    for ax_idx, (cond_label, sub_df) in enumerate([
-        ("Adversarial (with cues)", adversarial),
-        ("Cooperate", cooperate),
-    ]):
+    panels = [("Adversarial (with cues)", adversarial)]
+    if len(cooperate) > 0:
+        panels.append(("Cooperate", cooperate))
+
+    fig, axes = plt.subplots(1, len(panels), figsize=(6 * len(panels), 5))
+    if len(panels) == 1:
+        axes = [axes]
+    for ax_idx, (cond_label, sub_df) in enumerate(panels):
         ax = axes[ax_idx]
         labels, maintain_vals, defer_vals, unsure_vals = [], [], [], []
         for ckpt in checkpoints:
@@ -1219,11 +1225,12 @@ def main():
         before = len(df)
         df = df[
             ((df["slice"] == "A") & (df["specificity"] != "statistical"))
-            | (df["slice"] == "D")
             | (df["slice"] == "E")
         ]
+        df = df[df["prior"] == "fresh"]
         print(f"  --slice_a_balanced: {before} → {len(df)} rows "
-              f"(Slice A non-statistical + Slice D cooperate + Slice E sycophancy)")
+              f"(Slice A non-statistical + Slice E sycophancy, fresh prior only; "
+              f"Slice D cooperate excluded pending report-framing bug fix)")
         family_title += " [Slice A balanced]"
 
     report_data_quality(df, out_dir, checkpoints, stage_labels)
