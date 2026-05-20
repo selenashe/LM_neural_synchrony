@@ -1,0 +1,175 @@
+# Dataset: sft_instruct
+# Turn type: single
+# Source: Logic Puzzles
+# Examples: 5
+
+================================================================================
+ EXAMPLE 1
+================================================================================
+
+--- [user] ---
+This is a logic puzzle. There are 5 houses (numbered 1 on the left, 5 on the right), from the perspective of someone standing across the street from them. Each has a different person in them. They have different characteristics:
+ - Each person has a unique name: `alice`, `david`, `carol`, `bob`, `arnold`
+ - The people keep different animals: `dog`, `fish`, `bird`, `horse`, `cat`
+ - Everyone has something different for lunch: `spaghetti`, `stir fry`, `soup`, `grilled cheese`, `pizza`
+ - The people are of nationalities: `mexican`, `chinese`, `brit`, `dane`, `german`
+ - Everyone has a different favorite cigar: `prince`, `pall mall`, `blue master`, `red eye`, `dunhill`
+
+
+## Clues:
+1. The Prince smoker is the person who loves the spaghetti eater.
+2. The person who is a pizza lover and the person who loves the soup are next to each other.
+3. The person who keeps horses is directly left of Bob.
+4. Alice and Bob are next to each other.
+5. The Mexican and the person who is a pizza lover are next to each other.
+6. The Dane is the person who smokes Red Eye.
+7. The Dunhill smoker and Bob are next to each other.
+8. The German is directly left of the person who loves eating grilled cheese.
+9. The dog owner is the Dane.
+10. The cat lover is the person who smokes Blue Master.
+11. The person who loves the spaghetti eater and the bird keeper are next to each other.
+12. The cat lover is in the third house.
+13. Arnold is directly left of Carol.
+14. The German is the bird keeper.
+15. The German is Arnold.
+16. The person who keeps horses is the British person.
+
+What is Name of the person who lives in House 1? Provide only the name of the person as your final answer.
+
+--- [assistant] ---
+
+
+David
+
+================================================================================
+ EXAMPLE 2
+================================================================================
+
+--- [user] ---
+Your task is to sort words in ascending or descending order using ASCII/Unicode ordering.
+
+Your output should be a comma-separated list of words, e.g. word_1, word_2, word_3
+
+Now, sort these words in descending order (using ASCII/Unicode ordering) and return them as a comma-separated list: trace, Grand, 1100
+
+
+--- [assistant] ---
+
+
+trace,Grand,1100
+
+================================================================================
+ EXAMPLE 3
+================================================================================
+
+--- [user] ---
+Your task is to sort words in ascending or descending order using ASCII/Unicode ordering.
+
+Your output should be a comma-separated list of words, e.g. word_1, word_2, word_3
+
+Now, sort these words in descending order (using ASCII/Unicode ordering) and return them as a comma-separated list: olden, meal, sleeps, That
+
+
+--- [assistant] ---
+
+
+sleeps,olden,meal,That
+
+================================================================================
+ EXAMPLE 4
+================================================================================
+
+--- [user] ---
+This is a logic puzzle. There are 5 houses (numbered 1 on the left, 5 on the right), from the perspective of someone standing across the street from them. Each has a different person in them. They have different characteristics:
+ - Each person has a unique name: `david`, `bob`, `alice`, `arnold`, `carol`
+ - People use different phone models: sony xperia 5, samsung galaxy s21, google pixel 6, huawei p50, oneplus 9
+ - Everyone has something different for lunch: `stir fry`, `grilled cheese`, `pizza`, `spaghetti`, `soup`
+ - The people keep different animals: `cat`, `fish`, `bird`, `dog`, `horse`
+ - Everyone has a different favorite cigar: `blue master`, `red eye`, `prince`, `pall mall`, `dunhill`
+
+
+## Clues:
+1. The person who smokes Red Eye is in the first house.
+2. The Prince smoker is the person who loves the spaghetti eater.
+3. The fish enthusiast is in the fifth house.
+4. The bird keeper and the person who keeps horses are next to each other.
+5. The person who smokes Red Eye is directly left of the person partial to Pall Mall.
+6. The person who uses a Samsung Galaxy S21 is directly left of the person who uses a Huawei P50.
+7. Arnold and Alice are next to each other.
+8. The bird keeper is directly left of the person who loves stir fry.
+9. Bob and the person who keeps horses are next to each other.
+10. The person who loves the soup is directly left of the person who uses a OnePlus 9.
+11. The person who loves eating grilled cheese is the bird keeper.
+12. Arnold is the person partial to Pall Mall.
+13. The person who uses a Sony Xperia 5 is in the fifth house.
+14. The person who uses a Huawei P50 and David are next to each other.
+15. Carol is the Prince smoker.
+16. The dog owner is in the fourth house.
+17. The person who smokes Blue Master is Alice.
+
+What is Name of the person who lives in House 1? Provide only the name of the person as your final answer.
+
+--- [assistant] ---
+
+
+The person living in House 1 is **Bob**. 
+
+**Step-by-Step Explanation:**
+
+1. **Clue 1 & 5:** House 1 smokes Red Eye, and House 2 smokes Pall Mall. Arnold is in House 2 (Clue 12).
+2. **Clue 7:** Arnold (House 2) and Alice must be adjacent, so Alice is in House 3 (Clue 17 confirms Alice smokes Blue Master).
+3. **Clue 15:** Carol is the Prince smoker and eats spaghetti. She must be in House 5 (since House 5’s animal is fish, but Carol can still eat spaghetti there).
+4. **Clue 3 & 13:** House 5 has fish and Sony Xperia 5. Carol (House 5) has fish and Prince cigar.
+5. **Bird Keeper Analysis:** Bird keeper eats grilled cheese (Clue 11) and is left of stir fry (Clue 8). If Bird is in House 1:
+   - House 1: Bird, grilled cheese, Red Eye (Bob).
+   - Stir fry in House 2 (Arnold’s lunch).
+   - Horse (Clue 4) must be in House 2 (adjacent to Bird in 1), so Arnold has a horse.
+   - Bob (House 1) is next to Horse (House 2), satisfying Clue 9.
+6. **Phones:**
+   - Clue 6: Samsung Galaxy S21 (House 2) left of Huawei P50 (House 3).
+   - Clue 10: Soup (House 3) left of OnePlus 9 (House 4).
+   - House 4: David, dog, pizza, OnePlus 9, Dunhill.
+7. **Final Checks:**
+   - All animals: Bird (1), Horse (2), Cat (3), Dog (4), Fish (5).
+   - Lunches: Grilled cheese (1), Stir fry (2), Soup (3), Pizza (4), Spaghetti (5).
+   - Phones: Google Pixel 6 (1), S21 (2), Huawei (3), OnePlus (4), Sony (5).
+
+Thus, House 1 is **Bob**.
+
+================================================================================
+ EXAMPLE 5
+================================================================================
+
+--- [user] ---
+This is a logic puzzle. There are 5 houses (numbered 1 on the left, 5 on the right), from the perspective of someone standing across the street from them. Each has a different person in them. They have different characteristics:
+ - Each person has a unique name: `carol`, `david`, `alice`, `arnold`, `bob`
+ - People use different phone models: oneplus 9, sony xperia 5, google pixel 6, samsung galaxy s21, huawei p50
+ - The people are of nationalities: `dane`, `brit`, `chinese`, `mexican`, `german`
+ - Everyone has a favorite smoothie: `lemon`, `butterscotch`, `desert`, `dragonfruit`, `darkness`
+ - Each person has a favorite color: `blue`, `brown`, `white`, `yellow`, `purple`
+
+
+## Clues:
+1. The person who uses a Huawei P50 is the person who loves brown.
+2. Arnold is the person who loves yellow.
+3. The German is the Butterscotch smoothie drinker.
+4. The person who loves blue is the person who uses a Google Pixel 6.
+5. The person who uses a OnePlus 9 is the Desert smoothie lover.
+6. The Mexican is the person who uses a Sony Xperia 5.
+7. Bob is in the third house.
+8. The Mexican is David.
+9. The person who uses a Sony Xperia 5 and the person who uses a Google Pixel 6 are next to each other.
+10. The Dragonfruit smoothie lover is the Dane.
+11. The person who loves yellow is in the first house.
+12. The person who uses a Google Pixel 6 is the Darkness smoothie drinker.
+13. The person who loves white is the British person.
+14. Alice is the Butterscotch smoothie drinker.
+15. The British person is in the fourth house.
+
+What is Name of the person who lives in House 1? Provide only the name of the person as your final answer.
+
+--- [assistant] ---
+
+
+arnold
+

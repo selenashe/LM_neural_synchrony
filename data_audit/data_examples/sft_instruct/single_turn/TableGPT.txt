@@ -1,0 +1,282 @@
+# Dataset: sft_instruct
+# Turn type: single
+# Source: TableGPT
+# Examples: 5
+
+================================================================================
+ EXAMPLE 1
+================================================================================
+
+--- [user] ---
+Objective: Review the input table and notify me of any cells that are mistaken. If there are multiple erroneous cells, list them. If no cells are erroneous, reply with 'None'. Share only the cells with a high level of confidence in their error status. Return the final result as JSON in the format {"erroneous_cells": "<a list of erroneous cells or None>"}.  Let's think step by step and show your reasoning before showing the final result.
+
+## Input:
+|Country|nominal millions|nominal per capita|PPP millions|PPP per capita|
+|---|---|---|---|---|
+|Russian Federation|2,113,000|14,600|2,553,000|18,100|
+|Ukraine|175,500|3,800|337,400|7,400|
+|Belarus|69,240|7,500|150,400|16,100|
+|Uzbekistan|55,180|1,900|112,600|3,800|
+|Kazakhstan|224,900|12,700|243,600|14,100|
+
+Let's think step by step and show your reasoning before showing the final result. Return the final result as JSON in the format {"erroneous_cells": "<a list of erroneous cells or None>"}.
+## Output:
+
+
+--- [assistant] ---
+All cells in the table seem to be correct and no apparent error is found. Therefore, the final answer is {"erroneous_cells": "None"}
+
+================================================================================
+ EXAMPLE 2
+================================================================================
+
+--- [user] ---
+# Task Description: Please verify whether Movie A and Movie B are denoting the same entity. Indicate your conclusive answer as either 'Yes' or 'No'. Return the final result as JSON in the format {"answer": "<Yes or No>"}.  Let's think step by step and show your reasoning before showing the final result.
+
+Input:
+Movie A can be presented as follows.
+|actors|year|directors|duration|critic_rating|movie_name|pg_rating|genre|
+|---|---|---|---|---|---|---|---|
+|nan|1938.0|nan|102 minutes|4.0|The Adventures of Robin Hood|Rated PG|Action, Adventure, Drama, Romance|
+
+The below table depicts Movie B.
+|actors|year|directors|duration|movie_rating|movie_name|genre|
+|---|---|---|---|---|---|---|
+|Errol Flynn, Olivia de Havilland, Basil Rathbone|1938|Michael Curtiz|102 min |8.0|The Adventures of Robin Hood|Action, Adventure, Romance|
+
+Let's think step by step and show your reasoning before showing the final result. Return the final result as JSON in the format {"answer": "<Yes or No>"}.
+Output:
+
+
+--- [assistant] ---
+Movie A and Movie B are the same entity, "The Adventures of Robin Hood" (1938). Both movies have the same director, actors, genre, duration, and year. The only difference is the critic rating, with Movie A having a rating of 4.0 and Movie B having a rating of 8.0. Therefore, the final answer is {"answer": "Yes"}.
+
+================================================================================
+ EXAMPLE 3
+================================================================================
+
+--- [user] ---
+# Task Description: I would like you to verify whether Restaurant A and Restaurant B are referring to the same entity or not. Your final response should be 'Yes' or 'No'. Return the final result as JSON in the format {"answer": "<Yes or No>"}.  Let's think step by step and show your reasoning before showing the final result.
+
+## Input:
+The following table provides details of Restaurant A.
+|PHONENUMBER|RATING|ADDRESS|NO_OF_REVIEWS|NAME|
+|---|---|---|---|---|
+|(415) 399-1511|3.1|811 Stockton Street, San Francisco, CA|15|New Fortune Dim Sum And Cafe |
+
+Restaurant B:
+|PHONENUMBER|RATING|ADDRESS|NO_OF_REVIEWS|NAME|
+|---|---|---|---|---|
+|(213) 626-6050|3.5|936 N Hill St, Los Angeles, CA 90012|237|New Dragon Seafood Restaurant |
+
+## Output:
+Restaurant A and Restaurant B are two different entities as they have different names, ratings, phone numbers, number of reviews, and addresses. Therefore, the final answer is {"answer": "No"}.
+
+## Input:
+The following table provides details of Restaurant A.
+|PHONENUMBER|RATING|ADDRESS|NO_OF_REVIEWS|NAME|
+|---|---|---|---|---|
+|(323) 663-1178|3.7|1858 N Vermont Ave, Los Angeles, CA|178|Palermo Ristorante Italiano |
+
+Restaurant B:
+|PHONENUMBER|RATING|ADDRESS|NO_OF_REVIEWS|NAME|
+|---|---|---|---|---|
+|(608) 265-7469|5.0|1210 W Dayton St, Madison, WI 53715|1|DoIT Tech Store |
+
+## Output:
+Restaurant A and Restaurant B are different entities because they have different names, ratings, phone numbers, number of reviews, and addresses. Restaurant A is an Italian restaurant located in Los Angeles, CA, while Restaurant B is a tech store located in Madison, WI. Therefore, the final answer is {"answer": "No"}.
+
+## Input:
+The following table provides details of Restaurant A.
+|PHONENUMBER|RATING|ADDRESS|NO_OF_REVIEWS|NAME|
+|---|---|---|---|---|
+|(213) 228-7800|3.5|725 W 7th St, Los Angeles, CA|32|The Counter |
+
+Restaurant B:
+|PHONENUMBER|RATING|ADDRESS|NO_OF_REVIEWS|NAME|
+|---|---|---|---|---|
+|(212) 759-2282|5.0|635 Madison Ave, Manhattan, NY 10022|2|SPEAR Physical Therapy |
+
+## Output:
+Restaurant A and Restaurant B are different entities as they have different names, ratings, phone numbers, number of reviews, and addresses. Restaurant A is located in Los Angeles, CA and has a rating of 3.5, while Restaurant B is located in Manhattan, NY and has a rating of 5.0. Therefore, the final answer is {"answer": "No"}.
+
+## Input:
+The following table provides details of Restaurant A.
+|PHONENUMBER|RATING|ADDRESS|NO_OF_REVIEWS|NAME|
+|---|---|---|---|---|
+|(323) 931-1928|3.8|6333 W 3rd St, Los Angeles, CA|59|Pampas Grill |
+
+Restaurant B:
+|PHONENUMBER|RATING|ADDRESS|NO_OF_REVIEWS|NAME|
+|---|---|---|---|---|
+|(212) 759-2282|5.0|635 Madison Ave, Manhattan, NY 10022|2|SPEAR Physical Therapy |
+
+## Output:
+Restaurant A and Restaurant B are different entities as they have different names, ratings, phone numbers, number of reviews, and addresses. Restaurant A is located in Los Angeles, CA and has a rating of 3.8 with 59 reviews, while Restaurant B is located in Manhattan, NY and has a rating of 5.0 with 2 reviews. Therefore, the final answer is {"answer": "No"}.
+
+## Input:
+The following table provides details of Restaurant A.
+|PHONENUMBER|RATING|ADDRESS|NO_OF_REVIEWS|NAME|
+|---|---|---|---|---|
+|(608) 222-9232|3.8|716 Cottage Grove Rd, Madison, WI|47|Dairyland Family Restaurant |
+
+Restaurant B:
+|PHONENUMBER|RATING|ADDRESS|NO_OF_REVIEWS|NAME|
+|---|---|---|---|---|
+|(608) 833-2080|4.0|7860 Mineral Point Rd, Madison, WI 53717|2|Dairy Queen |
+
+## Output:
+Restaurant A and Restaurant B refer to the same entity, Dairyland Family Restaurant, as they have the same name, address, and phone number. The only difference is the rating and number of reviews, which may be due to different sources. Therefore, the final answer is {"answer": "Yes"}.
+
+## Input:
+The following table provides details of Restaurant A.
+|PHONENUMBER|RATING|ADDRESS|NO_OF_REVIEWS|NAME|
+|---|---|---|---|---|
+|(608) 829-0700|3.5|72 W Towne Mall, Madison, WI|228|Granite City Food & Brewery |
+
+Restaurant B:
+|PHONENUMBER|RATING|ADDRESS|NO_OF_REVIEWS|NAME|
+|---|---|---|---|---|
+|(415) 252-0759|4.5|1551 Mission St, San Francisco, CA 94103|85|Grandma�۪s Deli & Cafe |
+
+## Output:
+Restaurant A and Restaurant B refer to the same entity as they have the same name, rating, phone number, number of reviews, and address. Therefore, the final answer is {"answer": "Yes"}.
+
+## Input:
+The following table provides details of Restaurant A.
+|PHONENUMBER|RATING|ADDRESS|NO_OF_REVIEWS|NAME|
+|---|---|---|---|---|
+|(608) 833-0033|3.9|1828 Parmenter St, Middleton, WI|205|Villa Dolce |
+
+Restaurant B:
+|PHONENUMBER|RATING|ADDRESS|NO_OF_REVIEWS|NAME|
+|---|---|---|---|---|
+|(608) 255-2848|3.5|151 W Gorham St, Madison, WI 53703|72|Vientiane Palace Restaurant |
+
+## Output:
+Restaurant A and Restaurant B refer to the same entity as they have the same name, Villa Dolce. Although they have different ratings, phone numbers, number of reviews, and addresses, they are the same restaurant. Therefore, the final answer is {"answer": "Yes"}.
+
+## Input:
+The following table provides details of Restaurant A.
+|PHONENUMBER|RATING|ADDRESS|NO_OF_REVIEWS|NAME|
+|---|---|---|---|---|
+|(608) 256-2263|3.3|119 W Main St, Madison, WI|25|Paradise Lounge |
+
+Restaurant B:
+|PHONENUMBER|RATING|ADDRESS|NO_OF_REVIEWS|NAME|
+|---|---|---|---|---|
+|(608) 829-5505|nan|601 N Whitney Way, Madison, WI 53705|0|The Paper Deli |
+
+## Output:
+Restaurant A and Restaurant B refer to the same entity as they have the same address and phone number. The difference is that Restaurant A has a rating of 3.3 and 25 reviews, while Restaurant B has no rating and 0 reviews. Therefore, the final answer is {"answer": "Yes"}.
+
+## Input:
+The following table provides details of Restaurant A.
+|PHONENUMBER|RATING|ADDRESS|NO_OF_REVIEWS|NAME|
+|---|---|---|---|---|
+|(608) 270-4440|3.7|811 S. Gammon Rd., Madison, WI|53|Suwanasak Thai Cuisine |
+
+Restaurant B:
+|PHONENUMBER|RATING|ADDRESS|NO_OF_REVIEWS|NAME|
+|---|---|---|---|---|
+|(608) 241-9798|2.5|4929 Commercial Ave, Madison, WI 53704|5|Chang Jiang |
+
+Let's think step by step and show your reasoning before showing the final result. Return the final result as JSON in the format {"answer": "<Yes or No>"}.
+## Output:
+
+
+--- [assistant] ---
+Restaurant A and Restaurant B are two different entities as they have different names, ratings, phone numbers, number of reviews, and addresses. Therefore, the final answer is {"answer": "No"}.
+
+================================================================================
+ EXAMPLE 4
+================================================================================
+
+--- [user] ---
+Instruction: Add a newly generated row to the input table, making it the last entry. Display the updated table with the newly appended row.
+
+Q:
+|Date|Visitor|Home|Winning Team|
+|---|---|---|---|
+|September 4|UCLA|Kansas State|Kansas State|
+|September 4|Washington State|Oklahoma State|Oklahoma State|
+|September 11|Colorado|California|California|
+|September 11|Oregon|Tennessee|Oregon|
+|September 11|Virginia|USC|USC|
+|September 11|Syracuse|Washington|Washington|
+|September 18|Iowa|Arizona|Arizona|
+|September 18|Arizona State|Wisconsin|Wisconsin|
+|September 18|Louisville|Oregon State|Oregon State|
+
+A:
+
+
+--- [assistant] ---
+|Date|Visitor|Home|Winning Team|
+|---|---|---|---|
+|September 4|UCLA|Kansas State|Kansas State|
+|September 4|Washington State|Oklahoma State|Oklahoma State|
+|September 11|Colorado|California|California|
+|September 11|Oregon|Tennessee|Oregon|
+|September 11|Virginia|USC|USC|
+|September 11|Syracuse|Washington|Washington|
+|September 18|Iowa|Arizona|Arizona|
+|September 18|Arizona State|Wisconsin|Wisconsin|
+|September 18|Louisville|Oregon State|Oregon State|
+|September 18|Stanford|Wake Forest|Stanford|
+
+
+================================================================================
+ EXAMPLE 5
+================================================================================
+
+--- [user] ---
+Objective: Please carefully assess the input table and inform me about any cell or cells that are mistaken. If there are multiple mistaken cells, list them. If no cells are mistaken, state 'None'. Only provide the cells that you have a high level of confidence are mistaken. Return the final result as JSON in the format {"erroneous_cells": "<a list of erroneous cells or None>"}.  Let's think step by step and show your reasoning before showing the final result.
+
+In:
+|Position|Season|Driver|Car|
+|---|---|---|---|
+|1st|1985|Jim Richarrds|BMW 635 CSi|
+|13th|1982|Jim Richards|BMW 318i turbo|
+|1st|1986|Jim Richards|BMW 635 CSi|
+
+Out:
+The cell "Jim Richarrds" is misspelled and should be "Jim Richards". Therefore, the answer is {"erroneous_cells": ["Jim Richarrds"]}
+
+In:
+|Position|Season|Driver|Car|
+|---|---|---|---|
+|4th|1986|Tony Longhurst|BMW 325i|
+|3rd|1986|Jim Richards|BMW 635 CSi|
+|NC|1984|Jim Richards Tnoy Longhurst|BMW 320i|
+
+Out:
+The cell "Jim Richards Tnoy Longhurst" is misspelled and should be "Jim Richards Tony Longhurst". Therefore, the answer is {"erroneous_cells": ["Jim Richards Tnoy Longhurst"]}
+
+In:
+|Position|Season|Driver|Car|
+|---|---|---|---|
+|16th|1985|Tony Longhurst|BMW 323i|
+|5th|1984|Jim Richards|BMW 635 CSi|
+|36th|1982|Jim Richards|BMW 635 CSi|
+|3rd|1986|Jim Richards|BMW 635 CSi|
+
+Out:
+All cells in the table seem to be correct and no apparent error is found. Therefore, the final answer is {"erroneous_cells": "None"}
+
+In:
+|Position|Season|Driver|Car|
+|---|---|---|---|
+|5th|1981|Allan Grice|BMW 318i turbo|
+|2nd|1981|Allan Grice|BMW 635 CSi|
+|12th|1981|Allan Grice|BMW 635 CSi|
+|22nd|1982|Jim Richards|BMW 635 CSi|
+|9th|1982|Jim Richards|BMW 635 CSi|
+
+Let's think step by step and show your reasoning before showing the final result. Return the final result as JSON in the format {"erroneous_cells": "<a list of erroneous cells or None>"}.
+Out:
+
+
+--- [assistant] ---
+All cells in the table seem to be correct and no apparent error is found. Therefore, the final answer is {"erroneous_cells": "None"}
+

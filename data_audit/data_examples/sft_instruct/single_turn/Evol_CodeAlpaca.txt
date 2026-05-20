@@ -1,0 +1,201 @@
+# Dataset: sft_instruct
+# Turn type: single
+# Source: Evol CodeAlpaca
+# Examples: 5
+
+================================================================================
+ EXAMPLE 1
+================================================================================
+
+--- [user] ---
+Create a SwiftUI application that displays a list of products and allows users to add a product to a list of favorites.
+
+--- [assistant] ---
+You can create a SwiftUI application showing a list of products and allowing users to add a product to a list of favorites like shown below.
+
+First, we create a product struct as a data type for our application.
+
+```swift
+struct Product: Identifiable {
+    let id = UUID()
+    var name: String
+    var isFavorite: Bool = false
+}
+```
+
+Then will construct our view showing a list of products and providing a way for users to add specific products to a list of favorites.
+
+```swift
+struct ContentView: View {
+    @State private var products = [Product(name: "Product 1"), Product(name: "Product 2"), Product(name: "Product 3")]
+
+    var body: some View {
+        NavigationView {
+            List {
+                ForEach(products.indices, id: \.self) { index in
+                    HStack{
+                        Text(self.products[index].name)
+                        Spacer()
+                        
+                        Button(action: {
+                            self.products[index].isFavorite.toggle()
+                        }) {
+                            Image(systemName: self.products[index].isFavorite ? "star.fill" : "star")
+                                .foregroundColor(self.products[index].isFavorite ? .yellow : .gray)
+                        }
+                        
+                    }
+                }
+            }
+            .navigationBarTitle("Product List")
+        }
+    }
+}
+```
+
+Here in our `ContentView`, we have a `NavigationView` with a `List` inside, we use `ForEach` to iterate over each product in our `products` array and display its name.
+
+Then we have a `Button` which toggles the `isFavorite` property of the tapped product, changing its state from favorite to not favorite and vice versa.
+
+The button's image will dynamically change from `star` to `star.fill` and vice versa depending on whether or not the product is a favorite.
+
+Please note that to save the state of favorites across launches of your application, you would need to implement a data persistence solution which may include solutions like Core Data, UserDefaults or a server-side database. That would involve more complex code which is not covered in this example.
+
+================================================================================
+ EXAMPLE 2
+================================================================================
+
+--- [user] ---
+Let's pretend this SVG is under the sea. How can I make it sway with ocean currents and surrounded by tiny bubbles?
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M2.6272 3.69393C2.79618 3.37207 3.19408 3.24814 3.51593 3.41712L5.11458 4.25644C6.39399 4.92099 7.19817 6.25709 7.19817 7.6999V9.0099C7.19817 9.37341 6.90348 9.6681 6.53997 9.6681C6.17646 9.6681 5.88177 9.37341 5.88177 9.0099V7.6999C5.88177 6.74326 5.34656 5.85986 4.50683 5.42415L4.504 5.42268L2.90401 4.58265C2.58216 4.41367 2.45823 4.01578 2.6272 3.69393Z" fill="#008463"/>
+<path d="M12.8028 3.69393C12.9718 4.01578 12.8478 4.41367 12.526 4.58265L10.9232 5.42416C10.0834 5.85987 9.54822 6.74326 9.54822 7.6999V9.0099C9.54822 9.37341 9.25354 9.6681 8.89002 9.6681C8.52651 9.6681 8.23182 9.37341 8.23182 9.0099V7.6999C8.23182 6.25709 9.036 4.92099 10.3154 4.25644L11.9141 3.41712C12.2359 3.24814 12.6338 3.37207 12.8028 3.69393Z" fill="#008463"/>
+<path d="M12.23 20.9C12.9646 20.9 13.56 20.3045 13.56 19.5699C13.56 18.8354 12.9646 18.24 12.23 18.24C11.4955 18.24 10.9 18.8354 10.9 19.5699C10.9 20.3045 11.4955 20.9 12.23 20.9Z" fill="#008463"/>
+<path d="M14.89 23.56C14.89 24.2945 14.2945 24.89 13.56 24.89C12.8254 24.89 12.23 24.2945 12.23 23.56C12.23 22.8255 12.8254 22.23 13.56 22.23C14.2945 22.23 14.89 22.8255 14.89 23.56Z" fill="#008463"/>
+<path d="M16.22 28.16C16.9546 28.16 17.55 27.5646 17.55 26.83C17.55 26.0955 16.9546 25.5 16.22 25.5C15.4855 25.5 14.89 26.0955 14.89 26.83C14.89 27.5646 15.4855 28.16 16.22 28.16Z" fill="#008463"/>
+<path d="M21.9799 28.02C21.9799 28.7545 21.3845 29.35 20.6499 29.35C19.9154 29.35 19.3199 28.7545 19.3199 28.02C19.3199 27.2854 19.9154 26.6899 20.6499 26.6899C21.3845 26.6899 21.9799 27.2854 21.9799 28.02Z" fill="#008463"/>
+<path d="M26.58 28.02C26.58 28.7545 25.9846 29.35 25.25 29.35C24.5155 29.35 23.92 28.7545 23.92 28.02C23.92 27.2854 24.5155 26.6899 25.25 26.6899C25.9846 26.6899 26.58 27.2854 26.58 28.02Z" fill="#008463"/>
+<path d="M20.36 28.02H26.25C28.28 28.02 29.99 26.3599 29.95 24.3199C29.91 22.3499 28.3 20.7599 26.32 20.7599H21.88C20.92 20.7599 20.08 20.1199 19.83 19.1899L18.24 13.41C17.36 10.2 14.44 7.97998 11.12 7.97998H6.46997C4.91714 7.97998 3.55154 8.95132 3.01326 10.3211L2.32031 11.68L3.01326 12.9165C3.53913 14.2747 4.85724 15.24 6.39997 15.24H9.59997C10.56 15.24 11.4 15.88 11.65 16.81L13.24 22.59C14.12 25.8 17.04 28.02 20.36 28.02Z" fill="#00D26A"/>
+<path d="M2.76997 11.68C2.76049 11.196 2.84949 10.7334 3.01789 10.3093C2.96046 10.2967 2.90093 10.29 2.84 10.29C2.38 10.29 2 10.66 2 11.13V12.11C2 12.57 2.38 12.95 2.84 12.95C2.90122 12.95 2.96103 12.9433 3.01871 12.9305C2.8663 12.5417 2.77892 12.1203 2.76997 11.68Z" fill="#212121"/>
+<path d="M6.03999 11.13C6.03999 10.67 5.65999 10.29 5.19999 10.29C4.72999 10.29 4.35999 10.66 4.35999 11.13V12.11C4.35999 12.57 4.73999 12.95 5.19999 12.95C5.65999 12.95 6.03999 12.57 6.03999 12.11V11.13Z" fill="#212121"/>
+</svg>
+
+
+--- [assistant] ---
+Creating an animated SVG with the illusion of a swaying motion and being surrounded by tiny bubbles involves the use of CSS animations and manipulation of SVG properties. Here's a simple example that might give you a starting point:
+
+1. Add the SVG into a div:
+```html
+<div class="sea-animation">
+  <!-- Your SVG code here -->
+</div>
+```
+
+2. Add CSS to create the animation:
+```css
+@keyframes sway {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(10px, 20px) rotate(3deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+@keyframes bubbles {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 100px; }
+}
+
+.sea-animation {
+  animation: sway 5s infinite alternate;
+  background: url('bubbles.png') repeat, blue;
+  background-size: 100px 100px;
+  animation: bubbles 5s infinite;
+}
+```
+This CSS code will make your SVG move slightly left and right, up and down, mimicking a swaying motion. It also adds a background image of repetitive bubbles. Note that you need to provide a 'bubbles.png' image for the bubbles effect.
+
+Please note that the complexities of SVG animations can vary widely depending on the level of interactivity and complexity you desire. It may require more advanced understanding of SVG properties and CSS animations or JavaScript.
+
+================================================================================
+ EXAMPLE 3
+================================================================================
+
+--- [user] ---
+Construct SVG code to illustrate a regular pentagon with a hue of purple. Additionally, the pentagon should have a gradient effect, transitioning from a lighter shade of purple at the top to a darker shade at the bottom. The SVG code should also include a hover effect, where the pentagon changes its color to blue when the mouse pointer is over it.
+
+--- [assistant] ---
+Here's a sample SVG code to help. Please note that this just depicts a regular pentagon with gradient coloring without implementing the hover effect. SVG does not inherently support hover states. Implementing hover effect involves JavaScript.
+
+Please substitute the values for "fill" in the code with your actual RGB or HEX color codes for the shades of purple or blue.
+
+```svg
+<svg width="200px" height="200px" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   style="stop-color:lightPurple;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:darkPurple;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <polygon points="100,10 40,198 190,78 10,78 160,198"  fill="url(#purpleGradient)"/>
+</svg>
+```
+
+To implement a hover effect with color change, you'd need to involve JavaScript on the webpage where this SVG resides:
+
+```javascript
+let polygon = document.querySelector('polygon');
+polygon.addEventListener('mouseover', function() {
+  polygon.setAttribute('fill', 'blue');
+});
+polygon.addEventListener('mouseout', function() {
+  polygon.setAttribute('fill', 'url(#purpleGradient)');
+});
+```
+This code listens for a 'mouseover' event on the polygon and changes the fill color to blue. The fill color is then reverted to the original gradient ('url(#purpleGradient)') on 'mouseout' event.
+
+================================================================================
+ EXAMPLE 4
+================================================================================
+
+--- [user] ---
+Take into consideration the provided input sentence, effectively invert the order of the individual words presenting themselves within the sentence, thereby manufacturing an altered version of the sentence where terms feature in a reversed sequence. 
+Input: Hello World
+
+--- [assistant] ---
+You can solve this problem with Python. Here is a simple program to reverse the words in a sentence.
+
+```python
+def reverse_sentence(sentence):
+    words = sentence.split(' ')
+    reversed_sentence = ' '.join(reversed(words))
+    return reversed_sentence
+
+input_sentence = "Hello World"
+print(reverse_sentence(input_sentence))
+```
+
+When you run this program with "Hello World" as the input, the output will be "World Hello". The split function breaks the sentence into a list of words, and the reversed function changes the order of the elements in this list. Finally, ' '.join creates a string from this reversed list.
+
+================================================================================
+ EXAMPLE 5
+================================================================================
+
+--- [user] ---
+Can you elucidate a specific programming situation that showcases the construction of a basic machine learning model using TensorFlow on Google Cloud, considering its distributed training capabilities, the intricacies involved in the configuration process, and possible challenges that may arise during the distributed training operation, requiring a systematic problem-solving approach?
+
+--- [assistant] ---
+Sure. To illustrate these concepts, let's consider a situation where a company wants to use TensorFlow on Google Cloud to build a basic machine learning model for image recognition. The company has a large database of images that needs to be processed in a short time, and they want to leverage Google Cloud's distributed training capabilities to meet this objective.
+
+1. Data Preparation: The company would first need to gather and prepare their image data. This could involve converting the images into a format that can be used by TensorFlow (like TFRecord), segregating images into training/validation/test sets, and possibly augmenting the data to increase variety. Storage and retrieval of image files during training could pose a challenge, especially if they are very large or numerous. Google Cloud Storage could be used to overcome this by storing data blobs and reading them directly into TensorFlow's data pipeline.
+
+2. Coding the Model: TensorFlow provides tools to create various kinds of machine learning models. For image recognition, a convolutional neural network (CNN) model could be appropriate. Writing the code for the model architecture might present a challenge, which can be surmounted by experimenting with different neural layers and parameters, and looking to pre-existing models or research for guidance.
+
+3. Configuration for Distributed Training: TensorFlow can run distributed training jobs using Google Cloud ML Engine, distributing computations across multiple machines (either CPUs or GPUs). Configuring this involves a few steps. A runtime version, Python version, and machine type would be specified, along with other flags for distributed training, such as specifying the job as a 'worker' or 'parameter server,' and setting the number of each machine to be used. Misconfigurations (mismatched machine types, versions, numbers) can lead to job failure, so meticulous attention to detail is required.
+
+4. Training the Model: Once configuration is done, the model can be trained. This involves feeding the training data in batches, iteratively updating the model's parameters to minimize their generated error. While distributed training can drastically speed up this process, it involves certain challenges. For example, disparate machine performance could impede overall training speed if not monitored and mitigated, using concepts like gradient accumulation for slow workers. Further, certain operations don't distribute well (like batch normalization) and need to be handled differently.
+
+5. Evaluation and Tuning: After training, the model's performance must be validated with a test dataset. If the performance is not satisfactory, the model and training parameters might need to be adjusted. Hyperparameter tuning using Google Cloud's HyperTune capability can be a useful approach here.
+
+6. Deployment: Once the model is ready, it can be deployed for use. Here, the main challenge lies in creating a robust inference pipeline that can reliably serve model predictions, which can be achieved using Google Cloud's model serving capabilities.
+
+Throughout this process, one key challenge is managing costs, as large-scale, distributed machine learning can be expensive, making budget optimization crucial.
+

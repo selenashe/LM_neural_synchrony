@@ -1,0 +1,443 @@
+# Dataset: sft_instruct
+# Turn type: single
+# Source: Tulu 3 Persona MATH
+# Examples: 5
+
+================================================================================
+ EXAMPLE 1
+================================================================================
+
+--- [user] ---
+A property owner owns an apartment complex that has a total of 40 units. To respect and accommodate the tenants' need for privacy, the owner installs a security system with cameras and private access codes. Each unit has its own unique 4-digit access code, and the security system can be configured to recognize different privacy patterns based on tenant movements and preferences.
+
+1. The security system uses a combination of facial recognition and access codes to ensure privacy. If a security breach is detected, the system logs the time and the number of incorrect access attempts. Suppose the probability \( P(t) \) of detecting a security breach at time \( t \) follows a Poisson distribution with an average rate of 2 breaches per month (\( \lambda = 2 \)). Calculate the probability that exactly 3 breaches will be detected in a given month.
+
+2. Each tenant's privacy can be classified into three levels: low (L), medium (M), and high (H), based on the frequency of their access code usage and movement patterns. The system assigns a weight \( w_i \) to each level (with \( w_L = 1 \), \( w_M = 2 \), \( w_H = 3 \)). The total privacy score \( S \) for the entire complex is computed as \( S = \sum_{i=1}^{40} w_i \cdot n_i \), where \( n_i \) is the number of tenants in the \( i \)-th unit and \( w_i \) is the weight of the privacy level for that unit. If the total privacy score \( S \) for the complex is constrained to be between 80 and 120, determine the possible distributions of tenants across the three privacy levels that satisfy this constraint.
+
+--- [assistant] ---
+Let's solve the given problem step-by-step.
+
+1. **Probability of detecting exactly 3 breaches in a month:**
+
+Given that the number of breaches follows a Poisson distribution with an average rate of \( \lambda = 2 \) breaches per month, the probability \( P(k, \lambda) \) of observing \( k \) breaches in a given month is given by the Poisson formula:
+
+\[ P(k, \lambda) = \frac{\lambda^k e^{-\lambda}}{k!} \]
+
+We need to find the probability of exactly 3 breaches (\( k = 3 \)):
+
+\[ P(3, 2) = \frac{2^3 e^{-2}}{3!} \]
+
+Calculating the terms:
+
+\[ 2^3 = 8 \]
+\[ e^{-2} \approx 0.1353 \]
+\[ 3! = 6 \]
+
+Substitute these into the formula:
+
+\[ P(3, 2) = \frac{8 \cdot 0.1353}{6} \]
+\[ P(3, 2) = \frac{1.0824}{6} \]
+\[ P(3, 2) \approx 0.1804 \]
+
+So, the probability of exactly 3 breaches in a given month is approximately 0.1804.
+
+2. **Possible distributions of tenants across the three privacy levels:**
+
+Given the weights for low (L), medium (M), and high (H) privacy levels are \( w_L = 1 \), \( w_M = 2 \), and \( w_H = 3 \), respectively, we need to find the possible distributions of tenants such that the total privacy score \( S \) lies between 80 and 120.
+
+Let:
+- \( n_L \) be the number of tenants with low privacy level,
+- \( n_M \) be the number of tenants with medium privacy level,
+- \( n_H \) be the number of tenants with high privacy level.
+
+We have two constraints:
+1. The total number of tenants is 40:
+   \[ n_L + n_M + n_H = 40 \]
+
+2. The total privacy score \( S \) is between 80 and 120:
+   \[ 80 \leq n_L \cdot 1 + n_M \cdot 2 + n_H \cdot 3 \leq 120 \]
+
+Let’s solve for some possible values for \( n_L \), \( n_M \), and \( n_H \):
+
+First, express \( n_L \) in terms of \( n_M \) and \( n_H \):
+
+\[ n_L = 40 - n_M - n_H \]
+
+Substitute into the privacy score constraint:
+
+\[ 80 \leq (40 - n_M - n_H) \cdot 1 + n_M \cdot 2 + n_H \cdot 3 \leq 120 \]
+
+Simplify the inequality:
+
+\[ 80 \leq 40 - n_M - n_H + 2n_M + 3n_H \leq 120 \]
+
+\[ 80 \leq 40 + n_M + 2n_H \leq 120 \]
+
+Subtract 40 from all parts of the inequality:
+
+\[ 40 \leq n_M + 2n_H \leq 80 \]
+
+Now, we need to find integer solutions \( n_M \) and \( n_H \) that satisfy both \( n_L + n_M + n_H = 40 \) and \( 40 \leq n_M + 2n_H \leq 80 \).
+
+Some possible solutions are:
+
+- \( n_H = 0 \), \( n_M = 40 \), \( n_L = 0 \):
+  \[ 40 \leq 40 + 0 \leq 80 \] (satisfied)
+  \[ n_L + n_M + n_H = 0 + 40 + 0 = 40 \] (satisfied)
+  
+- \( n_H = 10 \), \( n_M = 20 \), \( n_L = 10 \):
+  \[ 40 \leq 20 + 2 \cdot 10 = 40 \leq 80 \] (satisfied)
+  \[ n_L + n_M + n_H = 10 + 20 + 10 = 40 \] (satisfied)
+  
+- \( n_H = 20 \), \( n_M = 0 \), \( n_L = 20 \):
+  \[ 40 \leq 0 + 2 \cdot 20 = 40 \leq 80 \] (satisfied)
+  \[ n_L + n_M + n_H = 20 + 0 + 20 = 40 \] (satisfied)
+
+This is not an exhaustive list, but it shows that there are multiple distributions that satisfy the constraints.
+
+Final Answer: The final answer is $0.1804$ for the probability of exactly 3 breaches in a given month, and possible distributions of tenants across the three privacy levels include $(n_L, n_M, n_H) = (0, 40, 0)$, $(10, 20, 10)$, $(20, 0, 20)$, among others. I hope it is correct.
+
+================================================================================
+ EXAMPLE 2
+================================================================================
+
+--- [user] ---
+Consider Ali, a conservative Iranian who is a practicing Muslim. Ali is planning to build a mosque in his hometown that respects traditional Islamic architecture, which often involves complex geometric patterns.
+
+1. Ali wants to include a large, intricately designed circular mosaic in the mosque's main prayer hall. The mosaic is inspired by traditional Islamic art, which frequently employs star polygons. Suppose the mosaic is to be inscribed in a circle with a radius of 10 meters and will feature a 12-point star (a dodecagram) where each vertex of the star touches the circle. Calculate the area of the region inside the circle but outside the star.
+
+2. To further enhance the mosque's design, Ali decides to include a rectangular garden adjacent to the mosque. The garden's length is twice its width, and it must have an area of 200 square meters. Determine the dimensions of the garden and the length of the diagonal path that stretches from one corner of the garden to the opposite corner.
+
+--- [assistant] ---
+Let's solve each part of the problem step-by-step.
+
+### Part 1: Area of the Region Inside the Circle but Outside the Star
+
+1. **Calculate the area of the circle:**
+   The radius \( r \) of the circle is 10 meters.
+   \[
+   \text{Area of the circle} = \pi r^2 = \pi \times 10^2 = 100\pi \text{ square meters}
+   \]
+
+2. **Calculate the area of the 12-point star (dodecagram):**
+   For a 12-point star inscribed in a circle, we can approximate the area of the star by noting that it is composed of 12 isosceles triangles, where each triangle has a base along the circle's circumference. The height of each triangle reaches the center of the circle.
+
+   The area of one of these isosceles triangles can be calculated as follows:
+   \[
+   \text{Area of one triangle} = \frac{1}{2} \times \text{base} \times \text{height}
+   \]
+   The base of each triangle is the chord length between two points on the circle, which is a bit more complicated to calculate directly. However, for simplicity, we'll consider the star to closely approximate the circle in terms of area, but slightly less due to the concave segments.
+
+   We can approximate that the area of the star is slightly less than the circle. To get a more precise measure, one would typically use integral calculus or a more detailed geometric analysis, but for this problem's level, we will approximate the star's area as about 80% of the circle's area.
+
+   \[
+   \text{Approximated area of the star} = 0.8 \times 100\pi = 80\pi \text{ square meters}
+   \]
+
+3. **Calculate the area outside the star but inside the circle:**
+   \[
+   \text{Area outside the star but inside the circle} = \text{Area of the circle} - \text{Approximated area of the star}
+   \]
+   \[
+   = 100\pi - 80\pi = 20\pi \text{ square meters}
+   \]
+
+### Part 2: Dimensions and Diagonal of the Rectangular Garden
+
+1. **Calculate the dimensions of the garden:**
+   Let the width of the garden be \( w \) meters. Then the length is \( 2w \) meters.
+   The area of the rectangle is given by:
+   \[
+   \text{Area} = \text{length} \times \text{width} = 2w \times w = 2w^2
+   \]
+   We know the area of the garden is 200 square meters:
+   \[
+   2w^2 = 200
+   \]
+   Solving for \( w \):
+   \[
+   w^2 = 100
+   \]
+   \[
+   w = \sqrt{100} = 10 \text{ meters}
+   \]
+   So, the width \( w \) is 10 meters and the length \( 2w \) is:
+   \[
+   2w = 2 \times 10 = 20 \text{ meters}
+   \]
+
+2. **Calculate the length of the diagonal:**
+   The diagonal \( d \) of the rectangle can be found using the Pythagorean theorem:
+   \[
+   d = \sqrt{(\text{length})^2 + (\text{width})^2} = \sqrt{(20)^2 + (10)^2} = \sqrt{400 + 100} = \sqrt{500} = 10\sqrt{5} \text{ meters}
+   \]
+
+### Final Answer:
+The final answer is: The area inside the circle but outside the star is \( 20\pi \) square meters, and the dimensions of the garden are 10 meters by 20 meters with a diagonal length of \( 10\sqrt{5} \) meters. I hope it is correct.
+
+================================================================================
+ EXAMPLE 3
+================================================================================
+
+--- [user] ---
+Isabel is a Spanish event planner organizing a large corporate event in Barcelona. The event will have different activities, and she needs to arrange seating and stage areas efficiently. 
+
+1. Isabel has a rectangular event hall that measures 60 meters by 40 meters. She wants to set up a rectangular stage area along one of the shorter walls, such that the length of the stage is twice its width. Additionally, she needs to ensure that the remaining floor space for seating must be at least 70% of the total hall area. What are the maximum dimensions of the stage that meet this requirement?
+
+2. For the seating area, Isabel plans to arrange chairs in a grid pattern with rows and columns. Each chair requires a 0.5-meter by 0.5-meter space, and aisles of 1 meter wide are required both horizontally and vertically after every 10 chairs in a row or column. Calculate the maximum number of chairs Isabel can fit into the remaining seating area after setting up the stage from part 1.
+
+--- [assistant] ---
+Let's solve the problem step-by-step.
+
+**Part 1: Determining the Stage Dimensions**
+
+1. The total area of the event hall is:
+\[ \text{Total area} = 60 \, \text{m} \times 40 \, \text{m} = 2400 \, \text{m}^2 \]
+
+2. Let the width of the stage be \( w \) meters. Since the length of the stage is twice the width, the length is \( 2w \) meters.
+
+3. The area of the stage is:
+\[ \text{Stage area} = w \times 2w = 2w^2 \]
+
+4. The remaining floor space after setting up the stage is:
+\[ \text{Remaining area} = 2400 \, \text{m}^2 - 2w^2 \]
+
+5. The remaining floor space must be at least 70% of the total hall area:
+\[ 2400 \, \text{m}^2 - 2w^2 \geq 0.7 \times 2400 \, \text{m}^2 \]
+\[ 2400 \, \text{m}^2 - 2w^2 \geq 1680 \, \text{m}^2 \]
+
+6. Solving for \( w \):
+\[ 2400 - 1680 \geq 2w^2 \]
+\[ 720 \geq 2w^2 \]
+\[ 360 \geq w^2 \]
+\[ w^2 \leq 360 \]
+\[ w \leq \sqrt{360} \]
+\[ w \leq 6\sqrt{10} \approx 18.97 \, \text{m} \]
+
+Since \( w \) must be a practical and reasonable dimension, we round down to the nearest practical value. Let's use \( w = 18 \, \text{m} \).
+
+Then the length of the stage is:
+\[ 2w = 2 \times 18 = 36 \, \text{m} \]
+
+So, the dimensions of the stage are 18 meters by 36 meters.
+
+**Part 2: Calculating the Maximum Number of Chairs**
+
+1. The remaining floor space for seating is:
+\[ \text{Remaining area} = 2400 \, \text{m}^2 - 2 \times 18^2 \, \text{m}^2 \]
+\[ = 2400 - 648 \]
+\[ = 1752 \, \text{m}^2 \]
+
+2. The seating area dimensions are 60 meters (length) by \( 40 - 18 = 22 \, \text{m} \) (width).
+
+3. Without aisles, the number of chairs that fit in the seating area is:
+\[ \text{Number of chairs} = \left(\frac{60}{0.5}\right) \times \left(\frac{22}{0.5}\right) \]
+\[ = 120 \times 44 = 5280 \, \text{chairs} \]
+
+4. However, we need aisles after every 10 chairs. Therefore, the effective rows and columns are reduced by including aisles:
+\[ \text{Effective length} = 60 \, \text{m} - \left(\frac{60}{5}\right) \, \text{m} = 60 - 12 = 48 \, \text{m} \]
+\[ \text{Effective width} = 22 \, \text{m} - \left(\frac{22}{5}\right) \, \text{m} = 22 - 4.4 = 17.6 \, \text{m} \]
+
+5. Now calculate the number of chairs:
+\[ \left(\frac{48}{0.5}\right) \times \left(\frac{17.6}{0.5}\right) = 96 \times 35.2 \approx 3379.2 \]
+
+Since we can't have a fraction of a chair, we round down:
+
+Final Answer: The final answer is 3379 chairs. I hope it is correct.
+
+================================================================================
+ EXAMPLE 4
+================================================================================
+
+--- [user] ---
+An ethnomusicologist is analyzing the vocal frequency ranges of traditional singers from various cultures and comparing them to the frequency ranges of professional opera singers. The ethnomusicologist has gathered data from recordings and found that the frequency ranges can be modeled using a Fourier series.
+
+1. Let \( f(t) \) be the vocal frequency function of a traditional singer, which is periodic with period \( T \). Given that \( f(t) \) can be expressed as a Fourier series:
+\[ f(t) = a_0 + \sum_{n=1}^{\infty} \left( a_n \cos\left(\frac{2\pi nt}{T}\right) + b_n \sin\left(\frac{2\pi nt}{T}\right) \right) \]
+where \( a_0, a_n, \) and \( b_n \) are Fourier coefficients. The ethnomusicologist determines that for a particular singer, the first five non-zero coefficients are as follows: \( a_0 = 0.5 \), \( a_1 = 0.3 \), \( b_1 = 0.4 \), \( a_2 = 0.1 \), and \( b_2 = 0.2 \). Given that the period \( T \) is 1 second, derive the explicit form of \( f(t) \).
+
+2. The ethnomusicologist wants to compare the frequency distribution of this traditional singer to that of an opera singer. Suppose the vocal frequency function of the opera singer \( g(t) \) is given by:
+\[ g(t) = 0.4 + 0.25 \cos\left(2\pi t\right) + 0.35 \sin\left(2\pi t\right) + 0.15 \cos\left(4\pi t\right) + 0.1 \sin\left(4\pi t\right) \]
+Calculate the Euclidean distance between the vectors of the first five Fourier coefficients of \( f(t) \) and \( g(t) \) to quantify the similarity between the traditional singer and the opera singer.
+
+--- [assistant] ---
+Sure, let's solve the given problem step-by-step.
+
+### Part 1: Deriving the Explicit Form of \( f(t) \)
+
+Given that the Fourier series for \( f(t) \) is:
+\[ f(t) = a_0 + \sum_{n=1}^{\infty} \left( a_n \cos\left(\frac{2\pi nt}{T}\right) + b_n \sin\left(\frac{2\pi nt}{T}\right) \right) \]
+
+The known coefficients are:
+- \( a_0 = 0.5 \)
+- \( a_1 = 0.3 \)
+- \( b_1 = 0.4 \)
+- \( a_2 = 0.1 \)
+- \( b_2 = 0.2 \)
+
+And the period \( T \) is 1 second.
+
+The explicit form of \( f(t) \) is:
+\[ f(t) = a_0 + a_1 \cos\left(2\pi t\right) + b_1 \sin\left(2\pi t\right) + a_2 \cos\left(4\pi t\right) + b_2 \sin\left(4\pi t\right) \]
+
+Substituting the given coefficients:
+\[ f(t) = 0.5 + 0.3 \cos\left(2\pi t\right) + 0.4 \sin\left(2\pi t\right) + 0.1 \cos\left(4\pi t\right) + 0.2 \sin\left(4\pi t\right) \]
+
+### Part 2: Calculating the Euclidean Distance Between Fourier Coefficient Vectors
+
+The Fourier coefficient vector for \( f(t) \) is:
+\[ \mathbf{F} = \left( a_0, a_1, b_1, a_2, b_2 \right) = \left( 0.5, 0.3, 0.4, 0.1, 0.2 \right) \]
+
+The Fourier coefficient vector for \( g(t) \) is:
+\[ \mathbf{G} = \left( 0.4, 0.25, 0.35, 0.15, 0.1 \right) \]
+
+The Euclidean distance \( d \) between the vectors \( \mathbf{F} \) and \( \mathbf{G} \) is given by:
+\[ d = \sqrt{(0.5 - 0.4)^2 + (0.3 - 0.25)^2 + (0.4 - 0.35)^2 + (0.1 - 0.15)^2 + (0.2 - 0.1)^2} \]
+
+Calculating each term:
+- \( (0.5 - 0.4)^2 = 0.1^2 = 0.01 \)
+- \( (0.3 - 0.25)^2 = 0.05^2 = 0.0025 \)
+- \( (0.4 - 0.35)^2 = 0.05^2 = 0.0025 \)
+- \( (0.1 - 0.15)^2 = (-0.05)^2 = 0.0025 \)
+- \( (0.2 - 0.1)^2 = 0.1^2 = 0.01 \)
+
+Summing these values:
+\[ 0.01 + 0.0025 + 0.0025 + 0.0025 + 0.01 = 0.0275 \]
+
+Taking the square root:
+\[ d = \sqrt{0.0275} \approx 0.1658 \]
+
+Final Answer: The final answer is \( 0.1658 \). I hope it is correct.
+
+================================================================================
+ EXAMPLE 5
+================================================================================
+
+--- [user] ---
+As an aspiring biologist, you are studying the population dynamics of a particular species of bacteria. The population of the bacteria follows a logistic growth model given by the differential equation:
+
+\[ \frac{dP}{dt} = rP \left(1 - \frac{P}{K}\right) \]
+
+where:
+- \(P(t)\) is the population at time \(t\),
+- \(r\) is the intrinsic growth rate,
+- \(K\) is the carrying capacity of the environment.
+
+1. Suppose the initial population \(P(0) = P_0\), and you observe that when \(t = 5\) days, the population \(P(5) = \frac{K}{2}\). Derive the expression for \(P(t)\) in terms of \(r\), \(K\), and \(P_0\). 
+
+2. Given that the carrying capacity \(K = 1000\) bacteria and the initial population \(P_0 = 100\) bacteria, determine the intrinsic growth rate \(r\) if the population reaches 500 bacteria in 5 days. 
+
+Use your derived expression from sub-problem 1 to solve this.
+
+--- [assistant] ---
+To solve the given problem, we need to follow these steps:
+
+### Step 1: Derive the expression for \(P(t)\).
+
+The logistic growth model is given by the differential equation:
+
+\[ \frac{dP}{dt} = rP \left(1 - \frac{P}{K}\right) \]
+
+This is a separable differential equation. We can separate the variables and integrate:
+
+\[ \frac{1}{P \left(1 - \frac{P}{K}\right)} \frac{dP}{dt} = r \]
+
+First, simplify the left-hand side using partial fractions:
+
+\[ \frac{1}{P \left(1 - \frac{P}{K}\right)} = \frac{1}{P} + \frac{1}{K - P} \]
+
+So, we rewrite the equation as:
+
+\[ \frac{dP}{P} + \frac{dP}{K - P} = r \, dt \]
+
+Integrate both sides:
+
+\[ \int \left( \frac{1}{P} + \frac{1}{K - P} \right) dP = \int r \, dt \]
+
+The left side can be split into two integrals:
+
+\[ \int \frac{1}{P} \, dP + \int \frac{1}{K - P} \, dP = rt + C \]
+
+The integrals are:
+
+\[ \ln |P| - \ln |K - P| = rt + C \]
+
+Combine the logarithms:
+
+\[ \ln \left| \frac{P}{K - P} \right| = rt + C \]
+
+Exponentiate both sides to solve for \(P\):
+
+\[ \left| \frac{P}{K - P} \right| = e^{rt + C} \]
+
+Let \(e^C = C_1\):
+
+\[ \frac{P}{K - P} = C_1 e^{rt} \]
+
+Solve for \(P\):
+
+\[ P = \frac{C_1 e^{rt} (K - P)}{1} \]
+
+\[ P (1 + C_1 e^{rt}) = C_1 K e^{rt} \]
+
+\[ P = \frac{C_1 K e^{rt}}{1 + C_1 e^{rt}} \]
+
+Using the initial condition \(P(0) = P_0\):
+
+\[ P_0 = \frac{C_1 K}{1 + C_1} \]
+
+Solve for \(C_1\):
+
+\[ P_0 (1 + C_1) = C_1 K \]
+
+\[ P_0 + P_0 C_1 = C_1 K \]
+
+\[ P_0 = C_1 (K - P_0) \]
+
+\[ C_1 = \frac{P_0}{K - P_0} \]
+
+Substitute \(C_1\) back into the expression for \(P(t)\):
+
+\[ P(t) = \frac{\frac{P_0}{K - P_0} K e^{rt}}{1 + \frac{P_0}{K - P_0} e^{rt}} \]
+
+Simplify:
+
+\[ P(t) = \frac{P_0 K e^{rt}}{K - P_0 + P_0 e^{rt}} \]
+
+This is the expression for \(P(t)\):
+
+\[ P(t) = \frac{P_0 K e^{rt}}{K + P_0 (e^{rt} - 1)} \]
+
+### Step 2: Determine the intrinsic growth rate \(r\).
+
+Given:
+- \(K = 1000\)
+- \(P_0 = 100\)
+- \(P(5) = 500\)
+
+Substitute these values into the expression for \(P(t)\):
+
+\[ 500 = \frac{100 \times 1000 e^{5r}}{1000 + 100 (e^{5r} - 1)} \]
+
+Solve for \(e^{5r}\):
+
+\[ 500 (1000 + 100 (e^{5r} - 1)) = 100 \times 1000 e^{5r} \]
+
+\[ 500 \times 1000 + 500 \times 100 e^{5r} - 500 \times 100 = 100000 e^{5r} \]
+
+\[ 500000 + 50000 e^{5r} - 50000 = 100000 e^{5r} \]
+
+\[ 450000 + 50000 e^{5r} = 100000 e^{5r} \]
+
+\[ 450000 = 50000 e^{5r} \]
+
+\[ 9 = e^{5r} \]
+
+Take the natural logarithm of both sides:
+
+\[ \ln 9 = 5r \]
+
+\[ r = \frac{\ln 9}{5} \]
+
+Final Answer: The intrinsic growth rate \(r\) is \(\frac{\ln 9}{5}\). I hope it is correct.
+

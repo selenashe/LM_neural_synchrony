@@ -1,0 +1,494 @@
+# Dataset: sft_instruct
+# Turn type: multi
+# Source: Dolci Instruct Tool Use
+# Examples: 5
+
+================================================================================
+ EXAMPLE 1
+================================================================================
+
+--- [system] ---
+You are a helpful function-calling AI assistant. You are provided with function signatures within <functions></functions> XML tags. You may call one or more functions to assist with the user query. Output any function calls within <function_calls></function_calls> XML tags. Don't make assumptions about what values to plug into functions.
+
+--- [user] ---
+Can you get the biography for the live room named 'lil_eva'?
+
+--- [assistant] ---
+
+
+--- [environment] ---
+{"biography": "Lil Eva is known for her energetic performances and has a vast following on social media."}
+
+--- [assistant] ---
+The biography for the live room 'lil_eva' is: Lil Eva is known for her energetic performances and has a vast following on social media.
+
+--- [user] ---
+That sounds interesting! Can you fetch a video related to her?
+
+--- [assistant] ---
+Sure! Do you have a specific video ID in mind, or should I look for one related to her latest performance?
+
+--- [user] ---
+Let's go with a video related to her latest performance.
+
+--- [assistant] ---
+
+
+--- [environment] ---
+{"video_details": {"title": "Lil Eva Live Performance","duration": "3:45","views": 10000}}
+
+--- [assistant] ---
+I found a video titled 'Lil Eva Live Performance'. It lasts 3 minutes and 45 seconds and has 10,000 views.
+
+--- [user] ---
+Great! Can you give me more details about the video?
+
+--- [assistant] ---
+
+
+--- [environment] ---
+{"video_details": {"title": "Lil Eva Live Performance","duration": "3:45","views": 10000,"likes": 500,"comments_count": 30}}
+
+--- [assistant] ---
+The video details are as follows: Title: 'Lil Eva Live Performance', Duration: 3 minutes and 45 seconds, Views: 10,000, Likes: 500, Comments: 30.
+
+================================================================================
+ EXAMPLE 2
+================================================================================
+
+--- [system] ---
+You are a helpful function-calling AI assistant. You are provided with function signatures within <functions></functions> XML tags. You may call one or more functions to assist with the user query. Output any function calls within <function_calls></function_calls> XML tags. Don't make assumptions about what values to plug into functions.
+
+--- [user] ---
+1. Integrate x^2 between 0 and 5 using both the trapezoid method and Simpson's method.
+2. For the number 512, check if it's a power of 2 and count how many 1's are in its binary representation.
+
+--- [assistant] ---
+
+
+--- [environment] ---
+{"result": 41.6667}
+{"result": 41.6667}
+{"result": true}
+{"result": 1}
+
+--- [assistant] ---
+Here are your results:
+1. The area under x^2 from 0 to 5 is approximately 41.67 using both the trapezoid and Simpson's methods.
+2. 512 is a power of 2, and it has 1 set bit (1's) in its binary representation.
+
+--- [user] ---
+Calculate the median and find the peak element in this list: [6, 2, 8, 8, 3, 7, 8, 4]
+
+--- [assistant] ---
+
+
+--- [environment] ---
+{"result": 7.0}
+{"result": 8}
+
+--- [assistant] ---
+The median of your list is 7.0, and a peak element found is 8.
+
+--- [user] ---
+Give me the density of an object with mass 920g and volume 400cm^3. Also, calculate the mean confidence interval for mean=82, std dev=4.3, sample size=50 at 95% confidence.
+
+--- [assistant] ---
+
+
+--- [environment] ---
+{"result": 2.3}
+{"result": [80.78, 83.22]}
+
+--- [assistant] ---
+The object's density is 2.3 g/cm³. The 95% confidence interval for the mean is [80.78, 83.22].
+
+--- [user] ---
+If I invest $2,000 at a 6% annual rate for 8 years, how much profit do I make? Also, integrate x^3 from 1 to 3 using Simpson's method.
+
+--- [assistant] ---
+
+
+--- [environment] ---
+{"result": 1272.28}
+{"result": 19.9999}
+
+--- [assistant] ---
+Your investment would yield a profit of $1,272.28 after 8 years at a 6% annual rate. The area under x^3 from 1 to 3 using Simpson's method is approximately 20.0.
+
+--- [user] ---
+Check if 1000 is a power of 10, and count the set bits in 1000. Also, what is the median of [5, 2, 9, 1]?
+
+--- [assistant] ---
+
+
+--- [environment] ---
+{"result": true}
+{"result": 6}
+{"result": 3.5}
+
+--- [assistant] ---
+1000 is a power of 10, it has 6 set bits in binary, and the median of [5, 2, 9, 1] is 3.5.
+
+================================================================================
+ EXAMPLE 3
+================================================================================
+
+--- [system] ---
+You are a helpful function-calling AI assistant. You are provided with function signatures within <functions></functions> XML tags. You may call one or more functions to assist with the user query. Output any function calls within <function_calls></function_calls> XML tags. Don't make assumptions about what values to plug into functions.
+
+--- [user] ---
+For the domain google.com, find probable email addresses for Sundar Pichai (CEO) and Ruth Porat (CFO). Also, fetch the hosts file for both "minecraft" and "terraria". Lastly, search for recent "Google executive announcements" via secondary search.
+
+--- [assistant] ---
+
+
+--- [environment] ---
+{"results": {"email": "sundar.pichai@google.com"}}
+{"results": {"email": "ruth.porat@google.com"}}
+{"results": {"hosts": "127.0.0.1 example1.com\n127.0.0.1 example2.com"}}
+{"results": {"hosts": "127.0.0.1 example3.com\n127.0.0.1 example4.com"}}
+{"results": {"search_results": ["Google announces new executive appointments", "Press release: Ruth Porat transitions to new role at Google", "Sundar Pichai on leadership changes"]}}
+
+--- [assistant] ---
+Here are the results you requested:
+
+1. Probable email addresses:
+  - Sundar Pichai (CEO): sundar.pichai@google.com
+  - Ruth Porat (CFO): ruth.porat@google.com
+
+2. Hosts file contents:
+  - Minecraft hosts:
+    127.0.0.1 example1.com
+    127.0.0.1 example2.com
+  - Terraria hosts:
+    127.0.0.1 example3.com
+    127.0.0.1 example4.com
+
+3. Recent "Google executive announcements" search results:
+  - Google announces new executive appointments
+  - Press release: Ruth Porat transitions to new role at Google
+  - Sundar Pichai on leadership changes
+
+Let me know if there's anything else I can assist you with!
+
+--- [user] ---
+Now, get the first 8 digits CNPJ info for a company of your choice and search for their current CFO using the secondary search. Also, repeat the email-finder for Ruth Porat but with the domain 'alphabet.com', and show the Minecraft hosts again.
+
+--- [assistant] ---
+
+
+--- [environment] ---
+{"results": {"company_name": "Mercado Livre S.A.", "address": "Avenida das Nações Unidas, 3003", "cnpj": "37.335.118/0001-99"}}
+{"results": {"search_results": ["CFO of Mercado Livre S.A. is Pedro Arnt", "Management team at Mercado Livre"]}}
+{"results": {"email": "ruth.porat@alphabet.com"}}
+{"results": {"hosts": "127.0.0.1 example1.com\n127.0.0.1 example2.com"}}
+
+--- [assistant] ---
+Here's the updated information:
+
+1. Company info for a company with CNPJ starting 37335118:
+   - Name: Mercado Livre S.A.
+   - Address: Avenida das Nações Unidas, 3003
+   - Full CNPJ: 37.335.118/0001-99
+
+2. Current CFO (via search) of Mercado Livre S.A.: Pedro Arnt
+
+3. Probable email for Ruth Porat at 'alphabet.com': ruth.porat@alphabet.com
+
+4. Minecraft hosts file (again):
+   127.0.0.1 example1.com
+   127.0.0.1 example2.com
+
+Let me know if you need further details or additional searches!
+
+--- [user] ---
+Can you compare the Minecraft and Terraria hosts file content and tell me which host entries are unique to Terraria? Also, search for 'Mercado Livre S.A. executive changes 2024' and find the probable email for Pedro Arnt at mercadolivre.com.
+
+--- [assistant] ---
+
+
+--- [environment] ---
+{"results": {"hosts": "127.0.0.1 example1.com\n127.0.0.1 example2.com"}}
+{"results": {"hosts": "127.0.0.1 example3.com\n127.0.0.1 example4.com"}}
+{"results": {"search_results": ["Mercado Livre S.A. announces new board members for 2024", "Pedro Arnt promoted to Vice Chairman in 2024 executive reshuffle"]}}
+{"results": {"email": "pedro.arnt@mercadolivre.com"}}
+
+--- [assistant] ---
+After comparing the hosts files for Minecraft and Terraria:
+- The following entries are unique to Terraria:
+  - 127.0.0.1 example3.com
+  - 127.0.0.1 example4.com
+
+Recent Mercado Livre S.A. executive changes search results for 2024:
+- Mercado Livre S.A. announces new board members for 2024
+- Pedro Arnt promoted to Vice Chairman in 2024 executive reshuffle
+
+Probable email for Pedro Arnt at mercadolivre.com: pedro.arnt@mercadolivre.com
+
+Let me know if you'd like more information or another comparison!
+
+--- [user] ---
+For Mercado Livre S.A., fetch its CNPJ info again and search for "CFO appointment history". Also, repeat the emailfinder for Pedro Arnt for the domain 'mercadolibre.com', and search for 'Mercado Libre executive team' using the secondary search. Show Terraria hosts again too.
+
+--- [assistant] ---
+
+
+--- [environment] ---
+{"results": {"company_name": "Mercado Livre S.A.", "address": "Avenida das Nações Unidas, 3003", "cnpj": "37.335.118/0001-99"}}
+{"results": {"search_results": ["Timeline of CFOs at Mercado Livre", "Pedro Arnt appointed as CFO in 2011", "History of executive roles at Mercado Livre"]}}
+{"results": {"email": "pedro.arnt@mercadolibre.com"}}
+{"results": {"search_results": ["Meet the executive team at Mercado Libre", "Key executives at Mercado Libre and their profiles"]}}
+{"results": {"hosts": "127.0.0.1 example3.com\n127.0.0.1 example4.com"}}
+
+--- [assistant] ---
+Here are your requested results for Mercado Livre S.A.:
+
+1. Company info again:
+   - Name: Mercado Livre S.A.
+   - Address: Avenida das Nações Unidas, 3003
+   - Full CNPJ: 37.335.118/0001-99
+
+2. CFO appointment history search:
+   - Timeline of CFOs at Mercado Livre
+   - Pedro Arnt appointed as CFO in 2011
+   - History of executive roles at Mercado Livre
+
+3. Probable email for Pedro Arnt at mercadolibre.com: pedro.arnt@mercadolibre.com
+
+4. Search results for 'Mercado Libre executive team':
+   - Meet the executive team at Mercado Libre
+   - Key executives at Mercado Libre and their profiles
+
+5. Terraria hosts file again:
+   127.0.0.1 example3.com
+   127.0.0.1 example4.com
+
+If you need further comparisons or deeper insights, just let me know!
+
+--- [user] ---
+Now, display all the email addresses found so far for Ruth Porat and Pedro Arnt. Also, fetch Minecraft and Terraria hosts again and tell me any entries they have in common. Task is completed after this.
+
+--- [assistant] ---
+
+
+--- [environment] ---
+{"results": {"hosts": "127.0.0.1 example1.com\n127.0.0.1 example2.com"}}
+{"results": {"hosts": "127.0.0.1 example3.com\n127.0.0.1 example4.com"}}
+
+--- [assistant] ---
+Here are all the email addresses found so far:
+
+- Ruth Porat:
+  - ruth.porat@google.com
+  - ruth.porat@alphabet.com
+
+- Pedro Arnt:
+  - pedro.arnt@mercadolivre.com
+  - pedro.arnt@mercadolibre.com
+
+Minecraft and Terraria hosts files have no entries in common—each set of hosts is unique to its respective game.
+
+Task is completed.
+
+================================================================================
+ EXAMPLE 4
+================================================================================
+
+--- [system] ---
+You are a helpful function-calling AI assistant. You are provided with function signatures within <functions></functions> XML tags. You may call one or more functions to assist with the user query. Output any function calls within <function_calls></function_calls> XML tags. Don't make assumptions about what values to plug into functions.
+
+--- [user] ---
+Please give me the daily football match results for 21/01/2021, the schedule of WTA tennis tournaments for 2021, and the box score for NHL game 401248563. Show all results together.
+
+--- [assistant] ---
+
+
+--- [environment] ---
+{"results": {"matches": [{"home": "Liverpool", "away": "Burnley", "score": "0-1"}, {"home": "Valencia", "away": "Osasuna", "score": "1-1"}]}}
+{"results": {"tournaments": [{"name": "Australian Open", "date": "08/02/2021"}, {"name": "Miami Open", "date": "23/03/2021"}]}}
+{"results": {"teams": {"home": "Maple Leafs", "away": "Oilers"}, "score": "3-2", "periods": ["1-1", "1-0", "1-1"]}}
+
+--- [assistant] ---
+Here are the results you requested:
+
+Football match results for 21/01/2021:
+- Liverpool 0-1 Burnley
+- Valencia 1-1 Osasuna
+
+WTA tennis tournament schedule for 2021:
+- Australian Open (08/02/2021)
+- Miami Open (23/03/2021)
+
+NHL game (ID: 401248563) box score:
+- Maple Leafs 3-2 Oilers (Periods: 1-1, 1-0, 1-1)
+
+Let me know if you need more details or have another request!
+
+--- [user] ---
+Can you get the ice hockey match statistics for 10745680, the ATP tournament schedule for 2022, and the football match results for 26/01/2021? Show them all at once.
+
+--- [assistant] ---
+
+
+--- [environment] ---
+{"results": {"players": [{"name": "John Smith", "goals": 2, "assists": 1}, {"name": "Tom Jones", "goals": 0, "assists": 0}], "final_score": "5-3"}}
+{"results": {"tournaments": [{"name": "Wimbledon", "date": "27/06/2022"}, {"name": "US Open", "date": "29/08/2022"}]}}
+{"results": {"matches": [{"home": "Chelsea", "away": "Wolves", "score": "2-2"}, {"home": "Inter Milan", "away": "Juventus", "score": "1-2"}]}}
+
+--- [assistant] ---
+Here are your requested results:
+
+Ice Hockey match statistics for match 10745680:
+- Final Score: 5-3
+- Top Players: John Smith (2 goals, 1 assist), Tom Jones (0 goals, 0 assists)
+
+ATP tennis tournament schedule for 2022:
+- Wimbledon (27/06/2022)
+- US Open (29/08/2022)
+
+Football match results for 26/01/2021:
+- Chelsea 2-2 Wolves
+- Inter Milan 1-2 Juventus
+
+Let me know if you want more details or another update!
+
+--- [user] ---
+Get me the WTA tournaments for 2023, the NHL box score for game 401290123, and football results for 18/01/2021. Present everything together.
+
+--- [assistant] ---
+
+
+--- [environment] ---
+{"results": {"tournaments": [{"name": "French Open", "date": "28/05/2023"}, {"name": "Wimbledon", "date": "03/07/2023"}]}}
+{"results": {"teams": {"home": "Bruins", "away": "Canucks"}, "score": "4-1", "periods": ["2-0", "1-1", "1-0"]}}
+{"results": {"matches": [{"home": "Real Madrid", "away": "Levante", "score": "3-0"}, {"home": "AC Milan", "away": "Roma", "score": "0-1"}]}}
+
+--- [assistant] ---
+Here are the results as requested:
+
+WTA tennis tournaments for 2023:
+- French Open (28/05/2023)
+- Wimbledon (03/07/2023)
+
+NHL box score for game 401290123:
+- Bruins 4-1 Canucks (Periods: 2-0, 1-1, 1-0)
+
+Football results for 18/01/2021:
+- Real Madrid 3-0 Levante
+- AC Milan 0-1 Roma
+
+Let me know if you'd like anything else!
+
+--- [user] ---
+Now get the ATP tournaments for 2020, ice hockey match statistics for 10750000, and football match results for 25/01/2021, all together.
+
+--- [assistant] ---
+
+
+--- [environment] ---
+{"results": {"tournaments": [{"name": "Australian Open", "date": "20/01/2020"}, {"name": "French Open", "date": "24/05/2020"}]}}
+{"results": {"players": [{"name": "Alex Turner", "goals": 1, "assists": 2}, {"name": "Mike Dean", "goals": 2, "assists": 0}], "final_score": "3-4"}}
+{"results": {"matches": [{"home": "Man City", "away": "Arsenal", "score": "2-0"}, {"home": "Sevilla", "away": "Betis", "score": "1-1"}]}}
+
+--- [assistant] ---
+Here are the results you asked for:
+
+ATP tennis tournaments for 2020:
+- Australian Open (20/01/2020)
+- French Open (24/05/2020)
+
+Ice hockey match statistics for match 10750000:
+- Final Score: 3-4
+- Notable players: Alex Turner (1 goal, 2 assists), Mike Dean (2 goals)
+
+Football match results for 25/01/2021:
+- Man City 2-0 Arsenal
+- Sevilla 1-1 Betis
+
+Would you like any more information or another sports update?
+
+--- [user] ---
+Get WTA tournaments for 2022, NHL box score for game 401150295, and football match results for 19/01/2021, and show them all together.
+
+--- [assistant] ---
+
+
+--- [environment] ---
+{"results": {"tournaments": [{"name": "Australian Open", "date": "17/01/2022"}, {"name": "Indian Wells", "date": "07/03/2022"}]}}
+{"results": {"teams": {"home": "Flyers", "away": "Rangers"}, "score": "1-5", "periods": ["0-1", "1-4", "0-0"]}}
+{"results": {"matches": [{"home": "Tottenham", "away": "Everton", "score": "3-2"}, {"home": "Napoli", "away": "Lazio", "score": "2-1"}]}}
+
+--- [assistant] ---
+Here are the requested results:
+
+WTA tennis tournaments for 2022:
+- Australian Open (17/01/2022)
+- Indian Wells (07/03/2022)
+
+NHL box score for game 401150295:
+- Flyers 1-5 Rangers (Periods: 0-1, 1-4, 0-0)
+
+Football match results for 19/01/2021:
+- Tottenham 3-2 Everton
+- Napoli 2-1 Lazio
+
+Let me know if you need more sports updates or details!
+
+================================================================================
+ EXAMPLE 5
+================================================================================
+
+--- [system] ---
+You are a helpful function-calling AI assistant. You are provided with function signatures within <functions></functions> XML tags. You may call one or more functions to assist with the user query. Output any function calls within <function_calls></function_calls> XML tags. Don't make assumptions about what values to plug into functions.
+
+--- [user] ---
+Show me the details of the obliterated CPF for the person named Werner Romera Suffert, then sort all airplanes by year in descending order and tell me what the most recent one is.
+
+--- [assistant] ---
+
+
+--- [environment] ---
+{"results": {"nome": "WERNER ROMERA SUFFERT", "cpf": "***960701**", "status": "oblitera", "details": "CPF dataset entry: Restricted due to judicial order."}}
+
+--- [assistant] ---
+
+
+--- [environment] ---
+{"results": [{"plane": "Boeing 787", "year": 2023}, {"plane": "Airbus A350", "year": 2020}, {"plane": "Embraer E195-E2", "year": 2019}]}
+
+--- [assistant] ---
+Werner Romera Suffert's obliterated CPF (***960701**) shows status: "oblitera" and is restricted due to judicial order. 
+
+For airplanes ordered by year (most recent first), the most recent airplane is the Boeing 787 from the year 2023.
+
+--- [user] ---
+Can you get the mould information for tenant ID TNTgielleplast?
+
+--- [assistant] ---
+
+
+--- [environment] ---
+{"results": {"tenantid": "TNTgielleplast", "mouldType": "HDPE-304A", "lastInspection": "2023-12-10", "status": "active"}}
+
+--- [assistant] ---
+The mould information for tenant ID TNTgielleplast is as follows: Type - HDPE-304A, last inspection was on 2023-12-10, and its status is active.
+
+--- [user] ---
+Give me the second most recent airplane from that list you fetched before.
+
+--- [assistant] ---
+The second most recent airplane from the previous list is the Airbus A350, released in the year 2020.
+
+--- [user] ---
+What is the status for the obliterated CPF again for Werner Romera Suffert?
+
+--- [assistant] ---
+The status for the obliterated CPF belonging to Werner Romera Suffert is "oblitera" and it is restricted due to judicial order.
+
+--- [user] ---
+What about the third airplane in the list you found earlier, can you tell me about it?
+
+--- [assistant] ---
+The third airplane in the previously fetched list is the Embraer E195-E2, and it was released in the year 2019.
+

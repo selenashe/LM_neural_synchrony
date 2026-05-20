@@ -1,0 +1,383 @@
+Tier 1 Structural Analysis — OLMo 3.1 32B Post-Training Datasets
+Data root: /juice6/scr6/nlp/interp-models/OLMo-3.1-32B/datasets
+
+================================================================================
+  SFT: Instruct (dolci-instruct-sft)
+================================================================================
+  ... processed 10/15 shards (1,434,742 rows)
+  ... processed 15/15 shards (2,152,112 rows)
+
+  Total examples: 2,152,112
+  Single-turn (1 user msg):   2,065,134  (96.0%)
+  Multi-turn  (2+ user msg):     86,978  (4.0%)
+
+  --- Message count distribution (top 15) ---
+  2    1,922,012  ( 89.3%)
+  5       68,489  (  3.2%)
+  21      45,916  (  2.1%)
+  3       30,202  (  1.4%)
+  7       28,704  (  1.3%)
+  9        9,675  (  0.4%)
+  23       9,553  (  0.4%)
+  19       6,700  (  0.3%)
+  17       6,486  (  0.3%)
+  25       5,605  (  0.3%)
+  11       3,967  (  0.2%)
+  15       2,428  (  0.1%)
+  4        2,368  (  0.1%)
+  27       2,057  (  0.1%)
+  13       1,883  (  0.1%)
+  (other)       6,067  (  0.3%)
+
+  --- User turns per conversation ---
+  1    2,065,131  ( 96.0%)
+  5       70,032  (  3.3%)
+  4        7,280  (  0.3%)
+  6        4,184  (  0.2%)
+  2        3,288  (  0.2%)
+  3        1,803  (  0.1%)
+  7          261  (  0.0%)
+  8           82  (  0.0%)
+  9           32  (  0.0%)
+  10           8  (  0.0%)
+  11           6  (  0.0%)
+  0            3  (  0.0%)
+  12           2  (  0.0%)
+
+  --- Turn length stats (chars) ---
+  User turns (single-turn convos) (n=2,065,131):
+    mean=822  median=506  p5=50  p25=199  p75=974  p95=1907  max=273264
+  Assistant turns (single-turn convos) (n=2,245,361):
+    mean=1135  median=607  p5=0  p25=154  p75=1685  p95=3656  max=279985
+  User turns (multi-turn convos) (n=419,310):
+    mean=98  median=87  p5=39  p25=62  p75=122  p95=191  max=9785
+  Assistant turns (multi-turn convos) (n=853,522):
+    mean=97  median=0  p5=0  p25=0  p75=156  p95=355  max=9886
+
+  --- Source dataset (single-turn, top 15) ---
+  Verifiable Reasoning                      310,572  ( 15.0%)
+  Wildchat                                  302,406  ( 14.6%)
+  Dolci Instruct Python Algorithms          186,345  (  9.0%)
+  Logic Puzzles                             159,882  (  7.7%)
+  Tulu 3 Persona MATH                       149,958  (  7.3%)
+  Dolci Instruct Tool Use                   143,065  (  6.9%)
+  Dolci Instruct Precise IF                 136,833  (  6.6%)
+  Evol CodeAlpaca                           107,270  (  5.2%)
+  Aya                                        99,987  (  4.8%)
+  Dolci Instruct OpenThoughts3+ Science      99,268  (  4.8%)
+  FLAN                                       89,981  (  4.4%)
+  OpenMathInstruct 2                         50,000  (  2.4%)
+  Tulu 3 Persona GSM                         49,980  (  2.4%)
+  WildJailbreak                              49,965  (  2.4%)
+  WildGuardMix                               49,373  (  2.4%)
+  (other)                                    80,249  (  3.9%)
+
+  --- Source dataset (multi-turn, top 15) ---
+  Dolci Instruct Tool Use      84,514  ( 97.2%)
+  OpenAssistant                 2,464  (  2.8%)
+
+  --- Domain (single-turn) ---
+  Coding             328,614  ( 15.9%)
+  Reasoning          310,572  ( 15.0%)
+  Chat               307,074  ( 14.9%)
+  Math               269,937  ( 13.1%)
+  Other              254,863  ( 12.3%)
+  Tool Use           143,065  (  6.9%)
+  Precise IF         136,833  (  6.6%)
+  Safety             110,295  (  5.3%)
+  Science            103,825  (  5.0%)
+  Multilingual        99,987  (  4.8%)
+  Hardcoded Data          69  (  0.0%)
+
+  --- Domain (multi-turn) ---
+  Tool Use      84,514  ( 97.2%)
+  Chat           2,464  (  2.8%)
+
+================================================================================
+  SFT: Thinking (dolci-thinking-sft)
+================================================================================
+  ... processed 10/156 shards (145,400 rows)
+  ... processed 20/156 shards (290,800 rows)
+  ... processed 30/156 shards (436,200 rows)
+  ... processed 40/156 shards (581,600 rows)
+  ... processed 50/156 shards (727,000 rows)
+  ... processed 60/156 shards (872,400 rows)
+  ... processed 70/156 shards (1,017,800 rows)
+  ... processed 80/156 shards (1,163,200 rows)
+  ... processed 90/156 shards (1,308,600 rows)
+  ... processed 100/156 shards (1,453,994 rows)
+  ... processed 110/156 shards (1,599,384 rows)
+  ... processed 120/156 shards (1,744,774 rows)
+  ... processed 130/156 shards (1,890,164 rows)
+  ... processed 140/156 shards (2,035,554 rows)
+  ... processed 150/156 shards (2,180,944 rows)
+  ... processed 156/156 shards (2,268,178 rows)
+
+  Total examples: 2,268,178
+  Single-turn (1 user msg):   2,236,244  (98.6%)
+  Multi-turn  (2+ user msg):     31,934  (1.4%)
+
+  --- Message count distribution (top 15) ---
+  2    2,236,244  ( 98.6%)
+  4       14,549  (  0.6%)
+  6        5,965  (  0.3%)
+  8        3,325  (  0.1%)
+  10       2,032  (  0.1%)
+  12       1,486  (  0.1%)
+  14       1,050  (  0.0%)
+  16         735  (  0.0%)
+  18         571  (  0.0%)
+  20         463  (  0.0%)
+  22         315  (  0.0%)
+  24         256  (  0.0%)
+  26         187  (  0.0%)
+  28         149  (  0.0%)
+  30         122  (  0.0%)
+  (other)         729  (  0.0%)
+
+  --- User turns per conversation ---
+  1    2,236,244  ( 98.6%)
+  2       14,549  (  0.6%)
+  3        5,965  (  0.3%)
+  4        3,325  (  0.1%)
+  5        2,032  (  0.1%)
+  6        1,486  (  0.1%)
+  7        1,050  (  0.0%)
+  8          735  (  0.0%)
+  9          571  (  0.0%)
+  10         463  (  0.0%)
+  11         315  (  0.0%)
+  12         256  (  0.0%)
+  13         187  (  0.0%)
+  14         149  (  0.0%)
+  15         122  (  0.0%)
+  (other)         729  (  0.0%)
+
+  --- Turn length stats (chars) ---
+  User turns (single-turn convos) (n=2,236,244):
+    mean=650  median=341  p5=72  p25=189  p75=696  p95=2100  max=164144
+  Assistant turns (single-turn convos) (n=2,236,244):
+    mean=33227  median=24816  p5=2251  p25=5506  p75=56460  p95=86205  max=1449631
+  User turns (multi-turn convos) (n=132,740):
+    mean=1246  median=115  p5=13  p25=48  p75=401  p95=5270  max=415203
+  Assistant turns (multi-turn convos) (n=132,740):
+    mean=3413  median=2685  p5=144  p25=1298  p75=3926  p95=9275  max=71574
+
+  --- Source dataset (single-turn, top 15) ---
+  saumyamalik/OpenThoughts3-full-filtered-math-decontam-v2                                                  752,997  ( 33.7%)
+  saumyamalik/correct-python-sft-187k-x16-thoughts-filtered-decontam-v2                                     466,677  ( 20.9%)
+  allenai/persona-precise-if-r1-final-content-filtered-chinese-filtered                                     223,123  ( 10.0%)
+  saumyamalik/if_qwq_reasoning_verified_filtered_decontam_v2                                                135,792  (  6.1%)
+  allenai/nemotron-post-training-dataset-subset-ngram-filtered-no-tool-calls                                113,777  (  5.1%)
+  allenai/SYNTHETIC-2-SFT-cn-fltrd-final-ngram-filtered-chinese-filtered                                    104,569  (  4.7%)
+  saumyamalik/OpenThoughts3-full-filtered-science-decontam-v2                                                99,269  (  4.4%)
+  allenai/aya-100k-r1-format-filtered-keyword-filtered-filter-datecutoff-ngram-filtered                      98,597  (  4.4%)
+  saumyamalik/OpenThoughts3-full-filtered-code-subsampled-decontam-v2                                        88,900  (  4.0%)
+  allenai/wildjailbreak-r1-v2-format-filtered-keyword-filtered-filter-datecutoff-final-content-filtered      41,100  (  1.8%)
+  allenai/wildguardmix-r1-v2-all-filtered-ngram-filtered-chinese-filtered                                    38,315  (  1.7%)
+  allenai/tulu_v3.9_wildchat_100k_english-r1-final-content-filtered                                          29,840  (  1.3%)
+  allenai/wildchat-r1-p2-repetition-filter                                                                   23,597  (  1.1%)
+  allenai/coconot-r1-format-domain-filtered-keyword-filtered-filter-datecutoff-chinese-filtered              10,227  (  0.5%)
+  allenai/tablegpt_r1-format-filtered-keyword-filtered-filter-datecutoff                                      4,981  (  0.2%)
+  (other)                                                                                                     4,483  (  0.2%)
+
+  --- Source dataset (multi-turn, top 15) ---
+  allenai/tulu_v3.9_wildchat_100k_english-r1-final-content-filtered                          16,472  ( 51.6%)
+  allenai/wildchat-r1-p2-repetition-filter                                                   13,145  ( 41.2%)
+  allenai/oasst1-r1-format-filtered-keyword-filtered-filter-datecutoff-chinese-filtered       2,317  (  7.3%)
+
+================================================================================
+  DPO: Instruct (dolci-instruct-dpo)
+================================================================================
+  Total examples: 259,922
+  Single-turn (1 user msg):     249,929  (96.2%)
+  Multi-turn  (2+ user msg):      9,993  (3.8%)
+
+  --- Chosen message count distribution (top 15) ---
+  2      249,923  ( 96.2%)
+  10       1,886  (  0.7%)
+  4        1,780  (  0.7%)
+  6        1,596  (  0.6%)
+  8        1,444  (  0.6%)
+  12       1,166  (  0.4%)
+  14       1,143  (  0.4%)
+  16         960  (  0.4%)
+  5           11  (  0.0%)
+  7            7  (  0.0%)
+  3            6  (  0.0%)
+
+  --- User turns per conversation ---
+  1     249,929  ( 96.2%)
+  5       1,886  (  0.7%)
+  2       1,791  (  0.7%)
+  3       1,603  (  0.6%)
+  4       1,444  (  0.6%)
+  6       1,166  (  0.4%)
+  7       1,143  (  0.4%)
+  8         960  (  0.4%)
+
+  --- Final assistant turn length (chars) ---
+  Chosen (n=259,922):
+    mean=2136  median=1296  p5=30  p25=423  p75=2923  p95=6780  max=1710158
+  Rejected (n=259,922):
+    mean=1947  median=1003  p5=17  p25=291  p75=2364  p95=5307  max=524672
+  Length diff (chosen - rejected): mean=189  median=171
+
+  --- Preference type ---
+  llm_judged                      124,980  ( 48.1%)
+  delta_learning                  124,942  ( 48.1%)
+  multiturn_self_talk               5,000  (  1.9%)
+  multiturn_synthetic_context       5,000  (  1.9%)
+
+  --- Chosen model (top 10) ---
+  qwen3-no_reasoning-32b        136,122  ( 52.4%)
+  gpt-4.1-2025-04-14              7,809  (  3.0%)
+  qwen3-no_reasoning-1.7b         7,757  (  3.0%)
+  gpt-120b                        7,750  (  3.0%)
+  olmo2-13b                       7,108  (  2.7%)
+  qwen3-no_reasoning-30b-3a       6,856  (  2.6%)
+  gpt-20b                         6,836  (  2.6%)
+  yi-34b                          6,650  (  2.6%)
+  phi4-mini-instruct              6,565  (  2.5%)
+  qwen3-no_reasoning-4b           5,976  (  2.3%)
+  (other)                        60,493  ( 23.3%)
+
+  --- Rejected model (top 10) ---
+  qwen3-no_reasoning-0.6b     149,385  ( 57.5%)
+  olmo2-1b                     20,901  (  8.0%)
+  olmo2-7b                     12,529  (  4.8%)
+  yi-9b                        12,132  (  4.7%)
+  qwen3-no_reasoning-1.7b      12,022  (  4.6%)
+  phi4-mini-instruct           10,315  (  4.0%)
+  olmo2-13b                     9,743  (  3.7%)
+  yi-34b                        9,064  (  3.5%)
+  gpt-3.5                       5,000  (  1.9%)
+  gemma3-4b                     3,244  (  1.2%)
+  (other)                      15,587  (  6.0%)
+
+  --- Turn length stats (chars) ---
+  User turns (n=296,203):
+    mean=890  median=432  p5=54  p25=163  p75=974  p95=2768  max=81120
+  Assistant turns (chosen) (n=296,227):
+    mean=1946  median=1074  p5=35  p25=379  p75=2626  p95=6481  max=1710158
+  Assistant turns (rejected) (n=296,227):
+    mean=1780  median=840  p5=20  p25=288  p75=2145  p95=4951  max=524672
+
+================================================================================
+  DPO: Thinking (dolci-thinking-dpo)
+================================================================================
+  Total examples: 150,000
+  Single-turn (1 user msg):     150,000  (100.0%)
+  Multi-turn  (2+ user msg):          0  (0.0%)
+
+  --- Chosen message count distribution (top 15) ---
+  2     150,000  (100.0%)
+
+  --- User turns per conversation ---
+  1     150,000  (100.0%)
+
+  --- Final assistant turn length (chars) ---
+  Chosen (n=150,000):
+    mean=10283  median=6116  p5=1350  p25=3129  p75=11330  p95=35654  max=4072312
+  Rejected (n=150,000):
+    mean=7969  median=3612  p5=943  p25=1989  p75=7509  p95=33130  max=1870683
+  Length diff (chosen - rejected): mean=2314  median=1697
+
+  --- Preference type ---
+  delta_learning     150,000  (100.0%)
+
+  --- Chosen model (top 10) ---
+  qwen3-reasoning-32b     150,000  (100.0%)
+
+  --- Rejected model (top 10) ---
+  qwen3-reasoning-0.6b     150,000  (100.0%)
+
+  --- Dataset source ---
+  ultrafeedback_cleaned_olmo2_7b                                          23,202  ( 15.5%)
+  filtered_wc_sample_500k                                                 17,596  ( 11.7%)
+  OpenThoughts3-full-filtered-science-no-cot                              14,967  ( 10.0%)
+  flan_v2_converted                                                       14,057  (  9.4%)
+  Wildchat-1M-gpt-4.1-regenerated-english                                 13,955  (  9.3%)
+  valpy_if_qwq_reasoning_verified_no_reasoning                            11,101  (  7.4%)
+  correct-python-sft-187k                                                  9,005  (  6.0%)
+  tulu-3-sft-personas-math                                                 7,252  (  4.8%)
+  Wildchat-1m-gpt-4.1-regeneration-not-english                             5,220  (  3.5%)
+  evol_codealpaca_heval_decontaminated                                     5,171  (  3.4%)
+  tulu_v3.9_wildjailbreak_decontaminated_50k                               3,885  (  2.6%)
+  tulu_v3.9_synthetic_finalresp_wildguardmixtrain_decontaminated_50k       3,884  (  2.6%)
+  tulu_v3.9_aya_100k                                                       2,863  (  1.9%)
+  tulu_v3.9_open_math_2_gsm8k_50k                                          2,561  (  1.7%)
+  tulu-3-sft-personas-math-grade                                           2,520  (  1.7%)
+  IF_sft_data_verified_permissive                                          2,482  (  1.7%)
+  tulu-3-sft-personas-instruction-following-o3                             2,447  (  1.6%)
+  personahub_code_v2_34999                                                 1,736  (  1.2%)
+  tulu_v3.9_sciriff_10k                                                    1,554  (  1.0%)
+  oasst1_converted                                                         1,259  (  0.8%)
+  tulu-3-sft-personas-algebra                                                930  (  0.6%)
+  tulu_v3.9_table_gpt_5k                                                     834  (  0.6%)
+  tulu-3-sft-coconot-regenerated                                             790  (  0.5%)
+  DaringAnteater-prefs_olmo2_7b                                              729  (  0.5%)
+
+  --- Turn length stats (chars) ---
+  User turns (n=150,000):
+    mean=1044  median=485  p5=39  p25=163  p75=1114  p95=3838  max=196624
+  Assistant turns (chosen) (n=150,000):
+    mean=10283  median=6116  p5=1350  p25=3129  p75=11330  p95=35654  max=4072312
+  Assistant turns (rejected) (n=150,000):
+    mean=7969  median=3612  p5=943  p25=1989  p75=7509  p95=33130  max=1870683
+
+================================================================================
+  RLVR: Instruct (dolci-instruct-rl)
+================================================================================
+  Total examples: 169,964
+  Prompt length (chars) (n=169,964):
+    mean=581  median=343  p5=74  p25=176  p75=648  p95=1808  max=12560
+
+  --- Passrate distribution ---
+  = 0                   5,240  (  3.1%)
+  (0, 0.25]             6,696  (  3.9%)
+  (0.25, 0.5]          17,688  ( 10.4%)
+  (0.5, 0.75]           7,944  (  4.7%)
+  (0.75, 1.0)               0  (  0.0%)
+  = 1.0                     0  (  0.0%)
+
+  --- Dataset source ---
+  allenai/rlvr_general_mix-keyword-filtered-topic-chars-char-filt-topic-filtered                              48,398  ( 28.5%)
+  allenai/IF_multi_constraints_upto5_filtered_dpo_0625_filter-keyword-filtered-topic-char-topic-filtered      37,568  ( 22.1%)
+  hamishivi/rlvr_acecoder_filtered_filtered                                                                   20,000  ( 11.8%)
+  hamishivi/omega-combined-no-boxed_filtered                                                                  20,000  ( 11.8%)
+  hamishivi/rlvr_orz_math_57k_collected_filtered                                                              14,000  (  8.2%)
+  hamishivi/polaris_53k                                                                                       14,000  (  8.2%)
+  hamishivi/MathSub-30K_filtered                                                                               8,998  (  5.3%)
+  hamishivi/DAPO-Math-17k-Processed_filtered                                                                   7,000  (  4.1%)
+
+  --- Ability ---
+  MATH       7,000  (100.0%)
+
+  --- Constraint type (top 10) ---
+  multi      37,568  (100.0%)
+
+================================================================================
+  RLVR: Think (dolci-think-rl)
+================================================================================
+  Total examples: 102,014
+  Prompt length (chars) (n=102,014):
+    mean=814  median=477  p5=93  p25=242  p75=1047  p95=2619  max=10632
+
+  --- Passrate distribution ---
+  = 0                  13,615  ( 13.3%)
+  (0, 0.25]            20,059  ( 19.7%)
+  (0.25, 0.5]          30,844  ( 30.2%)
+  (0.5, 0.75]          16,860  ( 16.5%)
+  (0.75, 1.0)               0  (  0.0%)
+  = 1.0                     0  (  0.0%)
+
+  --- Dataset source ---
+  hamishivi/math_rlvr_mixture_dpo                                    30,180  ( 29.6%)
+  hamishivi/IF_multi_constraints_upto5_filtered_dpo_0625_filter      29,813  ( 29.2%)
+  hamishivi/code_rlvr_mixture_dpo                                    21,385  ( 21.0%)
+  hamishivi/rlvr_general_mix                                         20,636  ( 20.2%)
+
+================================================================================
+  Done.
+================================================================================

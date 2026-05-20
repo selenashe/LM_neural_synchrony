@@ -1,0 +1,213 @@
+# Dataset: sft_instruct
+# Turn type: single
+# Source: Tulu 3 Persona Python
+# Examples: 5
+
+================================================================================
+ EXAMPLE 1
+================================================================================
+
+--- [user] ---
+Write a python function to determine the number of unique notes in a melody. The melody is represented as a list of strings, where each string corresponds to a musical note (e.g., "C", "D#", "F", "G"). The function should return an integer representing the number of distinct notes in the melody.
+
+Input: A list of strings, each string being a musical note. The list can contain duplicate notes.
+
+Output: An integer that represents the number of unique notes in the input list.
+
+Example:
+
+```python
+melody = ["C", "D", "E", "C", "F", "G", "E", "A"]
+```
+
+Expected Output: `6` (because the unique notes are "C", "D", "E", "F", "G", "A")
+
+--- [assistant] ---
+def count_unique_notes(melody):
+    unique_notes = set()
+    for note in melody:
+        unique_notes.add(note)
+    return len(unique_notes)
+
+================================================================================
+ EXAMPLE 2
+================================================================================
+
+--- [user] ---
+Write a python function to help me analyze the colors used in my anti-bullfighting murals. I have a list of color names that appear in each mural, and I want to determine the frequency of each color across all murals.
+
+The function should take a list of lists as input, where each inner list represents the colors used in one mural. The function should return a dictionary where the keys are color names and the values are the number of times each color appears across all the murals.
+
+Input:
+- A list of lists, with each inner list containing strings representing color names.
+
+Output:
+- A dictionary with color names as keys and their frequency as values.
+
+Example:
+```python
+murals = [
+    ["red", "blue", "green"],
+    ["yellow", "blue", "red"],
+    ["blue", "green", "purple"]
+]
+```
+
+For the input above, the expected output should be:
+```python
+{
+    "red": 2,
+    "blue": 3,
+    "green": 2,
+    "yellow": 1,
+    "purple": 1
+}
+```
+
+--- [assistant] ---
+def analyze_colors(murals):
+    color_freq = {}
+    for mural in murals:
+        for color in mural:
+            color_freq[color] = color_freq.get(color, 0) + 1
+    return color_freq
+
+================================================================================
+ EXAMPLE 3
+================================================================================
+
+--- [user] ---
+Write a python function to calculate the total property tax I need to pay across all my properties. Each property has a specific value and a tax rate associated with it. The function should take a list of dictionaries, where each dictionary represents a property with keys "value" (an integer representing the property value) and "tax_rate" (a float representing the tax rate as a percentage). The function should return the total tax amount as a float.
+
+Input: A list of dictionaries, e.g.,
+```python
+[
+    {"value": 250000, "tax_rate": 1.2},
+    {"value": 180000, "tax_rate": 0.8},
+    {"value": 320000, "tax_rate": 1.5}
+]
+```
+
+Expected Output: The total tax amount as a float. 
+
+Example:
+For the input above, the function should compute the taxes as follows:
+- For the first property: 250000 * 1.2 / 100 = 3000
+- For the second property: 180000 * 0.8 / 100 = 1440
+- For the third property: 320000 * 1.5 / 100 = 4800
+
+Thus, the function should return 3000 + 1440 + 4800 = 9240.0.
+
+--- [assistant] ---
+def calculate_total_property_tax(properties):
+    total_tax = 0.0
+    for property in properties:
+        value = property["value"]
+        tax_rate = property["tax_rate"]
+        tax_amount = value * (tax_rate / 100)
+        total_tax += tax_amount
+    return total_tax
+
+================================================================================
+ EXAMPLE 4
+================================================================================
+
+--- [user] ---
+Write a python function to simulate a basic quiz system using virtual reality (VR) where participants answer multiple-choice mathematics questions. The function should take a list of questions, each represented by a dictionary with the keys: "question" (a string), "options" (a list of strings), and "answer" (a string representing the correct option). The function should also take a list of responses from participants, where each response is a string indicating the chosen option. The function should return the number of correct answers. 
+
+Here is a detailed description of the input and expected output:
+
+- Input:
+  - `questions`: A list of dictionaries, where each dictionary corresponds to a question with the following structure:
+    ```python
+    {
+      "question": "What is 2 + 2?",
+      "options": ["3", "4", "5"],
+      "answer": "4"
+    }
+    ```
+  - `responses`: A list of strings, where each string is the participant's chosen option for the corresponding question.
+
+- Output:
+  - An integer representing the total number of correct responses by the participant.
+
+Example:
+```python
+questions = [
+    {
+        "question": "What is 2 + 2?",
+        "options": ["3", "4", "5"],
+        "answer": "4"
+    },
+    {
+        "question": "What is the square root of 9?",
+        "options": ["2", "3", "4"],
+        "answer": "3"
+    }
+]
+
+responses = ["4", "3"]
+
+# Expected output: 2
+```
+
+--- [assistant] ---
+Here's the Python function to simulate a basic quiz system using virtual reality (VR) for mathematics questions:
+
+```python
+def simulate_vr_quiz(questions, responses):
+    correct_answers = 0
+    for i, question in enumerate(questions):
+        if responses[i] == question["answer"]:
+            correct_answers += 1
+    return correct_answers
+```
+
+This function takes two arguments:
+
+1. `questions`: A list of dictionaries, where each dictionary represents a question with keys "question" (string), "options" (list of strings), and "answer" (string representing the correct option).
+2. `responses`: A list of strings, where each string represents the participant's chosen option for the corresponding question.
+
+The function iterates over the `questions` list using `enumerate()` to get both the index and the question dictionary. It checks if the participant's response (stored in `responses[i]`) matches the correct answer for that question (`question["answer"]`). If it matches, the `correct_answers` counter is incremented.
+
+Finally, the function returns the total number of correct answers (`correct_answers`).
+
+================================================================================
+ EXAMPLE 5
+================================================================================
+
+--- [user] ---
+Write a python function to calculate the net profit for a small business by taking into account both revenue and expenses over a period of time. 
+
+The function should accept two lists as inputs: `revenue` and `expenses`, where each element in the lists represents the revenue and expenses for a specific month, respectively. The function should return a list of net profits for each month. 
+
+Input:
+- `revenue`: A list of integers or floats representing monthly revenues.
+- `expenses`: A list of integers or floats representing monthly expenses.
+
+Output:
+- A list of integers or floats representing the net profit for each month, calculated as `revenue[i] - expenses[i]`.
+
+Example:
+```python
+revenue = [10000, 15000, 20000]
+expenses = [8000, 12000, 18000]
+# Expected output: [2000, 3000, 2000]
+```
+
+Please make sure that both input lists are of the same length and contain non-negative numbers.
+
+--- [assistant] ---
+def calculate_net_profit(revenue, expenses):
+    if len(revenue) != len(expenses):
+        raise ValueError("Revenue and expenses lists must have the same length.")
+    
+    net_profits = []
+    for i in range(len(revenue)):
+        if revenue[i] < 0 or expenses[i] < 0:
+            raise ValueError("Revenue and expenses must be non-negative numbers.")
+        net_profit = revenue[i] - expenses[i]
+        net_profits.append(net_profit)
+    
+    return net_profits
+

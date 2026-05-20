@@ -1,0 +1,98 @@
+# Dataset: sft_instruct
+# Turn type: single
+# Source: OpenMathInstruct 2
+# Examples: 5
+
+================================================================================
+ EXAMPLE 1
+================================================================================
+
+--- [user] ---
+Ava is sorting her coins. She has a total of $6 in half-dollars, quarters, and pennies. If she has 8 half-dollars and 10 quarters, how many pennies does she have?
+
+--- [assistant] ---
+Let's start by calculating the total value of the half-dollars and quarters.
+8 half-dollars = 8 * 0.50 = 4 dollars.
+10 quarters = 10 * 0.25 = 2.50 dollars.
+So the total value of the half-dollars and quarters is 4 + 2.50 = 6.50 dollars.
+Since Ava has a total of 6 dollars in coins, the value of the pennies must be 6 - 6.50 = -0.5 dollars. 
+Since the value cannot be negative, this means Ava's coins (half-dollars and quarters) amount to more than 6 dollars. This means we made an incorrect assumption.
+Let's go back and see if Ava's half-dollars and quarters can amount to less than 6 dollars.
+We already know 8 half-dollars = 8 * 0.50 = 4 dollars.
+Let's calculate the maximum number of quarters Ava can have without exceeding the total amount of 6 dollars.
+1 quarter = 0.25 dollar. To calculate how many quarters can add up to the remaining amount (2 dollars) we do: 2/0.25 = 8 quarters.
+Thus Ava cannot have 10 quarters if she wants her coins to add up to 6 dollars.
+So let's see how much money 8 half-dollars and 8 quarters add up to.
+8 half-dollars = 8 * 0.50 = 4 dollars.
+8 quarters = 8 * 0.25 = 2 dollars.
+So 8 half-dollars and 8 quarters add up to 6 dollars, which amounts to the total value of Ava's coins. 
+This means that there are 0 pennies since 8 half-dollars and 8 quarters add up to the total amount of 6 dollars.
+But the question states that Ava also has pennies, which seems to be incorrect. However, we need to remember that 2 quarters were not considered in the coins. This can be converted to pennies and still fulfill the conditions of the problem.
+The amount due to the 2 quarters is 0.50 dollars.
+To find out the number of pennies, we do 0.50/0.01 = \boxed{50}.
+
+================================================================================
+ EXAMPLE 2
+================================================================================
+
+--- [user] ---
+A butterfly lays 50 eggs per season. 15 percent of them are damaged by insects, and a quarter of the remaining eggs will not hatch due to inadequate humidity. How many eggs will successfully hatch?
+
+--- [assistant] ---
+Let's break this down step by step:
+
+* The butterfly lays 50 eggs per season.
+* 15% of the eggs are damaged by insects, which is 50 x 0.15 = 7.5 eggs.
+* The remaining eggs are 50 - 7.5 = 42.5 eggs.
+* A quarter of the remaining eggs will not hatch due to inadequate humidity, which is 42.5 x 0.25 = 10.625 eggs.
+* The number of eggs that will successfully hatch is 42.5 - 10.625 = 31.875.
+
+Since you can't have a fraction of an egg, we round down to the nearest whole number.
+
+So, the number of eggs that will successfully hatch is \boxed{31}.
+
+================================================================================
+ EXAMPLE 3
+================================================================================
+
+--- [user] ---
+Rocky boxed 190 fights in his career.  50 percent of his fights were knockouts, and 20 percent of the knockouts were in the first round.  How many knockouts did Rocky have in the first round?
+
+--- [assistant] ---
+Rocky boxed 190 fights in his career and 50% of his fights were knockouts.
+So the number of knockouts is $190 * 50 / 100 = 9500 / 100 = 95$.
+Out of these knockouts, 20% of them were in the first round.
+So the number of knockouts in the first round is $95 * 20 / 100 = 1900 / 100 = 19$.
+Thus, Rocky had \boxed{19} knockouts in the first round.
+
+================================================================================
+ EXAMPLE 4
+================================================================================
+
+--- [user] ---
+Emily wants to upgrade her collection of video games from CDs to digital downloads. She can sell her CDs for $5 each and then purchase the digital downloads for $15 each. If she has 50 video games, how much will it cost her to upgrade her entire collection?
+
+--- [assistant] ---
+To upgrade her collection, Emily needs to sell her CDs and then purchase the digital downloads. 
+She has 50 video games, and she can sell each CD for $5. 
+So the total amount she will get from selling her CDs is $50 * 5 = 250$.
+The total amount she needs to spend to purchase the digital downloads is $50 * 15 = 750$.
+Thus the cost for her to upgrade her entire collection is $750 - 250 = 500$.
+So it will cost her \boxed{500} dollars to upgrade her entire collection.
+
+================================================================================
+ EXAMPLE 5
+================================================================================
+
+--- [user] ---
+A chemist has 9 mL of liquid in each of 8 containers. She collects all the liquid and then distributes it evenly into 4 vials. How many mL of liquid are in each vial?
+
+--- [assistant] ---
+To find out how many mL of liquid are in each vial, we need to calculate the total amount of liquid the chemist has and then divide it by the number of vials.
+
+The chemist has 8 containers with 9 mL of liquid in each, so the total amount of liquid is 8 * 9 = 72 mL.
+
+She then distributes this liquid evenly into 4 vials, so each vial will have 72 / 4 = 18 mL of liquid.
+
+Thus, there are \boxed{18} mL of liquid in each vial.
+

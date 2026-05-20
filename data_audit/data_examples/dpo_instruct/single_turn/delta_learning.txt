@@ -1,0 +1,625 @@
+# Dataset: dpo_instruct
+# Turn type: single
+# Source: delta_learning
+# Examples: 5
+
+================================================================================
+ EXAMPLE 1
+================================================================================
+
+--- [user] ---
+What instigated the Armenian genocide?
+
+--- [assistant] ---
+The Armenian Genocide, which occurred during World War I (1915–1923), was instigated by a combination of factors rooted in the decline of the Ottoman Empire, ethnic tensions, and political ideologies of the time. The primary instigators were the ruling **Young Turks**, a reformist political movement that came to power in the early 20th century and sought to modernize and centralize the Ottoman state. Here are the key factors that led to the genocide:
+
+---
+
+### 1. **Decline of the Ottoman Empire**
+- The Ottoman Empire was a multi-ethnic and multi-religious state that had been in decline for centuries.
+- By the early 20th century, the empire was losing territory, facing internal rebellions, and struggling with nationalist movements among its various ethnic groups, including Armenians, Greeks, and Arabs.
+- The Armenians, a Christian minority in the predominantly Muslim Ottoman Empire, had long sought reforms and greater autonomy, especially in the eastern provinces of the empire.
+
+---
+
+### 2. **Rise of the Young Turks**
+- The **Committee of Union and Progress (CUP)**, known as the **Young Turks**, came to power in 1908 and advocated for a centralized, secular, and Turkic-dominated Ottoman state.
+- They promoted a vision of a "Turkey for the Turks," which marginalized non-Turkic and non-Muslim populations, including the Armenians.
+- The Young Turks believed that the survival of the Ottoman state required eliminating internal threats, which they identified as Armenians and other minorities.
+
+---
+
+### 3. **World War I and the Ottoman Government's Strategy**
+- When World War I began in 1914, the Ottoman Empire joined the Central Powers (Germany and Austria-Hungary).
+- The war placed immense strain on the empire’s resources and infrastructure.
+- The Ottoman government, under the CUP, used the war as a pretext to implement a policy of **ethnic cleansing** and **forced deportation** of Armenians.
+- The government accused Armenians of collaborating with the enemy (particularly Russia, where many Armenians had ties) and of being disloyal.
+
+---
+
+### 4. **The Armenian Question and Previous Repressions**
+- Tensions between Armenians and the Ottoman government had been rising for years.
+- The **Hamidian Massacres** (1894–1896) had already seen the deaths of tens of thousands of Armenians under the rule of Sultan Abdulhamid II.
+- Although the Young Turks initially promised reforms, they later turned against the Armenians, especially after the 1915 Armenian uprising in the Van region, which the government used to justify mass deportations and killings.
+
+---
+
+### 5. **Deportation and Massacres**
+- In 1915, the Ottoman government passed a law authorizing the **deportation** of Armenians from their ancestral lands in the eastern provinces.
+- These deportations were in reality **forced marches** to the Syrian desert, where many Armenians died from starvation, disease, and exposure.
+- Thousands were also **killed in massacres**, **executed**, or **enslaved**.
+- The Ottoman government systematically destroyed Armenian churches, schools, and cultural institutions.
+
+---
+
+### 6. **International Response and Denial**
+- The genocide was widely reported in the international press at the time, and many Western countries, including the United States, condemned the Ottoman actions.
+- After the war, the Ottoman Empire was dismembered, and the Armenian Genocide was recognized by the victorious Allied powers.
+- However, the modern **Republic of Turkey**, established in 1923, has long **denied** that the events constituted genocide, a stance that continues to be controversial.
+
+---
+
+### Conclusion
+The Armenian Genocide was instigated by the **Young Turks’ nationalist ideology**, the **decline of the Ottoman Empire**, **ethnic tensions**, and the **strategic use of World War I** to eliminate the Armenian population. It is widely regarded as one of the first genocides of the 20th century and a tragic example of state-sponsored violence and ethnic cleansing.
+
+---
+
+If you're interested, I can provide a timeline of key events or information on how the genocide is remembered today.
+
+---------------------------------------- REJECTED ----------------------------------------
+
+--- [user] ---
+What instigated the Armenian genocide?
+
+--- [assistant] ---
+The Armenian genocide, which occurred in 1915, was instigated by the Ottoman Empire's policies and the actions of the Armenian nationalist movement. The Ottoman government, under the leadership of Mustafa Kemal Atatürk, implemented a series of policies that led to the systematic destruction of the Armenian population. These policies included the forced relocation of Armenians to the Armenian regions, the suppression of their culture and religion, and the persecution of Armenians who were suspected of being "anti-Ottoman." The genocide was a direct result of the Ottoman Empire's attempt to reshape its empire through assimilation policies, which led to the loss of Armenian heritage and identity.
+
+================================================================================
+ EXAMPLE 2
+================================================================================
+
+--- [user] ---
+A well-respected historian is preparing a lecture on a series of significant historical events that span over various centuries. To quantify the impact of these events, the historian assigns each event a unique historical impact score, \( H \), which is calculated using a specific formula involving the year of the event, the historical significance index \( S \) (on a scale from 1 to 10), and the number of primary sources available \( P \).
+
+The formula for the historical impact score is given by:
+
+\[ H = \frac{(Y \times S^2) + \ln(P)}{e^{(Y-1500)/500}} \]
+
+where \( Y \) is the year of the event, \( S \) is the historical significance index, and \( P \) is the number of primary sources.
+
+1. Suppose the historian is comparing two events: Event A occurred in 1066 with \( S = 9 \) and \( P = 120 \), and Event B occurred in 1776 with \( S = 8 \) and \( P = 250 \). Calculate the historical impact score \( H \) for both events and determine which event has a greater historical impact.
+
+2. The historian wants to analyze the sensitivity of the impact score \( H \) to changes in the historical significance index \( S \). For a particular event in the year 1914 with \( P = 300 \), find the rate of change of \( H \) with respect to \( S \) when \( S = 7 \).
+
+--- [assistant] ---
+We are given the formula for the **historical impact score**:
+
+$$
+H = \frac{(Y \times S^2) + \ln(P)}{e^{(Y - 1500)/500}}
+$$
+
+We'll use this to solve the two parts of the problem.
+
+---
+
+### **Part 1: Calculate $ H $ for Event A and Event B**
+
+#### **Event A:**
+- Year $ Y = 1066 $
+- Significance index $ S = 9 $
+- Primary sources $ P = 120 $
+
+Compute numerator:
+$$
+Y \times S^2 + \ln(P) = 1066 \times 9^2 + \ln(120)
+$$
+$$
+= 1066 \times 81 + \ln(120)
+$$
+$$
+= 86,146 + 4.7875 \approx 86,150.7875
+$$
+
+Compute denominator:
+$$
+e^{(Y - 1500)/500} = e^{(1066 - 1500)/500} = e^{-434/500} = e^{-0.868}
+$$
+$$
+e^{-0.868} \approx 0.419
+$$
+
+Now compute $ H $:
+$$
+H_A = \frac{86,150.7875}{0.419} \approx 205,600
+$$
+
+#### **Event B:**
+- Year $ Y = 1776 $
+- Significance index $ S = 8 $
+- Primary sources $ P = 250 $
+
+Compute numerator:
+$$
+Y \times S^2 + \ln(P) = 1776 \times 8^2 + \ln(250)
+$$
+$$
+= 1776 \times 64 + \ln(250)
+$$
+$$
+= 113,664 + 5.5214 \approx 113,669.5214
+$$
+
+Compute denominator:
+$$
+e^{(Y - 1500)/500} = e^{(1776 - 1500)/500} = e^{276/500} = e^{0.552}
+$$
+$$
+e^{0.552} \approx 1.736
+$$
+
+Now compute $ H $:
+$$
+H_B = \frac{113,669.5214}{1.736} \approx 65,470
+$$
+
+---
+
+### **Conclusion for Part 1:**
+
+- $ H_A \approx 205,600 $
+- $ H_B \approx 65,470 $
+
+✅ **Event A has a greater historical impact than Event B.**
+
+---
+
+### **Part 2: Sensitivity of $ H $ to $ S $**
+
+We are given:
+- Year $ Y = 1914 $
+- Primary sources $ P = 300 $
+- Significance index $ S = 7 $
+
+We are to find the **rate of change of $ H $ with respect to $ S $** when $ S = 7 $, i.e., compute $ \frac{dH}{dS} $ at $ S = 7 $.
+
+We'll differentiate the formula with respect to $ S $:
+
+$$
+H = \frac{Y S^2 + \ln(P)}{e^{(Y - 1500)/500}}
+$$
+
+Note: $ Y $ and $ P $ are constants for this event, and $ e^{(Y - 1500)/500} $ is also constant.
+
+Let:
+- $ N = Y S^2 + \ln(P) $
+- $ D = e^{(Y - 1500)/500} $
+
+So $ H = \frac{N}{D} $, and since $ D $ is constant, we can write:
+
+$$
+\frac{dH}{dS} = \frac{dN}{dS} \cdot \frac{1}{D}
+$$
+
+Compute $ \frac{dN}{dS} $:
+$$
+\frac{dN}{dS} = \frac{d}{dS} \left( Y S^2 + \ln(P) \right) = 2 Y S
+$$
+
+So:
+
+$$
+\frac{dH}{dS} = \frac{2 Y S}{e^{(Y - 1500)/500}}
+$$
+
+Now plug in the values:
+
+- $ Y = 1914 $
+- $ S = 7 $
+- $ e^{(1914 - 1500)/500} = e^{414/500} = e^{0.828} \approx 2.289 $
+
+$$
+\frac{dH}{dS} = \frac{2 \cdot 1914 \cdot 7}{2.289} = \frac{26,796}{2.289} \approx 11,707
+$$
+
+---
+
+### **Conclusion for Part 2:**
+
+The **rate of change of the historical impact score $ H $** with respect to the historical significance index $ S $ at $ S = 7 $ is approximately:
+
+✅ **11,707**
+
+This means that for a small increase in $ S $, the impact score increases by about 11,707 units.
+
+---------------------------------------- REJECTED ----------------------------------------
+
+--- [user] ---
+A well-respected historian is preparing a lecture on a series of significant historical events that span over various centuries. To quantify the impact of these events, the historian assigns each event a unique historical impact score, \( H \), which is calculated using a specific formula involving the year of the event, the historical significance index \( S \) (on a scale from 1 to 10), and the number of primary sources available \( P \).
+
+The formula for the historical impact score is given by:
+
+\[ H = \frac{(Y \times S^2) + \ln(P)}{e^{(Y-1500)/500}} \]
+
+where \( Y \) is the year of the event, \( S \) is the historical significance index, and \( P \) is the number of primary sources.
+
+1. Suppose the historian is comparing two events: Event A occurred in 1066 with \( S = 9 \) and \( P = 120 \), and Event B occurred in 1776 with \( S = 8 \) and \( P = 250 \). Calculate the historical impact score \( H \) for both events and determine which event has a greater historical impact.
+
+2. The historian wants to analyze the sensitivity of the impact score \( H \) to changes in the historical significance index \( S \). For a particular event in the year 1914 with \( P = 300 \), find the rate of change of \( H \) with respect to \( S \) when \( S = 7 \).
+
+--- [assistant] ---
+Let's solve the two parts of the problem.
+
+---
+
+### **Part 1: Calculate the historical impact scores for Events A and B**
+
+We are given:
+
+- Event A:  
+  - Year: $ Y = 1066 $  
+  - $ S = 9 $, $ P = 120 $
+
+- Event B:  
+  - Year: $ Y = 1776 $  
+  - $ S = 8 $, $ P = 250 $
+
+The formula for the impact score is:
+
+$$
+H = \frac{(Y \times S^2) + \ln(P)}{e^{(Y-1500)/500}}
+$$
+
+#### **For Event A**:
+
+$$
+H_A = \frac{(1066 \times 9^2) + \ln(120)}{e^{(1066 - 1500)/500}} = \frac{(1066 \times 81) + \ln(120)}{e^{-434/500}} = \frac{85,786 + 4.78}{e^{-0.868}} \approx \frac{85,790.78}{0.422} \approx 202,352
+$$
+
+#### **For Event B**:
+
+$$
+H_B = \frac{(1776 \times 8^2) + \ln(250)}{e^{(1776 - 1500)/500}} = \frac{(1776 \times 64) + \ln(250)}{e^{276/500}} = \frac{113,424 + 5.52}{e^{0.552}} \approx \frac{113,429.52}{1.739} \approx 65,722
+$$
+
+---
+
+### **Part 2: Find the rate of change of $ H $ with respect to $ S $ for Event 1914**
+
+We are given:
+
+- Year: $ Y = 1914 $  
+- $ P = 300 $  
+- $ S = 7 $
+
+We need to find the **rate of change** of $ H $ with respect to $ S $, i.e., $ \frac{dH}{dS} $.
+
+Differentiate the formula for $ H $ with respect to $ S $:
+
+$$
+H = \frac{(Y \times S^2) + \ln(P)}{e^{(Y-1500)/500}}
+$$
+
+Let’s denote:
+
+- $ f(S) = Y \cdot S^2 + \ln(P) $  
+- $ g(S) = e^{(Y-1500)/500} $
+
+Then:
+
+$$
+H = \frac{f(S)}{g(S)}
+$$
+
+Using the quotient rule:
+
+$$
+\frac{dH}{dS} = \frac{f'(S)g(S) - f(S)g'(S)}{[g(S)]^2}
+$$
+
+#### Step 1: Compute $ f'(S) $
+
+$$
+f'(S) = 2Y \cdot S
+$$
+
+#### Step 2: Compute $ g'(S) $
+
+$$
+g(S) = e^{(Y-1500)/500} \Rightarrow g'(S) = \frac{d}{dS} \left[ e^{(Y-1500)/500} \right] = 0 \quad \text{(since $ S $ is independent of the exponent)}
+$$
+
+#### Step 3: Plug in the values
+
+- $ Y = 1914 $, $ S = 7 $, $ P = 300 $
+
+$$
+\frac{dH}{dS} = \frac{(2 \cdot 1914 \cdot 7) \cdot e^{(1914-1500)/500} - (1914 \cdot 7^2 + \ln(300)) \cdot 0}{[e^{(1914-1500)/500}]^2}
+$$
+
+$$
+= \frac{2 \cdot 1914 \cdot 7 \cdot e^{414/500}}{[e^{414/500}]^2} = \frac{2 \cdot 1914 \cdot 7}{e^{414/500}} = \frac{2 \cdot 1914 \cdot 7}{e^{0.828}}
+$$
+
+$$
+\approx \frac{2 \cdot 1914 \cdot 7}{2.289} \approx \frac{26,564}{2.289} \approx 11,650
+$$
+
+---
+
+### ✅ Final Answers:
+
+**1.**  
+- Event A: $ H_A \approx 202,352 $  
+- Event B: $ H_B \approx 65,722 $  
+- **Event B has a greater historical impact.**
+
+**2.**  
+- Rate of change of $ H $ with respect to $ S $: $ \frac{dH}{dS} \approx 11,650 $ (unit: $ \frac{H}{S} $)
+
+================================================================================
+ EXAMPLE 3
+================================================================================
+
+--- [user] ---
+Given the task definition, example input & output, solve the new input case.
+Given a document, an entity and its sentiment towards the entity, verify if it is the correct sentiment towards the entity. Answer should be yes or no. Note that URLs in the text have been replaced with [Link].
+Example: Verify if the sentiment of the following document towards the entity Bill Clinton is Positive . Bill Clinton knows how to win friends and influence people. The former president is a master of reinvention — and the same talents that guided him into office have propelled him, more recently, into the stratosphere of Internet stardom.
+Output: yes
+Here the author of the document praises Bill for this ability to win friends. Hence the sentiment should be Positive and the answer is yes.
+
+New input case for you: Verify if the sentiment of the following document towards the entity Devin Kelley is Negative . Given his background  how did  Devin Kelley  get a gun?
+ Kelley  previously served in the U.S. Air Force  but was discharged in 2014  an Air Force spokesperson confirmed to Fox News on Monday.
+ He  was court-martialed in 2012 for assaulting  his  wife and child.  He  was then sentenced to 12 months in custody before being given a bad conduct discharge.
+A 1968 Gun Control Act made it unlawful for a licensed firearms dealer to sell a weapon to any person who is given a dishonorable discharge. But because  Kelley  was discharged on bad conduct  the law was not triggered  Adam Winkler  a professor of law and a specialist in American constitutional law at the University of California at Los Angeles  told Fox News on Monday.
+ Kelley  purchased two firearms from two separate Academy Sports + Outdoors stores in San Antonio in 2016 and 2017  respectively  the sporting goods store confirmed to Fox News in a statement on Monday. One of the purchases was allegedly a Ruger model AR-556 rifle.
+However   Kelley âs domestic violence charges shouldâve been enough to prevent  him  from purchasing a gun  Winkler said -- but the Air Force most likely didnât report this information to the federal background check system  thus allowing the purchase to go forward.
+And Winklerâs prediction was right: The Air Force announced late Monday night that the Holloman Air Force Base Office of Special Investigations -- the base where  Kelley  was stationed -- failed to report  Kelley âs domestic violence conviction to the FBIâs Criminal Justice Investigation Services Division for inclusion in the National Criminal Information Center database. The database is used to conduct background checks on those who want to purchase a gun.
+The âbiggest mystery â Winkler said  is how  Kelley  was denied a handgun permit but was allowed to purchase a gun from the sporting goods store. But this information is currently unclear.
+Additionally  Texas authorities confirmed Monday that  Kelley  did not have a license to carry. However   he  did have a private security license -- often used by armed and unarmed security guards  personal protection officers  private investigators  and more  according to the Texas Department of Public Safety.
+Output:
+
+--- [assistant] ---
+yes
+
+The document discusses Devin Kelley's problematic background, including his domestic violence conviction, bad conduct discharge from the Air Force, and the failure of systems to prevent him from purchasing firearms. The tone is critical of how he was able to obtain guns despite these red flags, and highlights systemic failures. This indicates a **Negative** sentiment towards Devin Kelley. Hence, the answer is **yes**.
+
+---------------------------------------- REJECTED ----------------------------------------
+
+--- [user] ---
+Given the task definition, example input & output, solve the new input case.
+Given a document, an entity and its sentiment towards the entity, verify if it is the correct sentiment towards the entity. Answer should be yes or no. Note that URLs in the text have been replaced with [Link].
+Example: Verify if the sentiment of the following document towards the entity Bill Clinton is Positive . Bill Clinton knows how to win friends and influence people. The former president is a master of reinvention — and the same talents that guided him into office have propelled him, more recently, into the stratosphere of Internet stardom.
+Output: yes
+Here the author of the document praises Bill for this ability to win friends. Hence the sentiment should be Positive and the answer is yes.
+
+New input case for you: Verify if the sentiment of the following document towards the entity Devin Kelley is Negative . Given his background  how did  Devin Kelley  get a gun?
+ Kelley  previously served in the U.S. Air Force  but was discharged in 2014  an Air Force spokesperson confirmed to Fox News on Monday.
+ He  was court-martialed in 2012 for assaulting  his  wife and child.  He  was then sentenced to 12 months in custody before being given a bad conduct discharge.
+A 1968 Gun Control Act made it unlawful for a licensed firearms dealer to sell a weapon to any person who is given a dishonorable discharge. But because  Kelley  was discharged on bad conduct  the law was not triggered  Adam Winkler  a professor of law and a specialist in American constitutional law at the University of California at Los Angeles  told Fox News on Monday.
+ Kelley  purchased two firearms from two separate Academy Sports + Outdoors stores in San Antonio in 2016 and 2017  respectively  the sporting goods store confirmed to Fox News in a statement on Monday. One of the purchases was allegedly a Ruger model AR-556 rifle.
+However   Kelley âs domestic violence charges shouldâve been enough to prevent  him  from purchasing a gun  Winkler said -- but the Air Force most likely didnât report this information to the federal background check system  thus allowing the purchase to go forward.
+And Winklerâs prediction was right: The Air Force announced late Monday night that the Holloman Air Force Base Office of Special Investigations -- the base where  Kelley  was stationed -- failed to report  Kelley âs domestic violence conviction to the FBIâs Criminal Justice Investigation Services Division for inclusion in the National Criminal Information Center database. The database is used to conduct background checks on those who want to purchase a gun.
+The âbiggest mystery â Winkler said  is how  Kelley  was denied a handgun permit but was allowed to purchase a gun from the sporting goods store. But this information is currently unclear.
+Additionally  Texas authorities confirmed Monday that  Kelley  did not have a license to carry. However   he  did have a private security license -- often used by armed and unarmed security guards  personal protection officers  private investigators  and more  according to the Texas Department of Public Safety.
+Output:
+
+--- [assistant] ---
+yes
+
+================================================================================
+ EXAMPLE 4
+================================================================================
+
+--- [user] ---
+Zinc salt is mixed with \( (\text{NH}_4)_2\text{S} \) of molarity \( 0.021 \, M \). What amount of \( \text{Zn}^{2+} \) will remain unprecipitated in 12 mL of the solution? \( K_{sp} \) of \( \text{ZnS} = 4.51 \times 10^{-24} \).
+
+--- [assistant] ---
+We are given:
+
+- A solution of **ammonium sulfide** $(\text{NH}_4)_2\text{S}$ with molarity $ 0.021 \, M $.
+- Volume of the solution: $ 12 \, \text{mL} = 0.012 \, \text{L} $.
+- The salt is **zinc salt**, so it contains $\text{Zn}^{2+}$ ions.
+- We are to find the **amount of unprecipitated $\text{Zn}^{2+}$** after mixing with the sulfide.
+- $ K_{sp} $ of $\text{ZnS} = 4.51 \times 10^{-24} $.
+
+---
+
+### Step 1: Understand the precipitation reaction
+
+$$
+\text{Zn}^{2+} + \text{S}^{2-} \rightleftharpoons \text{ZnS(s)}
+$$
+
+The solubility product is:
+
+$$
+K_{sp} = [\text{Zn}^{2+}][\text{S}^{2-}] = 4.51 \times 10^{-24}
+$$
+
+We are given the concentration of $\text{S}^{2-}$ from $(\text{NH}_4)_2\text{S}$:  
+$$
+[\text{S}^{2-}] = 0.021 \, M
+$$
+
+---
+
+### Step 2: Use $ K_{sp} $ to find the maximum concentration of $\text{Zn}^{2+}$ that can remain in solution
+
+We rearrange the $ K_{sp} $ expression:
+
+$$
+[\text{Zn}^{2+}] = \frac{K_{sp}}{[\text{S}^{2-}]} = \frac{4.51 \times 10^{-24}}{0.021}
+$$
+
+$$
+[\text{Zn}^{2+}] = 2.15 \times 10^{-22} \, M
+$$
+
+This is the **maximum** concentration of $\text{Zn}^{2+}$ that can remain in solution without precipitation.
+
+---
+
+### Step 3: Calculate the amount of unprecipitated $\text{Zn}^{2+}$ in 12 mL
+
+We now find the **moles** of $\text{Zn}^{2+}$ that remain unprecipitated in 12 mL (0.012 L):
+
+$$
+\text{moles of Zn}^{2+} = [\text{Zn}^{2+}] \times \text{volume} = (2.15 \times 10^{-22}) \times 0.012
+$$
+
+$$
+\text{moles of Zn}^{2+} = 2.58 \times 10^{-24} \, \text{mol}
+$$
+
+---
+
+### ✅ Final Answer:
+
+$$
+\boxed{2.58 \times 10^{-24} \, \text{mol of Zn}^{2+} \text{ remain unprecipitated}}
+$$
+
+This is an extremely small amount, which is expected due to the very low solubility of ZnS.
+
+---------------------------------------- REJECTED ----------------------------------------
+
+--- [user] ---
+Zinc salt is mixed with \( (\text{NH}_4)_2\text{S} \) of molarity \( 0.021 \, M \). What amount of \( \text{Zn}^{2+} \) will remain unprecipitated in 12 mL of the solution? \( K_{sp} \) of \( \text{ZnS} = 4.51 \times 10^{-24} \).
+
+--- [assistant] ---
+To determine how much **Zn²⁺** remains unprecipitated in 12 mL of a solution containing **0.021 M (NH₄)₂S**, we need to consider the **solubility product** of **ZnS** and the **precipitation** reaction.
+
+---
+
+### **Step 1: Write the dissolution reaction**
+
+$$
+\text{ZnS} \rightleftharpoons \text{Zn}^{2+} + \text{S}^{2-}
+$$
+
+The **solubility product** is given as:
+
+$$
+K_{sp} = [\text{Zn}^{2+}][\text{S}^{2-}] = 4.51 \times 10^{-24}
+$$
+
+---
+
+### **Step 2: Assume initial concentrations**
+
+Let’s assume the **initial concentration of Zn²⁺** is **0** (since we are looking for the **unprecipitated** amount, not the total amount). But we can also calculate the **maximum Zn²⁺** that would remain unprecipitated.
+
+Let’s denote:
+
+- Volume of solution = 12 mL = 0.012 L
+- Molarity of (NH₄)₂S = 0.021 M
+
+So:
+
+- Moles of (NH₄)₂S = 0.021 M × 0.012 L = **0.000252 mol**
+
+Since the reaction is **ZnS + (NH₄)₂S → Zn(NH₄)₂S**, the **concentration of S²⁻** will be equal to the moles of (NH₄)₂S divided by the volume of the solution.
+
+So:
+
+$$
+[\text{S}^{2-}] = \frac{0.000252}{0.012} = 0.021 \, \text{M}
+$$
+
+---
+
+### **Step 3: Use the solubility product to find Zn²⁺**
+
+From the solubility product:
+
+$$
+[\text{Zn}^{2+}] = \frac{K_{sp}}{[\text{S}^{2-}]} = \frac{4.51 \times 10^{-24}}{0.021} \approx 2.17 \times 10^{-23} \, \text{M}
+$$
+
+So, the **maximum Zn²⁺** that would precipitate is:
+
+$$
+[\text{Zn}^{2+}] = 2.17 \times 10^{-23} \, \text{M}
+$$
+
+---
+
+### **Step 4: Find the amount of Zn²⁺ that remains unprecipitated**
+
+Since the initial concentration of Zn²⁺ is **0**, and assuming that the solution contains only **0.021 M Zn²⁺**, then the **amount of Zn²⁺** that remains unprecipitated is:
+
+$$
+\text{Unprecipitated Zn} = 0.021 \, \text{M} \times 0.012 \, \text{L} = 0.000252 \, \text{mol}
+$$
+
+---
+
+### ✅ Final Answer:
+
+$$
+\boxed{0.000252 \, \text{mol}}
+$$
+
+So, **0.000252 mol of Zn²⁺ remains unprecipitated**.
+
+================================================================================
+ EXAMPLE 5
+================================================================================
+
+--- [user] ---
+I want to know a fruit-based French dessert.
+
+--- [assistant] ---
+A classic **fruit-based French dessert** is **Tarte Tatin** (also known as **Tarte Tatin aux Fruits** or **Tarte Tatin à la Pomme** when made with apples). It's a delicious, caramelized fruit tart that originated in France and is a favorite for its sweet, gooey, and slightly crispy texture.
+
+### 🍎 What is Tarte Tatin?
+
+Tarte Tatin is a **reverse tart**, meaning the filling (usually caramelized fruit) is cooked first in the pan, and the pastry is placed on top. Once baked, it is inverted to reveal a beautiful, caramel-coated fruit base with a crisp pastry top.
+
+### 🍑 Common Variations:
+While the original version is made with **apples**, you can make it with a variety of fruits such as:
+- Pears
+- Peaches
+- Plums
+- Pineapple (called **Tarte Tatin aux Ananas**)
+- Figs
+- Stone fruits (like cherries or apricots)
+
+### 🥄 Basic Ingredients (for Apple Tarte Tatin):
+- Apples (usually Granny Smith for tartness)
+- Butter
+- Brown sugar (or white sugar for a lighter caramel)
+- Cinnamon (optional)
+- Pie crust or puff pastry
+
+### 🍽️ How to Serve:
+- Often served warm, with a scoop of **vanilla ice cream** on top (called **Tarte Tatin à la Mode**).
+- Can be served with a dollop of **crème fraîche** or **custard**.
+
+Would you like a **recipe** for a fruit Tarte Tatin or another French fruit dessert like **Clafoutis** or **Flambé aux Fruits**?
+
+---------------------------------------- REJECTED ----------------------------------------
+
+--- [user] ---
+I want to know a fruit-based French dessert.
+
+--- [assistant] ---
+A great fruit-based French dessert is **Crispy Pudding**! It's a classic dessert made with a mix of fruit, nuts, and a bit of spice. Here's how to make it:
+
+### **Ingredients**:
+- 1 cup of flour
+- 1 cup of sugar
+- 1/2 cup of water
+- 1/2 cup of cocoa powder
+- 1/4 cup of butter
+- 1/2 cup of chopped nuts (like almonds or walnuts)
+- 1/2 cup of chopped fruit (like strawberries, apples, or pears)
+
+### **Steps**:
+1. Mix the flour, sugar, water, cocoa powder, butter, and nuts in a bowl.
+2. Add the fruit to the mixture.
+3. Let it rest for 10–15 minutes to develop flavor.
+4. Chill the pudding for at least 1 hour before serving.
+
+Crispy Pudding is a beloved dessert that’s perfect for any party or snack! 🍎✨
+

@@ -1,0 +1,403 @@
+# Dataset: dpo_instruct
+# Turn type: single
+# Source: llm_judged
+# Examples: 5
+
+================================================================================
+ EXAMPLE 1
+================================================================================
+
+--- [user] ---
+now draw html structure of “color: #800080; /* A shade of purple */” pentacle with some lines in size, width, and height. include that symbol in circle as intended, make sure that star is aligned in center of circle. output from the very first line in your response without any newlines, backticks, and strictly in a one-lined solid string of code.(are you able to draw lines of star with html elements and css alignment or tranformation of lines.) wrong. try realign star lines correctly to represent starual pentacle shape. try output HTML-only version from the very first line in your response without any newlines, backticks, and strictly in a one-lined solid string of code. 
+
+--- [assistant] ---
+```html
+<div style="position:relative;width:200px;height:200px;border-radius:50%;background:#fff;display:flex;justify-content:center;align-items:center;overflow:hidden;"><svg viewBox="0 0 100 100" width="180" height="180" style="transform:rotate(180deg)"><polygon points="50,5 61.8,38.2 95,38.2 69,61.8 81.8,95 50,75 18.2,95 31,61.8 5,38.2 38.2,38.2" style="fill:#800080;"/></svg></div>
+
+---------------------------------------- REJECTED ----------------------------------------
+
+--- [user] ---
+now draw html structure of “color: #800080; /* A shade of purple */” pentacle with some lines in size, width, and height. include that symbol in circle as intended, make sure that star is aligned in center of circle. output from the very first line in your response without any newlines, backticks, and strictly in a one-lined solid string of code.(are you able to draw lines of star with html elements and css alignment or tranformation of lines.) wrong. try realign star lines correctly to represent starual pentacle shape. try output HTML-only version from the very first line in your response without any newlines, backticks, and strictly in a one-lined solid string of code. 
+
+--- [assistant] ---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML Star Pentacle</title>
+<style>
+  .pentacle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: relative;
+  }
+  .pentacle::before, .pentacle::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 50px;
+    border-top: 5px solid transparent;
+    border-right: 5px solid #800080;
+    border-bottom: 5px solid transparent;
+    transform: rotate(36deg);
+  }
+  .pentacle::before {
+    left: -25px;
+    transform: rotate(-9deg);
+  }
+  .pentacle::after {
+    left: 25px;
+    transform: rotate(9deg);
+  }
+</style>
+</head>
+<body>
+
+<div class="pentacle"></div>
+
+</body>
+</html>
+
+================================================================================
+ EXAMPLE 2
+================================================================================
+
+--- [user] ---
+When magnets attract each other, the two objects move on their own, even though they have mass, and this motion can* be calculated as the energy that would be spent to move two objects with similar mass but without any substantial macroscopic magnetic interaction. *Not saying this is how energy has to be calculated but instead saying that the calculation can be done, whether one says it is meaningful or not.
+Another way to calculate an energy here, is to say we now use two electromagnets of the same mass as our magnets, make sure to obtain the same motion from them using an external power supply and, well, see how much electrical energy was used. I am speaking in terms of an experimental setup but of course there are existing formulas that will do well.
+One way to imagine where an energy could come from to move the two "autonomous" magnets is to say the energy was waiting somewhere, stored after or even when the magnets were set apart, then was released, like a spring, to bring them back together.
+Obviously this picture is less intellectually satisfying for magnets that were never stuck together before, and could lead to even more dubious suggestions like saying all magnets were initially stuck together when the universe was created and will spend their entire existence looking for their soul mate. However I do not exclude the possibility that today's magnets are a sort of perturbation of the initial conditions that would recover when such spontaneous movement occurs. I just do not know.
+So as far as I know (e.g. Wikipedia), in the case of simple magnets, the magnetic attraction is due to electrons spin ordered in a certain way in the materials involved. In this description, there is no energy used in the sense of the energy expenditure described above, not even, to my knowledge, a transduction of some sort. But I am unaware of the adequate description of the system at work, thus my question.
+So where is the energy in the system? Where is it before, during and after the magnets moved and joined together? Please answer in terms of energy, and not work or force, and in plain English as I am trying to understand the physical process involved at a molecular and electronic level, not at a thermodynamic or macroscopic one. If someone can provide an exact description instead of an approximation, that would be perfect.
+As a side note, I am aware, or at least I remember reading that somewhere, that a composite object such as an atom with a nucleus and electrons has less energy than its constituents if they were spatially separated. There is an analogy here (and maybe more), the two magnets having less energy once they reach each other, requiring extra energy to set them apart. In the case of electrons joining the nucleus, there might be radiation released, which is energy, so the same question applies there too. As if some energy that favored the independence of the electron or magnet was lost after they were bound. But my question centers on magnets only.
+
+
+--- [assistant] ---
+You've hit on a deeply fascinating and often misunderstood aspect of magnetism. You're right to question where the energy comes from, and your intuition about a "stored" energy is a good starting point. Let's break down the energy situation in magnetic attraction, aiming for a molecular/electronic level understanding.
+
+**1. The Core: Spin and Magnetic Dipoles**
+
+*   **Electron Spin:** As you correctly state, the fundamental origin of magnetism in permanent magnets lies in the intrinsic property of electrons called "spin."  Think of it (though it's a simplification) as electrons spinning on their axis. This spinning charge creates a tiny magnetic dipole moment – a mini-magnet.
+*   **Alignment:**  In most materials, these electron spins are randomly oriented, cancelling each other out. In a permanent magnet, a significant portion of the electron spins within the material are *aligned* due to quantum mechanical interactions (specifically, the exchange interaction). This alignment creates a macroscopic magnetic field.  Each atom in the magnet now has a net magnetic dipole moment.
+*   **Magnetic Dipoles Interact:** Now, consider two magnets. Each magnet is essentially a collection of these aligned atomic magnetic dipoles. These dipoles interact with each other.
+
+**2. The Energy Landscape: Potential Energy**
+
+*   **Not "Stored" Like a Spring:** Your "spring" analogy is helpful for visualization, but it's not quite right. It's more accurate to think of the system as existing within an *energy landscape*. This landscape represents the potential energy of the two magnets as a function of their separation.
+*   **Lower Energy State:** When the magnets are far apart, their magnetic fields barely interact.  This is a relatively *high* energy state. As they get closer, the magnetic fields begin to align, reducing the overall energy of the system. The aligned magnetic dipoles exert forces on each other, pulling them together.
+*   **Minimum Energy:**  When the magnets snap together, they reach a *lower* energy state.  This is analogous to a ball rolling down a hill – it naturally seeks the lowest point in the energy landscape. The energy difference between the high-energy (separated) state and the low-energy (attracted) state is what manifests as the motion.
+*   **Analogy to Electrostatic Potential:** This is very similar to how two oppositely charged particles interact. They have a potential energy based on their separation, and when they come together, they release energy (e.g., light) as they move to a lower energy state.
+
+**3. Where Does the Energy *Go*?**
+
+This is the crucial part. The energy isn't "released" in the sense of radiating photons (although, in reality, there *is* some radiative damping, but it's usually negligible at macroscopic scales). Instead, the energy is converted into **vibrational energy** within the magnet's crystal lattice.
+
+*   **Lattice Vibrations (Phonons):**  The magnets are made of atoms arranged in a crystal lattice. As the magnets move together, they slightly distort this lattice. This distortion creates vibrations – quantized packets of vibrational energy called phonons. These phonons propagate through the magnet, eventually dissipating as heat.
+*   **No "Loss" of Energy:** It's vital to understand that the energy isn't *lost*. It's transformed into a different form (vibrational energy) within the system. The total energy of the system (magnets + environment) remains constant (conservation of energy).
+*   **Electromagnets and Electrical Energy:** Your electromagnet example is insightful. When you use an external power supply to move electromagnets, you're *directly* supplying the energy to create the magnetic field and overcome the attraction. The energy appears as electrical energy in the wires and is converted to heat in the coil due to resistance.  With permanent magnets, the energy is already "built-in" due to the aligned spins.
+
+**4. Addressing Your Specific Points**
+
+*   **Initial State:** You're right to question the "initial state" scenario. The energy landscape exists regardless of whether the magnets have been together before. The system simply seeks the lowest energy configuration.
+*   **"Soul Mate" Analogy:** The analogy of magnets seeking their "soul mate" is a poetic way of describing the tendency to minimize potential energy, but it doesn't have a direct physical basis.
+*   **Atom Analogy:** Your analogy to the atom is excellent. The binding energy that holds electrons to the nucleus is a manifestation of a lower energy state. The energy released when an electron transitions to a lower energy level is emitted as a photon.  The same principle applies to magnets – they seek a lower energy state through magnetic alignment.
+
+**5. Exact Description?**
+
+A truly "exact" description would require solving the complex many-body problem of interacting electron spins within the crystal lattice, accounting for quantum mechanical effects and relativistic corrections. This is beyond the scope of current computational capabilities for macroscopic magnets. However, the above explanation provides a very good approximation based on established physics.
+
+**In summary:** The energy driving the attraction of magnets isn't "stored" waiting to be released. It's the difference in potential energy between the separated and attracted states. This energy is converted into vibrational energy (phonons) within the magnet's crystal lattice as the magnets move together, ultimately dissipating as heat.
+
+
+
+Let me know if you'd like me to elaborate on any of these points!
+
+---------------------------------------- REJECTED ----------------------------------------
+
+--- [user] ---
+When magnets attract each other, the two objects move on their own, even though they have mass, and this motion can* be calculated as the energy that would be spent to move two objects with similar mass but without any substantial macroscopic magnetic interaction. *Not saying this is how energy has to be calculated but instead saying that the calculation can be done, whether one says it is meaningful or not.
+Another way to calculate an energy here, is to say we now use two electromagnets of the same mass as our magnets, make sure to obtain the same motion from them using an external power supply and, well, see how much electrical energy was used. I am speaking in terms of an experimental setup but of course there are existing formulas that will do well.
+One way to imagine where an energy could come from to move the two "autonomous" magnets is to say the energy was waiting somewhere, stored after or even when the magnets were set apart, then was released, like a spring, to bring them back together.
+Obviously this picture is less intellectually satisfying for magnets that were never stuck together before, and could lead to even more dubious suggestions like saying all magnets were initially stuck together when the universe was created and will spend their entire existence looking for their soul mate. However I do not exclude the possibility that today's magnets are a sort of perturbation of the initial conditions that would recover when such spontaneous movement occurs. I just do not know.
+So as far as I know (e.g. Wikipedia), in the case of simple magnets, the magnetic attraction is due to electrons spin ordered in a certain way in the materials involved. In this description, there is no energy used in the sense of the energy expenditure described above, not even, to my knowledge, a transduction of some sort. But I am unaware of the adequate description of the system at work, thus my question.
+So where is the energy in the system? Where is it before, during and after the magnets moved and joined together? Please answer in terms of energy, and not work or force, and in plain English as I am trying to understand the physical process involved at a molecular and electronic level, not at a thermodynamic or macroscopic one. If someone can provide an exact description instead of an approximation, that would be perfect.
+As a side note, I am aware, or at least I remember reading that somewhere, that a composite object such as an atom with a nucleus and electrons has less energy than its constituents if they were spatially separated. There is an analogy here (and maybe more), the two magnets having less energy once they reach each other, requiring extra energy to set them apart. In the case of electrons joining the nucleus, there might be radiation released, which is energy, so the same question applies there too. As if some energy that favored the independence of the electron or magnet was lost after they were bound. But my question centers on magnets only.
+
+
+--- [assistant] ---
+The energy involved in the magnetic attraction between two magnets is a fascinating aspect of physics, rooted in the behavior of elementary particles and their interactions. Here’s an attempt to break down the energy dynamics in a magnetic interaction, focusing on the atomic and subatomic levels.
+
+### At Rest and When Attracted
+
+**Before Attraction:**
+- When two magnets are at rest, far apart from each other, their magnetic fields are minimal and the energy associated with their magnetic interaction is at a minimum. The energy in this case is essentially the energy due to the internal states of the magnets, such as the spin and orbital states of their constituent electrons, which produce the magnetic moments (magnets' "north" and "south" poles).
+
+**During Attraction:**
+- As the magnets move towards each other, their magnetic fields change. This change in the magnetic field induces a magnetic force between them, which is described by the Lorentz force law. The energy required to move these magnets towards each other against this force is indeed energy that is "spent," and this can be related to the work done in overcoming the magnetic field gradient.
+
+**After Attraction:**
+- Once the magnets are close to each other, their magnetic fields interact more strongly. This interaction can be seen as a lowering of the total energy of the system due to the decrease in the magnetic field gradient between them. This is somewhat analogous to the potential energy decrease when two masses are brought closer together by doing work against an opposing force.
+
+### Energy Mechanisms
+
+**From an Atomic Perspective:**
+- The energy that allows magnets to move towards each other doesn’t originate from a "stored" energy in the sense of a spring being wound up. Instead, it's about the changing energy states of the electron configurations within the atoms of the magnets as their magnetic moments align or oppose each other.
+
+**Electron Spin and Orbital States:**
+- The magnetic moment of a magnet is due to the alignment of electron spins or orbital angular momentum. In a ferromagnetic material, these magnetic moments can align parallel to each other, creating a net magnetic field. The energy associated with these magnetic moments is minimized when the magnets are in close proximity, leading to the attraction.
+
+**Quantum Mechanical Picture:**
+- At the quantum level, the energy of the system is determined by the states of the electrons. Bringing two magnets together changes the wavefunction of the electrons in such a way that the total energy of the system decreases, releasing energy that manifests as the kinetic energy of motion. This is a form of potential energy being converted into kinetic energy.
+
+**Conservation of Energy:**
+- Energy is always conserved in physical processes. The energy "used" to move the magnets against the magnetic force is converted into other forms, such as kinetic energy of motion or thermal energy due to friction. When the magnets attract and come together, the energy isn't "stored" in some magical way but rather represents a change in the system's configuration that aligns more with the lower energy state of being closer together.
+
+### Conclusion
+
+In summary, the energy involved in magnetic attraction is a manifestation of the fundamental properties of electrons and their interactions within the atoms of the magnets. It's about changes in electron configurations and magnetic moments, not about energy being stored or released like a spring. The energy "spent" to move magnets is converted into other forms, reflecting the law of conservation of energy. This explanation is a simplification, as the actual physics involves complex quantum mechanical interactions that describe the behavior of electrons within magnetic fields.
+
+================================================================================
+ EXAMPLE 3
+================================================================================
+
+--- [user] ---
+# Task Description: You've been provided with a table containing input-output pairs in two columns. Analyze the patterns between inputs and outputs from the initial rows and predict the value for the last row labeled as '[Output Value].' Please exclude any other information and provide the output value only. Return the final result as JSON in the format {"output_value": "<output value transformed from the input value>"}.
+
+[Q]:
+|Input|Output|
+|---|---|
+|1998–99|1998/99|
+|1999–00|1999/00|
+|2000–01|2000/01|
+|2001–02|2001/02|
+|2004–05|2004/05|
+|2005–06|2005/06|
+|2005–06|2005/06|
+|2007–08|[Output Value]|
+
+Return the final result as JSON in the format {"output_value": "<output value transformed from the input value>"}.
+[A]:
+
+
+--- [assistant] ---
+{"output_value": "2007/08"}
+
+---------------------------------------- REJECTED ----------------------------------------
+
+--- [user] ---
+# Task Description: You've been provided with a table containing input-output pairs in two columns. Analyze the patterns between inputs and outputs from the initial rows and predict the value for the last row labeled as '[Output Value].' Please exclude any other information and provide the output value only. Return the final result as JSON in the format {"output_value": "<output value transformed from the input value>"}.
+
+[Q]:
+|Input|Output|
+|---|---|
+|1998–99|1998/99|
+|1999–00|1999/00|
+|2000–01|2000/01|
+|2001–02|2001/02|
+|2004–05|2004/05|
+|2005–06|2005/06|
+|2005–06|2005/06|
+|2007–08|[Output Value]|
+
+Return the final result as JSON in the format {"output_value": "<output value transformed from the input value>"}.
+[A]:
+
+
+--- [assistant] ---
+```json
+{"output_value": "2007 /08"}
+```
+
+================================================================================
+ EXAMPLE 4
+================================================================================
+
+--- [user] ---
+Write a function that takes two parameters, a suit (a string) and a rank (a string), and returns a string representation of a playing card in the format 'rank of suit'.
+
+--- [assistant] ---
+Here’s a simple implementation in Python. It takes the `suit` and `rank` strings, validates that they’re non‑empty strings (optional but helpful), and returns the formatted card description `"rank of suit"`.
+
+```python
+def format_card(suit: str, rank: str) -> str:
+    """
+    Return a human‑readable representation of a playing card.
+
+    Parameters
+    ----------
+    suit : str
+        The suit of the card (e.g., "hearts", "spades", "diamonds", "clubs").
+    rank : str
+        The rank of the card (e.g., "A", "2", "10", "J", "Q", "K").
+
+    Returns
+    -------
+    str
+        A string in the form "rank of suit", e.g. "A of spades".
+    """
+    # Basic validation (optional)
+    if not isinstance(suit, str) or not isinstance(rank, str):
+        raise TypeError("Both suit and rank must be strings.")
+    if not suit or not rank:
+        raise ValueError("Both suit and rank must be non‑empty strings.")
+
+    # Normalise the strings (trim whitespace, lower‑case the suit if desired)
+    suit_clean = suit.strip()
+    rank_clean = rank.strip()
+
+    return f"{rank_clean} of {suit_clean}"
+
+
+# Example usage
+if __name__ == "__main__":
+    print(format_card("hearts", "A"))      # → A of hearts
+    print(format_card("spades", "10"))    # → 10 of spades
+    print(format_card("clubs", "K"))      # → K of clubs
+```
+
+### How it works
+1. **Parameter checking** – The function first ensures both inputs are strings and not empty. This prevents accidental misuse (e.g., passing `None` or an integer).
+2. **Cleaning** – `strip()` removes any leading/trailing whitespace the caller might have included.
+3. **Formatting** – An f‑string (`f"{rank_clean} of {suit_clean}"`) builds the final output in the requested `"rank of suit"` format.
+
+You can easily adapt this to other languages (JavaScript, Java, C#, etc.)—the core idea is the same: concatenate the rank, the literal `" of "`, and the suit.
+
+---------------------------------------- REJECTED ----------------------------------------
+
+--- [user] ---
+Write a function that takes two parameters, a suit (a string) and a rank (a string), and returns a string representation of a playing card in the format 'rank of suit'.
+
+--- [assistant] ---
+def create_card(suit, rank):
+    return f"{rank} of {suit}"
+
+# Example usage:
+card = create_card("Hearts", "Ace")
+print(card)  # Output: Ace of Hearts
+
+
+================================================================================
+ EXAMPLE 5
+================================================================================
+
+--- [user] ---
+(a) What product would you expect to obtain from treating tyrosine with excess bromine water?\n(b) What product would you expect to be formed in the reaction of phenylalanine with ethanol in the presence of hydrogen chloride?\n(c) What product would you expect from the reaction of alanine and benzoyl chloride in aqueous base?
+
+--- [assistant] ---
+Let's answer each part in detail:
+
+---
+
+**(a) What product would you expect to obtain from treating tyrosine with excess bromine water?**
+
+**Tyrosine** is an amino acid with the structure:
+
+- NH₂–CH(COOH)–CH₂–C₆H₄–OH  
+  (para-hydroxyphenyl group on the side chain)
+
+**Bromine water** brominates activated aromatic rings, especially phenols, rapidly. The –OH group on the phenol ring activates the ortho and para positions. In tyrosine, the para position relative to the –OH is already occupied by the side chain, so bromination occurs at the two ortho positions (positions 2 and 6 relative to the –OH group) and at position 4 (relative to the side chain), if available.
+
+**Excess bromine water** leads to tribromination.
+
+**Product:**  
+**2,4,6-tribromo-L-tyrosine**  
+(The aromatic ring of tyrosine is substituted with three bromines at the 2, 4, and 6 positions relative to the phenolic –OH.)
+
+**Reaction:**  
+![Tyrosine tribromination](https://i.imgur.com/2X8a1zH.png)
+
+---
+
+**(b) What product would you expect to be formed in the reaction of phenylalanine with ethanol in the presence of hydrogen chloride?**
+
+**Phenylalanine:**  
+NH₂–CH(COOH)–CH₂–C₆H₅
+
+**Ethanol + HCl:**  
+This is a classic method for **Fischer esterification** of the carboxylic acid group. The amino group may also become protonated (NH₃⁺).
+
+**Product:**  
+**Ethyl phenylalaninate hydrochloride** (the ethyl ester of phenylalanine, with the amino group as an ammonium salt due to the acidic conditions)
+
+**Structure:**  
+- NH₃⁺–CH(COOC₂H₅)–CH₂–C₆H₅ (as the hydrochloride salt)
+
+---
+
+**(c) What product would you expect from the reaction of alanine and benzoyl chloride in aqueous base?**
+
+**Alanine:**  
+NH₂–CH(COOH)–CH₃
+
+**Benzoyl chloride:**  
+C₆H₅COCl (an acyl chloride)
+
+**Aqueous base:**  
+This facilitates **Schotten–Baumann reaction**, where the acyl chloride reacts with the amino group to form an amide (N-benzoylation).
+
+**Product:**  
+**N-benzoylalanine** (the N-benzoyl derivative of alanine)
+
+**Structure:**  
+- C₆H₅–CO–NH–CH(CH₃)–COOH
+
+---
+
+### **Summary Table**
+
+| Part | Amino Acid + Reagent(s)           | Main Product                       |
+|------|-----------------------------------|------------------------------------|
+| (a)  | Tyrosine + excess Br₂/H₂O         | 2,4,6-tribromo-L-tyrosine          |
+| (b)  | Phenylalanine + EtOH/HCl          | Ethyl phenylalaninate hydrochloride |
+| (c)  | Alanine + benzoyl chloride/base   | N-benzoylalanine                   |
+
+---------------------------------------- REJECTED ----------------------------------------
+
+--- [user] ---
+(a) What product would you expect to obtain from treating tyrosine with excess bromine water?\n(b) What product would you expect to be formed in the reaction of phenylalanine with ethanol in the presence of hydrogen chloride?\n(c) What product would you expect from the reaction of alanine and benzoyl chloride in aqueous base?
+
+--- [assistant] ---
+(a) **Tyrosine with excess bromine water**:
+
+When tyrosine reacts with excess bromine water (a strong oxidizing agent), it undergoes **oxidation**. The product is:
+
+- **Tyrosine bromide** (from the oxidation of tyrosine to a bromide salt).
+
+**Reaction:**
+
+$$
+\text{Tyrosine} + \text{Br}_2 + \text{H}_2\text{O} \rightarrow \text{Tyrosine bromide} + 2\text{HBr}
+$$
+
+(b) **Reaction of phenylalanine with ethanol in the presence of hydrogen chloride:**
+
+Phenylalanine is an amino acid. When it reacts with **ethanol** in the presence of **hydrogen chloride (HCl)**, it undergoes **acid-catalyzed hydrolysis** to form **phenylalanine hydroxylamine** (a compound with an amino group and a hydroxyl group).
+
+**Reaction:**
+
+$$
+\text{Phenylalanine} + \text{Ethanol} + \text{HCl} \rightarrow \text{Phenylalanine hydroxylamine}
+$$
+
+(c) **Reaction of alanine and benzoyl chloride in aqueous base:**
+
+Alanine is an amino acid. When it reacts with **benzoyl chloride** (a strong acid catalyst) in **aqueous base**, it undergoes **acid-catalyzed deamination** to form **alanine hydroxylamine**.
+
+**Reaction:**
+
+$$
+\text{Alanine} + \text{Benzoyl chloride} + \text{H}_2\text{O} + \text{HCl} \rightarrow \text{Alanine hydroxylamine}
+$$
+
+### Summary:
+
+(a) **Tyrosine bromide**
+
+(b) **Phenylalanine hydroxylamine**
+
+(c) **Alanine hydroxylamine**
+

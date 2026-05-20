@@ -1,0 +1,82 @@
+# Dataset: sft_instruct
+# Turn type: single
+# Source: FLAN
+# Examples: 5
+
+================================================================================
+ EXAMPLE 1
+================================================================================
+
+--- [user] ---
+Teacher:In this task, you are given a sentence in the Swedish language and your task is to convert it into the English language. In translation, keep numbers as it is and make it sentence case (capitalize only the first word of each sentence and noun).
+Teacher: Now, understand the problem? Solve this instance: Antalet åtal som väcktes mot lojalisterna under 1999 uppgick till 193 och motsvarande siffra för republikanerna var 97.
+Student:
+
+--- [assistant] ---
+Charges brought against loyalists in 1999 totalled 193, while those against republicans totalled 97.
+
+================================================================================
+ EXAMPLE 2
+================================================================================
+
+--- [user] ---
+Part 1. Definition
+In this task, you will be shown a short story with a beginning, two potential middles, and an ending. Your job is to choose the middle statement that makes the story incoherent / implausible by indicating 1 or 2 in the output. If both sentences are plausible, pick the one that makes less sense.
+Part 2. Example
+Beginning: Butch had a really old computer. Middle 1: Butch decided to order a new computer online. Middle 2: Butch noticed that a storm was approaching to his town. Ending: It arrived and Butch was much happier.
+Answer: 2
+Explanation: People generally don't feel happy about natural disasters like storms. Therefore, we choose 2 in this case.
+Part 3. Exercise
+Beginning: At the church she started to get butterflies. Middle 1: But she knew she was just seasick. Middle 2: But she knew she was just nervous. Ending: Now she was a married woman.
+Answer:
+
+--- [assistant] ---
+1
+
+================================================================================
+ EXAMPLE 3
+================================================================================
+
+--- [user] ---
+What do you do when you meet people for the first time?
+Options:
+- friendly
+- smile
+- greeting
+- introduce yourself
+- look over Let's think step by step:
+
+--- [assistant] ---
+New people do not know us, hence we introduce them to us. Introduction helps in knowing new people. So, the answer is introduce yourself.
+
+================================================================================
+ EXAMPLE 4
+================================================================================
+
+--- [user] ---
+Detailed Instructions: Given a passage with a question and an answer to that question, classify if the answer actually answers the question into 'yes' or 'no'. Output 'yes' if the answer answers the question and output 'no' if the answer does not answer the question.
+Q: Question: Does increased conventional chemotherapy improve survival in multiple myeloma : long-term results of two PETHEMA trials including 914 patients?
+Answer: In these trials the response rate significantly correlated with the regimen intensity. However, no significant differences in response duration and survival were found. This highlights the limited role of conventional chemotherapy in MM and the need for further trials, aimed at determining the impact of new treatment approaches such as high-dose therapy/autotransplantation.
+A:
+
+--- [assistant] ---
+no
+
+================================================================================
+ EXAMPLE 5
+================================================================================
+
+--- [user] ---
+In this task, you are given the abstract of a research paper. Your task is to generate a summary of this abstract. Your summary should not be very short, but it's better if it's not more than 30 words.
+Example: Mixed precision training (MPT) is becoming a practical technique to improve the speed and energy efficiency of training deep neural networks by leveraging the fast hardware support for IEEE half-precision floating point that is available in existing GPUs. MPT is typically used in combination with a technique called loss scaling, that works by scaling up the loss value up before the start of backpropagation in order to minimize the impact of numerical underflow on training. Unfortunately, existing methods make this loss scale value a hyperparameter that needs to be tuned per-model, and a single scale cannot be adapted to different layers at different training stages. We introduce a loss scaling-based training method called adaptive loss scaling that makes MPT easier and more practical to use, by removing the need to tune a model-specific loss scale hyperparameter. We achieve this by introducing layer-wise loss scale values which are automatically computed during training to deal with underflow more effectively than existing methods. We present experimental results on a variety of networks and tasks that show our approach can shorten the time to convergence and improve accuracy, compared with using the existing state-of-the-art MPT and single-precision floating point.
+Example solution: We devise adaptive loss scaling to improve mixed precision training that surpass the state-of-the-art results.
+Example explanation: The abstract focusses on designing an adaptive loss scaling method, hence the generated output is correct.
+
+Problem: We study the problem of learning to map, in an unsupervised way, between domains $A$ and $B$, such that the samples $\vb \in B$ contain all the information that exists in samples $\va\in A$ and some additional information. For example, ignoring occlusions, $B$ can be people with glasses, $A$ people without, and the glasses, would be the added information. When mapping a sample $\va$ from the first domain to the other domain, the missing information is replicated from an independent reference sample $\vb\in B$. Thus, in the above example, we can create, for every person without glasses a version with the glasses observed in any face image. 
+
+ Our solution employs a single two-pathway encoder and a single decoder for both domains. The common part of the two domains and the separate part are encoded as two vectors, and the separate part is fixed at zero for domain $A$. The loss terms are minimal and involve reconstruction losses for the two domains and a domain confusion term. Our analysis shows that under mild assumptions, this architecture, which is much simpler than the literature guided-translation methods, is enough to ensure disentanglement between the two domains. We present convincing results in a few visual domains, such as no-glasses to glasses, adding facial hair based on a reference image, etc.
+
+
+--- [assistant] ---
+Solution: An image to image translation method which adds to one image the content of another thereby creating a new image.
+

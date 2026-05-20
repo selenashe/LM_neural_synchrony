@@ -1,0 +1,158 @@
+# Dataset: sft_instruct
+# Turn type: single
+# Source: Dolci Instruct Tool Use
+# Examples: 5
+
+================================================================================
+ EXAMPLE 1
+================================================================================
+
+--- [system] ---
+You are a helpful function-calling AI assistant. You are provided with function signatures within <functions></functions> XML tags. You may call one or more functions to assist with the user query. Output any function calls within <function_calls></function_calls> XML tags. Don't make assumptions about what values to plug into functions.
+
+--- [user] ---
+Hi, I just saw a Nigerian licence plate that begins with the letters “ABC”. Could you look up which state and local government area this code belongs to and let me know?
+
+--- [assistant] ---
+
+
+--- [environment] ---
+{"state": "Lagos", "lga": "Ikeja"}
+
+--- [assistant] ---
+The plate code “ABC” is registered to Lagos State, specifically the Ikeja Local Government Area (LGA). Let me know if there’s anything else you’d like to check!
+
+================================================================================
+ EXAMPLE 2
+================================================================================
+
+--- [system] ---
+You are a helpful function-calling AI assistant. You are provided with function signatures within <functions></functions> XML tags. You may call one or more functions to assist with the user query. Output any function calls within <function_calls></function_calls> XML tags. Don't make assumptions about what values to plug into functions.
+
+--- [user] ---
+I want to analyze both Saudi Aramco's latest equity data and the T3MA (Triple Exponential Moving Average) for BTC/USDT and ETH/USDT on the 1h interval. Provide all relevant results.
+
+--- [assistant] ---
+
+
+--- [environment] ---
+{"results": {"symbol": "Saudi Aramco", "last_price": 32.85, "volume": 4863120, "change": 0.12, "percent_change": 0.37, "high": 33.1, "low": 32.7, "timestamp": "2024-06-18T13:45:00Z"}}
+{"results": {"symbol": "BTC/USDT", "interval": "1h", "T3MA": ["66950.23", "66831.12", "66921.84"], "v_factor": 0.7, "time_period": 9, "series_type": "close", "outputsize": 3}}
+{"results": {"symbol": "ETH/USDT", "interval": "1h", "T3MA": ["3442.18", "3441.02", "3445.55"], "v_factor": 0.7, "time_period": 9, "series_type": "close", "outputsize": 3}}
+
+--- [assistant] ---
+Here is your analysis:
+
+1. **Saudi Aramco Latest Equity Data:**
+   - Last Price: 32.85
+   - Volume: 4,863,120
+   - Change: +0.12 (+0.37%)
+   - High: 33.1, Low: 32.7
+   - Timestamp: 2024-06-18T13:45:00Z
+
+2. **Triple Exponential Moving Average (T3MA):**
+   - **BTC/USDT (1h interval):** T3MA values: 66,950.23, 66,831.12, 66,921.84
+   - **ETH/USDT (1h interval):** T3MA values: 3,442.18, 3,441.02, 3,445.55
+
+If you need a deeper analysis or visualization of these results, let me know!
+
+================================================================================
+ EXAMPLE 3
+================================================================================
+
+--- [system] ---
+You are a helpful function-calling AI assistant. You are provided with function signatures within <functions></functions> XML tags. You may call one or more functions to assist with the user query. Output any function calls within <function_calls></function_calls> XML tags. Don't make assumptions about what values to plug into functions.
+
+--- [user] ---
+How can methodology transfer help build an effective “visual musicology”? Specifically, what does this interdisciplinary area cover, which external analytics domains (such as text, geospatial, time-series, and other high‑dimensional data analysis) offer methods that map onto musicological tasks, and what kinds of challenges and future research opportunities are identified?
+
+--- [assistant] ---
+
+
+--- [environment] ---
+[{"type": "text", "text": "{\n  \"paperId\": \"69c1a870ee02b1a8e47bd36fb41d9c4745d1dd4e\",\n  \"title\": \"Framing Visual Musicology through Methodology Transfer\",\n  \"year\": 2019,\n  \"openAccessPdf\": {\n    \"url\": \"\",\n    \"status\": null,\n    \"license\": null,\n    \"disclaimer\": \"Notice: Paper or abstract available at https://arxiv.org/abs/1908.10411, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.\"\n  },\n  \"authors\": [\n    {\n      \"authorId\": \"1965917621\",\n      \"name\": \"Matthias Miller\"\n    },\n    {\n      \"authorId\": \"2054386555\",\n      \"name\": \"H. Sch\u00e4fer\"\n    },\n    {\n      \"authorId\": \"1665220350\",\n      \"name\": \"Matthias Kraus\"\n    },\n    {\n      \"authorId\": \"1712585\",\n      \"name\": \"M. Leman\"\n    },\n    {\n      \"authorId\": \"9106757\",\n      \"name\": \"D. Keim\"\n    },\n    {\n      \"authorId\": \"1401917601\",\n      \"name\": \"Mennatallah El-Assady\"\n    }\n  ],\n  \"abstract\": \"In this position paper, we frame the field of Visual Musicology by providing an overview of well-established musicological sub-domains and their corresponding analytic and visualization tasks. To foster collaborative, interdisciplinary research, we discuss relevant data and domain characteristics. We give a description of the problem space, as well as the design space of musicology and discuss how existing problem-design mappings or solutions from other fields can be transferred to musicology. We argue that, through methodology transfer, established methods can be exploited to solve current musicological problems and show exemplary mappings from analytics fields related to text, geospatial, time-series, and other high-dimensional data to musicology. Finally, we point out open challenges, discuss research gaps, and highlight future research opportunities.\"\n}", "annotations": null, "meta": null}, {"type": "text", "text": "{\n  \"paperId\": \"80b2ff1bbaa3412d0e40c8d464da329efebd0fad\",\n  \"title\": \"Vegetation - Herbivory Dynamics in Rangeland Ecosystems: Geospatial Modeling for Savanna and Wildlife Conservation in California and Namibia\",\n  \"year\": 2014,\n  \"openAccessPdf\": {\n    \"url\": \"\",\n    \"status\": null,\n    \"license\": null\n  },\n  \"authors\": [\n    {\n      \"authorId\": \"79685600\",\n      \"name\": \"M. Tsalyuk\"\n    }\n  ],\n  \"abstract\": null\n}", "annotations": null, "meta": null}, {"type": "text", "text": "{\n  \"paperId\": \"0b5982beea5b169a5404f29404ecbf241d864386\",\n  \"title\": \"American Eclipse: A Nation's Epic Race to Catch the Shadow of the Moon and Win the Glory of the World\",\n  \"year\": 2017,\n  \"openAccessPdf\": {\n    \"url\": \"\",\n    \"status\": null,\n    \"license\": null\n  },\n  \"authors\": [\n    {\n      \"authorId\": \"84531098\",\n      \"name\": \"David Baron\"\n    }\n  ],\n  \"abstract\": null\n}", "annotations": null, "meta": null}, {"type": "text", "text": "{\n  \"paperId\": \"f012cdb903ca0a26a428d12c70f6c4636745ece0\",\n  \"title\": \"Knowledge discovery in databases : PKDD 2007 : 11th European Conference on Principles and Practice of Knowledge Discovery in Databases, Warsaw, Poland, September 17-21, 2007 : proceedings\",\n  \"year\": 2007,\n  \"openAccessPdf\": {\n    \"url\": \"\",\n    \"status\": null,\n    \"license\": null\n  },\n  \"authors\": [\n    {\n      \"authorId\": \"2270277959\",\n      \"name\": \"Joost N. Kok\"\n    }\n  ],\n  \"abstract\": null\n}", "annotations": null, "meta": null}, {"type": "text", "text": "{\n  \"paperId\": \"e20b4117b2bf50ee2146535fc798010e0dc5c6fc\",\n  \"title\": \"Course Catalog 2006-2007\",\n  \"year\": 2006,\n  \"openAccessPdf\": {\n    \"url\": \"\",\n    \"status\": null,\n    \"license\": null\n  },\n  \"authors\": [\n    {\n      \"authorId\": \"2057501865\",\n      \"name\": \"Csusb\"\n    }\n  ],\n  \"abstract\": null\n}", "annotations": null, "meta": null}]
+
+--- [assistant] ---
+
+
+--- [environment] ---
+{"type":"text","text":"{\n  \"paperId\": \"69c1a870ee02b1a8e47bd36fb41d9c4745d1dd4e\",\n  \"url\": \"https://www.semanticscholar.org/paper/69c1a870ee02b1a8e47bd36fb41d9c4745d1dd4e\",\n  \"title\": \"Framing Visual Musicology through Methodology Transfer\",\n  \"year\": 2019,\n  \"openAccessPdf\": {\n    \"url\": \"\",\n    \"status\": null,\n    \"license\": null,\n    \"disclaimer\": \"Notice: Paper or abstract available at https://arxiv.org/abs/1908.10411, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.\"\n  },\n  \"authors\": [\n    {\n      \"authorId\": \"1965917621\",\n      \"name\": \"Matthias Miller\"\n    },\n    {\n      \"authorId\": \"2054386555\",\n      \"name\": \"H. Schäfer\"\n    },\n    {\n      \"authorId\": \"1665220350\",\n      \"name\": \"Matthias Kraus\"\n    },\n    {\n      \"authorId\": \"1712585\",\n      \"name\": \"M. Leman\"\n    },\n    {\n      \"authorId\": \"9106757\",\n      \"name\": \"D. Keim\"\n    },\n    {\n      \"authorId\": \"1401917601\",\n      \"name\": \"Mennatallah El-Assady\"\n    }\n  ],\n  \"abstract\": \"In this position paper, we frame the field of Visual Musicology by providing an overview of well-established musicological sub-domains and their corresponding analytic and visualization tasks. To foster collaborative, interdisciplinary research, we discuss relevant data and domain characteristics. We give a description of the problem space, as well as the design space of musicology and discuss how existing problem-design mappings or solutions from other fields can be transferred to musicology. We argue that, through methodology transfer, established methods can be exploited to solve current musicological problems and show exemplary mappings from analytics fields related to text, geospatial, time-series, and other high-dimensional data to musicology. Finally, we point out open challenges, discuss research gaps, and highlight future research opportunities.\"\n}","annotations":null,"meta":null}
+
+--- [assistant] ---
+The paper "Framing Visual Musicology through Methodology Transfer" (2019) by Matthias Miller et al. provides a comprehensive overview of how methodology transfer can help build an effective "visual musicology." This interdisciplinary area covers well-established musicological sub-domains alongside their analytic and visualization tasks. 
+
+Visual musicology aims to foster collaborative interdisciplinary research by leveraging relevant data and domain characteristics from various fields. The approach involves describing both the problem space and design space of musicology and then mapping solutions or methodologies from other fields onto these musicological challenges.
+
+Specifically, analytics methods from external domains such as text analysis, geospatial analysis, time-series analysis, and other high-dimensional data analysis have been identified as offering applicable methods that can be transferred to address musicological tasks. Through this methodology transfer, existing robust methods in these external domains can be exploited to solve current problems in musicology effectively.
+
+The paper also points out several open challenges, identifies research gaps, and highlights future research opportunities for further advancing visual musicology.
+
+In summary:
+- Visual musicology includes musicological sub-domains and related analytic and visualization tasks.
+- Methodology transfer allows using established analytic methods from text, geospatial, time-series, and high-dimensional data fields in musicology.
+- This interdisciplinary approach helps tackle musicological problems effectively.
+- Challenges and future research areas remain, focusing on improving and expanding this methodology transfer framework.
+
+For more details, you can refer to the paper here: https://www.semanticscholar.org/paper/69c1a870ee02b1a8e47bd36fb41d9c4745d1dd4e
+
+================================================================================
+ EXAMPLE 4
+================================================================================
+
+--- [system] ---
+You are a helpful function-calling AI assistant. You are provided with function signatures within <functions></functions> XML tags. You may call one or more functions to assist with the user query. Output any function calls within <function_calls></function_calls> XML tags. Don't make assumptions about what values to plug into functions.
+
+--- [user] ---
+Answer the following multiple choice question:
+When solving the two-dimensional Helmholtz equation with cylindrical symmetry using separation of variables, which special functions typically describe the radial part that remains finite at the origin?
+Choices:
+Chebyshev polynomials T_n(x)
+Bessel functions of the first kind J_n(kr)
+Hermite functions H_n(x)
+Associated Legendre functions P_ℓ^m(cos θ)
+
+Your final response should end with 'The correct answer is:' followed by the correct answer.
+
+--- [assistant] ---
+
+
+--- [environment] ---
+[]
+
+--- [assistant] ---
+The problem of solving the two-dimensional Helmholtz equation with cylindrical symmetry using separation of variables typically leads to a radial equation involving special functions. The radial part must remain finite at the origin. 
+
+- Chebyshev polynomials T_n(x) are typically used in approximation theory and numerical methods, not specifically for cylindrical symmetry problems in the Helmholtz equation.
+- Hermite functions H_n(x) are solutions to the quantum harmonic oscillator problem and are not related to cylindrical symmetry in the Helmholtz equation.
+- Associated Legendre functions P_ℓ^m(cos θ) arise in spherical coordinates problems, especially for the angular part on spheres, but not typically for the radial part with cylindrical symmetry.
+- Bessel functions of the first kind J_n(kr) are well-known solutions of the radial part of the Helmholtz equation in cylindrical coordinates and are finite at the origin.
+
+Based on the known mathematics of the Helmholtz equation in cylindrical coordinates and the physical boundary conditions that the solution must be finite at the origin, Bessel functions of the first kind J_n(kr) typically describe the radial part.
+
+The correct answer is: Bessel functions of the first kind J_n(kr)
+
+================================================================================
+ EXAMPLE 5
+================================================================================
+
+--- [system] ---
+You are a helpful function-calling AI assistant. You are provided with function signatures within <functions></functions> XML tags. You may call one or more functions to assist with the user query. Output any function calls within <function_calls></function_calls> XML tags. Don't make assumptions about what values to plug into functions.
+
+--- [user] ---
+I need a PNG snapshot of https://wikipedia.org and a PDF snapshot of https://www.bbc.com. Also, check the caller ID "myCaller123" for exclusiveness status.
+
+--- [assistant] ---
+
+
+--- [environment] ---
+{"url": "https://pragmavant-snapshots.com/snapshot/wikipedia_org.png"}
+{"url": "https://pragmavant-snapshots.com/pdf/bbc_com.pdf"}
+{"exclusiveness": "not exclusive"}
+
+--- [assistant] ---
+Here are the requested results:
+
+- PNG snapshot of https://wikipedia.org: https://pragmavant-snapshots.com/snapshot/wikipedia_org.png
+- PDF snapshot of https://www.bbc.com: https://pragmavant-snapshots.com/pdf/bbc_com.pdf
+- Caller ID "myCaller123" is not exclusive.
+

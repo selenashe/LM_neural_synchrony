@@ -1,0 +1,507 @@
+# Dataset: dpo_thinking
+# Turn type: single
+# Source: tulu_v3.9_sciriff_10k
+# Examples: 5
+
+================================================================================
+ EXAMPLE 1
+================================================================================
+
+--- [user] ---
+Given a short query with keyphrases about a research idea in 2019 in the domain of artificial intelligence, recommend the relevant datasets to validate the research idea from options provided. A short description of the datasets is also provided to help you.
+
+Query: In this paper, we consider the problem of unsupervised domain generalisation (UDG). The goal
+
+Keyphrases: domain generalisation images
+
+Dataset description:
+PACS: PACS is an image dataset for domain generalization. It consists of four domains, namely Photo (1,670 images), Art Painting (2,048 images), Cartoon (2,344 images) and Sketch (3,929 images).
+LLAMAS: The unsupervised Labeled Lane MArkerS dataset (LLAMAS) is a dataset for lane detection and segmentation. It contains over 100,000 annotated images, with annotations of over 100 meters at a resolution of 1276 x 717 pixels.
+Libri-Adapt: Libri-Adapt aims to support unsupervised domain adaptation research on speech recognition models.
+MMED: Contains 25,165 textual news articles collected from hundreds of news media sites (e.g., Yahoo News, Google News, CNN News.) and 76,516 image posts shared on Flickr social media, which are annotated according to 412 real-world events.
+
+Options:- A: PACS  B: LLAMAS  C: Libri-Adapt  D: MMED
+
+--- [assistant] ---
+<think> Okay, let's see. The user is working on a research idea from 2019 in AI, specifically unsupervised domain generalization (UDG) with a focus on images. They need to choose the right dataset from the given options.
+
+First, I need to understand what unsupervised domain generalization means. From what I remember, domain generalization is when a model is trained on multiple source domains and then tested on a target domain that it hasn't seen during training. Unsupervised here probably means that the target domain doesn't have labeled data during training. So the model has to generalize without any labels from the new domain.
+
+Now looking at the keyphrases: domain generalization and images. The datasets provided are PACS, LLAMAS, Libri-Adapt, and MMED. Let's check each one.
+
+PACS is described as an image dataset for domain generalization with four domains: Photo, Art Painting, Cartoon, Sketch. That seems perfect because it's specifically for domain generalization and involves images, which matches the keyphrases. The different domains would allow testing how well a model generalizes across different styles or data distributions.
+
+LLAMAS is for lane detection and segmentation with a lot of annotated images. But the focus here is on lane markers, which is a specific application. The problem here is about domain generalization, not just lane detection. Plus, the description doesn't mention anything about multiple domains or unsupervised learning aspects. So maybe not the best fit.
+
+Libri-Adapt is for speech recognition models and unsupervised domain adaptation. But the query is about images, not speech. So this is probably not relevant here.
+
+MMED has textual news articles and image posts from social media, annotated with events. But again, the focus is on textual and image data related to events. The problem is domain generalization for images, but MMED's image posts might not be structured in a way that tests different domains. Also, the dataset includes a lot of text, which isn't the focus here.
+
+So the best fit is PACS because it's explicitly designed for domain generalization in images, with multiple distinct domains. The other datasets either don't fit the image requirement, the domain generalization aspect, or both.
+</think>
+
+**Recommended Dataset: A: PACS**  
+
+**Reasoning:**  
+The query focuses on **unsupervised domain generalisation (UDG)** in **images**. The **PACS dataset** is explicitly designed for domain generalization tasks, containing four distinct image domains (Photo, Art Painting, Cartoon, Sketch) with varying styles and distributions. This aligns perfectly with the research goal of evaluating how models generalize across unseen domains without target-domain labels.  
+
+- **LLAMAS (B)** is specialized for lane detection and segmentation, not domain generalization.  
+- **Libri-Adapt (C)** is for speech recognition, not image-based tasks.  
+- **MMED (D)** combines text and images but focuses on event annotation, not domain adaptation across distinct visual domains.  
+
+PACS directly supports the research objective by providing structured, multi-domain image data for testing UDG methods.
+
+---------------------------------------- REJECTED ----------------------------------------
+
+--- [user] ---
+Given a short query with keyphrases about a research idea in 2019 in the domain of artificial intelligence, recommend the relevant datasets to validate the research idea from options provided. A short description of the datasets is also provided to help you.
+
+Query: In this paper, we consider the problem of unsupervised domain generalisation (UDG). The goal
+
+Keyphrases: domain generalisation images
+
+Dataset description:
+PACS: PACS is an image dataset for domain generalization. It consists of four domains, namely Photo (1,670 images), Art Painting (2,048 images), Cartoon (2,344 images) and Sketch (3,929 images).
+LLAMAS: The unsupervised Labeled Lane MArkerS dataset (LLAMAS) is a dataset for lane detection and segmentation. It contains over 100,000 annotated images, with annotations of over 100 meters at a resolution of 1276 x 717 pixels.
+Libri-Adapt: Libri-Adapt aims to support unsupervised domain adaptation research on speech recognition models.
+MMED: Contains 25,165 textual news articles collected from hundreds of news media sites (e.g., Yahoo News, Google News, CNN News.) and 76,516 image posts shared on Flickr social media, which are annotated according to 412 real-world events.
+
+Options:- A: PACS  B: LLAMAS  C: Libri-Adapt  D: MMED
+
+--- [assistant] ---
+<think> Okay, let's tackle this problem. The user wants to validate an unsupervised domain generalization (UDG) research idea in 2019 using the provided datasets. The query mentions keyphrases "domain generalisation images," so I need to focus on datasets that deal with image domain adaptation or similar tasks.
+
+First, looking at the options: A is PACS, which is an image dataset for domain generalization. The description says it has four domains with images. That sounds exactly like what we need for UDG. 
+
+Then, B is LLAMAS, which is for lane detection and segmentation. That's more about object detection rather than domain adaptation. So probably not the right choice here. 
+
+C is Libri-Adapt, which is for speech recognition. The query is about images, so that's unrelated. 
+
+D is MMED, which includes both text and images. Since the query is about images, but MMED has a mix, maybe it's a distractor. 
+
+Wait, the keyphrases in the query are "domain generalisation images," so the datasets that focus on image-based UDG would be PACS. The other options are for different tasks. So the correct answer should be A.
+</think>
+
+A: PACS  
+
+**Explanation**: The query emphasizes unsupervised domain generalization (UDG) and mentions "domain generalisation images." The **PACS** dataset (PACS: PACS) is specifically designed for domain generalization tasks, containing images from four domains (Photo, Art Painting, Cartoon, Sketch). This aligns directly with the research idea. Other datasets (LLAMAS, Libri-Adapt, MMED) are unrelated to image-based domain adaptation.
+
+================================================================================
+ EXAMPLE 2
+================================================================================
+
+--- [user] ---
+You will be presented with the full text of a biomedical research paper. Please write an abstract for this paper. Your response should include the abstract and no additional text.
+
+Paper text:
+
+ hearing preservation has not yet been reported in patients undergoing resection of intracochlear schwannomas .
+this study describes a minimally invasive procedure for intracochlear schwannoma resection with simultaneous cochlear implantation that resulted in good hearing .
+
+ this study aims to describe a minimally invasive procedure for intracochlear schwannoma resection with simultaneous cochlear implantation .
+
+ the technique described in this study was developed for a 55-year - old male with a 20-year history of bilateral progressive hearing loss and tinnitus that had a mass in the left apical turn of the cochlea measuring 0.3 cm .
+we performed mastoidectomy and posterior tympanotomy and removed incus and tensor tympani muscle to expose the cochlear apex .
+after the cochlea was anatomically preserved , it was implanted with a straight electrode via round window insertion .
+speech perception test revealed 100% speech recognition with closed sentences and the average audiometric threshold ( 500 to 2000 hz ) was 23 db .
+
+ our technique led to rehabilitation of the patient and improved hearing without damaging the intracochlear structure , making it possible to perform ci in the same procedure with good results .
+the cochlea is a particularly differentiated organ with delicate microscopic architecture that is easily damaged during surgical procedures .
+access to the cochlea through the internal ear was taboo for surgeons until the stapedotomy approach was introduced by shea . with the advent of cochlear implant ( ci ) surgery ,
+ci surgery has been performed for more than 30 years and is the standard procedure for restoring hearing in patients with severe - to - profound hearing loss .
+ci indications have expanded to allow for the restoration of moderate - to - severe hearing loss . for this purpose ,
+preservation of the cochlear architecture is essential.1 
+  von ilberg et al2 first described a cochlear surgery that preserved residual hearing .
+substantial progress has been made in cochlear surgical techniques , including the development of atraumatic cochleostomy and round window electrode insertion and the use of intraoperative lubricant solutions , which improved the ability to slide the electrode into the cochlea .
+additionally , new implants are continuously being developed , and the improvements in electrode design have facilitated atraumatic surgery with the aim of preserving residual hearing.1 skarzynski et al3 and bento et al4 have demonstrated that residual hearing can be preserved during ci surgery .
+progress in cochlear implant surgical techniques and technology have brought a new interest in bimodal stimulation .
+the bimodal stimulation results in less noise and improved musical perception.5 
+  intralabyrinthine schwannomas ( ils ) are tumors that primarily arise from within the membranous labyrinth ( the cochlea , vestibule , and semi - circular canals ) .
+to date , only 137 cases have been reported.6 salzman et al presented an anatomically based classification system for ils , including intravestibular , intracochlear , vestibulocochlear , transmodiolar , transmacular , and transotic .
+intracochlear schwannomas ( ics ) are the dominant ils type according to this classification system .
+the treatment of ics depends on tumor size and growth.6 the degree of hearing loss , the presence of vestibular symptoms , and the pathologic diagnosis must also be considered.7 
+  hearing preservation has not yet been reported in patients undergoing resection of intracochlear schwannomas .
+anacusis often occurs as a result of the natural history of the tumor or after surgical removal.8 
+  this study describes a minimally invasive procedure for intracochlear schwannoma resection with simultaneous cochlear implantation that resulted in good hearing . to our knowledge , we are the first to report an ics with a ci during the same surgery procedure and that is our report 's main contribution .
+kronenberg et al do report an ics with a ci , but their ics was incidentally discovered during surgery and the ci performed three years later , whereas ours was previously diagnosed and planned to perform during the same surgery .
+the score was 100% in closed set and 30% in open set presentation of topic - related , everyday sentences.9 
+
+the technique described in this study was developed for a patient with a 20-year history of bilateral progressive hearing loss and tinnitus .
+the patient was an otolaryngologist and was hindered from working in his chosen profession due to hearing loss and incapacitating vertigo .
+his hearing had gradually deteriorated on the left side , resulting in profound hearing loss .
+magnetic resonance imaging ( mri ) with gadolinium revealed a mass in the left apical turn of the cochlea measuring 0.3 cm ( figs . 1 , 2 , and 3 ) . 
+ post - gadolinium t1 , enhanced nodular mass in the left apical turn of the cochlea measuring 0.3 cm . 
+
+his hearing had also deteriorated on the right side , and his hearing aid ( ha ) was still providing some benefit to the right ear ( in contrast to the left side ) fig .
+4 . demonstrates his audiometry with bilateral sensorineural hearing loss , severe at the right side and profound at the left side . 
+
+audiometry with bilateral sensorineural hearing loss , severe at the right side and profound at the left side .
+we performed mastoidectomy and posterior tympanotomy , removing the incus and tensor timpani muscle to expose the cochlear apex .
+a small window in the apical turn was opened , and the membranous labyrinth was exposed .
+the tumor was identified , pulled out with a delicate hook , and completely resected ( figs . 5 and 6 )
+. 
+ apical turn of cochlea exposed with tumor inside . 
+ apical turn of the cochlea exposed following tumor removal . the small window in the apical turn was sealed with bone wax .
+after the cochlea was anatomically preserved , it was implanted with a straight electrode ( nucleus ci422 ) via round window insertion . computed
+we performed tumor resection to treat the patient 's vertigo , and performed simultaneous ci implantation to restore his hearing . immediately after surgery , the patient 's vertigo and dizziness resolved and the tinnitus improved .
+all electrodes ( 22/22 ) were used for electric stimulation , and neural response telemetry indicated that all electrodes were functional .
+after three months of speech processor use , an auditory speech perception test revealed 100% speech recognition with closed sentences , and the average audiometric threshold ( 500 to 2000 hz ) was 23 db .
+the patient continues to use a ha in the contralateral ear and his speech perception with open sentences is 70% using only the ha .
+however , with bimodal stimulation ( ha  +  ci ) , the score is 100% , which indicates that ci improved this patient 's speech recognition .
+with the recent improvements in imaging techniques , an increasing number of reports have described intralabyrinthine schwannomas.10 
+  mri with gadolinium is the best diagnostic tool to identify this disease .
+intracochlear schwannomas may have slightly higher signal intensities than normal intralabyrinthine fluid on unenhanced t1-weighted images .
+on t2-weighted images , the schwannomas appear as hypointense lesions with sharp borders , and the fluid has a high signal .
+after gadolinium administration , the schwannomas present as strongly enhanced , sharply circumscribed lesions on t1-weighted images.11 
+  asymmetric sensorineural hearing loss is almost invariably present in patients with intracochlear schwannoma .
+intracochlear schwannomas are difficult to diagnose , and diagnosis is often delayed because the presenting symptoms overlap with other otologic diseases ( particularly mnire 's disease ) . sometimes , patients present with mixed hearing loss and the conductive component can be secondary to stapes movement interference caused by tumor pressure on the vestibular surface of the stapes footplate or secondary to endolymphatic hydrops.12 
+ 13 
+  other lesions can mimic ils on contrast - enhanced mris , including labyrinthitis ( typically of viral etiology ) , labyrinthitis ossificans , hemorrhage , and lipoma.6 
+
+this minimally invasive procedure allows for simultaneous tumor removal and cochlear implantation with good audiological results . to the best of our knowledge ,
+this report is the first description of simultaneous intracochlear schwannoma resection and cochlear implantation . with this technique
+, we accessed the apical turn of the cochlea ( with minimal damage to other structures ) and removed the tumor .
+thus , the intracochlear structure was preserved , which facilitated successful cochlear implantation and hearing restoration .
+
+--- [assistant] ---
+<think> Okay, I need to create an abstract for this biomedical research paper. Let me start by reading through the provided text carefully to understand the key points.
+
+The study is about a minimally invasive procedure for removing an intracochlear schwannoma and simultaneously performing a cochlear implantation. The main contribution is that this is the first reported case where these two procedures were done together, leading to good hearing outcomes. The patient was a 55-year-old man with a 20-year history of hearing loss and tinnitus. The tumor was in the left apical turn of the cochlea. The surgical technique involved mastoidectomy, posterior tympanotomy, and removal of the incus and tensor tympani to access the cochlea. They used a straight electrode via round window insertion, which resulted in 100% speech recognition with closed sentences and an average audiometric threshold of 23 dB. The patient also experienced resolution of vertigo and improved tinnitus. The abstract should highlight the novelty of the procedure, the methods used, the outcomes, and the significance in the context of existing literature. I need to make sure to mention that this is the first case of simultaneous resection and implantation, the successful hearing preservation, and the use of bimodal stimulation for improved speech recognition. Also, note the importance of MRI in diagnosis and the challenges in diagnosing intracochlear schwannomas. The abstract should be concise, around 150-200 words, structured with background, methods, results, and conclusion. Let me check if I missed any important details. The patient's history, the specific surgical steps, the audiometric results, and the comparison to previous studies like Kronenberg's case where the CI was done three years later. Also, mention the preservation of cochlear structure and the implications for future treatments. Avoid including too much technical detail but ensure all key points are covered. Alright, time to structure this into a coherent abstract.
+</think>
+
+**Abstract**  
+This study presents the first reported case of simultaneous intracochlear schwannoma (ICS) resection and cochlear implantation (CI) via a minimally invasive approach, achieving preserved hearing and functional outcomes. A 55-year-old male with a 20-year history of progressive bilateral sensorineural hearing loss, tinnitus, and incapacitating vertigo underwent surgery for a 0.3 cm ICS in the left cochlear apical turn. The procedure involved mastoidectomy, posterior tympanotomy, and removal of the incus and tensor tympani to access the cochlea. The tumor was resected through a small apical window, followed by round window insertion of a straight CI electrode (Nucleus CI422). Postoperatively, the patient experienced complete resolution of vertigo, improved tinnitus, and 100% closed-set speech recognition with an average audiometric threshold of 23 dB (500–2000 Hz). Bimodal stimulation (CI + contralateral hearing aid) further enhanced open-set speech recognition to 100%. The technique preserved cochlear anatomy, enabling successful CI without structural damage. This case highlights the feasibility of combined tumor resection and CI in ICS management, offering a novel approach to hearing restoration while addressing tumor-related symptoms. The study underscores the importance of advanced imaging for ICS diagnosis and advances in CI technology for preserving residual hearing. This innovation represents a significant advancement in treating intralabyrinthine schwannomas, with potential implications for broader clinical applications.
+
+---------------------------------------- REJECTED ----------------------------------------
+
+--- [user] ---
+You will be presented with the full text of a biomedical research paper. Please write an abstract for this paper. Your response should include the abstract and no additional text.
+
+Paper text:
+
+ hearing preservation has not yet been reported in patients undergoing resection of intracochlear schwannomas .
+this study describes a minimally invasive procedure for intracochlear schwannoma resection with simultaneous cochlear implantation that resulted in good hearing .
+
+ this study aims to describe a minimally invasive procedure for intracochlear schwannoma resection with simultaneous cochlear implantation .
+
+ the technique described in this study was developed for a 55-year - old male with a 20-year history of bilateral progressive hearing loss and tinnitus that had a mass in the left apical turn of the cochlea measuring 0.3 cm .
+we performed mastoidectomy and posterior tympanotomy and removed incus and tensor tympani muscle to expose the cochlear apex .
+after the cochlea was anatomically preserved , it was implanted with a straight electrode via round window insertion .
+speech perception test revealed 100% speech recognition with closed sentences and the average audiometric threshold ( 500 to 2000 hz ) was 23 db .
+
+ our technique led to rehabilitation of the patient and improved hearing without damaging the intracochlear structure , making it possible to perform ci in the same procedure with good results .
+the cochlea is a particularly differentiated organ with delicate microscopic architecture that is easily damaged during surgical procedures .
+access to the cochlea through the internal ear was taboo for surgeons until the stapedotomy approach was introduced by shea . with the advent of cochlear implant ( ci ) surgery ,
+ci surgery has been performed for more than 30 years and is the standard procedure for restoring hearing in patients with severe - to - profound hearing loss .
+ci indications have expanded to allow for the restoration of moderate - to - severe hearing loss . for this purpose ,
+preservation of the cochlear architecture is essential.1 
+  von ilberg et al2 first described a cochlear surgery that preserved residual hearing .
+substantial progress has been made in cochlear surgical techniques , including the development of atraumatic cochleostomy and round window electrode insertion and the use of intraoperative lubricant solutions , which improved the ability to slide the electrode into the cochlea .
+additionally , new implants are continuously being developed , and the improvements in electrode design have facilitated atraumatic surgery with the aim of preserving residual hearing.1 skarzynski et al3 and bento et al4 have demonstrated that residual hearing can be preserved during ci surgery .
+progress in cochlear implant surgical techniques and technology have brought a new interest in bimodal stimulation .
+the bimodal stimulation results in less noise and improved musical perception.5 
+  intralabyrinthine schwannomas ( ils ) are tumors that primarily arise from within the membranous labyrinth ( the cochlea , vestibule , and semi - circular canals ) .
+to date , only 137 cases have been reported.6 salzman et al presented an anatomically based classification system for ils , including intravestibular , intracochlear , vestibulocochlear , transmodiolar , transmacular , and transotic .
+intracochlear schwannomas ( ics ) are the dominant ils type according to this classification system .
+the treatment of ics depends on tumor size and growth.6 the degree of hearing loss , the presence of vestibular symptoms , and the pathologic diagnosis must also be considered.7 
+  hearing preservation has not yet been reported in patients undergoing resection of intracochlear schwannomas .
+anacusis often occurs as a result of the natural history of the tumor or after surgical removal.8 
+  this study describes a minimally invasive procedure for intracochlear schwannoma resection with simultaneous cochlear implantation that resulted in good hearing . to our knowledge , we are the first to report an ics with a ci during the same surgery procedure and that is our report 's main contribution .
+kronenberg et al do report an ics with a ci , but their ics was incidentally discovered during surgery and the ci performed three years later , whereas ours was previously diagnosed and planned to perform during the same surgery .
+the score was 100% in closed set and 30% in open set presentation of topic - related , everyday sentences.9 
+
+the technique described in this study was developed for a patient with a 20-year history of bilateral progressive hearing loss and tinnitus .
+the patient was an otolaryngologist and was hindered from working in his chosen profession due to hearing loss and incapacitating vertigo .
+his hearing had gradually deteriorated on the left side , resulting in profound hearing loss .
+magnetic resonance imaging ( mri ) with gadolinium revealed a mass in the left apical turn of the cochlea measuring 0.3 cm ( figs . 1 , 2 , and 3 ) . 
+ post - gadolinium t1 , enhanced nodular mass in the left apical turn of the cochlea measuring 0.3 cm . 
+
+his hearing had also deteriorated on the right side , and his hearing aid ( ha ) was still providing some benefit to the right ear ( in contrast to the left side ) fig .
+4 . demonstrates his audiometry with bilateral sensorineural hearing loss , severe at the right side and profound at the left side . 
+
+audiometry with bilateral sensorineural hearing loss , severe at the right side and profound at the left side .
+we performed mastoidectomy and posterior tympanotomy , removing the incus and tensor timpani muscle to expose the cochlear apex .
+a small window in the apical turn was opened , and the membranous labyrinth was exposed .
+the tumor was identified , pulled out with a delicate hook , and completely resected ( figs . 5 and 6 )
+. 
+ apical turn of cochlea exposed with tumor inside . 
+ apical turn of the cochlea exposed following tumor removal . the small window in the apical turn was sealed with bone wax .
+after the cochlea was anatomically preserved , it was implanted with a straight electrode ( nucleus ci422 ) via round window insertion . computed
+we performed tumor resection to treat the patient 's vertigo , and performed simultaneous ci implantation to restore his hearing . immediately after surgery , the patient 's vertigo and dizziness resolved and the tinnitus improved .
+all electrodes ( 22/22 ) were used for electric stimulation , and neural response telemetry indicated that all electrodes were functional .
+after three months of speech processor use , an auditory speech perception test revealed 100% speech recognition with closed sentences , and the average audiometric threshold ( 500 to 2000 hz ) was 23 db .
+the patient continues to use a ha in the contralateral ear and his speech perception with open sentences is 70% using only the ha .
+however , with bimodal stimulation ( ha  +  ci ) , the score is 100% , which indicates that ci improved this patient 's speech recognition .
+with the recent improvements in imaging techniques , an increasing number of reports have described intralabyrinthine schwannomas.10 
+  mri with gadolinium is the best diagnostic tool to identify this disease .
+intracochlear schwannomas may have slightly higher signal intensities than normal intralabyrinthine fluid on unenhanced t1-weighted images .
+on t2-weighted images , the schwannomas appear as hypointense lesions with sharp borders , and the fluid has a high signal .
+after gadolinium administration , the schwannomas present as strongly enhanced , sharply circumscribed lesions on t1-weighted images.11 
+  asymmetric sensorineural hearing loss is almost invariably present in patients with intracochlear schwannoma .
+intracochlear schwannomas are difficult to diagnose , and diagnosis is often delayed because the presenting symptoms overlap with other otologic diseases ( particularly mnire 's disease ) . sometimes , patients present with mixed hearing loss and the conductive component can be secondary to stapes movement interference caused by tumor pressure on the vestibular surface of the stapes footplate or secondary to endolymphatic hydrops.12 
+ 13 
+  other lesions can mimic ils on contrast - enhanced mris , including labyrinthitis ( typically of viral etiology ) , labyrinthitis ossificans , hemorrhage , and lipoma.6 
+
+this minimally invasive procedure allows for simultaneous tumor removal and cochlear implantation with good audiological results . to the best of our knowledge ,
+this report is the first description of simultaneous intracochlear schwannoma resection and cochlear implantation . with this technique
+, we accessed the apical turn of the cochlea ( with minimal damage to other structures ) and removed the tumor .
+thus , the intracochlear structure was preserved , which facilitated successful cochlear implantation and hearing restoration .
+
+--- [assistant] ---
+<think> Okay, the user wants me to write an abstract based on the provided biomedical paper. Let me start by reading through the paper to understand the key points.
+
+The main focus is on a minimally invasive procedure for resecting intracochlear schwannomas while implanting a cochlear implant. The study describes how this approach resulted in good hearing. They mention that this is the first report of such a procedure, and the patient had bilateral progressive hearing loss and tinnitus.
+
+I need to capture the study's aim, methodology, results, and significance. The abstract should be concise, summarizing all these elements. Also, the user specified to include the abstract and no extra text, so I need to make sure it's all in one sentence or two.
+
+Wait, the paper has a lot of technical details, so the abstract should highlight the key findings without getting too bogged down. Let me check the key points again: minimally invasive, simultaneous implantation, good hearing, first report, patient's condition, and the benefits of the technique.
+
+I should start with the objective, mention the procedure, the patient's case, the results (speech recognition, audiometric thresholds), and conclude with the contribution to the field. Also, note the comparison with other studies and the importance of the technique.
+
+I need to ensure that the abstract flows well and includes all necessary information. Let me put it all together now.
+</think>
+
+Abstract: This study describes a minimally invasive procedure for intracochlear schwannoma resection with simultaneous cochlear implantation, resulting in 100% speech recognition with closed sentences and an average audiometric threshold of 23 dB. The technique, developed for a 55-year-old patient with bilateral progressive hearing loss and tinnitus, successfully preserved the cochlear architecture, enabling successful implantation and hearing restoration. This is the first reported case of simultaneous resection and implantation for intracochlear schwannomas, highlighting the potential of this approach to preserve auditory function while minimizing damage to the cochlear structure. The study emphasizes the importance of cochlear implantation in patients with severe hearing loss, and the technique's success underscores the benefits of advanced surgical approaches.
+
+================================================================================
+ EXAMPLE 3
+================================================================================
+
+--- [user] ---
+You will be shown the title of a chemistry paper, together with sections excerpted from the body of the paper. The paper sections may include HTML tags like `<p>` and `</p>`; please ignore these. Your task is to write an abstract for the paper. Your response should include the abstract and no other text.
+
+Title:
+A Switchable Gold Catalyst by Encapsulation in a Self‐Assembled Cage
+
+Paper sections:
+
+<p>A. C. H. Jans, A. Gómez-Suárez, S. P. Nolan, J. N. H. Reek, Chem. Eur. J.
+2016, 22, 14836.</p><p>There is a growing interest in transition‐metal catalysis in confined spaces as the approach provides an additional tool to control selectivity and activity in catalysis.1 For example, it has been demonstrated that the encapsulation of rhodium complexes in a hemispherical porphyrin assembly results in catalysts with increased activity and unprecedented branched selectivity in the hydroformylation of terminal and internal alkenes.2 In addition, the encapsulation of transition‐metal complexes in preformed cavities through weak interactions can lead to unexpected reactivity: M4L6 anionic tetrahedral capsules, for instance, can host cationic organometallic catalysts in their hydrophobic cavities,3 thereby inducing substrate selectivity.4 Moreover, reaction rates5 and product distribution6 can be greatly affected by catalyst encapsulation. Interestingly, many catalytic reactions operate through a dinuclear mechanism7 or deactivate via a dinuclear pathway;8, 9 by encapsulation of a transition metal complex, such decomposition pathways can be suppressed, leading to higher catalytic turnover numbers.10</p><p>In principle, an encapsulation event could also change the catalytic pathway of a reaction, and as such can be used as a switch for a catalytic transformation. Switchable catalysis is an interesting upcoming field of research as it provides new tools to control the reaction process with external stimuli such as light, pH, or metal coordination, a concept that is important to control reactions in nature.11 In a recent study, encapsulation of a photoredox catalyst was shown to be a feasible stimulus to steer reactivity.12 In a previous paper we reported the encapsulation of an N‐heterocyclic carbene (NHC) mononuclear gold(I) complex inside a self‐assembled hexameric resorcin[4]arene cage 1
+6 and showed that the encapsulated catalyst gives a different product distribution than the free complex.13 This supramolecular complex is formed in apolar, water‐saturated solvents (Scheme 1).14, 15 In the current contribution, we report how we change the active gold complex from dinuclear to mononuclear by reversible encapsulation and demonstrate that this can be used for both switching on/off a reaction, as well as for controlling its selectivity during the course of a reaction. Changing the reactivity or selectivity of a gold catalyst has been shown before by changing the ligands16 or Brønsted acid/base effects17 and even by guest binding by a rotaxane,18 but reversibly changing the active species of a gold‐catalyzed reaction as a result of encapsulation has, to the best of our knowledge, not been shown before.</p><p>Formation of the self‐assembled hexameric resorcin[4]arene cage.</p><p>In this study we use a dinuclear hydroxyl‐bridged gold complex [{Au(NHC)}2(μ‐OH)][X] instead of a mononuclear gold complex.19 This complex reacts through different mechanisms than mononuclear gold complexes20 and is a privileged catalyst for dual activation reactions.21 It, however, is too large to fit inside the cage 1
+6,
+22 and should be split into mononuclear complexes upon encapsulation. The NHC‐Au‐X fragment displays the traditional Lewis acidic character of mononuclear cationic gold catalysts, activating unsaturated substrates such as alkynes through π‐coordination, making them more electrophilic and susceptible towards nucleophilic attack.23 Meanwhile, the NHC‐Au‐OH species behaves as a Brønsted base and is known to σ‐activate substrates such as terminal alkynes or phenols.24 Together the two species, NHC‐Au‐X and NHC‐Au‐OH, can dually activate substrates through both π‐ and σ‐activation (Scheme 2). This dual‐activation mode was originally proposed by Toste and Houk25 and is well established and employed nowadays. In addition, this dual activation has elegantly been explored by Hashmi26 and Zhang27 for the formation of gold acetylides, which can react as a nucleophile and attack the π‐activated bond of the substrate, and as such represents a common strategy in gold‐mediated synthesis.</p><p>Dinuclear complexes [{Au(NHC)}2(μ‐OH)][X] can dually activate substrates.</p><p>We envisioned that encapsulation of the two fragments of the dinuclear gold catalyst [{Au(NHC)}2(μ‐OH)][X] in separate cages would alter its typical reactivity as they undergo transformations in a site isolated fashion. We anticipated that by complex encapsulation we could reversibly switch between the dinuclear and mononuclear catalyst and, therefore, have a tool to shift from dual gold catalysis to a mononuclear reaction mechanism. This forms the basis for an on/off switchable system, but can also alter the product distribution during a gold‐catalyzed transformation.</p><p>Indeed, when complex [{Au(IPr)}2(μ‐OH)][BF4] 2 (Scheme 3) and the capsule were mixed together, encapsulation of a mononuclear gold complex was confirmed by 1H NMR and 1H 2D DOSY NMR (see the Supporting Information). To demonstrate the principle of switching catalyst activity by selective encapsulation, the dual gold‐catalyzed hydrophenoxylation reaction was studied.21, 28 This reaction requires σ‐activation of a phenol by the NHC‐Au‐OH moiety and π‐activation of an alkyne by the cationic NHC‐Au‐X fragment (Scheme 4). Indeed, it was observed that the standard reaction between phenol (4) and diphenylacetylene (5) readily takes place when using 2 as catalyst in the absence of the cage (full conversion within 60 min). However, in the presence of the cage, the dinuclear complex 2 is broken and encapsulated as mononuclear species. As the dual reaction pathway is no longer available, no conversion to vinyl ether 6 is obtained, even after 24 h.29 We wondered if the reaction could be switched on again by adding a competing guest that would bind more strongly to the cage than the gold catalyst. For this purpose we selected tetraalkylammonium salts, as they are known to bind very strongly inside the hexamer.15 Gratifyingly, upon addition of Et4N+BF4
+− (7) to expel the gold catalyst from the cage, the catalytic activity was restored and product 6 was obtained in 89 % yield after one hour.</p><p>Encapsulation of [{Au(IPr)}2(μ‐OH)][BF4] in capsule 1
+6.</p><p>Switching the gold‐catalyzed hydrophenoxylation off and on. Reaction conditions: solvent=toluene, T=80 °C, [4]=550 mm, [5]=500 mm, [2]=2.5 mm (0.025 mol %), [1]=50 mm.</p><p>Next we explored the cage effect on changing the product distribution of a reaction. For this purpose we explored the conversion of 4‐phenyl‐1‐butyne (8). Depending on the available reaction pathways, the transformation can yield up to four products (Table 1). In the absence of the cage, 2 can activate two substrates in a σ‐ and π‐activation mode and, therefore, dimerization of 8 takes place through a dual‐activation mechanism, yielding the branched and linear products, 11 and 12 respectively (Table 1, entry 1; Scheme 5).26b, 30 As anticipated, this dual‐activation reaction pathway is completely blocked upon encapsulation of the catalyst and the production of 11 and 12 stopped. Instead, when in the cage, the catalyst produced the intramolecularly cyclized product 10, which is known to form via a mononuclear pathway inside the cage (Table 1, entry 2).13 In the presence of the cage and the competing guest 7, product 10 was not formed and dimerization products 11 and 12 were obtained (Table 1, entry 3), indicating that under these conditions the catalysis proceeds via a dual‐gold mechanism and thus takes place outside the cage.</p><p>Gold catalyzed conversion of 4‐phenyl‐1‐butyne.[a]</p><p>[a] Reaction conditions: [8]=66 mm, [2]=1.7 mm (2.5 mol %), [H2O]=44 mm, [1]=33 mm, [7]=33 mm. Yields are averaged from two measurements.</p><p>Dimerization of terminal alkynes through σ‐ and π‐activation.</p><p>Due to the presence of water molecules to facilitate the self‐assembly of the capsule, the well‐documented hydration product 9 was formed in all cases through π‐activation of the triple bond,31, 32 but only in minor amounts. We observed an increased rate of formation of this product in the presence of both cage and competing guest 7, which is interesting but difficult to explain. The addition of only the competing guest 7, in the absence of cage but with the same amount of water present, does not lead to increased formation of product 9 (Table 1, entry 4).</p><p>Next we investigated whether it would be possible to switch the product selectivity during the course of the reaction (Figure 1). The reaction was initiated using only the dinuclear gold catalyst 2. Under these reaction conditions, the branched dimer 11 was the main product formed, indicating that the dual activation pathway is dominating. After 3 h, an excess of cage 16 was added, thereby removing the dinuclear gold complex from the reaction mixture by encapsulation of the cationic mononuclear gold fragment. The formation of 11 immediately stopped, while production of compound 10 started. After another 3 h, compound 7 was added as a competing guest for 16, releasing the catalyst from the cage. As compound 10 can only be formed while the cationic gold species is encapsulated in 16, its production stopped, whereas formation of 11 started again. The formation of product 12 followed the same trend as 11, but it was less clear as this compound was formed in much smaller amounts. As ketone 9 can be formed both inside and outside the cage (Table 1), the formation of this product could not be switched; the faster formation of this product after addition of both cage and Et4N+BF4
+− (7) corresponds with the observations in Table 1.</p><p>Formation of products from the reaction of substrate 8 in the presence of stepwise addition of cage and competing guest. Reaction conditions: [8]=66 mm, [2]=1.7 mm (2.5 mol %), [H2O]=44 mm, [1]=33 mm, [7]=33 mm. Yields are averaged from two measurements.</p><p>In conclusion, we have demonstrated that it is possible to control the pathway by which gold complexes convert substrate molecules by complex encapsulation events. In the presence of a self‐assembled hexameric resorcin[4]arene cage the dinuclear complex [{Au(NHC)}2(μ‐OH)][X] breaks into mononuclear units that are encapsulated as the dinuclear gold complex 2 is too large to fit inside the cage. By doing so, the dual activation reactivity typical for complex 2 is switched into (re)activity that is typical for mononuclear complexes. By using this strategy on a reaction that can only proceed through a dual‐activation pathway, we have demonstrated on/off switching of a gold‐catalyzed reaction. Moreover, this approach also provides tools to change the product distribution during the course of a reaction, which is demonstrated in the activation of 4‐phenyl‐1‐butyne. In summary, this strategy of switching the active species of a gold‐catalyzed reaction by means of host‐guest interactions provides a new approach to controlling catalytic transformations, even during the course of the reaction.</p>
+
+Experimental Section
+<p>Hydrophenoxylation experiments: The catalyst 2 (0.025 mol %) was added to a solution of 4 (550 mm) and 5 (500 mm) and in selected experiments cage 1
+6 (50 mm) and/or competing guest 7 (50 mm) in [D8]toluene. The mixture was heated to 80 °C and yields were monitored using GC and 1H NMR of the crude mixture.</p><p>Catalytic experiments with substrate 8: The catalyst 2 (2.5 mol %), H2O (44 mm), substrate 8 (66 mm), and, in selected experiments, cage 1
+6 (33 mm) and/or competing guest 7 (33 mm) were mixed in [D6]benzene and heated to 70 °C for 48 h. Yields were monitored using GC and 1H NMR of the crude mixture and were determined as the average of two experiments.</p>
+
+
+<p>As a service to our authors and readers, this journal provides supporting information supplied by the authors. Such materials are peer reviewed and may be re‐organized for online delivery, but are not copy‐edited or typeset. Technical support issues arising from supporting information (other than missing files) should be addressed to the authors.</p><p>Supplementary</p><p>Click here for additional data file.</p>
+
+--- [assistant] ---
+<think> Okay, I need to create an abstract for this chemistry paper titled "A Switchable Gold Catalyst by Encapsulation in a Self‐Assembled Cage." Let me start by reading through the provided sections to understand the key points.
+
+The paper discusses transition-metal catalysis in confined spaces, specifically using a self-assembled cage to encapsulate gold complexes. The main idea is that encapsulation changes the catalyst's activity and selectivity. They mention a dinuclear gold complex that breaks into mononuclear units when encapsulated, which affects the reaction pathway. They demonstrated switching the catalyst on/off and altering product distribution using a competing guest. 
+
+The experiments involved hydrophenoxylation and the conversion of 4-phenyl-1-butyne. When the catalyst was encapsulated, the dual activation pathway was blocked, leading to different products. Adding a competing guest released the catalyst, restoring the original pathway. They also showed dynamic control during a reaction by adding the cage and then the guest.
+
+I should highlight the novelty: reversible switching of catalytic activity and selectivity via encapsulation in a self-assembled cage. Mention the use of a dinuclear gold complex, the effect on reaction mechanisms, and the practical examples they tested. Also note the implications for switchable catalysis and control in chemical reactions.
+
+Make sure to structure the abstract with the problem, method, key findings, and significance. Avoid technical jargon where possible, but include essential terms like NHC, self-assembled cage, dual activation. Keep it concise, around 150-200 words. Check if all main points are covered: encapsulation leading to mononuclear species, on/off switching, product distribution changes, and the use of competing guests to reverse encapsulation. Also mention the specific reactions studied as examples. Ensure that the abstract flows logically from introduction of the concept to the results and conclusion.
+</think>
+
+**Abstract**  
+This study introduces a switchable gold catalyst system based on reversible encapsulation within a self-assembled hexameric resorcin[4]arene cage. By exploiting host–guest interactions, the dinuclear gold complex [{Au(NHC)}₂(μ-OH)][X] is disassembled into mononuclear species upon encapsulation, effectively switching off dual-activation pathways critical for reactions like hydrophenoxylation. When encapsulated, the catalyst’s reactivity shifts from dual σ-/π-activation (enabling dimerization) to mononuclear pathways (favoring intramolecular cyclization). The system allows dynamic control: catalytic activity can be restored by displacing the encapsulated catalyst with a competing guest (e.g., tetraalkylammonium salts), re-enabling dual activation. This approach was demonstrated through temporal modulation of product distributions in the conversion of 4-phenyl-1-butyne, where selective addition of the cage or guest altered reaction outcomes in real time. The work establishes encapsulation in self-assembled cages as a novel strategy for on/off switching and selectivity control in gold-catalyzed transformations, offering a tunable platform for stimuli-responsive catalysis. This method expands the toolkit for manipulating reaction mechanisms via confined environments, with potential applications in precision synthesis and adaptive chemical systems.
+
+---------------------------------------- REJECTED ----------------------------------------
+
+--- [user] ---
+You will be shown the title of a chemistry paper, together with sections excerpted from the body of the paper. The paper sections may include HTML tags like `<p>` and `</p>`; please ignore these. Your task is to write an abstract for the paper. Your response should include the abstract and no other text.
+
+Title:
+A Switchable Gold Catalyst by Encapsulation in a Self‐Assembled Cage
+
+Paper sections:
+
+<p>A. C. H. Jans, A. Gómez-Suárez, S. P. Nolan, J. N. H. Reek, Chem. Eur. J.
+2016, 22, 14836.</p><p>There is a growing interest in transition‐metal catalysis in confined spaces as the approach provides an additional tool to control selectivity and activity in catalysis.1 For example, it has been demonstrated that the encapsulation of rhodium complexes in a hemispherical porphyrin assembly results in catalysts with increased activity and unprecedented branched selectivity in the hydroformylation of terminal and internal alkenes.2 In addition, the encapsulation of transition‐metal complexes in preformed cavities through weak interactions can lead to unexpected reactivity: M4L6 anionic tetrahedral capsules, for instance, can host cationic organometallic catalysts in their hydrophobic cavities,3 thereby inducing substrate selectivity.4 Moreover, reaction rates5 and product distribution6 can be greatly affected by catalyst encapsulation. Interestingly, many catalytic reactions operate through a dinuclear mechanism7 or deactivate via a dinuclear pathway;8, 9 by encapsulation of a transition metal complex, such decomposition pathways can be suppressed, leading to higher catalytic turnover numbers.10</p><p>In principle, an encapsulation event could also change the catalytic pathway of a reaction, and as such can be used as a switch for a catalytic transformation. Switchable catalysis is an interesting upcoming field of research as it provides new tools to control the reaction process with external stimuli such as light, pH, or metal coordination, a concept that is important to control reactions in nature.11 In a recent study, encapsulation of a photoredox catalyst was shown to be a feasible stimulus to steer reactivity.12 In a previous paper we reported the encapsulation of an N‐heterocyclic carbene (NHC) mononuclear gold(I) complex inside a self‐assembled hexameric resorcin[4]arene cage 1
+6 and showed that the encapsulated catalyst gives a different product distribution than the free complex.13 This supramolecular complex is formed in apolar, water‐saturated solvents (Scheme 1).14, 15 In the current contribution, we report how we change the active gold complex from dinuclear to mononuclear by reversible encapsulation and demonstrate that this can be used for both switching on/off a reaction, as well as for controlling its selectivity during the course of a reaction. Changing the reactivity or selectivity of a gold catalyst has been shown before by changing the ligands16 or Brønsted acid/base effects17 and even by guest binding by a rotaxane,18 but reversibly changing the active species of a gold‐catalyzed reaction as a result of encapsulation has, to the best of our knowledge, not been shown before.</p><p>Formation of the self‐assembled hexameric resorcin[4]arene cage.</p><p>In this study we use a dinuclear hydroxyl‐bridged gold complex [{Au(NHC)}2(μ‐OH)][X] instead of a mononuclear gold complex.19 This complex reacts through different mechanisms than mononuclear gold complexes20 and is a privileged catalyst for dual activation reactions.21 It, however, is too large to fit inside the cage 1
+6,
+22 and should be split into mononuclear complexes upon encapsulation. The NHC‐Au‐X fragment displays the traditional Lewis acidic character of mononuclear cationic gold catalysts, activating unsaturated substrates such as alkynes through π‐coordination, making them more electrophilic and susceptible towards nucleophilic attack.23 Meanwhile, the NHC‐Au‐OH species behaves as a Brønsted base and is known to σ‐activate substrates such as terminal alkynes or phenols.24 Together the two species, NHC‐Au‐X and NHC‐Au‐OH, can dually activate substrates through both π‐ and σ‐activation (Scheme 2). This dual‐activation mode was originally proposed by Toste and Houk25 and is well established and employed nowadays. In addition, this dual activation has elegantly been explored by Hashmi26 and Zhang27 for the formation of gold acetylides, which can react as a nucleophile and attack the π‐activated bond of the substrate, and as such represents a common strategy in gold‐mediated synthesis.</p><p>Dinuclear complexes [{Au(NHC)}2(μ‐OH)][X] can dually activate substrates.</p><p>We envisioned that encapsulation of the two fragments of the dinuclear gold catalyst [{Au(NHC)}2(μ‐OH)][X] in separate cages would alter its typical reactivity as they undergo transformations in a site isolated fashion. We anticipated that by complex encapsulation we could reversibly switch between the dinuclear and mononuclear catalyst and, therefore, have a tool to shift from dual gold catalysis to a mononuclear reaction mechanism. This forms the basis for an on/off switchable system, but can also alter the product distribution during a gold‐catalyzed transformation.</p><p>Indeed, when complex [{Au(IPr)}2(μ‐OH)][BF4] 2 (Scheme 3) and the capsule were mixed together, encapsulation of a mononuclear gold complex was confirmed by 1H NMR and 1H 2D DOSY NMR (see the Supporting Information). To demonstrate the principle of switching catalyst activity by selective encapsulation, the dual gold‐catalyzed hydrophenoxylation reaction was studied.21, 28 This reaction requires σ‐activation of a phenol by the NHC‐Au‐OH moiety and π‐activation of an alkyne by the cationic NHC‐Au‐X fragment (Scheme 4). Indeed, it was observed that the standard reaction between phenol (4) and diphenylacetylene (5) readily takes place when using 2 as catalyst in the absence of the cage (full conversion within 60 min). However, in the presence of the cage, the dinuclear complex 2 is broken and encapsulated as mononuclear species. As the dual reaction pathway is no longer available, no conversion to vinyl ether 6 is obtained, even after 24 h.29 We wondered if the reaction could be switched on again by adding a competing guest that would bind more strongly to the cage than the gold catalyst. For this purpose we selected tetraalkylammonium salts, as they are known to bind very strongly inside the hexamer.15 Gratifyingly, upon addition of Et4N+BF4
+− (7) to expel the gold catalyst from the cage, the catalytic activity was restored and product 6 was obtained in 89 % yield after one hour.</p><p>Encapsulation of [{Au(IPr)}2(μ‐OH)][BF4] in capsule 1
+6.</p><p>Switching the gold‐catalyzed hydrophenoxylation off and on. Reaction conditions: solvent=toluene, T=80 °C, [4]=550 mm, [5]=500 mm, [2]=2.5 mm (0.025 mol %), [1]=50 mm.</p><p>Next we explored the cage effect on changing the product distribution of a reaction. For this purpose we explored the conversion of 4‐phenyl‐1‐butyne (8). Depending on the available reaction pathways, the transformation can yield up to four products (Table 1). In the absence of the cage, 2 can activate two substrates in a σ‐ and π‐activation mode and, therefore, dimerization of 8 takes place through a dual‐activation mechanism, yielding the branched and linear products, 11 and 12 respectively (Table 1, entry 1; Scheme 5).26b, 30 As anticipated, this dual‐activation reaction pathway is completely blocked upon encapsulation of the catalyst and the production of 11 and 12 stopped. Instead, when in the cage, the catalyst produced the intramolecularly cyclized product 10, which is known to form via a mononuclear pathway inside the cage (Table 1, entry 2).13 In the presence of the cage and the competing guest 7, product 10 was not formed and dimerization products 11 and 12 were obtained (Table 1, entry 3), indicating that under these conditions the catalysis proceeds via a dual‐gold mechanism and thus takes place outside the cage.</p><p>Gold catalyzed conversion of 4‐phenyl‐1‐butyne.[a]</p><p>[a] Reaction conditions: [8]=66 mm, [2]=1.7 mm (2.5 mol %), [H2O]=44 mm, [1]=33 mm, [7]=33 mm. Yields are averaged from two measurements.</p><p>Dimerization of terminal alkynes through σ‐ and π‐activation.</p><p>Due to the presence of water molecules to facilitate the self‐assembly of the capsule, the well‐documented hydration product 9 was formed in all cases through π‐activation of the triple bond,31, 32 but only in minor amounts. We observed an increased rate of formation of this product in the presence of both cage and competing guest 7, which is interesting but difficult to explain. The addition of only the competing guest 7, in the absence of cage but with the same amount of water present, does not lead to increased formation of product 9 (Table 1, entry 4).</p><p>Next we investigated whether it would be possible to switch the product selectivity during the course of the reaction (Figure 1). The reaction was initiated using only the dinuclear gold catalyst 2. Under these reaction conditions, the branched dimer 11 was the main product formed, indicating that the dual activation pathway is dominating. After 3 h, an excess of cage 16 was added, thereby removing the dinuclear gold complex from the reaction mixture by encapsulation of the cationic mononuclear gold fragment. The formation of 11 immediately stopped, while production of compound 10 started. After another 3 h, compound 7 was added as a competing guest for 16, releasing the catalyst from the cage. As compound 10 can only be formed while the cationic gold species is encapsulated in 16, its production stopped, whereas formation of 11 started again. The formation of product 12 followed the same trend as 11, but it was less clear as this compound was formed in much smaller amounts. As ketone 9 can be formed both inside and outside the cage (Table 1), the formation of this product could not be switched; the faster formation of this product after addition of both cage and Et4N+BF4
+− (7) corresponds with the observations in Table 1.</p><p>Formation of products from the reaction of substrate 8 in the presence of stepwise addition of cage and competing guest. Reaction conditions: [8]=66 mm, [2]=1.7 mm (2.5 mol %), [H2O]=44 mm, [1]=33 mm, [7]=33 mm. Yields are averaged from two measurements.</p><p>In conclusion, we have demonstrated that it is possible to control the pathway by which gold complexes convert substrate molecules by complex encapsulation events. In the presence of a self‐assembled hexameric resorcin[4]arene cage the dinuclear complex [{Au(NHC)}2(μ‐OH)][X] breaks into mononuclear units that are encapsulated as the dinuclear gold complex 2 is too large to fit inside the cage. By doing so, the dual activation reactivity typical for complex 2 is switched into (re)activity that is typical for mononuclear complexes. By using this strategy on a reaction that can only proceed through a dual‐activation pathway, we have demonstrated on/off switching of a gold‐catalyzed reaction. Moreover, this approach also provides tools to change the product distribution during the course of a reaction, which is demonstrated in the activation of 4‐phenyl‐1‐butyne. In summary, this strategy of switching the active species of a gold‐catalyzed reaction by means of host‐guest interactions provides a new approach to controlling catalytic transformations, even during the course of the reaction.</p>
+
+Experimental Section
+<p>Hydrophenoxylation experiments: The catalyst 2 (0.025 mol %) was added to a solution of 4 (550 mm) and 5 (500 mm) and in selected experiments cage 1
+6 (50 mm) and/or competing guest 7 (50 mm) in [D8]toluene. The mixture was heated to 80 °C and yields were monitored using GC and 1H NMR of the crude mixture.</p><p>Catalytic experiments with substrate 8: The catalyst 2 (2.5 mol %), H2O (44 mm), substrate 8 (66 mm), and, in selected experiments, cage 1
+6 (33 mm) and/or competing guest 7 (33 mm) were mixed in [D6]benzene and heated to 70 °C for 48 h. Yields were monitored using GC and 1H NMR of the crude mixture and were determined as the average of two experiments.</p>
+
+
+<p>As a service to our authors and readers, this journal provides supporting information supplied by the authors. Such materials are peer reviewed and may be re‐organized for online delivery, but are not copy‐edited or typeset. Technical support issues arising from supporting information (other than missing files) should be addressed to the authors.</p><p>Supplementary</p><p>Click here for additional data file.</p>
+
+--- [assistant] ---
+<think> Okay, I need to write an abstract for the given chemistry paper. Let me start by reading through the paper sections to understand the main points. The title is about a switchable gold catalyst encapsulated in a self-assembled cage.
+
+First, the paper discusses how encapsulation can alter the reactivity of transition metal catalysts. They use a dinuclear complex that breaks into mononuclear units when encapsulated, switching from dual activation to mononuclear activity. This allows for on/off switching of the catalytic reaction. Also, they show how the product distribution changes depending on the presence of the guest.
+
+I should mention the key findings: switching the catalyst's activity and controlling product distribution. The experimental setup includes using a self-assembled cage and guest molecules. The abstract needs to highlight the dual activation mechanism, the switchable nature, and the impact on product formation.
+
+I need to make sure to include all the main points without getting too detailed. Check the sections to confirm the details. Avoid HTML tags, just write the abstract. Let me put that together.
+</think>
+
+A switchable gold catalyst by encapsulation in a self-assembled cage enables dual activation of substrates through a reversible mechanism, allowing on/off control of catalytic reactions and product distribution. The dinuclear complex [{Au(NHC)}2(μ−OH)][X] breaks into mononuclear units upon encapsulation, switching from dual activation to mononuclear activity, and this strategy can be applied to reactions that rely on a dual-activation pathway, demonstrating on/off switching and product control. This approach provides a novel method for manipulating catalytic transformations, even during the reaction process.
+
+================================================================================
+ EXAMPLE 4
+================================================================================
+
+--- [user] ---
+You will be shown biomedical passages and your task is to the answer the provided question. Provide a concise and accurate response and do not include any additional text in the response other than the answer.
+
+Question: Which cells mature in the human thymus?
+
+Context: Late stages of T cell maturation in the thymus involve NF-κB and tonic type I interferon signaling.
+NF-κB and tonic interferon signals are involved in the final maturation of thymocytes into naive T cells.
+The inhibition of dopamine synthesis in fetuses changes the pattern of T-lymphocyte maturation in the thymus of adult rats.
+Pharmacological inhibition of catecholamine synthesis in the crucial period of thymus development leads to long-term changes in the T-system immunity due to increased production of natural regulatory T-lymphocytes.
+Role of the MHC restriction during maturation of antigen-specific human T cells in the thymus.
+This first ex vivo analysis of human antigen-specific thymocytes at different stages of human T-cell development should open new perspectives in the understanding of the human thymic selection process.
+CD44 promotes progenitor homing into the thymus and T cell maturation.
+Delayed functional maturation of natural regulatory T cells in the medulla of postnatal thymus: role of TSLP.
+Effects of nicotine exposure on T cell development in fetal thymus organ culture: arrest of T cell maturation.
+Furthermore, d-tubocurarine alone blocked the development of both immature and mature murine thymocytes, suggesting the presence of an endogenous ligand that may engage nicotinic acetylcholine receptors on developing thymocytes and influence the course of normal thymic ontogeny.
+However, both DP T cell subsets have an intrathymic origin since they appear in the recent thymic emigrant population after injection of FITC intrathymically.
+T-cell maturation in the human thymus and tonsil
+Expression of the HPV16E7 oncoprotein by thymic epithelium is accompanied by disrupted T cell maturation and a failure of the thymus to involute with age.
+Thymocytes with reduced levels of expression of CD4 and/or CD8 were more abundant in transgenic (tg) mice and became increasingly more so with age.
+
+--- [assistant] ---
+<think> Okay, let's tackle this question. The user is asking which cells mature in the human thymus. The context provided has several passages about T cell maturation.
+
+First, I remember that the thymus is the primary site for T cell development. The context mentions "T cell maturation in the thymus" multiple times. For example, one sentence says, "Late stages of T cell maturation in the thymus involve NF-κB..." Another part talks about thymocytes becoming naive T cells. Also, there's mention of CD44 promoting T cell maturation and issues with nicotine affecting T cell development in the thymus. 
+
+Other parts reference regulatory T cells and how their maturation is delayed in the thymus. The MHC restriction during antigen-specific T cell maturation is also noted. All these points point to T cells, specifically thymocytes, maturing in the thymus. The answer should be T cells or thymocytes. Since the question is about cells that mature there, T cells are the main answer. The context doesn't mention other cell types like B cells maturing in the thymus, which is actually incorrect because B cells mature in the bone marrow. So the correct answer here is T cells.
+</think>
+
+T cells
+
+---------------------------------------- REJECTED ----------------------------------------
+
+--- [user] ---
+You will be shown biomedical passages and your task is to the answer the provided question. Provide a concise and accurate response and do not include any additional text in the response other than the answer.
+
+Question: Which cells mature in the human thymus?
+
+Context: Late stages of T cell maturation in the thymus involve NF-κB and tonic type I interferon signaling.
+NF-κB and tonic interferon signals are involved in the final maturation of thymocytes into naive T cells.
+The inhibition of dopamine synthesis in fetuses changes the pattern of T-lymphocyte maturation in the thymus of adult rats.
+Pharmacological inhibition of catecholamine synthesis in the crucial period of thymus development leads to long-term changes in the T-system immunity due to increased production of natural regulatory T-lymphocytes.
+Role of the MHC restriction during maturation of antigen-specific human T cells in the thymus.
+This first ex vivo analysis of human antigen-specific thymocytes at different stages of human T-cell development should open new perspectives in the understanding of the human thymic selection process.
+CD44 promotes progenitor homing into the thymus and T cell maturation.
+Delayed functional maturation of natural regulatory T cells in the medulla of postnatal thymus: role of TSLP.
+Effects of nicotine exposure on T cell development in fetal thymus organ culture: arrest of T cell maturation.
+Furthermore, d-tubocurarine alone blocked the development of both immature and mature murine thymocytes, suggesting the presence of an endogenous ligand that may engage nicotinic acetylcholine receptors on developing thymocytes and influence the course of normal thymic ontogeny.
+However, both DP T cell subsets have an intrathymic origin since they appear in the recent thymic emigrant population after injection of FITC intrathymically.
+T-cell maturation in the human thymus and tonsil
+Expression of the HPV16E7 oncoprotein by thymic epithelium is accompanied by disrupted T cell maturation and a failure of the thymus to involute with age.
+Thymocytes with reduced levels of expression of CD4 and/or CD8 were more abundant in transgenic (tg) mice and became increasingly more so with age.
+
+--- [assistant] ---
+<think> Okay, let's try to figure out the answer to this question. The question is asking which cells mature in the human thymus. The context provided has a lot of information about T cell maturation, interferons, dopamine, catecholamines, and other factors involved in thymocyte development.
+
+First, I need to parse all the given information. Let me read through it again. There's a mention that "Late stages of T cell maturation in the thymus involve NF-κB and tonic type I interferon signaling." So that's about the process. Then it says that "CD44 promotes progenitor homing into the thymus and T cell maturation." So CD44 is involved in maturation. Also, "the inhibition of dopamine synthesis in fetuses changes the pattern of T-lymphocyte maturation in the thymus of adult rats." So dopamine inhibition affects maturation. Another point is about the role of MHC restriction during maturation, which is important for antigen-specific T cells. 
+
+Then there's a part about the role of TSLP in the medulla of postnatal thymus. The question is about cells that mature in the thymus. So the answer might be thymocytes. But I need to check if there's a specific cell mentioned. Let me look again. 
+
+The first paragraph talks about late stages involving NF-κB and interferons. Then mentions CD44 promoting maturation. Another part says that the inhibition of dopamine affects maturation. There's also the part about the role of MHC restriction. Then there's information about the HPV16E7 oncoprotein and thymic epithelium. Also, the mention of the DP T cell subsets having an intrathymic origin. 
+
+Wait, the question is about cells that mature in the human thymus. So the answer would be thymocytes. But let me check if there's any specific cells mentioned. The context says "CD44 promotes progenitor homing into the thymus and T cell maturation." So CD44 is involved in maturation. Also, "the inhibition of dopamine synthesis... leads to long-term changes in T-system immunity..." but that's about regulatory T cells. 
+
+Another part mentions "the role of the MHC restriction during maturation of antigen-specific human T cells in the thymus." So MHC is important. 
+
+But the question is asking which cells mature in the human thymus. So the answer is thymocytes. But maybe I need to confirm if there's a specific cell name. Let me check again. The first mention is about late stages of maturation involving NF-κB and interferons, which are T cells. Then CD44 is involved in maturation. So the answer should be thymocytes. 
+
+I think that's it. The thymocytes mature in the human thymus. The answer is thymocytes.
+</think>
+
+Thymocytes.
+
+================================================================================
+ EXAMPLE 5
+================================================================================
+
+--- [user] ---
+Given an abstract from a research paper, your task is to identify and label relationships between chemical compounds and genes mentioned in the abstract.
+
+The relationship type must be one of ['DOWNREGULATOR', 'SUBSTRATE', 'INDIRECT-REGULATOR', 'PART-OF', 'MODULATOR-ACTIVATOR', 'REGULATOR', 'INHIBITOR', 'COFACTOR', 'UPREGULATOR', 'ACTIVATOR', 'ANTAGONIST', 'NOT', 'INDIRECT-DOWNREGULATOR', 'SUBSTRATE_PRODUCT-OF', 'INDIRECT-UPREGULATOR', 'AGONIST', 'PRODUCT-OF', 'MODULATOR', 'DIRECT-REGULATOR', 'UNDEFINED', 'AGONIST-INHIBITOR', 'AGONIST-ACTIVATOR', 'MODULATOR-INHIBITOR'].
+
+Please format your output as a JSON array. Each entry in the array should express a single relation, formatted as ["<Entity_A>", "<RELATION_A_B>", "<Entity_B>"]. If no relations can be found, please output an empty JSON array [].
+
+Abstract:
+
+The structure and properties of septin 3: a possible missing link in septin filament formation. The human genome codes for 13 members of a family of filament-forming GTP-binding proteins known as septins. These have been divided into four different subgroups on the basis of sequence similarity. The differences between the subgroups are believed to control their correct assembly into heterofilaments which have specific roles in membrane remodelling events. Many different combinations of the 13 proteins are theoretically possible and it is therefore important to understand the structural basis of specific filament assembly. However, three-dimensional structures are currently available for only three of the four subgroups. In the present study we describe the crystal structure of a construct of human SEPT3 which belongs to the outstanding subgroup. This construct (SEPT3-GC), which includes the GTP-binding and C-terminal domains, purifies as a nucleotide-free monomer, allowing for its characterization in terms of GTP-binding and hydrolysis. In the crystal structure, SEPT3-GC forms foreshortened filaments which employ the same NC and G interfaces observed in the heterotrimeric complex of human septins 2, 6 and 7, reinforcing the notion of 'promiscuous' interactions described previously. In the present study we describe these two interfaces and relate the structure to its tendency to form monomers and its efficiency in the hydrolysis of GTP. The relevance of these results is emphasized by the fact that septins from the SEPT3 subgroup may be important determinants of polymerization by occupying the terminal position in octameric units which themselves form the building blocks of at least some heterofilaments.
+
+--- [assistant] ---
+<think> Okay, let's tackle this problem. The user wants me to identify and label relationships between chemical compounds and genes in the given abstract. The possible relationship types are a list of about 23 options. First, I need to read through the abstract carefully to find any mentions of chemical compounds and genes, then see how they're related.
+
+The abstract is about septin 3 (SEPT3) and its structure. It mentions that SEPT3 is part of a subgroup and talks about its role in filament formation. There's a construct called SEPT3-GC, which includes GTP-binding and C-terminal domains. They mention that SEPT3-GC purifies as a nucleotide-free monomer and discuss GTP-binding and hydrolysis. 
+
+Looking for entities: SEPT3 is a gene, and SEPT3-GC is a construct of that gene. The abstract also mentions GTP, which is a chemical compound. Now, relationships. The structure of SEPT3-GC allows characterization in terms of GTP-binding and hydrolysis. So, SEPT3-GC (which is part of the SEPT3 gene product) has a relationship with GTP. The possible relationships here could be something like 'SUBSTRATE' because GTP is a substrate for the hydrolysis reaction. Alternatively, maybe 'COFACTOR' if GTP is required for the enzyme's activity. Wait, the abstract says "characterization in terms of GTP-binding and hydrolysis," which suggests that GTP is a substrate for the hydrolysis process. So SEPT3-GC (the protein) has GTP as a substrate. So the relationship would be SEPT3-GC (a protein product of SEPT3 gene) as the entity A, and GTP as entity B, with the relation 'SUBSTRATE'. 
+
+Another point: the abstract mentions that SEPT3 is part of a subgroup and may be important in polymerization. However, there's no direct mention of other genes or compounds interacting with SEPT3 in a regulatory way. The other entities mentioned are other septins (like septins 2,6,7), but those are part of heterotrimeric complexes. The abstract doesn't state any regulatory relationships between SEPT3 and other compounds or genes. 
+
+So the only relationship I can find is between SEPT3-GC (as a product of the SEPT3 gene) and GTP. But wait, the problem specifies that the relationships are between chemical compounds and genes. So if SEPT3 is a gene, and GTP is a compound, then the relationship is between the gene and the compound. However, the abstract says that the SEPT3-GC construct (a part of the SEPT3 gene product) is involved in GTP-binding and hydrolysis. Therefore, the gene SEPT3 encodes a protein that interacts with GTP. So the relationship would be SEPT3 (gene) and GTP (compound) with a relation type. The possible relation here is 'SUBSTRATE' if the gene product (SEPT3 protein) uses GTP as a substrate. Alternatively, 'COFACTOR' if GTP is a cofactor. But since the protein is a GTP-binding protein and hydrolyzes GTP, the correct relation would be 'SUBSTRATE', because GTP is the substrate for the hydrolysis reaction. 
+
+So the entry would be ["SEPT3", "SUBSTRATE", "GTP"]. 
+
+I need to check if there are any other relationships. The abstract also mentions that SEPT3-GC forms filaments using interfaces observed in other septin complexes. But that's structural and doesn't involve a chemical compound and a gene. The other septins (like septin 2,6,7) are part of heterotrimers, but again, the abstract doesn't state a regulatory relationship. 
+
+Therefore, the only relationship is SEPT3 and GTP as substrate. Let me make sure there's no other mention. The abstract also says that SEPT3-GC is nucleotide-free monomer, which implies that under normal conditions, it binds GTP. So the gene product (SEPT3) has GTP as a substrate. So the answer should be that one relationship.
+</think>
+
+[["SEPT3", "SUBSTRATE", "GTP"]]
+
+---------------------------------------- REJECTED ----------------------------------------
+
+--- [user] ---
+Given an abstract from a research paper, your task is to identify and label relationships between chemical compounds and genes mentioned in the abstract.
+
+The relationship type must be one of ['DOWNREGULATOR', 'SUBSTRATE', 'INDIRECT-REGULATOR', 'PART-OF', 'MODULATOR-ACTIVATOR', 'REGULATOR', 'INHIBITOR', 'COFACTOR', 'UPREGULATOR', 'ACTIVATOR', 'ANTAGONIST', 'NOT', 'INDIRECT-DOWNREGULATOR', 'SUBSTRATE_PRODUCT-OF', 'INDIRECT-UPREGULATOR', 'AGONIST', 'PRODUCT-OF', 'MODULATOR', 'DIRECT-REGULATOR', 'UNDEFINED', 'AGONIST-INHIBITOR', 'AGONIST-ACTIVATOR', 'MODULATOR-INHIBITOR'].
+
+Please format your output as a JSON array. Each entry in the array should express a single relation, formatted as ["<Entity_A>", "<RELATION_A_B>", "<Entity_B>"]. If no relations can be found, please output an empty JSON array [].
+
+Abstract:
+
+The structure and properties of septin 3: a possible missing link in septin filament formation. The human genome codes for 13 members of a family of filament-forming GTP-binding proteins known as septins. These have been divided into four different subgroups on the basis of sequence similarity. The differences between the subgroups are believed to control their correct assembly into heterofilaments which have specific roles in membrane remodelling events. Many different combinations of the 13 proteins are theoretically possible and it is therefore important to understand the structural basis of specific filament assembly. However, three-dimensional structures are currently available for only three of the four subgroups. In the present study we describe the crystal structure of a construct of human SEPT3 which belongs to the outstanding subgroup. This construct (SEPT3-GC), which includes the GTP-binding and C-terminal domains, purifies as a nucleotide-free monomer, allowing for its characterization in terms of GTP-binding and hydrolysis. In the crystal structure, SEPT3-GC forms foreshortened filaments which employ the same NC and G interfaces observed in the heterotrimeric complex of human septins 2, 6 and 7, reinforcing the notion of 'promiscuous' interactions described previously. In the present study we describe these two interfaces and relate the structure to its tendency to form monomers and its efficiency in the hydrolysis of GTP. The relevance of these results is emphasized by the fact that septins from the SEPT3 subgroup may be important determinants of polymerization by occupying the terminal position in octameric units which themselves form the building blocks of at least some heterofilaments.
+
+--- [assistant] ---
+<think> Okay, let's try to figure out the relationships between chemical compounds and genes from the abstract. The user wants me to label each relation as one of the provided options.
+
+First, I need to read through the abstract carefully. The abstract talks about septin 3 and its role in septin filament formation. It mentions that the human genome codes for 13 septin family members, divided into four subgroups. The structure of a construct (SEPT3-GC) is described, which forms specific filaments. The relationships here are about how the proteins assemble into heterofilaments, which are important for membrane remodelling.
+
+Looking at the relations provided, I need to see which ones apply. The key points are that the SEPT3-GC construct is a nucleotide-free monomer, forming filaments that share interface structures with septins 2, 6, and 7. Also, the study relates the structure to monomer formation and hydrolysis efficiency. 
+
+The first part mentions the structure of SEPT3-GC, which is a protein. The relation here could be "PRODUCT-OF" because the structure is a product of the protein. Then, the fact that it forms monomers and hydrolyzes GTP might relate to "REGULATOR" or "UPREGULATOR". Also, the interface structures are similar to those in heterotrimer complexes, which might be a "MODULATOR-ACTIVATOR" or "INDIRECT-REGULATOR". 
+
+Wait, the abstract says the structure reinforces the notion of promiscuous interactions, which is similar to what was described before. So maybe "INDIRECT-DOWNREGULATOR"? Or perhaps "MODULATOR-ACTIVATOR"? Also, the fact that the SEPT3 subgroup's proteins may be important determinants of polymerization suggests a "REGULATOR" or "UPREGULATOR" relationship. 
+
+I need to check each relation. The answer should be a JSON array with each relation. Let me make sure I'm not missing any. The user mentioned that the relations must be one of the given options. So, for example, the product of the construct (SEPT3-GC) would be "PRODUCT-OF". Also, the interaction with the interfaces might be "INDIRECT-REGULATOR". 
+
+Putting it all together, the relations would be:
+
+["SEPT3-GC", "PRODUCT-OF", "INDIRECT-REGULATOR", "MODULATOR-ACTIVATOR", ...]
+
+Wait, the abstract says that the structure relates to the tendency to form monomers and hydrolysis of GTP. So the hydrolysis might be a "REGULATOR" or "UPREGULATOR". Also, the interface structures are similar to those in heterotrimer complexes, which are "INDIRECT-REGULATOR". 
+
+I think I need to list each relation. Let me check again. The abstract mentions that SEPT3-GC forms foreshortened filaments which employ the same NC and G interfaces as in heterotrimer complexes. So the interface structures are "INDIRECT-REGULATOR". Also, the hydrolysis of GTP is related to the protein's ability to form monomers, which could be "REGULATOR". 
+
+So the final relations would be:
+
+["SEPT3-GC", "PRODUCT-OF", "INDIRECT-REGULATOR", "REGULATOR", "MODULATOR-ACTIVATOR", ...]
+
+But I need to make sure each entry is correct. The user's example response includes entries for each relation. So each entry is a single relation. Therefore, the answer should be a JSON array with each relation as a separate entry.
+</think>
+
+```json
+[
+  ["SEPT3-GC", "PRODUCT-OF", "INDIRECT-REGULATOR"],
+  ["SEPT3-GC", "MODULATOR-ACTIVATOR", "REGULATOR"]
+]
+```
+
