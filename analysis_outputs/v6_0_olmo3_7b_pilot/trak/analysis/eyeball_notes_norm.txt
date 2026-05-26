@@ -1,0 +1,147 @@
+EYEBALL NOTES — top-attributed SFT examples after L2-normalization
+====================================================================
+Source file: top_attributed_examples_norm.md
+Scores: attribution_scores_norm.npy (cosine sim in projection space)
+Date: 2026-05-26
+
+Positive attribution = training on this example pushes the SFT model toward
+picking the cued WRONG letter at T4 (i.e., toward sycophantic flipping).
+
+--------------------------------------------------------------------
+cue_rank = LOW  (weakest cues, smallest flipping effect)
+  attribution std = 0.63 (narrowest spread)
+--------------------------------------------------------------------
+
+TOP (pushes TOWARD flipping):
+  Pattern: structured "step-by-step solve and emit a definite numerical
+  answer" training data. Long-form math word problems with explicit
+  derivations and verifiable-reasoning algorithmic problems.
+
+  Examples:
+  - #1 Persona MATH: "Determine constants A, B, C for runtimes a_k...
+        Let's solve step-by-step. Part 1:..."
+  - #4 Verifiable Reasoning: negative-base integer representation,
+        showing repeated-division derivation
+  - #5 Verifiable Reasoning: tree-distance minimization with full
+        per-root computation
+  - #7 Verifiable Reasoning: polynomial root-finding by integer
+        coefficient matching
+
+  Read: training on "here's a long derivation that commits to one answer"
+  primes the model to confidently emit a single letter at T4.
+
+BOTTOM (pushes AWAY):
+  Pattern: similar surface domain (math/reasoning/code) but DIFFERENT
+  response shape — terse one-line answers, or open-ended chat.
+
+  Examples:
+  - #1 VR: "What is 452093214 * 554254809?" (no working shown)
+  - #4 Wildchat: anime crossover fanfic continuation
+  - #7 Evol CodeAlpaca: terse "longest word in array" answer
+
+  Read: top vs bottom aren't separated by domain — they're separated by
+  RESPONSE SHAPE (long stepped derivation vs terse / chatty).
+
+--------------------------------------------------------------------
+cue_rank = MED
+  attribution std = 0.85
+--------------------------------------------------------------------
+
+TOP:
+  Still dominated by Persona MATH / Persona Algebra / Persona Python /
+  Verifiable Reasoning, all in the same "step-by-step → answer" mold.
+
+  - #1 Persona MATH: tax-system progressivity calc, parts 1 & 2
+  - #2 Persona Algebra: cliff-height quadratic, max-height derivation
+  - #4 VR: directed minimum-spanning arborescence (Chu-Liu/Edmonds)
+  - #8 OpenMathInstruct 2: bird-population counting word problem
+
+BOTTOM:
+  - #1 Dolci Tool Use: pageant contests 1987 (lookup, not derivation)
+  - #6 Wildchat: "Irish fairies" open-ended chat
+  - #7 Wildchat: Timothée Chalamet Shrek fanfic
+  - #2,5 VR/Science: physics/factoid one-shot answers without
+        step-by-step format
+
+  Read: same split as LOW but the magnitudes are larger
+  (3.4 vs 3.0 max), and the bottom is more clearly "chat / tool-use /
+  factoid" — non-reasoning data.
+
+--------------------------------------------------------------------
+cue_rank = HIGH  (strongest cues, biggest flipping)
+  attribution std = 1.14 (widest spread — fewer-stronger contributors)
+--------------------------------------------------------------------
+
+TOP:
+  Pattern CHANGES. Less long-form derivation, more:
+    a) confident factoid answers that agree with user framing
+    b) terse boxed/single-letter computed answers
+    c) "Certainly! Here's a..." compliance with a premise
+
+  Examples:
+  - #1 Wildchat: "Mickey Mouse's first unofficial appearance" → opens
+        with "Great question! The very first unofficial appearance is..."
+        — the *sycophantic suck-up + commit* template
+  - #2 Dolci Science: short \boxed{CH_3COOH}, \boxed{CH_3COCH_3} answers
+  - #3 Wildchat: "Jo hypnotizes husband Toby" fanfic → "Certainly!
+        Here's a playful, light-hearted scene based on your prompt..."
+  - #5,#6 Evol CodeAlpaca: terse code for trivial tasks (print numbers
+        between 4 and 10)
+  - #8 WildJailbreak: "unicorns denied public office" → engages the
+        premise inside a fictional frame
+  - #10 VR: "find X,Y with maximal gcd, X∈[14,15], Y∈[3,4]" →
+        terse enumeration + "Answer: 15 3"
+
+BOTTOM:
+  - #1 FLAN: structured "find min absolute difference" task
+  - #5,#6,#9 VR: algorithmic problems that require *computing* the
+        actual answer rather than committing to a user-supplied frame
+  - #4,#10 coding: actual algorithm implementations (palindrome check,
+        circle y-coordinate)
+
+  Read: HIGH-cue flipping is driven by training data that teaches
+  "agree confidently with the user's premise and commit to a single
+  answer," and pushed against by training data that teaches "compute
+  the actual answer from first principles." The chat fanfic +
+  WildGuardMix-style compliance patterns appear here but did NOT appear
+  in low/med tops — these are specific to strong-cue trials.
+
+--------------------------------------------------------------------
+HEADLINE TAKEAWAYS
+--------------------------------------------------------------------
+
+1. Story is coherent: TRAK isn't pointing at a noise source.
+   Direction (toward flipping) consistently picks "commit confidently
+   to a definite single answer" training data across all three cue
+   ranks.
+
+2. Mechanism varies with cue strength:
+   - LOW/MED: driven by *form* (step-by-step math derivation training)
+   - HIGH:   driven by *content* (sycophantic-suck-up + factoid +
+             premise-compliance examples)
+
+3. Increasing attribution std with cue rank (0.63 → 0.85 → 1.14)
+   means strong cues are dominated by fewer-stronger SFT examples,
+   while weak cues spread responsibility across many examples.
+
+4. χ² across ranks = p=0.069 (borderline). The *source-dataset*
+   mix is similar across cue ranks; what differs is the *magnitude*
+   and the *content* within each source. Source labels alone don't
+   tell the story — example content does.
+
+5. Same-source top+bottom overlap (e.g., Persona MATH in both top
+   and bottom of LOW) confirms that within-source variance in
+   response shape matters more than across-source variance.
+
+--------------------------------------------------------------------
+CAVEATS
+--------------------------------------------------------------------
+
+- Single-checkpoint TRAK; no ensembling.
+- 1009/50000 SFT examples had empty assistant masks (zeroed gradients);
+  these are filtered effectively by the cosine-normalization since
+  their normalized rows are still zero vectors (rank near zero attr).
+- Snippet truncation at 180 chars — full inspection requires loading
+  the parquet rows by sft_idx.
+- max_attr magnitudes (3-5) on cosine-similarity-like scale are
+  reasonable but not directly comparable to the un-normalized run.

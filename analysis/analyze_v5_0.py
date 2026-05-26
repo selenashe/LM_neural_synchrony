@@ -114,6 +114,10 @@ CUE_LABELS = {
     10: "Expert\ndemand",
 }
 
+# Strength axis used by cue-strength plots. v5.0/v5.1 sweep 1-10; v6.0 patches
+# this to 1-19 (the original 10 cues + 9 new pressure types stacked on top).
+STRENGTHS = list(range(1, 11))
+
 FRAMING_COLORS = {"quote": "#9467bd", "report": "#8c564b"}
 TURNS_COLORS = {"single": "#17becf", "multi": "#e377c2"}
 STAGE_COLORS = plt.cm.tab10(np.linspace(0, 0.4, 4))
@@ -262,7 +266,7 @@ def plot_headline_22(df, out_dir, checkpoints, stage_labels, title=""):
             vals.append(acc)
             errs.append(_se(acc, n))
             labels.append(COND_SHORT[cond])
-            framing = cond.split("_")[4]
+            framing = cond.split("_")[-1]
             colors.append(FRAMING_COLORS[framing])
 
         xs = [0, 1, 3, 4]
@@ -302,7 +306,7 @@ def plot_flip_rate_by_cue_strength(df, out_dir, checkpoints, stage_labels, title
     For multi-turn: flip = T2 correct → T4 incorrect.
     For single-turn: flip = T4 incorrect (since no T2 baseline, uses overall error rate)."""
     n_ck = len(checkpoints)
-    strengths = list(range(1, 11))
+    strengths = list(STRENGTHS)
 
     # Multi-turn flip rate
     fig, axes = plt.subplots(1, 2, figsize=(14, 5.5))
@@ -377,7 +381,7 @@ def plot_flip_rate_by_cue_strength(df, out_dir, checkpoints, stage_labels, title
 def plot_flip_rate_heatmap(df, out_dir, checkpoints, stage_labels, title=""):
     """Heatmap: rows = cue strength, cols = condition, one subplot per checkpoint."""
     multi = df[df["turns"] == "multi"]
-    strengths = list(range(1, 11))
+    strengths = list(STRENGTHS)
     n_ck = len(checkpoints)
     fig, axes = plt.subplots(1, n_ck, figsize=(4.2 * n_ck, 6))
     if n_ck == 1:
@@ -423,7 +427,7 @@ def plot_flip_rate_heatmap(df, out_dir, checkpoints, stage_labels, title=""):
 def plot_flip_to_suggested(df, out_dir, checkpoints, stage_labels, title=""):
     """Among trials that flip, what fraction flip to the suggested wrong answer?"""
     multi = df[df["turns"] == "multi"]
-    strengths = list(range(1, 11))
+    strengths = list(STRENGTHS)
     n_ck = len(checkpoints)
     fig, ax = plt.subplots(figsize=(10, 5))
 
@@ -569,9 +573,9 @@ def plot_multi_metrics(df, out_dir, checkpoints, stage_labels, title=""):
 # ═════════════════════════════════════════════════════════════════════════════
 
 def plot_training_dynamics(df, out_dir, checkpoints, stage_labels, title=""):
-    strengths = list(range(1, 11))
+    strengths = list(STRENGTHS)
     ckpt_x = {c: i for i, c in enumerate(checkpoints)}
-    cmap = plt.cm.YlOrRd(np.linspace(0.15, 0.95, 10))
+    cmap = plt.cm.YlOrRd(np.linspace(0.15, 0.95, len(strengths)))
 
     fig, axes = plt.subplots(1, 2, figsize=(14, 5.5))
 
@@ -678,7 +682,7 @@ def plot_per_question(df, out_dir, checkpoints, stage_labels, title=""):
 # ═════════════════════════════════════════════════════════════════════════════
 
 def plot_logit_probs(df, out_dir, checkpoints, stage_labels, title=""):
-    strengths = list(range(1, 11))
+    strengths = list(STRENGTHS)
     n_ck = len(checkpoints)
     fig, axes = plt.subplots(1, n_ck, figsize=(4.5 * n_ck, 5), sharey=True)
     if n_ck == 1:
@@ -829,7 +833,7 @@ def plot_interactions(df, out_dir, checkpoints, stage_labels, title=""):
 
 def plot_per_condition_breakdowns(df, out_dir, checkpoints, stage_labels, title=""):
     base = out_dir / "by_condition"
-    strengths = list(range(1, 11))
+    strengths = list(STRENGTHS)
 
     for cond in CONDITIONS:
         cdf = df[df["condition"] == cond]
@@ -963,7 +967,7 @@ def plot_cascade_by_cue_strength(df, out_dir, checkpoints, stage_labels, title="
         return
     multi = df[df["turns"] == "multi"]
     turn_ns = [2, 4, 6, 8, 10, 12, 14]
-    strengths = list(range(1, 11))
+    strengths = list(STRENGTHS)
     cmap = plt.cm.YlOrRd(np.linspace(0.15, 0.95, len(strengths)))
     n_ck = len(checkpoints)
 

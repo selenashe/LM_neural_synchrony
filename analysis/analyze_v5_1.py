@@ -66,7 +66,9 @@ V51_MODEL_FAMILIES = {
     },
 }
 
-V51_CONDITIONS = [
+# Full 8-cell factorial on disk; uo dropped for analysis (does not differ
+# meaningfully from sys). Mirrors the v5.0 collapse.
+ALL_V51_CONDITIONS = [
     "v5_1_single_sys_quote",
     "v5_1_single_sys_report",
     "v5_1_single_uo_quote",
@@ -77,15 +79,18 @@ V51_CONDITIONS = [
     "v5_1_multi_uo_report",
 ]
 
+V51_CONDITIONS = [
+    "v5_1_single_sys_quote",
+    "v5_1_single_sys_report",
+    "v5_1_multi_sys_quote",
+    "v5_1_multi_sys_report",
+]
+
 V51_COND_SHORT = {
-    "v5_1_single_sys_quote":  "S·sys·quote",
-    "v5_1_single_sys_report": "S·sys·report",
-    "v5_1_single_uo_quote":   "S·uo·quote",
-    "v5_1_single_uo_report":  "S·uo·report",
-    "v5_1_multi_sys_quote":   "M·sys·quote",
-    "v5_1_multi_sys_report":  "M·sys·report",
-    "v5_1_multi_uo_quote":    "M·uo·quote",
-    "v5_1_multi_uo_report":   "M·uo·report",
+    "v5_1_single_sys_quote":  "S·quote",
+    "v5_1_single_sys_report": "S·report",
+    "v5_1_multi_sys_quote":   "M·quote",
+    "v5_1_multi_sys_report":  "M·report",
 }
 
 
@@ -191,7 +196,7 @@ def main():
 
     base.report_data_quality(df, out_dir, checkpoints, stage_labels)
     base.report_baseline_accuracy(df, out_dir, checkpoints, stage_labels)
-    base.plot_headline_222(df, out_dir, checkpoints, stage_labels, family_title)
+    base.plot_headline_22(df, out_dir, checkpoints, stage_labels, family_title)
     base.plot_flip_rate_by_cue_strength(df, out_dir, checkpoints, stage_labels, family_title)
     base.plot_flip_rate_heatmap(df, out_dir, checkpoints, stage_labels, family_title)
     base.plot_flip_to_suggested(df, out_dir, checkpoints, stage_labels, family_title)
@@ -205,6 +210,7 @@ def main():
     base.plot_per_condition_breakdowns(df, out_dir, checkpoints, stage_labels, family_title)
     base.plot_cascade_dynamics(df, out_dir, checkpoints, stage_labels, family_title)
     base.plot_cascade_by_cue_strength(df, out_dir, checkpoints, stage_labels, family_title)
+    base.plot_question_cascade_heatmap(df, out_dir, checkpoints, stage_labels, family_title)
     base.save_cell_summary(df, out_dir, stage_labels)
 
     print(f"\nAll outputs saved to {out_dir}")
