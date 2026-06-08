@@ -3,14 +3,30 @@
 
 Pipeline:
   1. Load and stack the per-shard SFT projected gradients (n_sft, D fp16).
-  2. Load trial projected gradients (n_trials, D fp16).
-  3. Compute Gram matrix G = P_sft.T @ P_sft / n_sft  (D × D)  + λ·I.
-  4. Solve P_sft.T @ x = trial_grads^T  in (D × n_trials) via Cholesky.
+  2. Load and stack the per-shard trial projected gradients (n_trials, D fp16).
+  3. Compute Gram matrix  G = P_sft.T @ P_sft + λ·I   (D × D).
+     This matches the TRAK paper's formulation (eq 13) and the upstream
+     trak/score_computers.py — no 1/n normalization on the Gram.
+     With 50k un-normalized SFT-side projected grads, max eigenvalue of
+     ΦᵀΦ is ≈ 1.25e10, so meaningful λ values are in the 1e6 – 1e8 range
+     (the canonical default below sits at 1e7 ≈ 1e-3 × max_eig, where
+     Mahalanobis-like whitening is substantial — Frobenius ratio ≈ 0.69).
+  4. Solve G x = P_trial.T  in (D × n_trials) via Cholesky.
   5. score = trial_grads @ G_inv @ P_sft.T.
 
+NOTE: As of the 2026-06 lambda-fix, the canonical analysis runs WITHOUT
+L2 row-normalization (`--normalize` defaults off). Normalizing the rows
+strips the per-example gradient magnitude that the (ΦᵀΦ)⁻¹ Gram-inverse
+is supposed to absorb; combined with the (now-corrected) /n bug, the
+old --normalize path was effectively computing TracIn-style cosine
+similarity rather than TRAK. The flag is kept for back-comparison only.
+Until the group-removal counterfactual validates causality, call the
+output "attribution scores," not "influence."
+
 Output:
-  attribution_scores.npy   shape (n_trials, n_sft) fp32 (~600 MB for 300×50k)
-  attribution_meta.json
+  attribution_scores_all_lam{N}.npy   shape (n_trials, n_sft) fp32
+                                      (~887 MB for 4432×50k)
+  attribution_scores_all_lam{N}.meta.json
 """
 import argparse
 import json
@@ -31,22 +47,33 @@ def main():
     ap.add_argument("--sft_grads_dir", type=str,
         default=f"{SCRATCH}/sft_grads")
     ap.add_argument("--trial_grads_dir", type=str,
-        default=f"{SCRATCH}/trial_grads")
+        default=f"{SCRATCH}/trial_grads_all")
     ap.add_argument("--out_dir", type=str,
         default=f"{SCRATCH}/scores")
     ap.add_argument("--meta_dir", type=str,
         default="analysis_outputs/v6_0_olmo3_7b_pilot/trak/scores",
         help="Small meta json + trial_id_order.csv go here (under REPO_ROOT).")
-    ap.add_argument("--lam", type=float, default=1e-2,
-        help="Tikhonov regularizer for the Gram matrix")
-    ap.add_argument("--num_shards", type=int, default=15)
+    ap.add_argument("--lam", type=float, default=1e7,
+        help="Tikhonov regularizer added to G = ΦᵀΦ + λI. Default 1e7 is "
+             "~1e-3 × max eigenvalue of un-normalized ΦᵀΦ (Frobenius "
+             "whitening-active ratio ≈ 0.69). Robustness-sweep variants: "
+             "1e6 (lighter; ratio 0.29) and 1e8 (heavier; ratio 0.91).")
+    ap.add_argument("--num_shards", type=int, default=15,
+        help="Number of SFT-side shards to concatenate.")
+    ap.add_argument("--num_trial_shards", type=int, default=15,
+        help="Number of trial-side shards to concatenate. Default 15 "
+             "matches the 15-way SLURM array in "
+             "bash/run_trak_featurize_trials_array.sh.")
     ap.add_argument("--normalize", action="store_true",
-        help="L2-normalize SFT (and trial) projected gradients before scoring. "
-             "Removes per-example gradient-norm confound; effectively turns "
-             "the inner product into a cosine similarity in projection space.")
-    ap.add_argument("--out_name", type=str, default="attribution_scores.npy",
-        help="Filename for the output scores. Use a distinct name when "
-             "--normalize is set so the un-normalized run isn't overwritten.")
+        help="LEGACY: L2-normalize SFT and trial rows before scoring. "
+             "Strips per-example gradient magnitude that the proper Gram "
+             "inverse is supposed to absorb — use only for back-comparison "
+             "with the pre-2026-06 _norm pipeline. Canonical analysis runs "
+             "without this flag.")
+    ap.add_argument("--out_name", type=str,
+        default="attribution_scores_all_lam1e7.npy",
+        help="Filename for the output scores. The default reflects the "
+             "canonical λ=1e7 corrected-Gram un-normalized run.")
     args = ap.parse_args()
 
     def resolve(p):
@@ -76,9 +103,27 @@ def main():
     n_sft, D = P_sft.shape
     print(f"Stacked SFT grads: {P_sft.shape}")
 
-    # Load trial grads
-    P_tr = np.load(tr_dir / "trial_grads.npy")            # (n_trials, D)
-    trial_ids = pd.read_csv(tr_dir / "trial_grads.idx.csv")["trial_id"].tolist()
+    # Load trial grads — sharded if --num_trial_shards > 1, else single file.
+    if args.num_trial_shards > 1:
+        print(f"Loading {args.num_trial_shards} trial-grad shards from {tr_dir}")
+        tr_parts, tr_id_parts = [], []
+        for s in range(args.num_trial_shards):
+            gp = tr_dir / (f"trial_grads_shard{s:02d}"
+                           f"_of{args.num_trial_shards:02d}.npy")
+            ip = tr_dir / (f"trial_grads_shard{s:02d}"
+                           f"_of{args.num_trial_shards:02d}.idx.csv")
+            if not gp.exists():
+                print(f"  WARNING: missing {gp.name}, skipping")
+                continue
+            tr_parts.append(np.load(gp))
+            tr_id_parts.append(pd.read_csv(ip)["trial_id"].tolist())
+            print(f"  shard {s}: {tr_parts[-1].shape}")
+        P_tr = np.concatenate(tr_parts, axis=0)
+        trial_ids = [tid for part in tr_id_parts for tid in part]
+    else:
+        P_tr = np.load(tr_dir / "trial_grads.npy")        # (n_trials, D)
+        trial_ids = pd.read_csv(
+            tr_dir / "trial_grads.idx.csv")["trial_id"].tolist()
     n_tr = P_tr.shape[0]
     assert P_tr.shape[1] == D, f"proj_dim mismatch: trial={P_tr.shape[1]} sft={D}"
     print(f"Trial grads: {P_tr.shape}")
@@ -100,10 +145,15 @@ def main():
         P_tr_t = P_tr_t / tr_norms
 
     t = time.time()
-    # Gram in projection space: G = P_sft^T P_sft / n_sft + λI  (D × D)
-    G = (P_sft_t.T @ P_sft_t) / n_sft
+    # Gram in projection space: G = ΦᵀΦ + λI  (D × D)
+    # Matches TRAK paper eq (13) and upstream trak/score_computers.py.
+    # The earlier code divided by n_sft, which combined with a typical λ
+    # made λI swamp the data term and reduced the estimator to TracIn-style
+    # cosine similarity. See v6_0_trak_lambda_fix.md for the diagnostic.
+    G = P_sft_t.T @ P_sft_t
     G = G + args.lam * torch.eye(D, device=device, dtype=torch.float32)
-    print(f"  Gram: {G.shape}  ({time.time() - t:.1f}s)")
+    print(f"  Gram: {G.shape}  λ={args.lam:.3g}  "
+          f"({time.time() - t:.1f}s)")
 
     # Solve G x = P_tr^T  → x = G^{-1} P_tr^T (D × n_tr)
     t = time.time()
@@ -126,6 +176,7 @@ def main():
     meta = {
         "n_trials": n_tr, "n_sft": n_sft, "proj_dim": D,
         "lambda": args.lam, "num_shards": args.num_shards,
+        "num_trial_shards": args.num_trial_shards,
         "normalize": bool(args.normalize),
         "scores_dtype": "float32",
         "scores_path": str(scores_path),

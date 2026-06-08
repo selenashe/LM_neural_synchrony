@@ -5,16 +5,16 @@ Criteria (applied in order):
   2. Drop if T2 answer is incorrect (kept trials therefore have T2 accuracy = 100%).
   3. Restrict to (question_id, cue_id) pairs that survive (1)+(2) in every checkpoint (balanced design across stages).
 
-Total trials before filtering: 38000
-Dropped by (1) null T2/T4: 2348 (6.18%)
-Dropped by (2) T2 incorrect (among non-null): 12532 (32.98%)
-Dropped by (3) (q,c) not surviving in all checkpoints: 6440 (16.95%)
-Total trials dropped: 21320 (56.11%)
-Total trials kept: 16680 (4170 unique (q,c) pairs × 4 checkpoints)
+Total trials before filtering: 40000
+Dropped by (1) null T2/T4: 2456 (6.14%)
+Dropped by (2) T2 incorrect (among non-null): 13171 (32.93%)
+Dropped by (3) (q,c) not surviving in all checkpoints: 6645 (16.61%)
+Total trials dropped: 22272 (55.68%)
+Total trials kept: 17728 (4432 unique (q,c) pairs × 4 checkpoints)
 
 Per-checkpoint breakdown:
     total    null   t2_wrong  not_common   dropped    kept  pct_kept  checkpoint
-     9500       0       3112        2218      5330    4170    43.89%  OLMo-3-1025-7B (Base)
-     9500     908       3166        1256      5330    4170    43.89%  OLMo-3-7B-Instruct-SFT (SFT)
-     9500     962       3035        1333      5330    4170    43.89%  OLMo-3-7B-Instruct-DPO (DPO)
-     9500     478       3219        1633      5330    4170    43.89%  OLMo-3-7B-Instruct-RLVR-step400 (RLVR)
+    10000       0       3270        2298      5568    4432    44.32%  OLMo-3-1025-7B (Base)
+    10000     944       3328        1296      5568    4432    44.32%  OLMo-3-7B-Instruct-SFT (SFT)
+    10000    1004       3193        1371      5568    4432    44.32%  OLMo-3-7B-Instruct-DPO (DPO)
+    10000     508       3380        1680      5568    4432    44.32%  OLMo-3-7B-Instruct-RLVR-step400 (RLVR)

@@ -493,10 +493,18 @@ def confidence_vs_outcome_per_cue(df, out_dir):
                   for c in cues}
     n_cues, n_ck = len(cues), len(STAGE_ORDER)
 
-    for outcome, ylabel, jitter, ylim in [
-        ("flip",       "T4 flipped (1=yes)",                0.06, (-0.15, 1.15)),
-        ("shift",      "T4 - T2 prob(correct)",             None, None),
-        ("shift_norm", "shift / max-possible-shift",        None, (-1.05, 1.05)),
+    # method = "spearman"   → rank-based monotonic correlation
+    # method = "pearson"    → linear correlation on raw values
+    # method = "regression" → OLS line overlaid; annotation shows R² with
+    #                         stars from the slope's t-test (== Pearson p)
+    # Pearson/regression versions emitted only for shift_norm (continuous,
+    # bounded); less appropriate for binary `flip` and unbounded raw `shift`.
+    for outcome, ylabel, jitter, ylim, method in [
+        ("flip",       "T4 flipped (1=yes)",         0.06, (-0.15, 1.15), "spearman"),
+        ("shift",      "T4 - T2 prob(correct)",      None, None,           "spearman"),
+        ("shift_norm", "shift / max-possible-shift", None, (-1.05, 1.05),  "spearman"),
+        ("shift_norm", "shift / max-possible-shift", None, (-1.05, 1.05),  "pearson"),
+        ("shift_norm", "shift / max-possible-shift", None, (-1.05, 1.05),  "regression"),
     ]:
         fig, axes = plt.subplots(n_ck, n_cues,
                                  figsize=(1.05 * n_cues, 1.8 * n_ck),
@@ -524,10 +532,42 @@ def confidence_vs_outcome_per_cue(df, out_dir):
                 raw = df[(df["checkpoint_label"] == ckpt) &
                          (df["cue_id"] == cue)][["confidence", outcome]].dropna()
                 if len(raw) > 5:
-                    rho, _ = stats.spearmanr(raw["confidence"], raw[outcome])
-                    ax.text(0.98, 0.98, f"ρ={rho:+.2f}\nn={len(raw)}",
+                    if method == "spearman":
+                        rho, pval = stats.spearmanr(raw["confidence"],
+                                                    raw[outcome])
+                        annot = f"ρ={rho:+.2f}"
+                    elif method == "pearson":
+                        rho, pval = stats.pearsonr(raw["confidence"],
+                                                   raw[outcome])
+                        annot = f"r={rho:+.2f}"
+                    else:  # regression
+                        lr = stats.linregress(raw["confidence"],
+                                              raw[outcome])
+                        pval = lr.pvalue
+                        # Draw OLS line across the observed x-range.
+                        xmin = float(raw["confidence"].min())
+                        xmax = float(raw["confidence"].max())
+                        xs = np.array([xmin, xmax])
+                        ys = lr.intercept + lr.slope * xs
+                        ax.plot(xs, ys, lw=0.8,
+                                color=STAGE_COLORS[ckpt], alpha=0.9)
+                        annot = f"R²={lr.rvalue ** 2:.2f}"
+                    # Significance stars (uncorrected, two-sided).
+                    # ~76 panels per figure, so treat as suggestive, not
+                    # confirmatory — ~4 expected false positives at α=0.05.
+                    if pval < 0.001:
+                        stars = "***"
+                    elif pval < 0.01:
+                        stars = "**"
+                    elif pval < 0.05:
+                        stars = "*"
+                    else:
+                        stars = ""
+                    ax.text(0.98, 0.98,
+                            f"{annot}{stars}\nn={len(raw)}",
                             transform=ax.transAxes, fontsize=5,
                             ha="right", va="top",
+                            fontweight=("bold" if stars else "normal"),
                             bbox=dict(boxstyle="round,pad=0.15",
                                       facecolor="white", alpha=0.7,
                                       edgecolor="none"))
@@ -535,13 +575,18 @@ def confidence_vs_outcome_per_cue(df, out_dir):
             axes[0, 0].set_ylim(*ylim)
         for ax in axes[:, 0]:
             ax.set_ylabel(ax.get_ylabel() + f"\n{ylabel}", fontsize=7)
+        corr_name = {"spearman": "Spearman ρ",
+                     "pearson":  "Pearson r",
+                     "regression": "OLS regression (R² annotated)"}[method]
         fig.suptitle(
             f"Trial-level: T2 confidence vs {outcome} — "
-            f"per checkpoint × per cue (one dot per trial; "
+            f"per checkpoint × per cue ({corr_name}; one dot per trial; "
             f"{'binary outcome jittered for visibility' if jitter else 'continuous outcome'})",
             fontsize=11)
         fig.tight_layout(rect=(0, 0, 1, 0.97))
-        fname = f"confidence_vs_outcome_per_cue_{outcome}.png"
+        suffix = {"spearman": "", "pearson": "_pearson",
+                  "regression": "_regression"}[method]
+        fname = f"confidence_vs_outcome_per_cue_{outcome}{suffix}.png"
         fig.savefig(out_dir / fname, dpi=130, bbox_inches="tight")
         plt.close(fig)
         print(f"  saved {fname}")
@@ -551,22 +596,27 @@ def confidence_vs_outcome_per_cue(df, out_dir):
 
 def cue_clustering(df, out_dir, n_clusters=4):
     """Hierarchical clustering of cues by their question-response pattern.
-    For each checkpoint, build a [n_cues × n_questions] matrix of the chosen
-    outcome; pool the four checkpoint matrices side-by-side so clusters
-    reflect a checkpoint-pooled pattern. Use correlation distance + average
-    linkage. Emits parallel results for `shift` and `shift_norm`."""
+    Per-checkpoint clustering: each checkpoint gets its own
+    [n_cues × n_questions] matrix and its own dendrogram. Cluster
+    assignments saved to CSV are derived from the checkpoint-pooled
+    matrix (kept for backward compatibility with the heatmap below).
+    Correlation distance + average linkage. Emits parallel results for
+    `shift` and `shift_norm`."""
     results = {}
     for outcome in ("shift", "shift_norm"):
         suffix = "" if outcome == "shift" else "_shift_norm"
         pieces = []
+        per_ckpt_mats = {}
         for ckpt in STAGE_ORDER:
             sub = df[df["checkpoint_label"] == ckpt]
             if sub.empty:
                 continue
             mat = sub.pivot_table(index="cue_id", columns="question_id",
                                   values=outcome, aggfunc="mean")
-            mat.columns = [f"{ckpt}::{q}" for q in mat.columns]
-            pieces.append(mat)
+            per_ckpt_mats[ckpt] = mat
+            renamed = mat.copy()
+            renamed.columns = [f"{ckpt}::{q}" for q in renamed.columns]
+            pieces.append(renamed)
         if not pieces:
             print(f"  cue_clustering[{outcome}]: no data")
             continue
@@ -576,9 +626,10 @@ def cue_clustering(df, out_dir, n_clusters=4):
             continue
 
         cue_ids = big.index.tolist()
-        dist = pdist(big.values, metric="correlation")
-        Z = linkage(dist, method="average")
-        clusters = fcluster(Z, t=n_clusters, criterion="maxclust")
+        # Pooled clustering (used for cluster_df / CSV / heatmap)
+        dist_pooled = pdist(big.values, metric="correlation")
+        Z_pooled = linkage(dist_pooled, method="average")
+        clusters = fcluster(Z_pooled, t=n_clusters, criterion="maxclust")
         cluster_df = pd.DataFrame({"cue_id": cue_ids, "cluster": clusters})
         cue_meta = (df.drop_duplicates("cue_id")
                       [["cue_id", "cue_strength", "cue_strength_label"]])
@@ -586,17 +637,33 @@ def cue_clustering(df, out_dir, n_clusters=4):
                                 .sort_values(["cluster", "cue_strength"]))
         cluster_df.to_csv(out_dir / f"cue_clusters{suffix}.csv", index=False)
 
-        fig, ax = plt.subplots(figsize=(10, 6))
-        labels = [f"{cid} [{lbl}]"
-                  for cid, lbl in zip(cue_ids,
-                      df.drop_duplicates("cue_id").set_index("cue_id")
-                        ["cue_strength_label"].reindex(cue_ids).values)]
-        dendrogram(Z, labels=labels, orientation="right",
-                   leaf_font_size=8, color_threshold=Z[-(n_clusters-1), 2])
-        ax.set_xlabel("correlation distance")
-        ax.set_title(f"Cue clustering (avg-linkage on {outcome} patterns, "
-                     f"pooled across {len(pieces)} checkpoints, k={n_clusters})")
-        fig.tight_layout()
+        # Per-checkpoint dendrograms — one subplot each
+        cue_label_lookup = (df.drop_duplicates("cue_id")
+                              .set_index("cue_id")["cue_strength_label"])
+        n_ck = len(per_ckpt_mats)
+        fig, axes = plt.subplots(1, n_ck, figsize=(5 * n_ck, 7), sharey=False)
+        if n_ck == 1:
+            axes = [axes]
+        for ax, (ckpt, mat) in zip(axes, per_ckpt_mats.items()):
+            mat_clean = mat.dropna(axis=1, how="any")
+            if mat_clean.shape[1] < 5 or mat_clean.shape[0] < 2:
+                ax.set_visible(False)
+                continue
+            ck_cue_ids = mat_clean.index.tolist()
+            dist_ck = pdist(mat_clean.values, metric="correlation")
+            Z_ck = linkage(dist_ck, method="average")
+            labels_ck = [f"{cid} [{cue_label_lookup.reindex([cid]).iloc[0]}]"
+                         for cid in ck_cue_ids]
+            color_threshold = (Z_ck[-(n_clusters - 1), 2]
+                               if len(Z_ck) >= n_clusters - 1 else None)
+            dendrogram(Z_ck, labels=labels_ck, orientation="right",
+                       leaf_font_size=8, color_threshold=color_threshold, ax=ax)
+            ax.set_xlabel("correlation distance")
+            ax.set_title(f"{ckpt} (n_q={mat_clean.shape[1]})", fontsize=11)
+
+        fig.suptitle(f"Per-checkpoint cue clustering (avg-linkage on {outcome} "
+                     f"patterns, k={n_clusters})", fontsize=13)
+        fig.tight_layout(rect=(0, 0, 1, 0.96))
         fig.savefig(out_dir / f"cue_clusters_dendrogram{suffix}.png",
                     dpi=150, bbox_inches="tight")
         plt.close(fig)

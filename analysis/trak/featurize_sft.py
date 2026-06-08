@@ -39,12 +39,17 @@ def load_model_paths():
     return json.loads((REPO_ROOT / "model_paths.json").read_text())
 
 
-def build_chat_text_and_mask(messages, tokenizer, max_seq_len):
+def build_chat_text_and_mask(messages, tokenizer, max_seq_len=None):
     """Apply OLMo-3 ChatML format and produce input_ids + loss_mask.
 
-    Loss mask is 1 for assistant-content tokens, 0 elsewhere. We tokenize
-    incrementally so we can mark assistant-content token spans precisely
-    without relying on (potentially absent) tokenizer.chat_template.
+    Loss mask is 1 for assistant content + their "<|im_end|>\\n" trailer
+    tokens, 0 elsewhere. We tokenize incrementally so we can mark assistant
+    spans precisely without relying on (potentially absent)
+    tokenizer.chat_template.
+
+    If max_seq_len is None, no truncation is applied (the caller handles
+    it — featurize_trials uses this to left-truncate the combined sequence
+    so the target span is preserved).
     """
     input_ids = []
     loss_mask = []
@@ -67,7 +72,7 @@ def build_chat_text_and_mask(messages, tokenizer, max_seq_len):
         input_ids.extend(trailer_ids)
         loss_mask.extend([1 if role == "assistant" else 0] * len(trailer_ids))
 
-    if len(input_ids) > max_seq_len:
+    if max_seq_len is not None and len(input_ids) > max_seq_len:
         input_ids = input_ids[:max_seq_len]
         loss_mask = loss_mask[:max_seq_len]
     return input_ids, loss_mask

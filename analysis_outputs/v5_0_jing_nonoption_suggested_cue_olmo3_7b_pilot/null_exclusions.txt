@@ -1,0 +1,20 @@
+Trial exclusions (v6.0 analysis)
+==================================================
+Criteria (applied in order):
+  1. Drop if turn2_parsed_letter OR turn4_parsed_letter is empty/NaN.
+  2. Drop if T2 answer is incorrect (kept trials therefore have T2 accuracy = 100%).
+  3. Restrict to (question_id, cue_id) pairs that survive (1)+(2) in every checkpoint (balanced design across stages).
+
+Total trials before filtering: 3040
+Dropped by (1) null T2/T4: 6 (0.20%)
+Dropped by (2) T2 incorrect (among non-null): 192 (6.32%)
+Dropped by (3) (q,c) not surviving in all checkpoints: 130 (4.28%)
+Total trials dropped: 328 (10.79%)
+Total trials kept: 2712 (678 unique (q,c) pairs × 4 checkpoints)
+
+Per-checkpoint breakdown:
+    total    null   t2_wrong  not_common   dropped    kept  pct_kept  checkpoint
+      760       0         18          64        82     678    89.21%  OLMo-3-1025-7B (Base)
+      760       1         63          18        82     678    89.21%  OLMo-3-7B-Instruct-SFT (SFT)
+      760       4         55          23        82     678    89.21%  OLMo-3-7B-Instruct-DPO (DPO)
+      760       1         56          25        82     678    89.21%  OLMo-3-7B-Instruct-RLVR-step400 (RLVR)
